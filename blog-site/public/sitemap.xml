@@ -3,26 +3,26 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://guohaolu.github.io/</loc>
+    <loc>http://localhost:1313/</loc>
     <lastmod>2024-06-13T00:02:11+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://guohaolu.github.io/posts/</loc>
+    <loc>http://localhost:1313/posts/</loc>
     <lastmod>2024-06-13T00:02:11+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://guohaolu.github.io/posts/test/</loc>
+    <loc>http://localhost:1313/posts/2024-06%E7%AC%AC%E4%BA%8C%E5%91%A8/</loc>
     <lastmod>2024-06-13T00:02:11+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://guohaolu.github.io/categories/</loc>
+    <loc>http://localhost:1313/categories/</loc>
   </url>
   
   <url>
-    <loc>https://guohaolu.github.io/tags/</loc>
+    <loc>http://localhost:1313/tags/</loc>
   </url>
   
 </urlset>
