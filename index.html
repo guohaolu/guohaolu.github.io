@@ -145,6 +145,179 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/08/29/nio-channel/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="guohao.lu">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/08/29/nio-channel/" class="post-title-link" itemprop="url">NIO-通道（channel）</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2024-08-29 18:38:41 / 修改时间：18:40:05" itemprop="dateCreated datePublished" datetime="2024-08-29T18:38:41+08:00">2024-08-29</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="Channel代码"><a href="#Channel代码" class="headerlink" title="Channel代码"></a>Channel代码</h3><h4 id="服务端"><a href="#服务端" class="headerlink" title="服务端"></a>服务端</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">LaGouChannelServerDemo</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">        <span class="keyword">try</span> (<span class="type">ServerSocketChannel</span> <span class="variable">serverSocketChannel</span> <span class="operator">=</span> ServerSocketChannel.open()) &#123;</span><br><span class="line">            serverSocketChannel.socket().bind(<span class="keyword">new</span> <span class="title class_">InetSocketAddress</span>(<span class="number">60001</span>));</span><br><span class="line">            serverSocketChannel.configureBlocking(<span class="literal">false</span>);</span><br><span class="line">            <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">                <span class="comment">// non-blocking</span></span><br><span class="line">                <span class="keyword">try</span> (<span class="type">SocketChannel</span> <span class="variable">socketChannel</span> <span class="operator">=</span> serverSocketChannel.accept()) &#123;</span><br><span class="line">                    <span class="keyword">if</span> (socketChannel != <span class="literal">null</span>) &#123;</span><br><span class="line">                        <span class="type">ByteBuffer</span> <span class="variable">byteBuffer</span> <span class="operator">=</span> ByteBuffer.allocate(<span class="number">1024</span>);</span><br><span class="line">                        <span class="type">int</span> <span class="variable">read</span> <span class="operator">=</span> socketChannel.read(byteBuffer);</span><br><span class="line">                        System.out.println(<span class="string">&quot;客户端接收到的消息：&quot;</span> + <span class="keyword">new</span> <span class="title class_">String</span>(byteBuffer.array(), <span class="number">0</span>, read, StandardCharsets.UTF_8));</span><br><span class="line">                        socketChannel.write(ByteBuffer.wrap(<span class="string">&quot;客户端已接收的您发送的请求&quot;</span>.getBytes(StandardCharsets.UTF_8)));</span><br><span class="line">                        socketChannel.close();</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="comment">// do other work, sleep 1 second...</span></span><br><span class="line">                    System.out.println(<span class="string">&quot;没有客户端连接。。。&quot;</span>);</span><br><span class="line">                    TimeUnit.SECONDS.sleep(<span class="number">1L</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">RuntimeException</span>(e);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">LaGouChannelClientDemo</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">        <span class="keyword">try</span> (<span class="type">SocketChannel</span> <span class="variable">socketChannel</span> <span class="operator">=</span> SocketChannel.open(<span class="keyword">new</span> <span class="title class_">InetSocketAddress</span>(<span class="string">&quot;127.0.0.1&quot;</span>, <span class="number">60001</span>))) &#123;</span><br><span class="line">            socketChannel.write(ByteBuffer.wrap(<span class="string">&quot;发送一个请求1&quot;</span>.getBytes(StandardCharsets.UTF_8)));</span><br><span class="line">            <span class="type">ByteBuffer</span> <span class="variable">byteBuffer</span> <span class="operator">=</span> ByteBuffer.allocate(<span class="number">1024</span>);</span><br><span class="line">            <span class="type">int</span> <span class="variable">read</span> <span class="operator">=</span> socketChannel.read(byteBuffer);</span><br><span class="line">            System.out.println(<span class="string">&quot;服务端返回的消息：&quot;</span> + <span class="keyword">new</span> <span class="title class_">String</span>(byteBuffer.array(), <span class="number">0</span>, read, StandardCharsets.UTF_8));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/08/29/nio-buffer/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="guohao.lu">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/08/29/nio-buffer/" class="post-title-link" itemprop="url">NIO-缓冲区（buffer）</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2024-08-29 17:29:25 / 修改时间：17:36:41" itemprop="dateCreated datePublished" datetime="2024-08-29T17:29:25+08:00">2024-08-29</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>Buffer本质是一个可重复读写的数组。</p>
+<h3 id="重要的属性"><a href="#重要的属性" class="headerlink" title="重要的属性"></a>重要的属性</h3><ol>
+<li>capacity：容量，不可变的</li>
+<li>position：下一个读写的位置，在读写时会自动向后移动，可变</li>
+<li>limit：读写的上限位置，使position无法越界，可变</li>
+</ol>
+<h3 id="重要的API"><a href="#重要的API" class="headerlink" title="重要的API"></a>重要的API</h3><h4 id="读"><a href="#读" class="headerlink" title="读"></a>读</h4><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>get()</td>
+<td>读取下一个</td>
+</tr>
+<tr>
+<td>get(int position)</td>
+<td>读取固定索引数据，不会修改position</td>
+</tr>
+<tr>
+<td>get(byte[] bytes)</td>
+<td>批量读取，读取到byte[]</td>
+</tr>
+<tr>
+<td>flip()</td>
+<td>切换成读模式</td>
+</tr>
+</tbody></table>
+<h4 id="写"><a href="#写" class="headerlink" title="写"></a>写</h4><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>get()</td>
+<td>读取下一个</td>
+</tr>
+<tr>
+<td>get(int position)</td>
+<td>读取固定索引数据，不会修改position</td>
+</tr>
+<tr>
+<td>get(byte[] bytes)</td>
+<td>批量读取，读取到byte[]</td>
+</tr>
+<tr>
+<td>flip()</td>
+<td>切换成读模式</td>
+</tr>
+</tbody></table>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2024/08/29/socket-programming/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -401,7 +574,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">3</span>
+          <span class="site-state-item-count">5</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
