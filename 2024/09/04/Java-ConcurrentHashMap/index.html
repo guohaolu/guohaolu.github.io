@@ -20,19 +20,19 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+  <meta name="description" content="并发哈希结构设计一个支持并发访问的哈希结构（Concurrent Hash Structure）是一项挑战性任务，因为它需要在保证高性能的同时，还要确保数据的一致性和安全性。下面是一些设计并发哈希结构的关键考虑因素和实现策略。 设计目标 高性能：并发哈希结构应当支持高并发的读写操作，减少锁的竞争，提高整体性能。 线程安全：在多线程环境下，需要确保数据的一致性和安全性，避免数据竞争和死锁。 可扩展性">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hexo命令">
-<meta property="og:url" content="http://example.com/2024/08/29/hello-world/index.html">
+<meta property="og:title" content="Java并发集合-并发哈希结构设计">
+<meta property="og:url" content="http://example.com/2024/09/04/Java-ConcurrentHashMap/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="并发哈希结构设计一个支持并发访问的哈希结构（Concurrent Hash Structure）是一项挑战性任务，因为它需要在保证高性能的同时，还要确保数据的一致性和安全性。下面是一些设计并发哈希结构的关键考虑因素和实现策略。 设计目标 高性能：并发哈希结构应当支持高并发的读写操作，减少锁的竞争，提高整体性能。 线程安全：在多线程环境下，需要确保数据的一致性和安全性，避免数据竞争和死锁。 可扩展性">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-08-28T17:26:14.912Z">
-<meta property="article:modified_time" content="2024-08-28T17:51:40.432Z">
+<meta property="article:published_time" content="2024-09-04T10:37:26.000Z">
+<meta property="article:modified_time" content="2024-09-04T11:36:21.003Z">
 <meta property="article:author" content="guohao.lu">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/2024/08/29/hello-world/">
+<link rel="canonical" href="http://example.com/2024/09/04/Java-ConcurrentHashMap/">
 
 
 <script id="page-configurations">
@@ -45,7 +45,7 @@
   };
 </script>
 
-  <title>Hexo命令 | Hexo</title>
+  <title>Java并发集合-并发哈希结构设计 | Hexo</title>
   
 
 
@@ -150,7 +150,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/08/29/hello-world/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/09/04/Java-ConcurrentHashMap/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -163,7 +163,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Hexo命令
+          Java并发集合-并发哈希结构设计
         </h1>
 
         <div class="post-meta">
@@ -174,7 +174,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2024-08-29 01:26:14 / 修改时间：01:51:40" itemprop="dateCreated datePublished" datetime="2024-08-29T01:26:14+08:00">2024-08-29</time>
+              <time title="创建时间：2024-09-04 18:37:26 / 修改时间：19:36:21" itemprop="dateCreated datePublished" datetime="2024-09-04T18:37:26+08:00">2024-09-04</time>
             </span>
 
           
@@ -188,19 +188,62 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+        <h2 id="并发哈希结构"><a href="#并发哈希结构" class="headerlink" title="并发哈希结构"></a>并发哈希结构</h2><p>设计一个支持并发访问的哈希结构（Concurrent Hash Structure）是一项挑战性任务，因为它需要在保证高性能的同时，还要确保数据的一致性和安全性。下面是一些设计并发哈希结构的关键考虑因素和实现策略。</p>
+<h3 id="设计目标"><a href="#设计目标" class="headerlink" title="设计目标"></a>设计目标</h3><ol>
+<li><strong>高性能</strong>：并发哈希结构应当支持高并发的读写操作，减少锁的竞争，提高整体性能。</li>
+<li><strong>线程安全</strong>：在多线程环境下，需要确保数据的一致性和安全性，避免数据竞争和死锁。</li>
+<li><strong>可扩展性</strong>：随着数据量的增长，哈希结构应当能够平滑地扩展，支持更多的数据和更高的并发度。</li>
+<li><strong>易用性</strong>：设计应当简单易用，易于理解和实现。</li>
+</ol>
+<h3 id="设计策略"><a href="#设计策略" class="headerlink" title="设计策略"></a>设计策略</h3><h4 id="1-分段锁（Segment-Locking）"><a href="#1-分段锁（Segment-Locking）" class="headerlink" title="1. 分段锁（Segment Locking）"></a>1. 分段锁（Segment Locking）</h4><ul>
+<li><strong>原理</strong>：将哈希表分成多个段（Segment），每个段有自己的锁。这样，在同一时刻，多个线程可以并发访问不同的段，减少了锁的竞争。</li>
+<li><strong>实现</strong>：可以使用一个数组来存储多个哈希表，每个哈希表对应一个段，并且每个段有自己的锁。</li>
+</ul>
+<h4 id="2-细粒度锁（Fine-Grained-Locking）"><a href="#2-细粒度锁（Fine-Grained-Locking）" class="headerlink" title="2. 细粒度锁（Fine-Grained Locking）"></a>2. 细粒度锁（Fine-Grained Locking）</h4><ul>
+<li><strong>原理</strong>：在哈希表中，对单个桶（Bucket）进行加锁，而不是整个表。这样可以进一步减少锁的竞争。</li>
+<li><strong>实现</strong>：每个桶都有自己的锁，当访问或修改该桶时，才对其加锁。</li>
+</ul>
+<h3 id="实现细节"><a href="#实现细节" class="headerlink" title="实现细节"></a>实现细节</h3><ul>
+<li>锁必须为可重入锁，当线程进行复杂操作的时候，不会死锁。锁同时也需要为读写锁，不会阻塞只读操作。</li>
+<li>集合大小在新增元素的时候需要自增，选用原子类型来支撑。</li>
+<li>扩容策略，设置一个固定大小的负载因子（平均每个桶存储的元素个数）。</li>
+<li>add 方法新增元素后会检测集合是否满足扩容条件，若满足则进行扩容操作。扩容操作时不允许集合中存在写操作。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">classDiagram</span><br><span class="line">class 并发哈希结构~T~ &#123;</span><br><span class="line">        &lt;&lt;Abstract&gt;&gt;</span><br><span class="line">        + AtomicInteger size：集合大小</span><br><span class="line">        + List~T~[] table：桶表</span><br><span class="line">        + Lock[] locks：锁数组</span><br><span class="line">&#125;</span><br><span class="line">并发哈希结构 : +contains(T entry) boolean</span><br><span class="line">并发哈希结构 : +add(T entry) boolean</span><br><span class="line">并发哈希结构 : +acquire(T entry) void</span><br><span class="line">并发哈希结构 : +release(T entry) void</span><br><span class="line">并发哈希结构 : +resize() void</span><br><span class="line">并发哈希结构 : -policy() boolean</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo s</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo g -d</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+<p>方法介绍：</p>
+<table>
+<thead>
+<tr>
+<th><strong>API</strong></th>
+<th><strong>描述</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>boolean contains(T entry)</td>
+<td>是否含有此元素</td>
+</tr>
+<tr>
+<td>boolean  add(T entry)</td>
+<td>新增元素</td>
+</tr>
+<tr>
+<td>void acquire(T entry)</td>
+<td>获得锁</td>
+</tr>
+<tr>
+<td>void release(T entry)</td>
+<td>释放锁</td>
+</tr>
+<tr>
+<td>void resize()</td>
+<td>扩容</td>
+</tr>
+<tr>
+<td>boolean policy()</td>
+<td>检测是否达到扩容条件</td>
+</tr>
+</tbody></table>
 
     </div>
 
@@ -215,10 +258,13 @@
 
         
     <div class="post-nav">
-      <div class="post-nav-item"></div>
       <div class="post-nav-item">
-    <a href="/2024/08/29/my-first-blog/" rel="next" title="这是我的第一篇博文">
-      这是我的第一篇博文 <i class="fa fa-chevron-right"></i>
+    <a href="/2024/09/02/PageRank-Algorithm/" rel="prev" title="机器学习——PageRank算法">
+      <i class="fa fa-chevron-left"></i> 机器学习——PageRank算法
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2024/09/04/LeetCode-Opposite-Pointer/" rel="next" title="LeetCode-相向双指针">
+      LeetCode-相向双指针 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -278,7 +324,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Quick-Start"><span class="nav-number">1.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-a-new-post"><span class="nav-number">1.1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-server"><span class="nav-number">1.2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generate-static-files"><span class="nav-number">1.3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deploy-to-remote-sites"><span class="nav-number">1.4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B9%B6%E5%8F%91%E5%93%88%E5%B8%8C%E7%BB%93%E6%9E%84"><span class="nav-number">1.</span> <span class="nav-text">并发哈希结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BE%E8%AE%A1%E7%9B%AE%E6%A0%87"><span class="nav-number">1.1.</span> <span class="nav-text">设计目标</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BE%E8%AE%A1%E7%AD%96%E7%95%A5"><span class="nav-number">1.2.</span> <span class="nav-text">设计策略</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E5%88%86%E6%AE%B5%E9%94%81%EF%BC%88Segment-Locking%EF%BC%89"><span class="nav-number">1.2.1.</span> <span class="nav-text">1. 分段锁（Segment Locking）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E7%BB%86%E7%B2%92%E5%BA%A6%E9%94%81%EF%BC%88Fine-Grained-Locking%EF%BC%89"><span class="nav-number">1.2.2.</span> <span class="nav-text">2. 细粒度锁（Fine-Grained Locking）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E7%BB%86%E8%8A%82"><span class="nav-number">1.3.</span> <span class="nav-text">实现细节</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
