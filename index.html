@@ -145,6 +145,163 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/09/07/linux-fix-wsl2-forget-password/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="guohao.lu">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/09/07/linux-fix-wsl2-forget-password/" class="post-title-link" itemprop="url">linux-fix-wsl2-forget-password</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2024-09-07 14:39:22 / 修改时间：14:44:06" itemprop="dateCreated datePublished" datetime="2024-09-07T14:39:22+08:00">2024-09-07</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>背景：在Win11系统上通过WSL2开启Linux子系统，但是Linux系统的root密码忘记了。</p>
+<p>步骤：</p>
+<ol>
+<li>在Win11系统上，打开有管理员权限的CMD，输入：wsl -u root</li>
+<li>输入passwd root</li>
+<li>连续输入两次新密码</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/09/07/docker-base/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="guohao.lu">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/09/07/docker-base/" class="post-title-link" itemprop="url">docker-base</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2024-09-07 10:25:00 / 修改时间：11:48:42" itemprop="dateCreated datePublished" datetime="2024-09-07T10:25:00+08:00">2024-09-07</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="docker常用命令"><a href="#docker常用命令" class="headerlink" title="docker常用命令"></a>docker常用命令</h3><p><img src="https://raw.githubusercontent.com/guohaolu/ImageHostingWebsite/main/image-20240907105838495.png" alt="image-20240907105838495"></p>
+<hr>
+<p>Docker命令结构图：</p>
+<p><img src="https://raw.githubusercontent.com/guohaolu/ImageHostingWebsite/main/image-20240907110020254.png" alt="image-20240907110020254"></p>
+<h5 id="Docker环境信息"><a href="#Docker环境信息" class="headerlink" title="Docker环境信息"></a>Docker环境信息</h5><p>（1）<strong>docker info</strong>	</p>
+<p>信息提示</p>
+<p>（2）<strong>docker version</strong>	</p>
+<p>版本信息</p>
+<h5 id="容器生命周期管理"><a href="#容器生命周期管理" class="headerlink" title="容器生命周期管理"></a>容器生命周期管理</h5><p>（1）<strong>docker run</strong></p>
+<p>docker run [OPTIONS] IMAGE [COMMAND] [ARG…]	基于特定镜像创建容器，并根据命令来控制它</p>
+<p>$ sudo docker run ubuntu:latest echo “Hello World”</p>
+<p>根据tag为latest的ubuntu镜像，创建容器（容器id会随机）。运行echo “Hello World”命令后，容器会停止运行。</p>
+<p>$ sudo docker run -i -t –name mytest ubuntu:latest &#x2F;bin&#x2F;bash</p>
+<p>以交互模式、分配伪终端的形式创建容器（名称为mytest），并运行。</p>
+<p>其他参数如下：</p>
+<p><img src="https://raw.githubusercontent.com/guohaolu/ImageHostingWebsite/main/image-20240907111504418.png" alt="image-20240907111504418"></p>
+<p>（2）<strong>docker start&#x2F;stop&#x2F;restart</strong></p>
+<p><img src="https://raw.githubusercontent.com/guohaolu/ImageHostingWebsite/main/image-20240907112051927.png" alt="image-20240907112051927"></p>
+<h5 id="Docker仓库"><a href="#Docker仓库" class="headerlink" title="Docker仓库"></a>Docker仓库</h5><p>（1）<strong>docker pull</strong></p>
+<p>docker pull [OPTIONS] NAME[:TAG @DIGEST]</p>
+<p><img src="https://raw.githubusercontent.com/guohaolu/ImageHostingWebsite/main/image-20240907112644697.png" alt="image-20240907112644697"></p>
+<p>（2）<strong>docker push</strong></p>
+<p>docker push [OPTIONS] NAME[:TAG]</p>
+<p>例如：docker push SEL&#x2F;ubuntu</p>
+<h5 id="镜像管理"><a href="#镜像管理" class="headerlink" title="镜像管理"></a>镜像管理</h5><p>（1）<strong>docker images</strong></p>
+<p><img src="https://raw.githubusercontent.com/guohaolu/ImageHostingWebsite/main/image-20240907114611592.png" alt="image-20240907114611592"></p>
+<p>（2）<strong>docker rmi&#x2F;rm</strong></p>
+<ul>
+<li><p>docker rmi：删除镜像</p>
+</li>
+<li><p>docker rm：删除容器</p>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/guohaolu/ImageHostingWebsite/main/image-20240907114837273.png" alt="image-20240907114837273"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2024/09/04/LeetCode-Opposite-Pointer/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -963,135 +1120,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/08/29/socket-programming/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="guohao.lu">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2024/08/29/socket-programming/" class="post-title-link" itemprop="url">Socket网络编程</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2024-08-29 02:06:37 / 修改时间：19:09:53" itemprop="dateCreated datePublished" datetime="2024-08-29T02:06:37+08:00">2024-08-29</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="Socket代码"><a href="#Socket代码" class="headerlink" title="Socket代码"></a>Socket代码</h3><h4 id="服务端"><a href="#服务端" class="headerlink" title="服务端"></a>服务端</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SocketServerDemo</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">ExecutorService</span> <span class="variable">executorService</span> <span class="operator">=</span> Executors.newCachedThreadPool();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">        <span class="keyword">try</span> (<span class="type">ServerSocket</span> <span class="variable">serverSocket</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ServerSocket</span>(<span class="number">60001</span>)) &#123;</span><br><span class="line">            <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">                <span class="type">Socket</span> <span class="variable">socket</span> <span class="operator">=</span> serverSocket.accept(); <span class="comment">// （1）blocking</span></span><br><span class="line">                executorService.submit(() -&gt; handler(socket));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">handler</span><span class="params">(Socket socket)</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;当前线程为：&quot;</span> + Thread.currentThread().getName());</span><br><span class="line">            <span class="type">InputStream</span> <span class="variable">inputStream</span> <span class="operator">=</span> socket.getInputStream();</span><br><span class="line">            <span class="type">byte</span>[] bytes = <span class="keyword">new</span> <span class="title class_">byte</span>[<span class="number">1024</span>];</span><br><span class="line">            <span class="type">int</span> <span class="variable">read</span> <span class="operator">=</span> inputStream.read(bytes); <span class="comment">// （2）blocking</span></span><br><span class="line">            System.out.println(<span class="string">&quot;接受数据：&quot;</span> + <span class="keyword">new</span> <span class="title class_">String</span>(bytes, <span class="number">0</span>, read));</span><br><span class="line">            <span class="type">OutputStream</span> <span class="variable">outputStream</span> <span class="operator">=</span> socket.getOutputStream();</span><br><span class="line">            outputStream.write(<span class="string">&quot;数据已被客户端接收&quot;</span>.getBytes());</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                socket.close();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (IOException ex) &#123;</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">RuntimeException</span>(ex);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SocketClientDemo</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">        <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">            <span class="keyword">try</span> (<span class="type">Socket</span> <span class="variable">socket</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Socket</span>(<span class="string">&quot;127.0.0.1&quot;</span>, <span class="number">60001</span>)) &#123;</span><br><span class="line">                <span class="type">Scanner</span> <span class="variable">scanner</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Scanner</span>(System.in);</span><br><span class="line">                <span class="type">String</span> <span class="variable">input</span> <span class="operator">=</span> scanner.nextLine();</span><br><span class="line">                socket.getOutputStream().write(input.getBytes());</span><br><span class="line">                <span class="type">InputStream</span> <span class="variable">inputStream</span> <span class="operator">=</span> socket.getInputStream();</span><br><span class="line">                <span class="type">byte</span>[] buffer = <span class="keyword">new</span> <span class="title class_">byte</span>[<span class="number">1024</span>];</span><br><span class="line">                <span class="type">int</span> <span class="variable">len</span> <span class="operator">=</span> inputStream.read(buffer); <span class="comment">// （3）blocking</span></span><br><span class="line">                System.out.println(<span class="string">&quot;服务端返回消息：&quot;</span> + <span class="keyword">new</span> <span class="title class_">String</span>(buffer, <span class="number">0</span>, len));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/08/29/my-first-blog/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="guohao.lu">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2024/08/29/my-first-blog/" class="post-title-link" itemprop="url">这是我的第一篇博文</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2024-08-29 01:36:55" itemprop="dateCreated datePublished" datetime="2024-08-29T01:36:55+08:00">2024-08-29</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-08-30 17:45:43" itemprop="dateModified" datetime="2024-08-30T17:45:43+08:00">2024-08-30</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>这是我的第一篇博文</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">HelloWorldDemo</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    	System.out.println(<span class="string">&quot;Hello World!&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1161,7 +1189,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-count">13</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
