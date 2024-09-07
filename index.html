@@ -145,6 +145,71 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/09/07/docker-app-stack/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="guohao.lu">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/09/07/docker-app-stack/" class="post-title-link" itemprop="url">docker-应用栈</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2024-09-07 18:46:24 / 修改时间：18:48:02" itemprop="dateCreated datePublished" datetime="2024-09-07T18:46:24+08:00">2024-09-07</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="Docker应用栈"><a href="#Docker应用栈" class="headerlink" title="Docker应用栈"></a>Docker应用栈</h4><p>Docker应用栈（Application Stack）通常指的是在一个或多个Docker容器中运行的一组相互协作的应用和服务。这些应用和服务通常是通过Docker Compose或其他编排工具来定义和管理的，它们共同构成了一个完整的应用环境。</p>
+<p>应用栈结构如下：</p>
+<p><img src="https://raw.githubusercontent.com/guohaolu/ImageHostingWebsite/main/image-20240907174622584.png" alt="image-20240907174622584"></p>
+<p>容器启动顺序：</p>
+<pre class="mermaid">graph LR
+    A[Redis Master] --> B[Redis Slave] --> C[APP] --> D[HAProxy]</pre>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2024/09/07/linux-fix-wsl2-forget-password/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -224,7 +289,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2024/09/07/docker-base/" class="post-title-link" itemprop="url">docker-base</a>
+            <a href="/2024/09/07/docker-base/" class="post-title-link" itemprop="url">docker-基础</a>
         </h2>
 
         <div class="post-meta">
@@ -235,7 +300,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2024-09-07 10:25:00 / 修改时间：17:49:07" itemprop="dateCreated datePublished" datetime="2024-09-07T10:25:00+08:00">2024-09-07</time>
+              <time title="创建时间：2024-09-07 10:25:00 / 修改时间：18:46:44" itemprop="dateCreated datePublished" datetime="2024-09-07T10:25:00+08:00">2024-09-07</time>
             </span>
 
           
@@ -283,17 +348,6 @@
 </li>
 </ul>
 <p><img src="https://raw.githubusercontent.com/guohaolu/ImageHostingWebsite/main/image-20240907114837273.png" alt="image-20240907114837273"></p>
-<h4 id="Docker应用栈"><a href="#Docker应用栈" class="headerlink" title="Docker应用栈"></a>Docker应用栈</h4><p>应用栈结构如下：</p>
-<p><img src="https://raw.githubusercontent.com/guohaolu/ImageHostingWebsite/main/image-20240907174622584.png" alt="image-20240907174622584"></p>
-<p>网络通信连接顺序：</p>
-<pre class="mermaid">graph TD
-    
-    A[Redis Slave] --> B[Redis Master]
-    C[APP] --> D[HAProxy]
-    D --> B
-    B -- Replication --> A
-    D -- Load Balance --> B</pre>
-
 
       
     </div>
@@ -1019,118 +1073,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/08/29/nio-buffer/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="guohao.lu">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2024/08/29/nio-buffer/" class="post-title-link" itemprop="url">NIO-缓冲区（buffer）</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2024-08-29 17:29:25 / 修改时间：17:36:41" itemprop="dateCreated datePublished" datetime="2024-08-29T17:29:25+08:00">2024-08-29</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Buffer本质是一个可重复读写的数组。</p>
-<h3 id="重要的属性"><a href="#重要的属性" class="headerlink" title="重要的属性"></a>重要的属性</h3><ol>
-<li>capacity：容量，不可变的</li>
-<li>position：下一个读写的位置，在读写时会自动向后移动，可变</li>
-<li>limit：读写的上限位置，使position无法越界，可变</li>
-</ol>
-<h3 id="重要的API"><a href="#重要的API" class="headerlink" title="重要的API"></a>重要的API</h3><h4 id="读"><a href="#读" class="headerlink" title="读"></a>读</h4><table>
-<thead>
-<tr>
-<th>方法</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>get()</td>
-<td>读取下一个</td>
-</tr>
-<tr>
-<td>get(int position)</td>
-<td>读取固定索引数据，不会修改position</td>
-</tr>
-<tr>
-<td>get(byte[] bytes)</td>
-<td>批量读取，读取到byte[]</td>
-</tr>
-<tr>
-<td>flip()</td>
-<td>切换成读模式</td>
-</tr>
-</tbody></table>
-<h4 id="写"><a href="#写" class="headerlink" title="写"></a>写</h4><table>
-<thead>
-<tr>
-<th>方法</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>get()</td>
-<td>读取下一个</td>
-</tr>
-<tr>
-<td>get(int position)</td>
-<td>读取固定索引数据，不会修改position</td>
-</tr>
-<tr>
-<td>get(byte[] bytes)</td>
-<td>批量读取，读取到byte[]</td>
-</tr>
-<tr>
-<td>flip()</td>
-<td>切换成读模式</td>
-</tr>
-</tbody></table>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1200,7 +1142,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-count">14</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
