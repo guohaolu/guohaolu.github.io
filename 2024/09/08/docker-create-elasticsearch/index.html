@@ -20,19 +20,19 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="背景：在 Win11 系统上通过 WSL2 开启 Linux 子系统，但是 Linux 系统的 root 密码忘记了。 步骤： （1）在 Win11 系统上，打开有管理员权限的 CMD，输入： 12$ wsl -u root$ passwd root  （2）连续输入两次新密码">
+  <meta name="description" content="配置环境变量123root@stealandfire:&#x2F;home&#x2F;stealandfire# export ELASTIC_PASSWORD&#x3D;&quot;lgh123&quot;root@stealandfire:&#x2F;home&#x2F;stealandfire# export KIBANA_PASSWORD&#x3D;&quot;lgh123&quot;  查看环境变量1root@stealandfire:&#x2F;home">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Linux-WSL2下重设root密码">
-<meta property="og:url" content="http://example.com/2024/09/07/linux-fix-wsl2-forget-password/index.html">
+<meta property="og:title" content="docker-搭建ES环境">
+<meta property="og:url" content="http://example.com/2024/09/08/docker-create-elasticsearch/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="背景：在 Win11 系统上通过 WSL2 开启 Linux 子系统，但是 Linux 系统的 root 密码忘记了。 步骤： （1）在 Win11 系统上，打开有管理员权限的 CMD，输入： 12$ wsl -u root$ passwd root  （2）连续输入两次新密码">
+<meta property="og:description" content="配置环境变量123root@stealandfire:&#x2F;home&#x2F;stealandfire# export ELASTIC_PASSWORD&#x3D;&quot;lgh123&quot;root@stealandfire:&#x2F;home&#x2F;stealandfire# export KIBANA_PASSWORD&#x3D;&quot;lgh123&quot;  查看环境变量1root@stealandfire:&#x2F;home">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-09-07T06:39:22.000Z">
-<meta property="article:modified_time" content="2024-09-08T14:38:07.796Z">
+<meta property="article:published_time" content="2024-09-08T09:26:52.000Z">
+<meta property="article:modified_time" content="2024-09-08T09:45:36.050Z">
 <meta property="article:author" content="guohao.lu">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/2024/09/07/linux-fix-wsl2-forget-password/">
+<link rel="canonical" href="http://example.com/2024/09/08/docker-create-elasticsearch/">
 
 
 <script id="page-configurations">
@@ -45,7 +45,7 @@
   };
 </script>
 
-  <title>Linux-WSL2下重设root密码 | Hexo</title>
+  <title>docker-搭建ES环境 | Hexo</title>
   
 
 
@@ -150,7 +150,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/09/07/linux-fix-wsl2-forget-password/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/09/08/docker-create-elasticsearch/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -163,7 +163,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Linux-WSL2下重设root密码
+          docker-搭建ES环境
         </h1>
 
         <div class="post-meta">
@@ -172,16 +172,10 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2024-09-07 14:39:22" itemprop="dateCreated datePublished" datetime="2024-09-07T14:39:22+08:00">2024-09-07</time>
+              <time title="创建时间：2024-09-08 17:26:52 / 修改时间：17:45:36" itemprop="dateCreated datePublished" datetime="2024-09-08T17:26:52+08:00">2024-09-08</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-09-08 22:38:07" itemprop="dateModified" datetime="2024-09-08T22:38:07+08:00">2024-09-08</time>
-              </span>
 
           
 
@@ -194,12 +188,26 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>背景：在 Win11 系统上通过 WSL2 开启 Linux 子系统，但是 Linux 系统的 <code>root</code> 密码忘记了。</p>
-<p>步骤：</p>
-<p>（1）在 Win11 系统上，打开有管理员权限的 CMD，输入：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ wsl -u root</span><br><span class="line">$ passwd root</span><br></pre></td></tr></table></figure>
+        <h4 id="配置环境变量"><a href="#配置环境变量" class="headerlink" title="配置环境变量"></a>配置环境变量</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">root@stealandfire:/home/stealandfire# <span class="built_in">export</span> ELASTIC_PASSWORD=<span class="string">&quot;lgh123&quot;</span></span><br><span class="line"></span><br><span class="line">root@stealandfire:/home/stealandfire# <span class="built_in">export</span> KIBANA_PASSWORD=<span class="string">&quot;lgh123&quot;</span></span><br></pre></td></tr></table></figure>
 
-<p>（2）连续输入两次新密码</p>
+<h4 id="查看环境变量"><a href="#查看环境变量" class="headerlink" title="查看环境变量"></a>查看环境变量</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@stealandfire:/home/stealandfire# <span class="built_in">export</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="创建elastic网络"><a href="#创建elastic网络" class="headerlink" title="创建elastic网络"></a>创建elastic网络</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@stealandfire:/home/stealandfire# docker network create elastic-net</span><br></pre></td></tr></table></figure>
+
+<h4 id="运行elasticsearch容器"><a href="#运行elasticsearch容器" class="headerlink" title="运行elasticsearch容器"></a>运行elasticsearch容器</h4><ul>
+<li><p>映射 9200 端口号</p>
+</li>
+<li><p>容器名称为：elasticsearch</p>
+</li>
+<li><p>运行在名为：elastic-net 的 docker 网络中</p>
+</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">root@stealandfire:/home/stealandfire# docker run -p 127.0.0.1:9200:9200 -d --name elasticsearch --network elastic-net \</span><br><span class="line">  -e ELASTIC_PASSWORD=<span class="variable">$ELASTIC_PASSWORD</span> \</span><br><span class="line">  -e <span class="string">&quot;discovery.type=single-node&quot;</span> \</span><br><span class="line">  -e <span class="string">&quot;xpack.security.http.ssl.enabled=false&quot;</span> \</span><br><span class="line">  -e <span class="string">&quot;xpack.license.self_generated.type=basic&quot;</span> \</span><br><span class="line">  docker.elastic.co/elasticsearch/elasticsearch:8.15.1</span><br></pre></td></tr></table></figure>
+
+<h4 id="运行Kibana容器"><a href="#运行Kibana容器" class="headerlink" title="运行Kibana容器"></a>运行Kibana容器</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">docker run -p 127.0.0.1:5601:5601 -d --name kibana --network elastic-net \</span><br><span class="line">  -e ELASTICSEARCH_URL=http://elasticsearch:9200 \</span><br><span class="line">  -e ELASTICSEARCH_HOSTS=http://elasticsearch:9200 \</span><br><span class="line">  -e ELASTICSEARCH_USERNAME=kibana_system \</span><br><span class="line">  -e ELASTICSEARCH_PASSWORD=<span class="variable">$KIBANA_PASSWORD</span> \</span><br><span class="line">  -e <span class="string">&quot;xpack.security.enabled=false&quot;</span> \</span><br><span class="line">  -e <span class="string">&quot;xpack.license.self_generated.type=basic&quot;</span> \</span><br><span class="line">  docker.elastic.co/kibana/kibana:8.15.1</span><br></pre></td></tr></table></figure>
+
+<h4 id="验证elasticsearch运行"><a href="#验证elasticsearch运行" class="headerlink" title="验证elasticsearch运行"></a>验证elasticsearch运行</h4><p>登录 <a target="_blank" rel="noopener" href="http://localhost:9200/%EF%BC%8C%E8%BE%93%E5%85%A5%E8%B4%A6%E5%8F%B7%E5%AF%86%E7%A0%81%E3%80%82">http://localhost:9200/，输入账号密码。</a></p>
+<h4 id="验证Kibana运行"><a href="#验证Kibana运行" class="headerlink" title="验证Kibana运行"></a>验证Kibana运行</h4><p>登录 <a target="_blank" rel="noopener" href="http://localhost:5601/%EF%BC%8C%E8%BE%93%E5%85%A5%E8%B4%A6%E5%8F%B7%EF%BC%9A%60elastic%60%EF%BC%8C%E5%AF%86%E7%A0%81%EF%BC%9A%60lgh123%60%E3%80%82">http://localhost:5601/，输入账号：`elastic`，密码：`lgh123`。</a></p>
 
     </div>
 
@@ -215,12 +223,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2024/09/07/docker-base/" rel="prev" title="docker-基础">
-      <i class="fa fa-chevron-left"></i> docker-基础
+    <a href="/2024/09/08/docker-network-manager/" rel="prev" title="docker-网络管理">
+      <i class="fa fa-chevron-left"></i> docker-网络管理
     </a></div>
       <div class="post-nav-item">
-    <a href="/2024/09/07/docker-app-stack/" rel="next" title="docker-应用栈">
-      docker-应用栈 <i class="fa fa-chevron-right"></i>
+    <a href="/2024/09/08/search-develop-search-engine/" rel="next" title="search-开发搜索引擎">
+      search-开发搜索引擎 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -280,6 +288,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="nav-number">1.</span> <span class="nav-text">配置环境变量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="nav-number">2.</span> <span class="nav-text">查看环境变量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9B%E5%BB%BAelastic%E7%BD%91%E7%BB%9C"><span class="nav-number">3.</span> <span class="nav-text">创建elastic网络</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%90%E8%A1%8Celasticsearch%E5%AE%B9%E5%99%A8"><span class="nav-number">4.</span> <span class="nav-text">运行elasticsearch容器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%90%E8%A1%8CKibana%E5%AE%B9%E5%99%A8"><span class="nav-number">5.</span> <span class="nav-text">运行Kibana容器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%AA%8C%E8%AF%81elasticsearch%E8%BF%90%E8%A1%8C"><span class="nav-number">6.</span> <span class="nav-text">验证elasticsearch运行</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%AA%8C%E8%AF%81Kibana%E8%BF%90%E8%A1%8C"><span class="nav-number">7.</span> <span class="nav-text">验证Kibana运行</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

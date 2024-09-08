@@ -20,19 +20,22 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="背景：在 Win11 系统上通过 WSL2 开启 Linux 子系统，但是 Linux 系统的 root 密码忘记了。 步骤： （1）在 Win11 系统上，打开有管理员权限的 CMD，输入： 12$ wsl -u root$ passwd root  （2）连续输入两次新密码">
+  <meta name="description" content="搜索引擎的构成 索引管理器——Index Manager 索引管理器组件的作用是管理带有索引结构的数据，索引结构是一种用于进行高速检索的数据结构。 对索引的访问也是通过索引管理器进行的。 索引管理器通常是将索引作为二级存储上的二进制文件来进行管理的。 而且，还经常会通过保存经过压缩的索引来达到减少从二级存储加载的数据量，提升检索处理效率的目的。  索引检索器——Index Searcher索引检索">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Linux-WSL2下重设root密码">
-<meta property="og:url" content="http://example.com/2024/09/07/linux-fix-wsl2-forget-password/index.html">
+<meta property="og:title" content="search-开发搜索引擎">
+<meta property="og:url" content="http://example.com/2024/09/08/search-develop-search-engine/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="背景：在 Win11 系统上通过 WSL2 开启 Linux 子系统，但是 Linux 系统的 root 密码忘记了。 步骤： （1）在 Win11 系统上，打开有管理员权限的 CMD，输入： 12$ wsl -u root$ passwd root  （2）连续输入两次新密码">
+<meta property="og:description" content="搜索引擎的构成 索引管理器——Index Manager 索引管理器组件的作用是管理带有索引结构的数据，索引结构是一种用于进行高速检索的数据结构。 对索引的访问也是通过索引管理器进行的。 索引管理器通常是将索引作为二级存储上的二进制文件来进行管理的。 而且，还经常会通过保存经过压缩的索引来达到减少从二级存储加载的数据量，提升检索处理效率的目的。  索引检索器——Index Searcher索引检索">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-09-07T06:39:22.000Z">
-<meta property="article:modified_time" content="2024-09-08T14:38:07.796Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/guohaolu/ImageHostingWebsite/main/image-20240908181100042.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/guohaolu/ImageHostingWebsite/main/image-20240908184342063.png">
+<meta property="article:published_time" content="2024-09-08T10:10:09.000Z">
+<meta property="article:modified_time" content="2024-09-08T14:39:18.570Z">
 <meta property="article:author" content="guohao.lu">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/guohaolu/ImageHostingWebsite/main/image-20240908181100042.png">
 
-<link rel="canonical" href="http://example.com/2024/09/07/linux-fix-wsl2-forget-password/">
+<link rel="canonical" href="http://example.com/2024/09/08/search-develop-search-engine/">
 
 
 <script id="page-configurations">
@@ -45,7 +48,7 @@
   };
 </script>
 
-  <title>Linux-WSL2下重设root密码 | Hexo</title>
+  <title>search-开发搜索引擎 | Hexo</title>
   
 
 
@@ -150,7 +153,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/09/07/linux-fix-wsl2-forget-password/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/09/08/search-develop-search-engine/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -163,7 +166,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Linux-WSL2下重设root密码
+          search-开发搜索引擎
         </h1>
 
         <div class="post-meta">
@@ -172,16 +175,10 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2024-09-07 14:39:22" itemprop="dateCreated datePublished" datetime="2024-09-07T14:39:22+08:00">2024-09-07</time>
+              <time title="创建时间：2024-09-08 18:10:09 / 修改时间：22:39:18" itemprop="dateCreated datePublished" datetime="2024-09-08T18:10:09+08:00">2024-09-08</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-09-08 22:38:07" itemprop="dateModified" datetime="2024-09-08T22:38:07+08:00">2024-09-08</time>
-              </span>
 
           
 
@@ -194,12 +191,32 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>背景：在 Win11 系统上通过 WSL2 开启 Linux 子系统，但是 Linux 系统的 <code>root</code> 密码忘记了。</p>
-<p>步骤：</p>
-<p>（1）在 Win11 系统上，打开有管理员权限的 CMD，输入：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ wsl -u root</span><br><span class="line">$ passwd root</span><br></pre></td></tr></table></figure>
+        <h4 id="搜索引擎的构成"><a href="#搜索引擎的构成" class="headerlink" title="搜索引擎的构成"></a>搜索引擎的构成</h4><p><img src="https://raw.githubusercontent.com/guohaolu/ImageHostingWebsite/main/image-20240908181100042.png" alt="image-20240908181100042"></p>
+<h5 id="索引管理器——Index-Manager"><a href="#索引管理器——Index-Manager" class="headerlink" title="索引管理器——Index Manager"></a>索引管理器——Index Manager</h5><ol>
+<li>索引管理器组件的作用是管理带有索引结构的数据，索引结构是一种用于进行高速检索的数据结构。</li>
+<li>对索引的访问也是通过索引管理器进行的。</li>
+<li>索引管理器通常是将索引作为二级存储上的二进制文件来进行管理的。</li>
+<li>而且，还经常会通过保存经过压缩的索引来达到减少从二级存储加载的数据量，提升检索处理效率的目的。</li>
+</ol>
+<h5 id="索引检索器——Index-Searcher"><a href="#索引检索器——Index-Searcher" class="headerlink" title="索引检索器——Index Searcher"></a>索引检索器——Index Searcher</h5><p>索引检索器是利用索引进行全文搜索处理的组件。在大多数情况下，索引检索器都会根据某种标准对与查询相匹配的检索结果排序，并将排在前面的结果返回给应用程序。</p>
+<h5 id="索引构建器——Indexer"><a href="#索引构建器——Indexer" class="headerlink" title="索引构建器——Indexer"></a>索引构建器——Indexer</h5><p>从文档中构建索引。先通过解析将文本文档分解为单词序列，然后再将该单词序列转换为索引结构。</p>
+<h5 id="文档管理器——Document-Manager"><a href="#文档管理器——Document-Manager" class="headerlink" title="文档管理器——Document Manager"></a>文档管理器——Document Manager</h5><p>存储着作为检索对象的文档。结构的映射关系为 <code>文档ID ——&gt; 文档</code>，可以通过现成的 DBMS 实现。</p>
+<pre class="mermaid">graph LR
+    文档编号 -->|映射| 文档</pre>
 
-<p>（2）连续输入两次新密码</p>
+<h4 id="倒排索引的设计"><a href="#倒排索引的设计" class="headerlink" title="倒排索引的设计"></a>倒排索引的设计</h4><p>利用索引来进行全文搜索相较于全扫描搜索的效率会高很多，其中索引结构常使用<strong>倒排索引</strong>。倒排索引会维护单词和文档 ID 的映射关系。</p>
+<pre class="mermaid">graph LR
+    单词 -->|映射| 文档编号-倒排列表</pre>
+
+<h5 id="倒排索引的结构"><a href="#倒排索引的结构" class="headerlink" title="倒排索引的结构"></a>倒排索引的结构</h5><p><img src="https://raw.githubusercontent.com/guohaolu/ImageHostingWebsite/main/image-20240908184342063.png" alt="image-20240908184342063"></p>
+<p>若查询单个单词出现在哪些文档，先通过词典找到对应的倒排列表。</p>
+<p>若查询多个单词出现在哪些文档，先通过词典找到对应的倒排列表 L1、L2，取交集得到 L3（&#x3D; L1 ∩ L2）。</p>
+<p>若查询某个短语出现在哪些文档，倒排项中需要维护<strong>文档编号</strong>和<strong>单词出现的偏移量</strong>。</p>
+<h5 id="分词实现"><a href="#分词实现" class="headerlink" title="分词实现"></a>分词实现</h5><p>英文分词实现比较容易，但是中文分词实现比较困难，需要通过一定的策略来实现。</p>
+<ol>
+<li>词素解析，如 Python 的 jieba 库。</li>
+<li>N-gram 分隔，将句子分隔成多个 N-gram（<strong>Token 词元</strong>），这个过程称为：<strong>Tokenization</strong>。</li>
+</ol>
 
     </div>
 
@@ -215,12 +232,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2024/09/07/docker-base/" rel="prev" title="docker-基础">
-      <i class="fa fa-chevron-left"></i> docker-基础
+    <a href="/2024/09/08/docker-create-elasticsearch/" rel="prev" title="docker-搭建ES环境">
+      <i class="fa fa-chevron-left"></i> docker-搭建ES环境
     </a></div>
       <div class="post-nav-item">
-    <a href="/2024/09/07/docker-app-stack/" rel="next" title="docker-应用栈">
-      docker-应用栈 <i class="fa fa-chevron-right"></i>
+    <a href="/2024/09/08/linux-install-anaconda/" rel="next" title="linux-Anaconda3基础">
+      linux-Anaconda3基础 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -280,6 +297,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%E7%9A%84%E6%9E%84%E6%88%90"><span class="nav-number">1.</span> <span class="nav-text">搜索引擎的构成</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%B4%A2%E5%BC%95%E7%AE%A1%E7%90%86%E5%99%A8%E2%80%94%E2%80%94Index-Manager"><span class="nav-number">1.1.</span> <span class="nav-text">索引管理器——Index Manager</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%B4%A2%E5%BC%95%E6%A3%80%E7%B4%A2%E5%99%A8%E2%80%94%E2%80%94Index-Searcher"><span class="nav-number">1.2.</span> <span class="nav-text">索引检索器——Index Searcher</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA%E5%99%A8%E2%80%94%E2%80%94Indexer"><span class="nav-number">1.3.</span> <span class="nav-text">索引构建器——Indexer</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%96%87%E6%A1%A3%E7%AE%A1%E7%90%86%E5%99%A8%E2%80%94%E2%80%94Document-Manager"><span class="nav-number">1.4.</span> <span class="nav-text">文档管理器——Document Manager</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%80%92%E6%8E%92%E7%B4%A2%E5%BC%95%E7%9A%84%E8%AE%BE%E8%AE%A1"><span class="nav-number">2.</span> <span class="nav-text">倒排索引的设计</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%80%92%E6%8E%92%E7%B4%A2%E5%BC%95%E7%9A%84%E7%BB%93%E6%9E%84"><span class="nav-number">2.1.</span> <span class="nav-text">倒排索引的结构</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%88%86%E8%AF%8D%E5%AE%9E%E7%8E%B0"><span class="nav-number">2.2.</span> <span class="nav-text">分词实现</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
