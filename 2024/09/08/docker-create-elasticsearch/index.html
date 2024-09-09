@@ -1,394 +1,43 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-  <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 7.3.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+const { Component } = require('inferno');
+const classname = require('hexo-component-inferno/lib/util/classname');
+const Head = require('./common/head');
+const Navbar = require('./common/navbar');
+const Widgets = require('./common/widgets');
+const Footer = require('./common/footer');
+const Scripts = require('./common/scripts');
+const Search = require('./common/search');
 
-<link rel="stylesheet" href="/css/main.css">
+module.exports = class extends Component {
+    render() {
+        const { site, config, page, helper, body } = this.props;
 
+        const language = page.lang || page.language || config.language;
+        const columnCount = Widgets.getColumnCount(config.widgets, config, page);
 
-<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
-
-<script id="hexo-configurations">
-    var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
-  </script>
-
-  <meta name="description" content="配置环境变量123root@stealandfire:&#x2F;home&#x2F;stealandfire# export ELASTIC_PASSWORD&#x3D;&quot;lgh123&quot;root@stealandfire:&#x2F;home&#x2F;stealandfire# export KIBANA_PASSWORD&#x3D;&quot;lgh123&quot;  查看环境变量1root@stealandfire:&#x2F;home">
-<meta property="og:type" content="article">
-<meta property="og:title" content="docker-搭建ES环境">
-<meta property="og:url" content="http://example.com/2024/09/08/docker-create-elasticsearch/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="配置环境变量123root@stealandfire:&#x2F;home&#x2F;stealandfire# export ELASTIC_PASSWORD&#x3D;&quot;lgh123&quot;root@stealandfire:&#x2F;home&#x2F;stealandfire# export KIBANA_PASSWORD&#x3D;&quot;lgh123&quot;  查看环境变量1root@stealandfire:&#x2F;home">
-<meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-09-08T09:26:52.000Z">
-<meta property="article:modified_time" content="2024-09-08T09:45:36.050Z">
-<meta property="article:author" content="guohao.lu">
-<meta name="twitter:card" content="summary">
-
-<link rel="canonical" href="http://example.com/2024/09/08/docker-create-elasticsearch/">
-
-
-<script id="page-configurations">
-  // https://hexo.io/docs/variables.html
-  CONFIG.page = {
-    sidebar: "",
-    isHome : false,
-    isPost : true,
-    lang   : 'zh-CN'
-  };
-</script>
-
-  <title>docker-搭建ES环境 | Hexo</title>
-  
-
-
-
-
-
-
-  <noscript>
-  <style>
-  .use-motion .brand,
-  .use-motion .menu-item,
-  .sidebar-inner,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
-
-  .use-motion .site-title,
-  .use-motion .site-subtitle {
-    opacity: initial;
-    top: initial;
-  }
-
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
-  </style>
-</noscript>
-
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
-    <div class="headband"></div>
-
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
-  <div class="site-nav-toggle">
-    <div class="toggle" aria-label="切换导航栏">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
-    </div>
-  </div>
-
-  <div class="site-meta">
-
-    <a href="/" class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">Hexo</h1>
-      <span class="logo-line-after"><i></i></span>
-    </a>
-  </div>
-
-  <div class="site-nav-right">
-    <div class="toggle popup-trigger">
-    </div>
-  </div>
-</div>
-
-
-
-
-<nav class="site-nav">
-  <ul id="menu" class="main-menu menu">
-        <li class="menu-item menu-item-home">
-
-    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
-
-  </li>
-  </ul>
-</nav>
-
-
-
-
-</div>
-    </header>
-
-    
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
-
-
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
-
-          <div class="content post posts-expand">
-            
-
-    
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/09/08/docker-create-elasticsearch/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="guohao.lu">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          docker-搭建ES环境
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2024-09-08 17:26:52 / 修改时间：17:45:36" itemprop="dateCreated datePublished" datetime="2024-09-08T17:26:52+08:00">2024-09-08</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-        <h4 id="配置环境变量"><a href="#配置环境变量" class="headerlink" title="配置环境变量"></a>配置环境变量</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">root@stealandfire:/home/stealandfire# <span class="built_in">export</span> ELASTIC_PASSWORD=<span class="string">&quot;lgh123&quot;</span></span><br><span class="line"></span><br><span class="line">root@stealandfire:/home/stealandfire# <span class="built_in">export</span> KIBANA_PASSWORD=<span class="string">&quot;lgh123&quot;</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="查看环境变量"><a href="#查看环境变量" class="headerlink" title="查看环境变量"></a>查看环境变量</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@stealandfire:/home/stealandfire# <span class="built_in">export</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="创建elastic网络"><a href="#创建elastic网络" class="headerlink" title="创建elastic网络"></a>创建elastic网络</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@stealandfire:/home/stealandfire# docker network create elastic-net</span><br></pre></td></tr></table></figure>
-
-<h4 id="运行elasticsearch容器"><a href="#运行elasticsearch容器" class="headerlink" title="运行elasticsearch容器"></a>运行elasticsearch容器</h4><ul>
-<li><p>映射 9200 端口号</p>
-</li>
-<li><p>容器名称为：elasticsearch</p>
-</li>
-<li><p>运行在名为：elastic-net 的 docker 网络中</p>
-</li>
-</ul>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">root@stealandfire:/home/stealandfire# docker run -p 127.0.0.1:9200:9200 -d --name elasticsearch --network elastic-net \</span><br><span class="line">  -e ELASTIC_PASSWORD=<span class="variable">$ELASTIC_PASSWORD</span> \</span><br><span class="line">  -e <span class="string">&quot;discovery.type=single-node&quot;</span> \</span><br><span class="line">  -e <span class="string">&quot;xpack.security.http.ssl.enabled=false&quot;</span> \</span><br><span class="line">  -e <span class="string">&quot;xpack.license.self_generated.type=basic&quot;</span> \</span><br><span class="line">  docker.elastic.co/elasticsearch/elasticsearch:8.15.1</span><br></pre></td></tr></table></figure>
-
-<h4 id="运行Kibana容器"><a href="#运行Kibana容器" class="headerlink" title="运行Kibana容器"></a>运行Kibana容器</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">docker run -p 127.0.0.1:5601:5601 -d --name kibana --network elastic-net \</span><br><span class="line">  -e ELASTICSEARCH_URL=http://elasticsearch:9200 \</span><br><span class="line">  -e ELASTICSEARCH_HOSTS=http://elasticsearch:9200 \</span><br><span class="line">  -e ELASTICSEARCH_USERNAME=kibana_system \</span><br><span class="line">  -e ELASTICSEARCH_PASSWORD=<span class="variable">$KIBANA_PASSWORD</span> \</span><br><span class="line">  -e <span class="string">&quot;xpack.security.enabled=false&quot;</span> \</span><br><span class="line">  -e <span class="string">&quot;xpack.license.self_generated.type=basic&quot;</span> \</span><br><span class="line">  docker.elastic.co/kibana/kibana:8.15.1</span><br></pre></td></tr></table></figure>
-
-<h4 id="验证elasticsearch运行"><a href="#验证elasticsearch运行" class="headerlink" title="验证elasticsearch运行"></a>验证elasticsearch运行</h4><p>登录 <a target="_blank" rel="noopener" href="http://localhost:9200/%EF%BC%8C%E8%BE%93%E5%85%A5%E8%B4%A6%E5%8F%B7%E5%AF%86%E7%A0%81%E3%80%82">http://localhost:9200/，输入账号密码。</a></p>
-<h4 id="验证Kibana运行"><a href="#验证Kibana运行" class="headerlink" title="验证Kibana运行"></a>验证Kibana运行</h4><p>登录 <a target="_blank" rel="noopener" href="http://localhost:5601/%EF%BC%8C%E8%BE%93%E5%85%A5%E8%B4%A6%E5%8F%B7%EF%BC%9A%60elastic%60%EF%BC%8C%E5%AF%86%E7%A0%81%EF%BC%9A%60lgh123%60%E3%80%82">http://localhost:5601/，输入账号：`elastic`，密码：`lgh123`。</a></p>
-
-    </div>
-
-    
-    
-    
-
-      <footer class="post-footer">
-
-        
-
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/2024/09/08/docker-network-manager/" rel="prev" title="docker-网络管理">
-      <i class="fa fa-chevron-left"></i> docker-网络管理
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/2024/09/08/search-develop-search-engine/" rel="next" title="search-开发搜索引擎">
-      search-开发搜索引擎 <i class="fa fa-chevron-right"></i>
-    </a></div>
-    </div>
-      </footer>
-    
-  </article>
-  
-  
-  
-
-
-
-          </div>
-          
-
-<script>
-  window.addEventListener('tabs:register', () => {
-    let { activeClass } = CONFIG.comments;
-    if (CONFIG.comments.storage) {
-      activeClass = localStorage.getItem('comments_active') || activeClass;
+        return <html lang={language ? language.substr(0, 2) : ''}>
+            <Head site={site} config={config} helper={helper} page={page} />
+            <body class={`is-${columnCount}-column`}>
+                <Navbar config={config} helper={helper} page={page} />
+                <section class="section">
+                    <div class="container">
+                        <div class="columns">
+                            <div class={classname({
+                                column: true,
+                                'order-2': true,
+                                'column-main': true,
+                                'is-12': columnCount === 1,
+                                'is-8-tablet is-8-desktop is-8-widescreen': columnCount === 2,
+                                'is-8-tablet is-8-desktop is-6-widescreen': columnCount === 3
+                            })} dangerouslySetInnerHTML={{ __html: body }}></div>
+                            <Widgets site={site} config={config} helper={helper} page={page} position={'left'} />
+                            <Widgets site={site} config={config} helper={helper} page={page} position={'right'} />
+                        </div>
+                    </div>
+                </section>
+                <Footer config={config} helper={helper} />
+                <Scripts site={site} config={config} helper={helper} page={page} />
+                <Search config={config} helper={helper} />
+            </body>
+        </html>;
     }
-    if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
-      if (activeTab) {
-        activeTab.click();
-      }
-    }
-  });
-  if (CONFIG.comments.storage) {
-    window.addEventListener('tabs:click', event => {
-      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
-      localStorage.setItem('comments_active', commentClass);
-    });
-  }
-</script>
-
-        </div>
-          
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
-  </div>
-
-  <aside class="sidebar">
-    <div class="sidebar-inner">
-
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          文章目录
-        </li>
-        <li class="sidebar-nav-overview">
-          站点概览
-        </li>
-      </ul>
-
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="nav-number">1.</span> <span class="nav-text">配置环境变量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="nav-number">2.</span> <span class="nav-text">查看环境变量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9B%E5%BB%BAelastic%E7%BD%91%E7%BB%9C"><span class="nav-number">3.</span> <span class="nav-text">创建elastic网络</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%90%E8%A1%8Celasticsearch%E5%AE%B9%E5%99%A8"><span class="nav-number">4.</span> <span class="nav-text">运行elasticsearch容器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%90%E8%A1%8CKibana%E5%AE%B9%E5%99%A8"><span class="nav-number">5.</span> <span class="nav-text">运行Kibana容器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%AA%8C%E8%AF%81elasticsearch%E8%BF%90%E8%A1%8C"><span class="nav-number">6.</span> <span class="nav-text">验证elasticsearch运行</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%AA%8C%E8%AF%81Kibana%E8%BF%90%E8%A1%8C"><span class="nav-number">7.</span> <span class="nav-text">验证Kibana运行</span></a></li></ol></div>
-      </div>
-      <!--/noindex-->
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-  <p class="site-author-name" itemprop="name">guohao.lu</p>
-  <div class="site-description" itemprop="description"></div>
-</div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">18</span>
-          <span class="site-state-item-name">日志</span>
-        </a>
-      </div>
-  </nav>
-</div>
-
-
-
-      </div>
-
-    </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
-
-
-      </div>
-    </main>
-
-    <footer class="footer">
-      <div class="footer-inner">
-        
-
-        
-
-<div class="copyright">
-  
-  &copy; 
-  <span itemprop="copyrightYear">2024</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">guohao.lu</span>
-</div>
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
-  </div>
-
-        
-
-
-
-
-
-
-
-
-      </div>
-    </footer>
-  </div>
-
-  
-  <script src="/lib/anime.min.js"></script>
-  <script src="/lib/velocity/velocity.min.js"></script>
-  <script src="/lib/velocity/velocity.ui.min.js"></script>
-
-<script src="/js/utils.js"></script>
-
-<script src="/js/motion.js"></script>
-
-
-<script src="/js/schemes/pisces.js"></script>
-
-
-<script src="/js/next-boot.js"></script>
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-  
-
-</body>
-</html>
+};
