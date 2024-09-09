@@ -1,43 +1,77 @@
-const { Component } = require('inferno');
-const classname = require('hexo-component-inferno/lib/util/classname');
-const Head = require('./common/head');
-const Navbar = require('./common/navbar');
-const Widgets = require('./common/widgets');
-const Footer = require('./common/footer');
-const Scripts = require('./common/scripts');
-const Search = require('./common/search');
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><title>search-开发搜索引擎 - Hexo</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="Hexo"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Hexo"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="搜索引擎的构成 索引管理器——Index Manager 索引管理器组件的作用是管理带有索引结构的数据，索引结构是一种用于进行高速检索的数据结构。 对索引的访问也是通过索引管理器进行的。 索引管理器通常是将索引作为二级存储上的二进制文件来进行管理的。 而且，还经常会通过保存经过压缩的索引来达到减少从二级存储加载的数据量，提升检索处理效率的目的。  索引检索器——Index Searcher索引检索"><meta property="og:type" content="article"><meta property="og:title" content="search-开发搜索引擎"><meta property="og:url" content="http://example.com/2024/09/08/search-develop-search-engine/"><meta property="og:site_name" content="Hexo"><meta property="og:description" content="搜索引擎的构成 索引管理器——Index Manager 索引管理器组件的作用是管理带有索引结构的数据，索引结构是一种用于进行高速检索的数据结构。 对索引的访问也是通过索引管理器进行的。 索引管理器通常是将索引作为二级存储上的二进制文件来进行管理的。 而且，还经常会通过保存经过压缩的索引来达到减少从二级存储加载的数据量，提升检索处理效率的目的。  索引检索器——Index Searcher索引检索"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://raw.githubusercontent.com/guohaolu/ImageHostingWebsite/main/image-20240908181100042.png"><meta property="og:image" content="https://raw.githubusercontent.com/guohaolu/ImageHostingWebsite/main/image-20240908184342063.png"><meta property="og:image" content="https://raw.githubusercontent.com/guohaolu/ImageHostingWebsite/main/image-20240908230156046.png"><meta property="article:published_time" content="2024-09-08T10:10:09.000Z"><meta property="article:modified_time" content="2024-09-08T15:21:44.135Z"><meta property="article:author" content="guohao.lu"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="https://raw.githubusercontent.com/guohaolu/ImageHostingWebsite/main/image-20240908181100042.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://example.com/2024/09/08/search-develop-search-engine/"},"headline":"search-开发搜索引擎","image":["https://raw.githubusercontent.com/guohaolu/ImageHostingWebsite/main/image-20240908181100042.png","https://raw.githubusercontent.com/guohaolu/ImageHostingWebsite/main/image-20240908184342063.png","https://raw.githubusercontent.com/guohaolu/ImageHostingWebsite/main/image-20240908230156046.png"],"datePublished":"2024-09-08T10:10:09.000Z","dateModified":"2024-09-08T15:21:44.135Z","author":{"@type":"Person","name":"guohao.lu"},"publisher":{"@type":"Organization","name":"Hexo","logo":{"@type":"ImageObject"}},"description":"搜索引擎的构成 索引管理器——Index Manager 索引管理器组件的作用是管理带有索引结构的数据，索引结构是一种用于进行高速检索的数据结构。 对索引的访问也是通过索引管理器进行的。 索引管理器通常是将索引作为二级存储上的二进制文件来进行管理的。 而且，还经常会通过保存经过压缩的索引来达到减少从二级存储加载的数据量，提升检索处理效率的目的。  索引检索器——Index Searcher索引检索"}</script><link rel="canonical" href="http://example.com/2024/09/08/search-develop-search-engine/"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link data-pjax rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link data-pjax rel="stylesheet" href="/css/default.css"><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
 
-module.exports = class extends Component {
-    render() {
-        const { site, config, page, helper, body } = this.props;
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
 
-        const language = page.lang || page.language || config.language;
-        const columnCount = Widgets.getColumnCount(config.widgets, config, page);
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
 
-        return <html lang={language ? language.substr(0, 2) : ''}>
-            <Head site={site} config={config} helper={helper} page={page} />
-            <body class={`is-${columnCount}-column`}>
-                <Navbar config={config} helper={helper} page={page} />
-                <section class="section">
-                    <div class="container">
-                        <div class="columns">
-                            <div class={classname({
-                                column: true,
-                                'order-2': true,
-                                'column-main': true,
-                                'is-12': columnCount === 1,
-                                'is-8-tablet is-8-desktop is-8-widescreen': columnCount === 2,
-                                'is-8-tablet is-8-desktop is-6-widescreen': columnCount === 3
-                            })} dangerouslySetInnerHTML={{ __html: body }}></div>
-                            <Widgets site={site} config={config} helper={helper} page={page} position={'left'} />
-                            <Widgets site={site} config={config} helper={helper} page={page} position={'right'} />
-                        </div>
-                    </div>
-                </section>
-                <Footer config={config} helper={helper} />
-                <Scripts site={site} config={config} helper={helper} page={page} />
-                <Search config={config} helper={helper} />
-            </body>
-        </html>;
-    }
-};
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"></head><body class="is-1-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">Hexo</a></div><div class="navbar-menu"><div class="navbar-end"></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-12"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2024-09-08T10:10:09.000Z" title="2024/9/8 18:10:09">2024-09-08</time>发表</span><span class="level-item"><time dateTime="2024-09-08T15:21:44.135Z" title="2024/9/8 23:21:44">2024-09-08</time>更新</span></div></div><h1 class="title is-3 is-size-4-mobile">search-开发搜索引擎</h1><div class="content"><h4 id="搜索引擎的构成"><a href="#搜索引擎的构成" class="headerlink" title="搜索引擎的构成"></a>搜索引擎的构成</h4><p><img src="https://raw.githubusercontent.com/guohaolu/ImageHostingWebsite/main/image-20240908181100042.png" alt="image-20240908181100042"></p>
+<h5 id="索引管理器——Index-Manager"><a href="#索引管理器——Index-Manager" class="headerlink" title="索引管理器——Index Manager"></a>索引管理器——Index Manager</h5><ol>
+<li>索引管理器组件的作用是管理带有索引结构的数据，索引结构是一种用于进行高速检索的数据结构。</li>
+<li>对索引的访问也是通过索引管理器进行的。</li>
+<li>索引管理器通常是将索引作为二级存储上的二进制文件来进行管理的。</li>
+<li>而且，还经常会通过保存经过压缩的索引来达到减少从二级存储加载的数据量，提升检索处理效率的目的。</li>
+</ol>
+<h5 id="索引检索器——Index-Searcher"><a href="#索引检索器——Index-Searcher" class="headerlink" title="索引检索器——Index Searcher"></a>索引检索器——Index Searcher</h5><p>索引检索器是利用索引进行全文搜索处理的组件。在大多数情况下，索引检索器都会根据某种标准对与查询相匹配的检索结果排序，并将排在前面的结果返回给应用程序。</p>
+<h5 id="索引构建器——Indexer"><a href="#索引构建器——Indexer" class="headerlink" title="索引构建器——Indexer"></a>索引构建器——Indexer</h5><p>从文档中构建索引。先通过解析将文本文档分解为单词序列，然后再将该单词序列转换为索引结构。</p>
+<h5 id="文档管理器——Document-Manager"><a href="#文档管理器——Document-Manager" class="headerlink" title="文档管理器——Document Manager"></a>文档管理器——Document Manager</h5><p>存储着作为检索对象的文档。结构的映射关系为 <code>文档ID ——&gt; 文档</code>，可以通过现成的 DBMS 实现。</p>
+<pre class="mermaid">graph LR
+    文档编号 -->|映射| 文档</pre>
+
+<h4 id="倒排索引的设计"><a href="#倒排索引的设计" class="headerlink" title="倒排索引的设计"></a>倒排索引的设计</h4><p>利用索引来进行全文搜索相较于全扫描搜索的效率会高很多，其中索引结构常使用<strong>倒排索引</strong>。倒排索引会维护单词和文档 ID 的映射关系。</p>
+<pre class="mermaid">graph LR
+    单词 -->|映射| 文档编号-倒排列表</pre>
+
+<h5 id="倒排索引的结构"><a href="#倒排索引的结构" class="headerlink" title="倒排索引的结构"></a>倒排索引的结构</h5><p><img src="https://raw.githubusercontent.com/guohaolu/ImageHostingWebsite/main/image-20240908184342063.png" alt="image-20240908184342063"></p>
+<p>若查询单个单词出现在哪些文档，先通过词典找到对应的倒排列表。</p>
+<p>若查询多个单词出现在哪些文档，先通过词典找到对应的倒排列表 L1、L2，取交集得到 L3（&#x3D; L1 ∩ L2）。</p>
+<p>若查询某个短语出现在哪些文档，倒排项中需要维护<strong>文档编号</strong>和<strong>单词出现的偏移量</strong>。</p>
+<h5 id="分词实现"><a href="#分词实现" class="headerlink" title="分词实现"></a>分词实现</h5><p>英文分词实现比较容易，但是中文分词实现比较困难，需要通过一定的策略来实现。</p>
+<ol>
+<li>词素解析，如 Python 的 jieba 库。</li>
+<li>N-gram 分隔，将句子分隔成多个 N-gram（<strong>Token 词元</strong>），这个过程称为：<strong>Tokenization</strong>。</li>
+</ol>
+<h5 id="数据结构设计"><a href="#数据结构设计" class="headerlink" title="数据结构设计"></a>数据结构设计</h5><p>（1）字典</p>
+<p>字典用来存储单词，一般要求提供高效的查询。如果字典存储在内存里，可以通过二叉查找树&#x2F;字典树来实现。如果字典存储在磁盘里，可以通过 B+ 树来实现。</p>
+<p>（2）倒排文件</p>
+<p>由于倒排列表可能会很长，一般倒排文件都是存储在硬盘的连续区域中（需要通过分段存储来解决预留空间不足的问题）。同时，我们可能需要通过压缩倒排文件的方式来进一步降低空间占用。</p>
+<p><img src="https://raw.githubusercontent.com/guohaolu/ImageHostingWebsite/main/image-20240908230156046.png" alt="image-20240908230156046"></p>
+<p>倒排列表需要包含：文档编号、词频、偏移列表。</p>
+<h4 id="检索模型的设计"><a href="#检索模型的设计" class="headerlink" title="检索模型的设计"></a>检索模型的设计</h4><h5 id="布尔检索处理流程"><a href="#布尔检索处理流程" class="headerlink" title="布尔检索处理流程"></a>布尔检索处理流程</h5><pre class="mermaid">graph TD
+    A[1. 获取查询中每个单词的倒排列表] --> B[2. 根据布尔检索, 获取符合检索条件的文档编号]
+    B --> C[3.1 计算符合检索条件的文档和查询的匹配度]
+    C --> D[3.2 获取对检索结果进行排序时使用的属性值]
+    D --> E[4. 根据匹配度或用于排序的属性值, 获取前k个文档]</pre>
+
+<h5 id="关联度计算"><a href="#关联度计算" class="headerlink" title="关联度计算"></a>关联度计算</h5></div><!--!--></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/2024/09/08/linux-install-anaconda/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">linux-Anaconda3基础</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/2024/09/08/docker-create-elasticsearch/"><span class="level-item">docker-搭建ES环境</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><!--!--></div><!--!--><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/">Hexo</a><p class="is-size-7"><span>&copy; 2024 guohao.lu</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script data-pjax src="/js/column.js"></script><!--!--><script data-pjax src="/js/main.js" defer></script><!--!--></body></html>

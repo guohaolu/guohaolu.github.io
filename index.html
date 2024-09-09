@@ -1,43 +1,249 @@
-const { Component } = require('inferno');
-const classname = require('hexo-component-inferno/lib/util/classname');
-const Head = require('./common/head');
-const Navbar = require('./common/navbar');
-const Widgets = require('./common/widgets');
-const Footer = require('./common/footer');
-const Scripts = require('./common/scripts');
-const Search = require('./common/search');
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><title>Hexo</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="Hexo"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Hexo"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta property="og:type" content="website"><meta property="og:title" content="Hexo"><meta property="og:url" content="http://example.com/"><meta property="og:site_name" content="Hexo"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="http://example.com/img/og_image.png"><meta property="article:author" content="guohao.lu"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="http://example.com/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://example.com"},"headline":"Hexo","image":["http://example.com/img/og_image.png"],"author":{"@type":"Person","name":"guohao.lu"},"publisher":{"@type":"Organization","name":"Hexo","logo":{"@type":"ImageObject"}},"description":""}</script><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link data-pjax rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link data-pjax rel="stylesheet" href="/css/default.css"><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
 
-module.exports = class extends Component {
-    render() {
-        const { site, config, page, helper, body } = this.props;
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
 
-        const language = page.lang || page.language || config.language;
-        const columnCount = Widgets.getColumnCount(config.widgets, config, page);
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
 
-        return <html lang={language ? language.substr(0, 2) : ''}>
-            <Head site={site} config={config} helper={helper} page={page} />
-            <body class={`is-${columnCount}-column`}>
-                <Navbar config={config} helper={helper} page={page} />
-                <section class="section">
-                    <div class="container">
-                        <div class="columns">
-                            <div class={classname({
-                                column: true,
-                                'order-2': true,
-                                'column-main': true,
-                                'is-12': columnCount === 1,
-                                'is-8-tablet is-8-desktop is-8-widescreen': columnCount === 2,
-                                'is-8-tablet is-8-desktop is-6-widescreen': columnCount === 3
-                            })} dangerouslySetInnerHTML={{ __html: body }}></div>
-                            <Widgets site={site} config={config} helper={helper} page={page} position={'left'} />
-                            <Widgets site={site} config={config} helper={helper} page={page} position={'right'} />
-                        </div>
-                    </div>
-                </section>
-                <Footer config={config} helper={helper} />
-                <Scripts site={site} config={config} helper={helper} page={page} />
-                <Search config={config} helper={helper} />
-            </body>
-        </html>;
-    }
-};
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"></head><body class="is-1-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">Hexo</a></div><div class="navbar-menu"><div class="navbar-end"></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-12"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2024-09-09T17:37:54.666Z" title="2024/9/10 01:37:54">2024-09-10</time>发表</span><span class="level-item"><time dateTime="2024-09-09T17:47:39.763Z" title="2024/9/10 01:47:39">2024-09-10</time>更新</span></div></div><div class="content"></div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2024-09-08T12:34:01.000Z" title="2024/9/8 20:34:01">2024-09-08</time>发表</span><span class="level-item"><time dateTime="2024-09-08T13:38:14.281Z" title="2024/9/8 21:38:14">2024-09-08</time>更新</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2024/09/08/linux-install-anaconda/">linux-Anaconda3基础</a></p><div class="content"><p>在 WSL2 环境下安装 Anaconda3，Linux 系统为：Ubuntu 22.04.3 LTS。</p>
+<h4 id="安装步骤"><a href="#安装步骤" class="headerlink" title="安装步骤"></a>安装步骤</h4><h5 id="安装bzip2"><a href="#安装bzip2" class="headerlink" title="安装bzip2"></a>安装bzip2</h5><p>缺失 bzip2 可能会引发后续安装失败。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@stealandfire:/opt# <span class="built_in">sudo</span> apt-get install bzip2</span><br></pre></td></tr></table></figure>
+
+<h5 id="安装Anaconda3"><a href="#安装Anaconda3" class="headerlink" title="安装Anaconda3"></a>安装Anaconda3</h5><p>目录为 <code>/opt</code></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">root@stealandfire:/opt# wget https://repo.anaconda.com/archive/Anaconda3-5.3.0-Linux-x86_64.sh</span><br><span class="line">root@stealandfire:/opt# <span class="built_in">chmod</span> +x Anaconda3-5.3.0-Linux-x86_64.sh</span><br><span class="line">root@stealandfire:/opt# ./Anaconda3-5.3.0-Linux-x86_64.sh -u</span><br><span class="line">root@stealandfire:~# vim /root/.bashrc</span><br><span class="line">root@stealandfire:~# <span class="built_in">source</span> ~/.bashrc</span><br></pre></td></tr></table></figure>
+
+<h5 id="验证Anaconda3"><a href="#验证Anaconda3" class="headerlink" title="验证Anaconda3"></a>验证Anaconda3</h5><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">root@stealandfire:~# conda -V</span><br><span class="line">conda 4.5.11</span><br></pre></td></tr></table></figure>
+
+<h4 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h4><h5 id="关闭SSL验证"><a href="#关闭SSL验证" class="headerlink" title="关闭SSL验证"></a>关闭SSL验证</h5><p>conda 配置需要关闭 SSL 的验证，不然创建虚拟环境会报错。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda config --<span class="built_in">set</span> ssl_verify <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="创建虚拟环境"><a href="#创建虚拟环境" class="headerlink" title="创建虚拟环境"></a>创建虚拟环境</h5><p>虚拟环境名称为：pytorch，python 版本为：3.7</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda create -n pytorch python=3.7</span><br></pre></td></tr></table></figure>
+
+<h5 id="激活虚拟环境"><a href="#激活虚拟环境" class="headerlink" title="激活虚拟环境"></a>激活虚拟环境</h5><p>激活环境即切换所使用的环境</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda activate pytorch</span><br></pre></td></tr></table></figure>
+
+<p>激活后，命令行会变为：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(pytorch) root@stealandfire:~#</span><br></pre></td></tr></table></figure>
+
+<h5 id="在虚拟环境中安装"><a href="#在虚拟环境中安装" class="headerlink" title="在虚拟环境中安装"></a>在虚拟环境中安装</h5><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda install pytorch torchvision torchaudio cudatoolkit=10.2 -c pytorch</span><br></pre></td></tr></table></figure>
+
+<h5 id="查看安装的环境"><a href="#查看安装的环境" class="headerlink" title="查看安装的环境"></a>查看安装的环境</h5><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda info --envs</span><br></pre></td></tr></table></figure>
+
+</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2024-09-08T10:10:09.000Z" title="2024/9/8 18:10:09">2024-09-08</time>发表</span><span class="level-item"><time dateTime="2024-09-08T15:21:44.135Z" title="2024/9/8 23:21:44">2024-09-08</time>更新</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2024/09/08/search-develop-search-engine/">search-开发搜索引擎</a></p><div class="content"><h4 id="搜索引擎的构成"><a href="#搜索引擎的构成" class="headerlink" title="搜索引擎的构成"></a>搜索引擎的构成</h4><p><img src="https://raw.githubusercontent.com/guohaolu/ImageHostingWebsite/main/image-20240908181100042.png" alt="image-20240908181100042"></p>
+<h5 id="索引管理器——Index-Manager"><a href="#索引管理器——Index-Manager" class="headerlink" title="索引管理器——Index Manager"></a>索引管理器——Index Manager</h5><ol>
+<li>索引管理器组件的作用是管理带有索引结构的数据，索引结构是一种用于进行高速检索的数据结构。</li>
+<li>对索引的访问也是通过索引管理器进行的。</li>
+<li>索引管理器通常是将索引作为二级存储上的二进制文件来进行管理的。</li>
+<li>而且，还经常会通过保存经过压缩的索引来达到减少从二级存储加载的数据量，提升检索处理效率的目的。</li>
+</ol>
+<h5 id="索引检索器——Index-Searcher"><a href="#索引检索器——Index-Searcher" class="headerlink" title="索引检索器——Index Searcher"></a>索引检索器——Index Searcher</h5><p>索引检索器是利用索引进行全文搜索处理的组件。在大多数情况下，索引检索器都会根据某种标准对与查询相匹配的检索结果排序，并将排在前面的结果返回给应用程序。</p>
+<h5 id="索引构建器——Indexer"><a href="#索引构建器——Indexer" class="headerlink" title="索引构建器——Indexer"></a>索引构建器——Indexer</h5><p>从文档中构建索引。先通过解析将文本文档分解为单词序列，然后再将该单词序列转换为索引结构。</p>
+<h5 id="文档管理器——Document-Manager"><a href="#文档管理器——Document-Manager" class="headerlink" title="文档管理器——Document Manager"></a>文档管理器——Document Manager</h5><p>存储着作为检索对象的文档。结构的映射关系为 <code>文档ID ——&gt; 文档</code>，可以通过现成的 DBMS 实现。</p>
+<pre class="mermaid">graph LR
+    文档编号 -->|映射| 文档</pre>
+
+<h4 id="倒排索引的设计"><a href="#倒排索引的设计" class="headerlink" title="倒排索引的设计"></a>倒排索引的设计</h4><p>利用索引来进行全文搜索相较于全扫描搜索的效率会高很多，其中索引结构常使用<strong>倒排索引</strong>。倒排索引会维护单词和文档 ID 的映射关系。</p>
+<pre class="mermaid">graph LR
+    单词 -->|映射| 文档编号-倒排列表</pre>
+
+<h5 id="倒排索引的结构"><a href="#倒排索引的结构" class="headerlink" title="倒排索引的结构"></a>倒排索引的结构</h5><p><img src="https://raw.githubusercontent.com/guohaolu/ImageHostingWebsite/main/image-20240908184342063.png" alt="image-20240908184342063"></p>
+<p>若查询单个单词出现在哪些文档，先通过词典找到对应的倒排列表。</p>
+<p>若查询多个单词出现在哪些文档，先通过词典找到对应的倒排列表 L1、L2，取交集得到 L3（&#x3D; L1 ∩ L2）。</p>
+<p>若查询某个短语出现在哪些文档，倒排项中需要维护<strong>文档编号</strong>和<strong>单词出现的偏移量</strong>。</p>
+<h5 id="分词实现"><a href="#分词实现" class="headerlink" title="分词实现"></a>分词实现</h5><p>英文分词实现比较容易，但是中文分词实现比较困难，需要通过一定的策略来实现。</p>
+<ol>
+<li>词素解析，如 Python 的 jieba 库。</li>
+<li>N-gram 分隔，将句子分隔成多个 N-gram（<strong>Token 词元</strong>），这个过程称为：<strong>Tokenization</strong>。</li>
+</ol>
+<h5 id="数据结构设计"><a href="#数据结构设计" class="headerlink" title="数据结构设计"></a>数据结构设计</h5><p>（1）字典</p>
+<p>字典用来存储单词，一般要求提供高效的查询。如果字典存储在内存里，可以通过二叉查找树&#x2F;字典树来实现。如果字典存储在磁盘里，可以通过 B+ 树来实现。</p>
+<p>（2）倒排文件</p>
+<p>由于倒排列表可能会很长，一般倒排文件都是存储在硬盘的连续区域中（需要通过分段存储来解决预留空间不足的问题）。同时，我们可能需要通过压缩倒排文件的方式来进一步降低空间占用。</p>
+<p><img src="https://raw.githubusercontent.com/guohaolu/ImageHostingWebsite/main/image-20240908230156046.png" alt="image-20240908230156046"></p>
+<p>倒排列表需要包含：文档编号、词频、偏移列表。</p>
+<h4 id="检索模型的设计"><a href="#检索模型的设计" class="headerlink" title="检索模型的设计"></a>检索模型的设计</h4><h5 id="布尔检索处理流程"><a href="#布尔检索处理流程" class="headerlink" title="布尔检索处理流程"></a>布尔检索处理流程</h5><pre class="mermaid">graph TD
+    A[1. 获取查询中每个单词的倒排列表] --> B[2. 根据布尔检索, 获取符合检索条件的文档编号]
+    B --> C[3.1 计算符合检索条件的文档和查询的匹配度]
+    C --> D[3.2 获取对检索结果进行排序时使用的属性值]
+    D --> E[4. 根据匹配度或用于排序的属性值, 获取前k个文档]</pre>
+
+<h5 id="关联度计算"><a href="#关联度计算" class="headerlink" title="关联度计算"></a>关联度计算</h5></div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2024-09-08T09:26:52.000Z" title="2024/9/8 17:26:52">2024-09-08</time>发表</span><span class="level-item"><time dateTime="2024-09-08T09:45:36.050Z" title="2024/9/8 17:45:36">2024-09-08</time>更新</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2024/09/08/docker-create-elasticsearch/">docker-搭建ES环境</a></p><div class="content"><h4 id="配置环境变量"><a href="#配置环境变量" class="headerlink" title="配置环境变量"></a>配置环境变量</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">root@stealandfire:/home/stealandfire# <span class="built_in">export</span> ELASTIC_PASSWORD=<span class="string">&quot;lgh123&quot;</span></span><br><span class="line"></span><br><span class="line">root@stealandfire:/home/stealandfire# <span class="built_in">export</span> KIBANA_PASSWORD=<span class="string">&quot;lgh123&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="查看环境变量"><a href="#查看环境变量" class="headerlink" title="查看环境变量"></a>查看环境变量</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@stealandfire:/home/stealandfire# <span class="built_in">export</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="创建elastic网络"><a href="#创建elastic网络" class="headerlink" title="创建elastic网络"></a>创建elastic网络</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@stealandfire:/home/stealandfire# docker network create elastic-net</span><br></pre></td></tr></table></figure>
+
+<h4 id="运行elasticsearch容器"><a href="#运行elasticsearch容器" class="headerlink" title="运行elasticsearch容器"></a>运行elasticsearch容器</h4><ul>
+<li><p>映射 9200 端口号</p>
+</li>
+<li><p>容器名称为：elasticsearch</p>
+</li>
+<li><p>运行在名为：elastic-net 的 docker 网络中</p>
+</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">root@stealandfire:/home/stealandfire# docker run -p 127.0.0.1:9200:9200 -d --name elasticsearch --network elastic-net \</span><br><span class="line">  -e ELASTIC_PASSWORD=<span class="variable">$ELASTIC_PASSWORD</span> \</span><br><span class="line">  -e <span class="string">&quot;discovery.type=single-node&quot;</span> \</span><br><span class="line">  -e <span class="string">&quot;xpack.security.http.ssl.enabled=false&quot;</span> \</span><br><span class="line">  -e <span class="string">&quot;xpack.license.self_generated.type=basic&quot;</span> \</span><br><span class="line">  docker.elastic.co/elasticsearch/elasticsearch:8.15.1</span><br></pre></td></tr></table></figure>
+
+<h4 id="运行Kibana容器"><a href="#运行Kibana容器" class="headerlink" title="运行Kibana容器"></a>运行Kibana容器</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">docker run -p 127.0.0.1:5601:5601 -d --name kibana --network elastic-net \</span><br><span class="line">  -e ELASTICSEARCH_URL=http://elasticsearch:9200 \</span><br><span class="line">  -e ELASTICSEARCH_HOSTS=http://elasticsearch:9200 \</span><br><span class="line">  -e ELASTICSEARCH_USERNAME=kibana_system \</span><br><span class="line">  -e ELASTICSEARCH_PASSWORD=<span class="variable">$KIBANA_PASSWORD</span> \</span><br><span class="line">  -e <span class="string">&quot;xpack.security.enabled=false&quot;</span> \</span><br><span class="line">  -e <span class="string">&quot;xpack.license.self_generated.type=basic&quot;</span> \</span><br><span class="line">  docker.elastic.co/kibana/kibana:8.15.1</span><br></pre></td></tr></table></figure>
+
+<h4 id="验证elasticsearch运行"><a href="#验证elasticsearch运行" class="headerlink" title="验证elasticsearch运行"></a>验证elasticsearch运行</h4><p>登录 <a target="_blank" rel="noopener" href="http://localhost:9200/%EF%BC%8C%E8%BE%93%E5%85%A5%E8%B4%A6%E5%8F%B7%E5%AF%86%E7%A0%81%E3%80%82">http://localhost:9200/，输入账号密码。</a></p>
+<h4 id="验证Kibana运行"><a href="#验证Kibana运行" class="headerlink" title="验证Kibana运行"></a>验证Kibana运行</h4><p>登录 <a target="_blank" rel="noopener" href="http://localhost:5601/%EF%BC%8C%E8%BE%93%E5%85%A5%E8%B4%A6%E5%8F%B7%EF%BC%9A%60elastic%60%EF%BC%8C%E5%AF%86%E7%A0%81%EF%BC%9A%60lgh123%60%E3%80%82">http://localhost:5601/，输入账号：`elastic`，密码：`lgh123`。</a></p>
+</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2024-09-08T04:15:08.000Z" title="2024/9/8 12:15:08">2024-09-08</time>发表</span><span class="level-item"><time dateTime="2024-09-08T14:29:50.982Z" title="2024/9/8 22:29:50">2024-09-08</time>更新</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2024/09/08/docker-network-manager/">docker-网络管理</a></p><div class="content"><p>（1）创建网络”frontend”</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># docker create network frontend</span></span><br></pre></td></tr></table></figure>
+
+<p>（2）查看网络</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># docker network ls</span></span><br></pre></td></tr></table></figure>
+
+<p>（3）将容器 container 加入 frontend 网络中</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># docker run -it --name container --net frontend busybox</span></span><br></pre></td></tr></table></figure>
+
+<p>（4）将容器 container 加入 backend 网络中</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># docker network connnect backend container</span></span><br></pre></td></tr></table></figure>
+
+</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2024-09-07T10:46:24.000Z" title="2024/9/7 18:46:24">2024-09-07</time>发表</span><span class="level-item"><time dateTime="2024-09-08T14:33:09.248Z" title="2024/9/8 22:33:09">2024-09-08</time>更新</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2024/09/07/docker-app-stack/">docker-应用栈</a></p><div class="content"><h4 id="Docker应用栈"><a href="#Docker应用栈" class="headerlink" title="Docker应用栈"></a>Docker应用栈</h4><p>Docker 应用栈（Application Stack）通常指的是在一个或多个 Docker 容器中运行的一组相互协作的应用和服务。这些应用和服务通常是通过 Docker Compose 或其他编排工具来定义和管理的，它们共同构成了一个完整的应用环境。</p>
+<p>应用栈结构如下：</p>
+<p><img src="https://raw.githubusercontent.com/guohaolu/ImageHostingWebsite/main/image-20240907174622584.png" alt="image-20240907174622584"></p>
+<p>容器启动顺序：</p>
+<pre class="mermaid">graph LR
+    A[Redis Master] --> B[Redis Slave] --> C[APP] --> D[HAProxy]</pre>
+
+</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2024-09-07T06:39:22.000Z" title="2024/9/7 14:39:22">2024-09-07</time>发表</span><span class="level-item"><time dateTime="2024-09-08T14:38:07.796Z" title="2024/9/8 22:38:07">2024-09-08</time>更新</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2024/09/07/linux-fix-wsl2-forget-password/">Linux-WSL2下重设root密码</a></p><div class="content"><p>背景：在 Win11 系统上通过 WSL2 开启 Linux 子系统，但是 Linux 系统的 <code>root</code> 密码忘记了。</p>
+<p>步骤：</p>
+<p>（1）在 Win11 系统上，打开有管理员权限的 CMD，输入：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ wsl -u root</span><br><span class="line">$ passwd root</span><br></pre></td></tr></table></figure>
+
+<p>（2）连续输入两次新密码</p>
+</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2024-09-07T02:25:00.000Z" title="2024/9/7 10:25:00">2024-09-07</time>发表</span><span class="level-item"><time dateTime="2024-09-08T14:32:49.880Z" title="2024/9/8 22:32:49">2024-09-08</time>更新</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2024/09/07/docker-base/">docker-基础</a></p><div class="content"><h4 id="docker常用命令"><a href="#docker常用命令" class="headerlink" title="docker常用命令"></a>docker常用命令</h4><p><img src="https://raw.githubusercontent.com/guohaolu/ImageHostingWebsite/main/image-20240907105838495.png" alt="image-20240907105838495"></p>
+<hr>
+<p>Docker 命令结构图：</p>
+<p><img src="https://raw.githubusercontent.com/guohaolu/ImageHostingWebsite/main/image-20240907110020254.png" alt="image-20240907110020254"></p>
+<h5 id="Docker环境信息"><a href="#Docker环境信息" class="headerlink" title="Docker环境信息"></a>Docker环境信息</h5><p>（1）<strong>docker info</strong>	</p>
+<p>信息提示</p>
+<p>（2）<strong>docker version</strong>	</p>
+<p>版本信息</p>
+<h5 id="容器生命周期管理"><a href="#容器生命周期管理" class="headerlink" title="容器生命周期管理"></a>容器生命周期管理</h5><p>（1）<strong>docker run</strong></p>
+<p>基于特定镜像创建容器，并根据命令来控制它。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">sudo</span> docker run [OPTIONS] IMAGE [COMMAND] [ARG...]</span><br></pre></td></tr></table></figure>
+
+<p>根据 tag 为 latest 的 ubuntu 镜像，创建容器（容器 id 会随机）。运行 <code>echo &quot;Hello World&quot;</code> 命令后，容器会停止运行。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">sudo</span> docker run ubuntu:latest <span class="built_in">echo</span> <span class="string">&quot;Hello World&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>以交互模式、分配伪终端的形式创建容器（名称为 mytest ），并运行。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">sudo</span> docker run -i -t --name mytest ubuntu:latest /bin/bash</span><br></pre></td></tr></table></figure>
+
+<p>其他参数如下：</p>
+<p><img src="https://raw.githubusercontent.com/guohaolu/ImageHostingWebsite/main/image-20240907111504418.png" alt="image-20240907111504418"></p>
+<p>（2）<strong>docker start&#x2F;stop&#x2F;restart</strong></p>
+<p><img src="https://raw.githubusercontent.com/guohaolu/ImageHostingWebsite/main/image-20240907112051927.png" alt="image-20240907112051927"></p>
+<h5 id="Docker仓库"><a href="#Docker仓库" class="headerlink" title="Docker仓库"></a>Docker仓库</h5><p>（1）<strong>docker pull</strong></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">sudo</span> docker pull [OPTIONS] NAME[:TAG @DIGEST]</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/guohaolu/ImageHostingWebsite/main/image-20240907112644697.png" alt="image-20240907112644697"></p>
+<p>（2）<strong>docker push</strong></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">sudo</span> docker push [OPTIONS] NAME[:TAG]</span><br></pre></td></tr></table></figure>
+
+<p>例如：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">sudo</span> docker push SEL/ubuntu</span><br></pre></td></tr></table></figure>
+
+<h5 id="镜像管理"><a href="#镜像管理" class="headerlink" title="镜像管理"></a>镜像管理</h5><p>（1）<strong>docker images</strong></p>
+<p><img src="https://raw.githubusercontent.com/guohaolu/ImageHostingWebsite/main/image-20240907114611592.png" alt="image-20240907114611592"></p>
+<p>（2）<strong>docker rmi&#x2F;rm</strong></p>
+<ul>
+<li><p><strong>docker rmi</strong>：删除镜像</p>
+</li>
+<li><p><strong>docker rm</strong>：删除容器</p>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/guohaolu/ImageHostingWebsite/main/image-20240907114837273.png" alt="image-20240907114837273"></p>
+</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2024-09-04T13:56:23.000Z" title="2024/9/4 21:56:23">2024-09-04</time>发表</span><span class="level-item"><time dateTime="2024-09-04T14:47:56.497Z" title="2024/9/4 22:47:56">2024-09-04</time>更新</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2024/09/04/LeetCode-Opposite-Pointer/">LeetCode-相向双指针</a></p><div class="content"><h3 id="167-两数之和-II-输入有序数组"><a href="#167-两数之和-II-输入有序数组" class="headerlink" title="167. 两数之和 II - 输入有序数组"></a>167. 两数之和 II - 输入有序数组</h3><p>描述：给一个排好序后的数组 <code>numbers</code> 和要查找的值 <code>target</code>，给出两数之和为 <code>target</code> 的数组下标【<code>idx1，idx2</code>】</p>
+<p>技巧：设两指针，<code>i = 0</code>，<code>j = numbers.length - 1</code>，令两指针相向搜索。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>, j = numbers.length;</span><br><span class="line"><span class="keyword">while</span> (i &lt; j) &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">sum</span> <span class="operator">=</span> numbers[i] + numbers[j];</span><br><span class="line">    <span class="keyword">if</span> (sum &lt; target) &#123;</span><br><span class="line">        i++;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (sum &gt; target) &#123;</span><br><span class="line">        j--;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">int</span>[] &#123;i, j&#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="15-三数之和"><a href="#15-三数之和" class="headerlink" title="15. 三数之和"></a>15. 三数之和</h3></div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2024-09-04T10:37:26.000Z" title="2024/9/4 18:37:26">2024-09-04</time>发表</span><span class="level-item"><time dateTime="2024-09-04T11:36:21.003Z" title="2024/9/4 19:36:21">2024-09-04</time>更新</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2024/09/04/Java-ConcurrentHashMap/">Java并发集合-并发哈希结构设计</a></p><div class="content"><h2 id="并发哈希结构"><a href="#并发哈希结构" class="headerlink" title="并发哈希结构"></a>并发哈希结构</h2><p>设计一个支持并发访问的哈希结构（Concurrent Hash Structure）是一项挑战性任务，因为它需要在保证高性能的同时，还要确保数据的一致性和安全性。下面是一些设计并发哈希结构的关键考虑因素和实现策略。</p>
+<h3 id="设计目标"><a href="#设计目标" class="headerlink" title="设计目标"></a>设计目标</h3><ol>
+<li><strong>高性能</strong>：并发哈希结构应当支持高并发的读写操作，减少锁的竞争，提高整体性能。</li>
+<li><strong>线程安全</strong>：在多线程环境下，需要确保数据的一致性和安全性，避免数据竞争和死锁。</li>
+<li><strong>可扩展性</strong>：随着数据量的增长，哈希结构应当能够平滑地扩展，支持更多的数据和更高的并发度。</li>
+<li><strong>易用性</strong>：设计应当简单易用，易于理解和实现。</li>
+</ol>
+<h3 id="设计策略"><a href="#设计策略" class="headerlink" title="设计策略"></a>设计策略</h3><h4 id="1-分段锁（Segment-Locking）"><a href="#1-分段锁（Segment-Locking）" class="headerlink" title="1. 分段锁（Segment Locking）"></a>1. 分段锁（Segment Locking）</h4><ul>
+<li><strong>原理</strong>：将哈希表分成多个段（Segment），每个段有自己的锁。这样，在同一时刻，多个线程可以并发访问不同的段，减少了锁的竞争。</li>
+<li><strong>实现</strong>：可以使用一个数组来存储多个哈希表，每个哈希表对应一个段，并且每个段有自己的锁。</li>
+</ul>
+<h4 id="2-细粒度锁（Fine-Grained-Locking）"><a href="#2-细粒度锁（Fine-Grained-Locking）" class="headerlink" title="2. 细粒度锁（Fine-Grained Locking）"></a>2. 细粒度锁（Fine-Grained Locking）</h4><ul>
+<li><strong>原理</strong>：在哈希表中，对单个桶（Bucket）进行加锁，而不是整个表。这样可以进一步减少锁的竞争。</li>
+<li><strong>实现</strong>：每个桶都有自己的锁，当访问或修改该桶时，才对其加锁。</li>
+</ul>
+<h3 id="实现细节"><a href="#实现细节" class="headerlink" title="实现细节"></a>实现细节</h3><ul>
+<li>锁必须为可重入锁，当线程进行复杂操作的时候，不会死锁。锁同时也需要为读写锁，不会阻塞只读操作。</li>
+<li>集合大小在新增元素的时候需要自增，选用原子类型来支撑。</li>
+<li>扩容策略，设置一个固定大小的负载因子（平均每个桶存储的元素个数）。</li>
+<li>add 方法新增元素后会检测集合是否满足扩容条件，若满足则进行扩容操作。扩容操作时不允许集合中存在写操作。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">classDiagram</span><br><span class="line">class 并发哈希结构~T~ &#123;</span><br><span class="line">        &lt;&lt;Abstract&gt;&gt;</span><br><span class="line">        + AtomicInteger size：集合大小</span><br><span class="line">        + List~T~[] table：桶表</span><br><span class="line">        + Lock[] locks：锁数组</span><br><span class="line">&#125;</span><br><span class="line">并发哈希结构 : +contains(T entry) boolean</span><br><span class="line">并发哈希结构 : +add(T entry) boolean</span><br><span class="line">并发哈希结构 : +acquire(T entry) void</span><br><span class="line">并发哈希结构 : +release(T entry) void</span><br><span class="line">并发哈希结构 : +resize() void</span><br><span class="line">并发哈希结构 : -policy() boolean</span><br></pre></td></tr></table></figure>
+
+<p>方法介绍：</p>
+<table>
+<thead>
+<tr>
+<th><strong>API</strong></th>
+<th><strong>描述</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>boolean contains(T entry)</td>
+<td>是否含有此元素</td>
+</tr>
+<tr>
+<td>boolean  add(T entry)</td>
+<td>新增元素</td>
+</tr>
+<tr>
+<td>void acquire(T entry)</td>
+<td>获得锁</td>
+</tr>
+<tr>
+<td>void release(T entry)</td>
+<td>释放锁</td>
+</tr>
+<tr>
+<td>void resize()</td>
+<td>扩容</td>
+</tr>
+<tr>
+<td>boolean policy()</td>
+<td>检测是否达到扩容条件</td>
+</tr>
+</tbody></table>
+</div></article></div><nav class="pagination" role="navigation" aria-label="pagination"><div class="pagination-previous is-invisible is-hidden-mobile"><a href="/page/0/">上一页</a></div><div class="pagination-next"><a href="/page/2/">下一页</a></div><ul class="pagination-list is-hidden-mobile"><li><a class="pagination-link is-current" href="/">1</a></li><li><a class="pagination-link" href="/page/2/">2</a></li></ul></nav></div><!--!--><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/">Hexo</a><p class="is-size-7"><span>&copy; 2024 guohao.lu</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script data-pjax src="/js/column.js"></script><!--!--><script data-pjax src="/js/main.js" defer></script><!--!--></body></html>

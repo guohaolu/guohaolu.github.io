@@ -1,43 +1,91 @@
-const { Component } = require('inferno');
-const classname = require('hexo-component-inferno/lib/util/classname');
-const Head = require('./common/head');
-const Navbar = require('./common/navbar');
-const Widgets = require('./common/widgets');
-const Footer = require('./common/footer');
-const Scripts = require('./common/scripts');
-const Search = require('./common/search');
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><title>Netty-核心API - Hexo</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="Hexo"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Hexo"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="ChannelHandler处理 I&amp;#x2F;O 事件或拦截 I&amp;#x2F;O 操作，并将其转发到其 ChannelPipeline 中的下一个处理程序。 功能 处理I&amp;#x2F;O事件： ChannelHandler可以处理各种I&amp;#x2F;O事件，如连接建立、断开、读取、写入等。 通过实现ChannelInboundHandler或ChannelOutboundHandler接口，你可以编写"><meta property="og:type" content="article"><meta property="og:title" content="Netty-核心API"><meta property="og:url" content="http://example.com/2024/08/31/java-netty-core-api/"><meta property="og:site_name" content="Hexo"><meta property="og:description" content="ChannelHandler处理 I&amp;#x2F;O 事件或拦截 I&amp;#x2F;O 操作，并将其转发到其 ChannelPipeline 中的下一个处理程序。 功能 处理I&amp;#x2F;O事件： ChannelHandler可以处理各种I&amp;#x2F;O事件，如连接建立、断开、读取、写入等。 通过实现ChannelInboundHandler或ChannelOutboundHandler接口，你可以编写"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://raw.githubusercontent.com/guohaolu/ImageHostingWebsite/main/image-20240831204242015.png"><meta property="article:published_time" content="2024-08-31T12:14:16.000Z"><meta property="article:modified_time" content="2024-09-08T14:34:20.409Z"><meta property="article:author" content="guohao.lu"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="https://raw.githubusercontent.com/guohaolu/ImageHostingWebsite/main/image-20240831204242015.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://example.com/2024/08/31/java-netty-core-api/"},"headline":"Netty-核心API","image":["https://raw.githubusercontent.com/guohaolu/ImageHostingWebsite/main/image-20240831204242015.png"],"datePublished":"2024-08-31T12:14:16.000Z","dateModified":"2024-09-08T14:34:20.409Z","author":{"@type":"Person","name":"guohao.lu"},"publisher":{"@type":"Organization","name":"Hexo","logo":{"@type":"ImageObject"}},"description":"ChannelHandler处理 I&#x2F;O 事件或拦截 I&#x2F;O 操作，并将其转发到其 ChannelPipeline 中的下一个处理程序。 功能 处理I&#x2F;O事件： ChannelHandler可以处理各种I&#x2F;O事件，如连接建立、断开、读取、写入等。 通过实现ChannelInboundHandler或ChannelOutboundHandler接口，你可以编写"}</script><link rel="canonical" href="http://example.com/2024/08/31/java-netty-core-api/"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link data-pjax rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link data-pjax rel="stylesheet" href="/css/default.css"><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
 
-module.exports = class extends Component {
-    render() {
-        const { site, config, page, helper, body } = this.props;
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
 
-        const language = page.lang || page.language || config.language;
-        const columnCount = Widgets.getColumnCount(config.widgets, config, page);
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
 
-        return <html lang={language ? language.substr(0, 2) : ''}>
-            <Head site={site} config={config} helper={helper} page={page} />
-            <body class={`is-${columnCount}-column`}>
-                <Navbar config={config} helper={helper} page={page} />
-                <section class="section">
-                    <div class="container">
-                        <div class="columns">
-                            <div class={classname({
-                                column: true,
-                                'order-2': true,
-                                'column-main': true,
-                                'is-12': columnCount === 1,
-                                'is-8-tablet is-8-desktop is-8-widescreen': columnCount === 2,
-                                'is-8-tablet is-8-desktop is-6-widescreen': columnCount === 3
-                            })} dangerouslySetInnerHTML={{ __html: body }}></div>
-                            <Widgets site={site} config={config} helper={helper} page={page} position={'left'} />
-                            <Widgets site={site} config={config} helper={helper} page={page} position={'right'} />
-                        </div>
-                    </div>
-                </section>
-                <Footer config={config} helper={helper} />
-                <Scripts site={site} config={config} helper={helper} page={page} />
-                <Search config={config} helper={helper} />
-            </body>
-        </html>;
-    }
-};
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"></head><body class="is-1-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">Hexo</a></div><div class="navbar-menu"><div class="navbar-end"></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-12"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2024-08-31T12:14:16.000Z" title="2024/8/31 20:14:16">2024-08-31</time>发表</span><span class="level-item"><time dateTime="2024-09-08T14:34:20.409Z" title="2024/9/8 22:34:20">2024-09-08</time>更新</span></div></div><h1 class="title is-3 is-size-4-mobile">Netty-核心API</h1><div class="content"><h2 id="ChannelHandler"><a href="#ChannelHandler" class="headerlink" title="ChannelHandler"></a>ChannelHandler</h2><p>处理 I&#x2F;O 事件或拦截 I&#x2F;O 操作，并将其转发到其 <code>ChannelPipeline</code> 中的下一个处理程序。</p>
+<h3 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h3><ol>
+<li><strong>处理I&#x2F;O事件</strong>：<ul>
+<li><code>ChannelHandler</code>可以处理各种I&#x2F;O事件，如连接建立、断开、读取、写入等。</li>
+<li>通过实现<code>ChannelInboundHandler</code>或<code>ChannelOutboundHandler</code>接口，你可以编写自定义的<code>ChannelHandler</code>来处理这些事件。</li>
+</ul>
+</li>
+<li><strong>读取和写入数据</strong>：<ul>
+<li><code>ChannelHandler</code>可以读取从网络上接收的数据，并将其处理后写回网络。</li>
+<li>你可以实现<code>channelRead()</code>方法来处理读取的数据，并实现<code>write()</code>方法来发送数据。</li>
+</ul>
+</li>
+<li><strong>异常处理</strong>：<ul>
+<li><code>ChannelHandler</code>可以处理在通信过程中发生的异常情况。</li>
+<li>你可以实现<code>exceptionCaught()</code>方法来捕获和处理异常。</li>
+</ul>
+</li>
+<li><strong>生命周期管理</strong>：<ul>
+<li><code>ChannelHandler</code>可以参与到<code>Channel</code>的生命周期管理中。</li>
+<li>你可以实现<code>channelRegistered()</code>、<code>channelActive()</code>、<code>channelInactive()</code>等方法来处理<code>Channel</code>的生命周期事件。</li>
+</ul>
+</li>
+<li><strong>自定义处理逻辑</strong>：<ul>
+<li><code>ChannelHandler</code>可以实现自定义的业务逻辑，如协议解析、编码解码、安全认证等。</li>
+<li>你可以实现<code>channelRead0()</code>方法来处理具体的业务逻辑。</li>
+</ul>
+</li>
+</ol>
+<h3 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h3><p>以下是一些常用的<code>ChannelHandler</code>方法：</p>
+<ol>
+<li><strong>入站方法</strong>：<ul>
+<li><code>channelRegistered(ChannelHandlerContext ctx)</code>：当<code>Channel</code>注册到<code>EventLoop</code>上时调用。</li>
+<li><code>channelActive(ChannelHandlerContext ctx)</code>：当<code>Channel</code>准备就绪，可以进行读写操作时调用。</li>
+<li><code>channelInactive(ChannelHandlerContext ctx)</code>：当<code>Channel</code>变得不可用时调用。</li>
+<li><code>channelRead(ChannelHandlerContext ctx, Object msg)</code>：当从网络上读取到消息时调用。</li>
+<li><code>channelReadComplete(ChannelHandlerContext ctx)</code>：当读取操作完成时调用。</li>
+<li><code>userEventTriggered(ChannelHandlerContext ctx, Object evt)</code>：当用户触发的事件发生时调用。</li>
+<li><code>channelWritabilityChanged(ChannelHandlerContext ctx)</code>：当<code>Channel</code>的可写状态发生变化时调用。</li>
+<li><code>exceptionCaught(ChannelHandlerContext ctx, Throwable cause)</code>：当发生异常时调用。</li>
+</ul>
+</li>
+<li><strong>出站方法</strong>：<ul>
+<li><code>write(ChannelHandlerContext ctx, Object msg, Promise promise)</code>：当需要写入数据到网络时调用。</li>
+<li><code>flush(ChannelHandlerContext ctx)</code>：当需要刷新输出缓冲区时调用。</li>
+</ul>
+</li>
+</ol>
+<h2 id="ChannelPipeline"><a href="#ChannelPipeline" class="headerlink" title="ChannelPipeline"></a>ChannelPipeline</h2><p>由多个 <code>ChannelHandler</code> 组成的链为<code>ChannelPipeline</code>。</p>
+<p><img src="https://raw.githubusercontent.com/guohaolu/ImageHostingWebsite/main/image-20240831204242015.png" alt="image-20240831204242015"></p>
+<ul>
+<li>InboundHandler 按照 Pipeline 正序处理入站，OutboundHandler 按照 Pipeline 逆序处理出站。</li>
+</ul>
+</div><!--!--></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/2024/09/02/PageRank-Algorithm/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">机器学习——PageRank算法</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/2024/08/31/Java-network-pattern/"><span class="level-item">Java-网络编程模式</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><!--!--></div><!--!--><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/">Hexo</a><p class="is-size-7"><span>&copy; 2024 guohao.lu</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script data-pjax src="/js/column.js"></script><!--!--><script data-pjax src="/js/main.js" defer></script><!--!--></body></html>

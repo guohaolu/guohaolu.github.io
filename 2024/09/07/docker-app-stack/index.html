@@ -1,43 +1,46 @@
-const { Component } = require('inferno');
-const classname = require('hexo-component-inferno/lib/util/classname');
-const Head = require('./common/head');
-const Navbar = require('./common/navbar');
-const Widgets = require('./common/widgets');
-const Footer = require('./common/footer');
-const Scripts = require('./common/scripts');
-const Search = require('./common/search');
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><title>docker-应用栈 - Hexo</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="Hexo"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Hexo"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="Docker应用栈Docker 应用栈（Application Stack）通常指的是在一个或多个 Docker 容器中运行的一组相互协作的应用和服务。这些应用和服务通常是通过 Docker Compose 或其他编排工具来定义和管理的，它们共同构成了一个完整的应用环境。 应用栈结构如下：  容器启动顺序： graph LR     A[Redis Master] --&amp;gt; B[Redis Slav"><meta property="og:type" content="article"><meta property="og:title" content="docker-应用栈"><meta property="og:url" content="http://example.com/2024/09/07/docker-app-stack/"><meta property="og:site_name" content="Hexo"><meta property="og:description" content="Docker应用栈Docker 应用栈（Application Stack）通常指的是在一个或多个 Docker 容器中运行的一组相互协作的应用和服务。这些应用和服务通常是通过 Docker Compose 或其他编排工具来定义和管理的，它们共同构成了一个完整的应用环境。 应用栈结构如下：  容器启动顺序： graph LR     A[Redis Master] --&amp;gt; B[Redis Slav"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://raw.githubusercontent.com/guohaolu/ImageHostingWebsite/main/image-20240907174622584.png"><meta property="article:published_time" content="2024-09-07T10:46:24.000Z"><meta property="article:modified_time" content="2024-09-08T14:33:09.248Z"><meta property="article:author" content="guohao.lu"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="https://raw.githubusercontent.com/guohaolu/ImageHostingWebsite/main/image-20240907174622584.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://example.com/2024/09/07/docker-app-stack/"},"headline":"docker-应用栈","image":["https://raw.githubusercontent.com/guohaolu/ImageHostingWebsite/main/image-20240907174622584.png"],"datePublished":"2024-09-07T10:46:24.000Z","dateModified":"2024-09-08T14:33:09.248Z","author":{"@type":"Person","name":"guohao.lu"},"publisher":{"@type":"Organization","name":"Hexo","logo":{"@type":"ImageObject"}},"description":"Docker应用栈Docker 应用栈（Application Stack）通常指的是在一个或多个 Docker 容器中运行的一组相互协作的应用和服务。这些应用和服务通常是通过 Docker Compose 或其他编排工具来定义和管理的，它们共同构成了一个完整的应用环境。 应用栈结构如下：  容器启动顺序： graph LR     A[Redis Master] --&gt; B[Redis Slav"}</script><link rel="canonical" href="http://example.com/2024/09/07/docker-app-stack/"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link data-pjax rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link data-pjax rel="stylesheet" href="/css/default.css"><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
 
-module.exports = class extends Component {
-    render() {
-        const { site, config, page, helper, body } = this.props;
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
 
-        const language = page.lang || page.language || config.language;
-        const columnCount = Widgets.getColumnCount(config.widgets, config, page);
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
 
-        return <html lang={language ? language.substr(0, 2) : ''}>
-            <Head site={site} config={config} helper={helper} page={page} />
-            <body class={`is-${columnCount}-column`}>
-                <Navbar config={config} helper={helper} page={page} />
-                <section class="section">
-                    <div class="container">
-                        <div class="columns">
-                            <div class={classname({
-                                column: true,
-                                'order-2': true,
-                                'column-main': true,
-                                'is-12': columnCount === 1,
-                                'is-8-tablet is-8-desktop is-8-widescreen': columnCount === 2,
-                                'is-8-tablet is-8-desktop is-6-widescreen': columnCount === 3
-                            })} dangerouslySetInnerHTML={{ __html: body }}></div>
-                            <Widgets site={site} config={config} helper={helper} page={page} position={'left'} />
-                            <Widgets site={site} config={config} helper={helper} page={page} position={'right'} />
-                        </div>
-                    </div>
-                </section>
-                <Footer config={config} helper={helper} />
-                <Scripts site={site} config={config} helper={helper} page={page} />
-                <Search config={config} helper={helper} />
-            </body>
-        </html>;
-    }
-};
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"></head><body class="is-1-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">Hexo</a></div><div class="navbar-menu"><div class="navbar-end"></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-12"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2024-09-07T10:46:24.000Z" title="2024/9/7 18:46:24">2024-09-07</time>发表</span><span class="level-item"><time dateTime="2024-09-08T14:33:09.248Z" title="2024/9/8 22:33:09">2024-09-08</time>更新</span></div></div><h1 class="title is-3 is-size-4-mobile">docker-应用栈</h1><div class="content"><h4 id="Docker应用栈"><a href="#Docker应用栈" class="headerlink" title="Docker应用栈"></a>Docker应用栈</h4><p>Docker 应用栈（Application Stack）通常指的是在一个或多个 Docker 容器中运行的一组相互协作的应用和服务。这些应用和服务通常是通过 Docker Compose 或其他编排工具来定义和管理的，它们共同构成了一个完整的应用环境。</p>
+<p>应用栈结构如下：</p>
+<p><img src="https://raw.githubusercontent.com/guohaolu/ImageHostingWebsite/main/image-20240907174622584.png" alt="image-20240907174622584"></p>
+<p>容器启动顺序：</p>
+<pre class="mermaid">graph LR
+    A[Redis Master] --> B[Redis Slave] --> C[APP] --> D[HAProxy]</pre>
+
+</div><!--!--></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/2024/09/08/docker-network-manager/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">docker-网络管理</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/2024/09/07/linux-fix-wsl2-forget-password/"><span class="level-item">Linux-WSL2下重设root密码</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><!--!--></div><!--!--><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/">Hexo</a><p class="is-size-7"><span>&copy; 2024 guohao.lu</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script data-pjax src="/js/column.js"></script><!--!--><script data-pjax src="/js/main.js" defer></script><!--!--></body></html>
