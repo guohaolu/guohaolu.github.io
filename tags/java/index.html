@@ -1,0 +1,363 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="robots" content="noindex"><meta><title>标签: java - guohaolu的个人博客</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="guohaolu的个人博客"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="guohaolu的个人博客"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta property="og:type" content="blog"><meta property="og:title" content="guohaolu的个人博客"><meta property="og:url" content="https://guohaolu.github.io/"><meta property="og:site_name" content="guohaolu的个人博客"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://guohaolu.github.io/img/og_image.png"><meta property="article:author" content="guohao.lu"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="https://guohaolu.github.io/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://guohaolu.github.io"},"headline":"guohaolu的个人博客","image":["https://guohaolu.github.io/img/og_image.png"],"author":{"@type":"Person","name":"guohao.lu"},"publisher":{"@type":"Organization","name":"guohaolu的个人博客","logo":{"@type":"ImageObject","url":"https://guohaolu.github.io/img/logo.svg"}},"description":""}</script><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link data-pjax rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link data-pjax rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/logo.svg" alt="guohaolu的个人博客" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><div class="card-content"><nav class="breadcrumb" aria-label="breadcrumbs"><ul><li><a href="/tags">标签</a></li><li class="is-active"><a href="#" aria-current="page">java</a></li></ul></nav></div></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2024-09-04T10:37:26.000Z" title="2024/9/4 18:37:26">2024-09-04</time>发表</span><span class="level-item"><time dateTime="2024-09-18T12:14:35.192Z" title="2024/9/18 20:14:35">2024-09-18</time>更新</span><span class="level-item">5 分钟读完 (大约727个字)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2024/09/04/Java-ConcurrentHashMap/">Java并发集合-并发哈希结构设计</a></p><div class="content"><h2 id="并发哈希结构"><a href="#并发哈希结构" class="headerlink" title="并发哈希结构"></a>并发哈希结构</h2><p>设计一个支持并发访问的哈希结构（Concurrent Hash Structure）是一项挑战性任务，因为它需要在保证高性能的同时，还要确保数据的一致性和安全性。下面是一些设计并发哈希结构的关键考虑因素和实现策略。</p>
+<h3 id="设计目标"><a href="#设计目标" class="headerlink" title="设计目标"></a>设计目标</h3><ol>
+<li><strong>高性能</strong>：并发哈希结构应当支持高并发的读写操作，减少锁的竞争，提高整体性能。</li>
+<li><strong>线程安全</strong>：在多线程环境下，需要确保数据的一致性和安全性，避免数据竞争和死锁。</li>
+<li><strong>可扩展性</strong>：随着数据量的增长，哈希结构应当能够平滑地扩展，支持更多的数据和更高的并发度。</li>
+<li><strong>易用性</strong>：设计应当简单易用，易于理解和实现。</li>
+</ol>
+<h3 id="设计策略"><a href="#设计策略" class="headerlink" title="设计策略"></a>设计策略</h3><h4 id="1-分段锁（Segment-Locking）"><a href="#1-分段锁（Segment-Locking）" class="headerlink" title="1. 分段锁（Segment Locking）"></a>1. 分段锁（Segment Locking）</h4><ul>
+<li><strong>原理</strong>：将哈希表分成多个段（Segment），每个段有自己的锁。这样，在同一时刻，多个线程可以并发访问不同的段，减少了锁的竞争。</li>
+<li><strong>实现</strong>：可以使用一个数组来存储多个哈希表，每个哈希表对应一个段，并且每个段有自己的锁。</li>
+</ul>
+<h4 id="2-细粒度锁（Fine-Grained-Locking）"><a href="#2-细粒度锁（Fine-Grained-Locking）" class="headerlink" title="2. 细粒度锁（Fine-Grained Locking）"></a>2. 细粒度锁（Fine-Grained Locking）</h4><ul>
+<li><strong>原理</strong>：在哈希表中，对单个桶（Bucket）进行加锁，而不是整个表。这样可以进一步减少锁的竞争。</li>
+<li><strong>实现</strong>：每个桶都有自己的锁，当访问或修改该桶时，才对其加锁。</li>
+</ul>
+<h3 id="实现细节"><a href="#实现细节" class="headerlink" title="实现细节"></a>实现细节</h3><ul>
+<li>锁必须为可重入锁，当线程进行复杂操作的时候，不会死锁。锁同时也需要为读写锁，不会阻塞只读操作。</li>
+<li>集合大小在新增元素的时候需要自增，选用原子类型来支撑。</li>
+<li>扩容策略，设置一个固定大小的负载因子（平均每个桶存储的元素个数）。</li>
+<li>add 方法新增元素后会检测集合是否满足扩容条件，若满足则进行扩容操作。扩容操作时不允许集合中存在写操作。</li>
+</ul>
+<pre class="mermaid">classDiagram
+class 并发哈希结构~T~ {
+        <<Abstract>>
+        + AtomicInteger size：集合大小
+        + List~T~[] table：桶表
+        + Lock[] locks：锁数组
+}
+并发哈希结构 : +contains(T entry) boolean
+并发哈希结构 : +add(T entry) boolean
+并发哈希结构 : +acquire(T entry) void
+并发哈希结构 : +release(T entry) void
+并发哈希结构 : +resize() void
+并发哈希结构 : -policy() boolean</pre>
+
+<p>方法介绍：</p>
+<table>
+<thead>
+<tr>
+<th><strong>API</strong></th>
+<th><strong>描述</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>boolean contains(T entry)</td>
+<td>是否含有此元素</td>
+</tr>
+<tr>
+<td>boolean  add(T entry)</td>
+<td>新增元素</td>
+</tr>
+<tr>
+<td>void acquire(T entry)</td>
+<td>获得锁</td>
+</tr>
+<tr>
+<td>void release(T entry)</td>
+<td>释放锁</td>
+</tr>
+<tr>
+<td>void resize()</td>
+<td>扩容</td>
+</tr>
+<tr>
+<td>boolean policy()</td>
+<td>检测是否达到扩容条件</td>
+</tr>
+</tbody></table>
+</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2024-08-31T08:49:46.000Z" title="2024/8/31 16:49:46">2024-08-31</time>发表</span><span class="level-item"><time dateTime="2024-09-18T12:14:55.499Z" title="2024/9/18 20:14:55">2024-09-18</time>更新</span><span class="level-item">14 分钟读完 (大约2155个字)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2024/08/31/Java-network-pattern/">Java-网络编程模式</a></p><div class="content"><h2 id="数据传输过程"><a href="#数据传输过程" class="headerlink" title="数据传输过程"></a>数据传输过程</h2><ol>
+<li><strong>数据到达网络设备</strong>：<ul>
+<li>当数据包从网络到达时，网卡（NIC，Network Interface Card）接收到这些数据包。</li>
+</ul>
+</li>
+<li><strong>DMA操作</strong>：<ul>
+<li>网卡通过 DMA 操作将接收到的数据包直接写入预先分配好的内核空间缓冲区。DMA 操作允许数据直接从网卡传输到内存，而不需要 CPU 的介入，从而减轻了 CPU 的负担。</li>
+</ul>
+</li>
+<li><strong>网卡驱动程序的作用</strong>：<ul>
+<li>网卡驱动程序负责配置 DMA 操作，并管理内核空间缓冲区。</li>
+<li>驱动程序还负责检测 DMA 操作的完成情况，并通知内核数据已经就绪。</li>
+<li>一旦 DMA 操作完成，驱动程序会通知操作系统内核，告诉内核哪些缓冲区中有新的数据。</li>
+</ul>
+</li>
+<li><strong>内核处理数据</strong>：<ul>
+<li>内核收到通知后，会处理这些数据，例如将数据从 DMA 缓冲区复制到应用程序可以访问的内核缓冲区。</li>
+<li>内核还会设置相应的文件描述符（在 Java NIO 中对应<code>Channel</code>）的状态，表示数据已经就绪，可以被应用程序读取。</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li><strong>DMA</strong>：DMA 允许网卡直接将数据写入内核空间缓冲区，从而提高数据传输效率。</li>
+<li><strong>网卡驱动程序</strong>：驱动程序负责配置 DMA 操作，并管理内核空间缓冲区。它还负责通知内核数据已经就绪。</li>
+</ul>
+<h2 id="高级IO功能"><a href="#高级IO功能" class="headerlink" title="高级IO功能"></a>高级IO功能</h2><ol>
+<li><strong>文件锁定</strong>：<ul>
+<li>文件锁定可以防止多个进程或线程同时修改同一个文件，从而保证数据的一致性和完整性。</li>
+<li>传统的 Java I&#x2F;O 机制缺乏对文件锁定的支持，容易导致并发访问时的数据冲突。</li>
+</ul>
+</li>
+<li><strong>非阻塞I&#x2F;O</strong>：<ul>
+<li>非阻塞 I&#x2F;O 允许应用程序在没有数据可读或可写时立即返回，而不是阻塞等待。这样可以提高系统的并发处理能力。</li>
+<li>传统的 Java I&#x2F;O 机制通常采用阻塞式 I&#x2F;O，无法充分利用现代操作系统的非阻塞 I&#x2F;O 功能。</li>
+</ul>
+</li>
+<li><strong>就绪性选择</strong>：<ul>
+<li>就绪性选择（如<code>select</code>、<code>poll</code>、<code>epoll</code>等）允许应用程序监控多个文件描述符的状态，当某个文件描述符上的数据可读或可写时，可以立即进行处理。</li>
+<li>传统的 Java I&#x2F;O 机制缺乏对就绪性选择的支持，无法高效地处理多个并发连接。</li>
+</ul>
+</li>
+<li><strong>内存映射</strong>：<ul>
+<li>内存映射允许将文件或设备直接映射到内存中，从而提高数据访问速度。</li>
+<li>传统的 Java I&#x2F;O 机制通常采用逐字节读写的方式，无法充分利用内存映射的优势。</li>
+</ul>
+</li>
+</ol>
+<h2 id="BIO"><a href="#BIO" class="headerlink" title="BIO"></a>BIO</h2><p>在 Java 的 BIO（Blocking I&#x2F;O）模型中，很多操作都是同步阻塞的。常见的阻塞操作：</p>
+<ol>
+<li>**接受连接 (<code>accept</code>)**：<ul>
+<li><code>ServerSocket.accept()</code> 用来等待客户端的连接请求。如果没有客户端连接，这个方法会一直阻塞，直到有一个新的连接到达。</li>
+</ul>
+</li>
+<li>**读取数据 (<code>read</code>)**：<ul>
+<li><code>InputStream.read()</code> 用来从客户端读取数据。如果没有数据可读，这个方法会阻塞，直到有数据可读。</li>
+<li><code>BufferedReader.readLine()</code> 同样会阻塞，直到一行数据读取完毕或到达流的末尾。</li>
+</ul>
+</li>
+<li>**写入数据 (<code>write</code>)**：<ul>
+<li><code>OutputStream.write()</code> 用来向客户端发送数据。在某些情况下，如果网络拥塞或者客户端缓冲区满，这个方法也可能暂时阻塞。</li>
+</ul>
+</li>
+</ol>
+<p>多线程BIO的缺点：</p>
+<ul>
+<li>资源开销大，降低了服务端的吞吐量。</li>
+</ul>
+<h2 id="NIO"><a href="#NIO" class="headerlink" title="NIO"></a>NIO</h2><p>NIO：基于 IO 多路复用的同步非阻塞 IO。</p>
+<p>在 Java NIO（Non-blocking I&#x2F;O）中，使用 IO 多路复用技术可以实现同步非阻塞的 IO 操作。具体来说：</p>
+<ul>
+<li><strong>IO多路复用</strong>：一个线程可以管理（轮询：select，poll）多个 Socket 连接。当某个 Socket 的缓冲区（内核空间）中有数据可读或可写时，Selector 会通知（epoll）对应的 IO 线程进行读写操作。这样，一个线程可以同时监控多个 Socket 连接，极大地提高了系统的并发处理能力。</li>
+<li><strong>IO操作时会阻塞线程，但此时数据已经就绪</strong>：当 Selector 通知某个 Socket 连接的数据已经就绪时，线程会执行读写操作。虽然这些读写操作本身是同步的，但由于数据已经就绪（即数据已经存在于内核空间的缓冲区中），因此读写操作不会长时间阻塞线程。这种机制使得每次读写操作都非常高效，大大提升了整体的系统性能。</li>
+</ul>
+<p>tips：read 操作本身仍然是阻塞的，因为它需要等待数据从内核缓冲区复制到用户缓冲区。</p>
+<h2 id="AIO"><a href="#AIO" class="headerlink" title="AIO"></a>AIO</h2><p>异步非阻塞 IO，应用较少，主要是 Linux 上的异步 IO 实现比较特别。</p>
+<p>真正的异步 IO：</p>
+<p><img src="https://raw.githubusercontent.com/guohaolu/ImageHostingWebsite/main/image-20240831172116056.png" alt="image-20240831172116056"></p>
+<h2 id="主从Reactor模式"><a href="#主从Reactor模式" class="headerlink" title="主从Reactor模式"></a>主从Reactor模式</h2><h3 id="1-主Reactor"><a href="#1-主Reactor" class="headerlink" title="1. 主Reactor"></a>1. 主Reactor</h3><ul>
+<li><strong>职责</strong>：<ul>
+<li>监听新连接的到来。</li>
+<li>接受新连接，并将其分发给从 Reactor 进行处理。</li>
+</ul>
+</li>
+<li><strong>具体操作</strong>：<ul>
+<li>创建一个<code>Selector</code>实例，并将<code>ServerSocketChannel</code>注册到该<code>Selector</code>上，监听<code>SelectionKey.OP_ACCEPT</code>事件。</li>
+<li>在<code>Selector</code>中循环等待新连接的到来。</li>
+<li>当<code>ServerSocketChannel</code>上的<code>SelectionKey.OP_ACCEPT</code>事件就绪时，接受新连接，并将新连接的<code>SocketChannel</code>注册到一个从Reactor的<code>Selector</code>上，监听<code>SelectionKey.OP_READ</code>事件。</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-从Reactor"><a href="#2-从Reactor" class="headerlink" title="2. 从Reactor"></a>2. 从Reactor</h3><ul>
+<li><strong>职责</strong>：<ul>
+<li>监控已建立的连接上的读写事件。</li>
+<li>处理具体的读写操作。</li>
+<li>将读写操作分发给 Worker 线程进行处理（如果有 Worker 线程）。</li>
+</ul>
+</li>
+<li><strong>具体操作</strong>：<ul>
+<li>创建一个<code>Selector</code>实例，并将已接受的新连接的<code>SocketChannel</code>注册到该<code>Selector</code>上，监听<code>SelectionKey.OP_READ</code>事件。</li>
+<li>在<code>Selector</code>中循环等待读写事件的到来。</li>
+<li>当<code>SocketChannel</code>上的<code>SelectionKey.OP_READ</code>事件就绪时，读取数据，并将数据交给 Worker 线程进行处理（如果有 Worker 线程）。</li>
+<li>当<code>SocketChannel</code>上的<code>SelectionKey.OP_WRITE</code>事件就绪时，写入数据。</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-Worker线程"><a href="#3-Worker线程" class="headerlink" title="3. Worker线程"></a>3. Worker线程</h3><ul>
+<li><strong>职责</strong>：<ul>
+<li>执行具体的业务逻辑。</li>
+<li>处理来自客户端的数据。</li>
+<li>准备响应数据，并将响应数据交给从 Reactor 进行写操作。</li>
+</ul>
+</li>
+<li><strong>具体操作</strong>：<ul>
+<li>接收从 Reactor 传递过来的数据。</li>
+<li>处理数据，生成响应数据。</li>
+<li>将响应数据交给从 Reactor，由从 Reactor 写回到客户端。</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/guohaolu/ImageHostingWebsite/main/image-20240831185850929.png" alt="image-20240831185850929"></p>
+<h2 id="Netty线程模型"><a href="#Netty线程模型" class="headerlink" title="Netty线程模型"></a>Netty线程模型</h2><h3 id="BossGroup"><a href="#BossGroup" class="headerlink" title="BossGroup"></a>BossGroup</h3><p><strong>职责</strong>：</p>
+<ul>
+<li>负责接收新进来的连接请求。</li>
+<li>一旦接收到新的连接请求，<code>BossGroup</code>会创建一个新的<code>Channel</code>并将其注册到<code>WorkerGroup</code>中的某个<code>EventLoop</code>上。</li>
+</ul>
+<p><strong>具体操作</strong>：</p>
+<ol>
+<li>监听新连接<ul>
+<li><code>BossGroup</code>中的每个<code>EventLoop</code>都会监听新连接的到来。通常，<code>BossGroup</code>只包含一个<code>EventLoop</code>，因为只需要一个线程来监听新连接。</li>
+</ul>
+</li>
+<li>处理新连接<ul>
+<li>当新的连接请求到达时，<code>BossGroup</code>会创建一个新的<code>Channel</code>（例如<code>SocketChannel</code>）并将其注册到<code>WorkerGroup</code>中的某个<code>EventLoop</code>上。</li>
+<li>这个新的<code>Channel</code>将由<code>WorkerGroup</code>中的<code>EventLoop</code>来处理后续的I&#x2F;O操作，包括读取数据、写入数据等。</li>
+</ul>
+</li>
+</ol>
+<h3 id="WorkerGroup"><a href="#WorkerGroup" class="headerlink" title="WorkerGroup"></a>WorkerGroup</h3><p><strong>职责</strong>：</p>
+<ul>
+<li>负责处理已经被接收的连接的所有 I&#x2F;O 操作，包括读取数据、写入数据等。</li>
+<li>可以包含多个<code>EventLoop</code>，每个<code>EventLoop</code>都可以独立地处理多个<code>Channel</code>上的I&#x2F;O事件。</li>
+</ul>
+<p><strong>具体操作</strong>：</p>
+<ol>
+<li>处理 I&#x2F;O 事件<ul>
+<li><code>WorkerGroup</code>中的每个<code>EventLoop</code>都会处理分配给它的<code>Channel</code>上的 I&#x2F;O 事件。</li>
+<li>每个<code>EventLoop</code>都有一个自己的事件循环，可以独立地处理多个<code>Channel</code>上的事件。</li>
+</ul>
+</li>
+<li>读取和写入数据<ul>
+<li>当<code>Channel</code>上的数据可读或可写时，对应的<code>EventLoop</code>会处理这些事件。</li>
+<li><code>EventLoop</code>会调用相应的<code>ChannelHandler</code>来读取或写入数据。</li>
+</ul>
+</li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/guohaolu/ImageHostingWebsite/main/image-20240831192526294.png" alt="image-20240831192526294"></p>
+</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2024-08-29T11:10:35.000Z" title="2024/8/29 19:10:35">2024-08-29</time>发表</span><span class="level-item"><time dateTime="2024-09-18T12:16:18.603Z" title="2024/9/18 20:16:18">2024-09-18</time>更新</span><span class="level-item">1 分钟读完 (大约166个字)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2024/08/29/nio-selector/">NIO-多路选择器（selector）</a></p><div class="content"><h3 id="Selector代码"><a href="#Selector代码" class="headerlink" title="Selector代码"></a>Selector代码</h3><h4 id="服务端"><a href="#服务端" class="headerlink" title="服务端"></a>服务端</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">NIOSelectorServerDemo</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> (<span class="type">ServerSocketChannel</span> <span class="variable">serverSocketChannel</span> <span class="operator">=</span> ServerSocketChannel.open()) &#123;</span><br><span class="line">            serverSocketChannel.socket().bind(<span class="keyword">new</span> <span class="title class_">InetSocketAddress</span>(<span class="number">60001</span>));</span><br><span class="line">            serverSocketChannel.configureBlocking(<span class="literal">false</span>);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">try</span> (<span class="type">Selector</span> <span class="variable">selector</span> <span class="operator">=</span> Selector.open()) &#123;</span><br><span class="line">                <span class="comment">// (1) register OP_ACCEPT event</span></span><br><span class="line">                serverSocketChannel.register(selector, SelectionKey.OP_ACCEPT);</span><br><span class="line">                <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">                    <span class="keyword">if</span> (selector.select(<span class="number">2</span> * <span class="number">1000</span>) &lt;= <span class="number">0</span>) &#123;</span><br><span class="line">                        <span class="keyword">continue</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                    Iterator&lt;SelectionKey&gt; iterator = selector.selectedKeys().iterator();</span><br><span class="line">                    <span class="keyword">while</span> (iterator.hasNext()) &#123;</span><br><span class="line">                        <span class="type">SelectionKey</span> <span class="variable">key</span> <span class="operator">=</span> iterator.next();</span><br><span class="line">                        <span class="comment">// (2) process OP_ACCEPT event</span></span><br><span class="line">                        <span class="keyword">if</span> (key.isAcceptable()) &#123;</span><br><span class="line">                            <span class="type">SocketChannel</span> <span class="variable">clientSocketChannel</span> <span class="operator">=</span> serverSocketChannel.accept();</span><br><span class="line">                            clientSocketChannel.configureBlocking(<span class="literal">false</span>);</span><br><span class="line">                            <span class="comment">// (3) register OP_READ event</span></span><br><span class="line">                            clientSocketChannel.register(selector, SelectionKey.OP_READ);</span><br><span class="line">                        &#125;</span><br><span class="line">                        <span class="comment">// (4) process OP_READ event</span></span><br><span class="line">                        <span class="keyword">else</span> <span class="keyword">if</span> (key.isReadable()) &#123;</span><br><span class="line">                            <span class="keyword">try</span> (<span class="type">SocketChannel</span> <span class="variable">clientSocketChannel</span> <span class="operator">=</span> (SocketChannel) key.channel()) &#123;</span><br><span class="line">                                <span class="type">ByteBuffer</span> <span class="variable">buffer</span> <span class="operator">=</span> ByteBuffer.allocate(<span class="number">1024</span>);</span><br><span class="line">                                <span class="comment">// (5) read client message</span></span><br><span class="line">                                <span class="type">int</span> <span class="variable">read</span> <span class="operator">=</span> clientSocketChannel.read(buffer);</span><br><span class="line">                                <span class="keyword">if</span> (read &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                                    System.out.println(<span class="string">&quot;接收到客户端消息：&quot;</span> + <span class="keyword">new</span> <span class="title class_">String</span>(buffer.array(), <span class="number">0</span>, read, StandardCharsets.UTF_8));</span><br><span class="line">                                    <span class="comment">// (6) request client message</span></span><br><span class="line">                                    clientSocketChannel.write(ByteBuffer.wrap(<span class="string">&quot;客户端已接收到您的消息&quot;</span>.getBytes(StandardCharsets.UTF_8)));</span><br><span class="line">                                &#125;</span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;</span><br><span class="line">                        <span class="comment">// (7) remove processed event</span></span><br><span class="line">                        iterator.remove();</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">RuntimeException</span>(e);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2024-08-29T10:38:41.000Z" title="2024/8/29 18:38:41">2024-08-29</time>发表</span><span class="level-item"><time dateTime="2024-09-18T12:16:13.320Z" title="2024/9/18 20:16:13">2024-09-18</time>更新</span><span class="level-item">1 分钟读完 (大约189个字)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2024/08/29/nio-channel/">NIO-通道（channel）</a></p><div class="content"><h3 id="Channel代码"><a href="#Channel代码" class="headerlink" title="Channel代码"></a>Channel代码</h3><h4 id="服务端"><a href="#服务端" class="headerlink" title="服务端"></a>服务端</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">NIOChannelServerDemo</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">        <span class="keyword">try</span> (<span class="type">ServerSocketChannel</span> <span class="variable">serverSocketChannel</span> <span class="operator">=</span> ServerSocketChannel.open()) &#123;</span><br><span class="line">            serverSocketChannel.socket().bind(<span class="keyword">new</span> <span class="title class_">InetSocketAddress</span>(<span class="number">60001</span>));</span><br><span class="line">            serverSocketChannel.configureBlocking(<span class="literal">false</span>);</span><br><span class="line">            <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">                <span class="comment">// non-blocking</span></span><br><span class="line">                <span class="keyword">try</span> (<span class="type">SocketChannel</span> <span class="variable">socketChannel</span> <span class="operator">=</span> serverSocketChannel.accept()) &#123;</span><br><span class="line">                    <span class="keyword">if</span> (socketChannel != <span class="literal">null</span>) &#123;</span><br><span class="line">                        <span class="type">ByteBuffer</span> <span class="variable">byteBuffer</span> <span class="operator">=</span> ByteBuffer.allocate(<span class="number">1024</span>);</span><br><span class="line">                        <span class="type">int</span> <span class="variable">read</span> <span class="operator">=</span> socketChannel.read(byteBuffer); <span class="comment">// （1）blocking</span></span><br><span class="line">                        System.out.println(<span class="string">&quot;客户端接收到的消息：&quot;</span> + <span class="keyword">new</span> <span class="title class_">String</span>(byteBuffer.array(), <span class="number">0</span>, read, StandardCharsets.UTF_8));</span><br><span class="line">                        socketChannel.write(ByteBuffer.wrap(<span class="string">&quot;客户端已接收的您发送的请求&quot;</span>.getBytes(StandardCharsets.UTF_8)));</span><br><span class="line">                        socketChannel.close();</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="comment">// do other work, sleep 1 second...</span></span><br><span class="line">                    System.out.println(<span class="string">&quot;没有客户端连接。。。&quot;</span>);</span><br><span class="line">                    TimeUnit.SECONDS.sleep(<span class="number">1L</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">RuntimeException</span>(e);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">NIOChannelClientDemo</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">        <span class="keyword">try</span> (<span class="type">SocketChannel</span> <span class="variable">socketChannel</span> <span class="operator">=</span> SocketChannel.open(<span class="keyword">new</span> <span class="title class_">InetSocketAddress</span>(<span class="string">&quot;127.0.0.1&quot;</span>, <span class="number">60001</span>))) &#123;</span><br><span class="line">            socketChannel.write(ByteBuffer.wrap(<span class="string">&quot;发送一个请求1&quot;</span>.getBytes(StandardCharsets.UTF_8)));</span><br><span class="line">            <span class="type">ByteBuffer</span> <span class="variable">byteBuffer</span> <span class="operator">=</span> ByteBuffer.allocate(<span class="number">1024</span>);</span><br><span class="line">            <span class="type">int</span> <span class="variable">read</span> <span class="operator">=</span> socketChannel.read(byteBuffer);</span><br><span class="line">            System.out.println(<span class="string">&quot;服务端返回的消息：&quot;</span> + <span class="keyword">new</span> <span class="title class_">String</span>(byteBuffer.array(), <span class="number">0</span>, read, StandardCharsets.UTF_8));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2024-08-29T09:29:25.000Z" title="2024/8/29 17:29:25">2024-08-29</time>发表</span><span class="level-item"><time dateTime="2024-09-18T12:16:06.518Z" title="2024/9/18 20:16:06">2024-09-18</time>更新</span><span class="level-item">1 分钟读完 (大约125个字)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2024/08/29/nio-buffer/">NIO-缓冲区（buffer）</a></p><div class="content"><p>Buffer本质是一个可重复读写的数组。</p>
+<h3 id="重要的属性"><a href="#重要的属性" class="headerlink" title="重要的属性"></a>重要的属性</h3><ol>
+<li>capacity：容量，不可变的</li>
+<li>position：下一个读写的位置，在读写时会自动向后移动，可变</li>
+<li>limit：读写的上限位置，使position无法越界，可变</li>
+</ol>
+<h3 id="重要的API"><a href="#重要的API" class="headerlink" title="重要的API"></a>重要的API</h3><h4 id="读"><a href="#读" class="headerlink" title="读"></a>读</h4><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>get()</td>
+<td>读取下一个</td>
+</tr>
+<tr>
+<td>get(int position)</td>
+<td>读取固定索引数据，不会修改position</td>
+</tr>
+<tr>
+<td>get(byte[] bytes)</td>
+<td>批量读取，读取到byte[]</td>
+</tr>
+<tr>
+<td>flip()</td>
+<td>切换成读模式</td>
+</tr>
+</tbody></table>
+<h4 id="写"><a href="#写" class="headerlink" title="写"></a>写</h4><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2024-08-28T18:06:37.000Z" title="2024/8/29 02:06:37">2024-08-29</time>发表</span><span class="level-item"><time dateTime="2024-09-18T12:16:45.841Z" title="2024/9/18 20:16:45">2024-09-18</time>更新</span><span class="level-item">1 分钟读完 (大约187个字)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2024/08/29/socket-programming/">Socket网络编程</a></p><div class="content"><h3 id="Socket代码"><a href="#Socket代码" class="headerlink" title="Socket代码"></a>Socket代码</h3><h4 id="服务端"><a href="#服务端" class="headerlink" title="服务端"></a>服务端</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SocketServerDemo</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">ExecutorService</span> <span class="variable">executorService</span> <span class="operator">=</span> Executors.newCachedThreadPool();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">        <span class="keyword">try</span> (<span class="type">ServerSocket</span> <span class="variable">serverSocket</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ServerSocket</span>(<span class="number">60001</span>)) &#123;</span><br><span class="line">            <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">                <span class="type">Socket</span> <span class="variable">socket</span> <span class="operator">=</span> serverSocket.accept(); <span class="comment">// （1）blocking</span></span><br><span class="line">                executorService.submit(() -&gt; handler(socket));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">handler</span><span class="params">(Socket socket)</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;当前线程为：&quot;</span> + Thread.currentThread().getName());</span><br><span class="line">            <span class="type">InputStream</span> <span class="variable">inputStream</span> <span class="operator">=</span> socket.getInputStream();</span><br><span class="line">            <span class="type">byte</span>[] bytes = <span class="keyword">new</span> <span class="title class_">byte</span>[<span class="number">1024</span>];</span><br><span class="line">            <span class="type">int</span> <span class="variable">read</span> <span class="operator">=</span> inputStream.read(bytes); <span class="comment">// （2）blocking</span></span><br><span class="line">            System.out.println(<span class="string">&quot;接受数据：&quot;</span> + <span class="keyword">new</span> <span class="title class_">String</span>(bytes, <span class="number">0</span>, read));</span><br><span class="line">            <span class="type">OutputStream</span> <span class="variable">outputStream</span> <span class="operator">=</span> socket.getOutputStream();</span><br><span class="line">            outputStream.write(<span class="string">&quot;数据已被客户端接收&quot;</span>.getBytes());</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                socket.close();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (IOException ex) &#123;</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">RuntimeException</span>(ex);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SocketClientDemo</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">        <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">            <span class="keyword">try</span> (<span class="type">Socket</span> <span class="variable">socket</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Socket</span>(<span class="string">&quot;127.0.0.1&quot;</span>, <span class="number">60001</span>)) &#123;</span><br><span class="line">                <span class="type">Scanner</span> <span class="variable">scanner</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Scanner</span>(System.in);</span><br><span class="line">                <span class="type">String</span> <span class="variable">input</span> <span class="operator">=</span> scanner.nextLine();</span><br><span class="line">                socket.getOutputStream().write(input.getBytes());</span><br><span class="line">                <span class="type">InputStream</span> <span class="variable">inputStream</span> <span class="operator">=</span> socket.getInputStream();</span><br><span class="line">                <span class="type">byte</span>[] buffer = <span class="keyword">new</span> <span class="title class_">byte</span>[<span class="number">1024</span>];</span><br><span class="line">                <span class="type">int</span> <span class="variable">len</span> <span class="operator">=</span> inputStream.read(buffer); <span class="comment">// （3）blocking</span></span><br><span class="line">                System.out.println(<span class="string">&quot;服务端返回消息：&quot;</span> + <span class="keyword">new</span> <span class="title class_">String</span>(buffer, <span class="number">0</span>, len));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</div></article></div></div><div class="column column-left is-4-tablet is-4-desktop is-4-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar" src="/img/avatar.png" alt="guohao.lu"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">guohao.lu</p><p class="is-size-6 is-block">软件开发工程师</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>Shanghai</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">文章</p><a href="/archives"><p class="title">24</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">分类</p><a href="/categories"><p class="title">0</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">标签</p><a href="/tags"><p class="title">22</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/ppoffice" target="_blank" rel="me noopener">关注我</a></div><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="me noopener" title="Github" href="https://github.com/ppoffice"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="me noopener" title="Facebook" href="https://facebook.com"><i class="fab fa-facebook"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="me noopener" title="Twitter" href="https://twitter.com"><i class="fab fa-twitter"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="me noopener" title="Dribbble" href="https://dribbble.com"><i class="fab fa-dribbble"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="me noopener" title="RSS" href="/"><i class="fas fa-rss"></i></a></div></div></div><!--!--><div class="card widget" data-type="links"><div class="card-content"><div class="menu"><h3 class="menu-label">链接</h3><ul class="menu-list"><li><a class="level is-mobile" href="https://hexo.io" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">Hexo</span></span><span class="level-right"><span class="level-item tag">hexo.io</span></span></a></li><li><a class="level is-mobile" href="https://bulma.io" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">Bulma</span></span><span class="level-right"><span class="level-item tag">bulma.io</span></span></a></li></ul></div></div></div><!--!--><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2024-09-13T06:31:35.000Z">2024-09-13</time></p><p class="title"><a href="/2024/09/13/lucene-tokenizer/">lucene-分词器</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2024-09-13T05:54:25.000Z">2024-09-13</time></p><p class="title"><a href="/2024/09/13/lucene-field/">lucene-field域</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2024-09-12T16:49:27.000Z">2024-09-13</time></p><p class="title"><a href="/2024/09/13/lucene-search-index/">lucene-search-index</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2024-09-11T16:25:46.000Z">2024-09-12</time></p><p class="title"><a href="/2024/09/12/lucene-create-index/">lucene-创建索引</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2024-09-11T07:39:54.000Z">2024-09-11</time></p><p class="title"><a href="/2024/09/11/lucene-data-structure/">lucene-数据结构</a></p></div></article></div></div><div class="card widget" data-type="archives"><div class="card-content"><div class="menu"><h3 class="menu-label">归档</h3><ul class="menu-list"><li><a class="level is-mobile" href="/archives/2024/09/"><span class="level-start"><span class="level-item">九月 2024</span></span><span class="level-end"><span class="level-item tag">17</span></span></a></li><li><a class="level is-mobile" href="/archives/2024/08/"><span class="level-start"><span class="level-item">八月 2024</span></span><span class="level-end"><span class="level-item tag">7</span></span></a></li></ul></div></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/Netty/"><span class="tag">Netty</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/PageRank/"><span class="tag">PageRank</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/docker/"><span class="tag">docker</span><span class="tag">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/elasticsearch/"><span class="tag">elasticsearch</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/hexo/"><span class="tag">hexo</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/java/"><span class="tag">java</span><span class="tag">6</span></a></div><div class="control"><a class="tags has-addons" href="/tags/leetcode/"><span class="tag">leetcode</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/linux/"><span class="tag">linux</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/lucene/"><span class="tag">lucene</span><span class="tag">5</span></a></div><div class="control"><a class="tags has-addons" href="/tags/netw/"><span class="tag">netw</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/network/"><span class="tag">network</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/nio/"><span class="tag">nio</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/python/"><span class="tag">python</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/socket/"><span class="tag">socket</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%88%86%E8%AF%8D/"><span class="tag">分词</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%9F%9F/"><span class="tag">域</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%B9%B6%E5%8F%91/"><span class="tag">并发</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/"><span class="tag">搜索引擎</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"><span class="tag">数据结构</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"><span class="tag">机器学习</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%AE%97%E6%B3%95/"><span class="tag">算法</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%B4%A2%E5%BC%95/"><span class="tag">索引</span><span class="tag">1</span></a></div></div></div></div></div><div class="card widget" data-type="subscribe-email"><div class="card-content"><div class="menu"><h3 class="menu-label">订阅更新</h3><form action="https://feedburner.google.com/fb/a/mailverify" method="post" target="popupwindow" onsubmit="window.open(&#039;https://feedburner.google.com/fb/a/mailverify?uri=&#039;,&#039;popupwindow&#039;,&#039;scrollbars=yes,width=550,height=520&#039;);return true"><input type="hidden" value="" name="uri"><input type="hidden" name="loc" value="en_US"><div class="field has-addons"><div class="control has-icons-left is-expanded"><input class="input" name="email" type="email" placeholder="Email"><span class="icon is-small is-left"><i class="fas fa-envelope"></i></span></div><div class="control"><input class="button" type="submit" value="订阅"></div></div></form></div></div></div><div class="card widget"><div class="card-content"><div class="notification is-danger">You need to set <code>client_id</code> and <code>slot_id</code> to show this AD unit. Please set it in <code>_config.yml</code>.</div></div></div><div class="card widget" data-type="subscribe-email"><div class="card-content"><div class="menu"><h3 class="menu-label">follow.it</h3><form action="" method="post" target="_blank"><div class="field has-addons"><div class="control has-icons-left is-expanded"><input class="input" name="email" type="email" placeholder="Email"><span class="icon is-small is-left"><i class="fas fa-envelope"></i></span></div><div class="control"><input class="button" type="submit" value="订阅"></div></div></form></div></div></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/logo.svg" alt="guohaolu的个人博客" height="28"></a><p class="is-size-7"><span>&copy; 2024 guohao.lu</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p><p class="is-size-7">© 2019</p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script data-pjax src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script data-pjax src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "此网站使用Cookie来改善您的体验。",
+          dismiss: "知道了！",
+          allow: "允许使用Cookie",
+          deny: "拒绝",
+          link: "了解更多",
+          policy: "Cookie政策",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js"></script><script src="/js/pjax.js"></script><!--!--><!--!--><!--!--><script data-pjax src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>
