@@ -1,42 +1,608 @@
-<!doctype html>
-<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>guohaolu的个人博客</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="guohaolu的个人博客"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="guohaolu的个人博客"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta property="og:type" content="blog"><meta property="og:title" content="guohaolu的个人博客"><meta property="og:url" content="https://guohaolu.github.io/"><meta property="og:site_name" content="guohaolu的个人博客"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://guohaolu.github.io/img/og_image.png"><meta property="article:author" content="guohao.lu"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="https://guohaolu.github.io/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://guohaolu.github.io"},"headline":"guohaolu的个人博客","image":["https://guohaolu.github.io/img/og_image.png"],"author":{"@type":"Person","name":"guohao.lu"},"publisher":{"@type":"Organization","name":"guohaolu的个人博客","logo":{"@type":"ImageObject","url":"https://guohaolu.github.io/img/logo.svg"}},"description":""}</script><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link data-pjax rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link data-pjax rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
-  (function () {
-      function switchTab() {
-          if (!location.hash) {
-            return;
-          }
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-          const id = '#' + CSS.escape(location.hash.substring(1));
-          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
-          if (!$tabMenu) {
-            return;
-          }
+<link rel="stylesheet" href="/css/main.css">
 
-          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
-          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
-          Array.from($tabMenuContainer.querySelectorAll('a'))
-              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
-              .forEach($content => $content.classList.add('is-hidden'));
 
-          if ($tabMenu) {
-              $tabMenu.parentElement.classList.add('is-active');
-          }
-          const $activeTab = document.querySelector(id);
-          if ($activeTab) {
-              $activeTab.classList.remove('is-hidden');
-          }
-      }
-      switchTab();
-      window.addEventListener('hashchange', switchTab, false);
-  })();
-  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/logo.svg" alt="guohaolu的个人博客" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2024-09-07T10:46:24.000Z" title="2024/9/7 18:46:24">2024-09-07</time>发表</span><span class="level-item"><time dateTime="2024-09-18T12:13:26.537Z" title="2024/9/18 20:13:26">2024-09-18</time>更新</span><span class="level-item">1 分钟读完 (大约127个字)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2024/09/07/docker-app-stack/">docker-应用栈</a></p><div class="content"><h4 id="Docker应用栈"><a href="#Docker应用栈" class="headerlink" title="Docker应用栈"></a>Docker应用栈</h4><p>Docker 应用栈（Application Stack）通常指的是在一个或多个 Docker 容器中运行的一组相互协作的应用和服务。这些应用和服务通常是通过 Docker Compose 或其他编排工具来定义和管理的，它们共同构成了一个完整的应用环境。</p>
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"guohaolu.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta property="og:type" content="website">
+<meta property="og:title" content="guohaolu的个人博客">
+<meta property="og:url" content="https://guohaolu.github.io/page/2/index.html">
+<meta property="og:site_name" content="guohaolu的个人博客">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="guohao.lu">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://guohaolu.github.io/page/2/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : true,
+    isPost : false,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>guohaolu的个人博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">guohaolu的个人博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content index posts-expand">
+            
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://guohaolu.github.io/2024/09/08/search-develop-search-engine/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="guohao.lu">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="guohaolu的个人博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/09/08/search-develop-search-engine/" class="post-title-link" itemprop="url">search-开发搜索引擎</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-09-08 18:10:09" itemprop="dateCreated datePublished" datetime="2024-09-08T18:10:09+08:00">2024-09-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-09-18 20:16:36" itemprop="dateModified" datetime="2024-09-18T20:16:36+08:00">2024-09-18</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="搜索引擎的构成"><a href="#搜索引擎的构成" class="headerlink" title="搜索引擎的构成"></a>搜索引擎的构成</h4><p><img src="https://raw.githubusercontent.com/guohaolu/ImageHostingWebsite/main/image-20240908181100042.png" alt="image-20240908181100042"></p>
+<h5 id="索引管理器——Index-Manager"><a href="#索引管理器——Index-Manager" class="headerlink" title="索引管理器——Index Manager"></a>索引管理器——Index Manager</h5><ol>
+<li>索引管理器组件的作用是管理带有索引结构的数据，索引结构是一种用于进行高速检索的数据结构。</li>
+<li>对索引的访问也是通过索引管理器进行的。</li>
+<li>索引管理器通常是将索引作为二级存储上的二进制文件来进行管理的。</li>
+<li>而且，还经常会通过保存经过压缩的索引来达到减少从二级存储加载的数据量，提升检索处理效率的目的。</li>
+</ol>
+<h5 id="索引检索器——Index-Searcher"><a href="#索引检索器——Index-Searcher" class="headerlink" title="索引检索器——Index Searcher"></a>索引检索器——Index Searcher</h5><p>索引检索器是利用索引进行全文搜索处理的组件。在大多数情况下，索引检索器都会根据某种标准对与查询相匹配的检索结果排序，并将排在前面的结果返回给应用程序。</p>
+<h5 id="索引构建器——Indexer"><a href="#索引构建器——Indexer" class="headerlink" title="索引构建器——Indexer"></a>索引构建器——Indexer</h5><p>从文档中构建索引。先通过解析将文本文档分解为单词序列，然后再将该单词序列转换为索引结构。</p>
+<h5 id="文档管理器——Document-Manager"><a href="#文档管理器——Document-Manager" class="headerlink" title="文档管理器——Document Manager"></a>文档管理器——Document Manager</h5><p>存储着作为检索对象的文档。结构的映射关系为 <code>文档ID ——&gt; 文档</code>，可以通过现成的 DBMS 实现。</p>
+<pre class="mermaid">graph LR
+    文档编号 -->|映射| 文档</pre>
+
+<h4 id="倒排索引的设计"><a href="#倒排索引的设计" class="headerlink" title="倒排索引的设计"></a>倒排索引的设计</h4><p>利用索引来进行全文搜索相较于全扫描搜索的效率会高很多，其中索引结构常使用<strong>倒排索引</strong>。倒排索引会维护单词和文档 ID 的映射关系。</p>
+<pre class="mermaid">graph LR
+    单词 -->|映射| 文档编号-倒排列表</pre>
+
+<h5 id="倒排索引的结构"><a href="#倒排索引的结构" class="headerlink" title="倒排索引的结构"></a>倒排索引的结构</h5><p><img src="https://raw.githubusercontent.com/guohaolu/ImageHostingWebsite/main/image-20240908184342063.png" alt="image-20240908184342063"></p>
+<p>若查询单个单词出现在哪些文档，先通过词典找到对应的倒排列表。</p>
+<p>若查询多个单词出现在哪些文档，先通过词典找到对应的倒排列表 L1、L2，取交集得到 L3（&#x3D; L1 ∩ L2）。</p>
+<p>若查询某个短语出现在哪些文档，倒排项中需要维护<strong>文档编号</strong>和<strong>单词出现的偏移量</strong>。</p>
+<h5 id="分词实现"><a href="#分词实现" class="headerlink" title="分词实现"></a>分词实现</h5><p>英文分词实现比较容易，但是中文分词实现比较困难，需要通过一定的策略来实现。</p>
+<ol>
+<li>词素解析，如 Python 的 jieba 库。</li>
+<li>N-gram 分隔，将句子分隔成多个 N-gram（<strong>Token 词元</strong>），这个过程称为：<strong>Tokenization</strong>。</li>
+</ol>
+<h5 id="数据结构设计"><a href="#数据结构设计" class="headerlink" title="数据结构设计"></a>数据结构设计</h5><p>（1）字典</p>
+<p>字典用来存储单词，一般要求提供高效的查询。如果字典存储在内存里，可以通过二叉查找树&#x2F;字典树来实现。如果字典存储在磁盘里，可以通过 B+ 树来实现。</p>
+<p>（2）倒排文件</p>
+<p>由于倒排列表可能会很长，一般倒排文件都是存储在硬盘的连续区域中（需要通过分段存储来解决预留空间不足的问题）。同时，我们可能需要通过压缩倒排文件的方式来进一步降低空间占用。</p>
+<p><img src="https://raw.githubusercontent.com/guohaolu/ImageHostingWebsite/main/image-20240908230156046.png" alt="image-20240908230156046"></p>
+<p>倒排列表需要包含：文档编号、词频、偏移列表。</p>
+<h4 id="检索模型的设计"><a href="#检索模型的设计" class="headerlink" title="检索模型的设计"></a>检索模型的设计</h4><h5 id="布尔检索处理流程"><a href="#布尔检索处理流程" class="headerlink" title="布尔检索处理流程"></a>布尔检索处理流程</h5><pre class="mermaid">graph TD
+    A[1. 获取查询中每个单词的倒排列表] --> B[2. 根据布尔检索, 获取符合检索条件的文档编号]
+    B --> C[3.1 计算符合检索条件的文档和查询的匹配度]
+    C --> D[3.2 获取对检索结果进行排序时使用的属性值]
+    D --> E[4. 根据匹配度或用于排序的属性值, 获取前k个文档]</pre>
+
+<h5 id="关联度计算"><a href="#关联度计算" class="headerlink" title="关联度计算"></a>关联度计算</h5>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://guohaolu.github.io/2024/09/08/docker-create-elasticsearch/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="guohao.lu">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="guohaolu的个人博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/09/08/docker-create-elasticsearch/" class="post-title-link" itemprop="url">docker-搭建ES环境</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-09-08 17:26:52" itemprop="dateCreated datePublished" datetime="2024-09-08T17:26:52+08:00">2024-09-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-09-18 20:13:40" itemprop="dateModified" datetime="2024-09-18T20:13:40+08:00">2024-09-18</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="配置环境变量"><a href="#配置环境变量" class="headerlink" title="配置环境变量"></a>配置环境变量</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># export ELASTIC_PASSWORD=&quot;lgh123&quot;</span></span><br><span class="line"><span class="comment"># export KIBANA_PASSWORD=&quot;lgh123&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="查看环境变量"><a href="#查看环境变量" class="headerlink" title="查看环境变量"></a>查看环境变量</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># export</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="创建elastic网络"><a href="#创建elastic网络" class="headerlink" title="创建elastic网络"></a>创建elastic网络</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker network create elastic-net</span><br></pre></td></tr></table></figure>
+
+<h4 id="运行elasticsearch容器"><a href="#运行elasticsearch容器" class="headerlink" title="运行elasticsearch容器"></a>运行elasticsearch容器</h4><ul>
+<li><p>映射 9200 端口号</p>
+</li>
+<li><p>容器名称为：elasticsearch</p>
+</li>
+<li><p>运行在名为：elastic-net 的 docker 网络中</p>
+</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">docker run -p 127.0.0.1:9200:9200 -d --name elasticsearch --network elastic-net \</span><br><span class="line">  -e ELASTIC_PASSWORD=<span class="variable">$ELASTIC_PASSWORD</span> \</span><br><span class="line">  -e <span class="string">&quot;discovery.type=single-node&quot;</span> \</span><br><span class="line">  -e <span class="string">&quot;xpack.security.http.ssl.enabled=false&quot;</span> \</span><br><span class="line">  -e <span class="string">&quot;xpack.license.self_generated.type=basic&quot;</span> \</span><br><span class="line">  docker.elastic.co/elasticsearch/elasticsearch:8.15.1</span><br></pre></td></tr></table></figure>
+
+<h4 id="运行Kibana容器"><a href="#运行Kibana容器" class="headerlink" title="运行Kibana容器"></a>运行Kibana容器</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">docker run -p 127.0.0.1:5601:5601 -d --name kibana --network elastic-net \</span><br><span class="line">  -e ELASTICSEARCH_URL=http://elasticsearch:9200 \</span><br><span class="line">  -e ELASTICSEARCH_HOSTS=http://elasticsearch:9200 \</span><br><span class="line">  -e ELASTICSEARCH_USERNAME=kibana_system \</span><br><span class="line">  -e ELASTICSEARCH_PASSWORD=<span class="variable">$KIBANA_PASSWORD</span> \</span><br><span class="line">  -e <span class="string">&quot;xpack.security.enabled=false&quot;</span> \</span><br><span class="line">  -e <span class="string">&quot;xpack.license.self_generated.type=basic&quot;</span> \</span><br><span class="line">  docker.elastic.co/kibana/kibana:8.15.1</span><br></pre></td></tr></table></figure>
+
+<h4 id="验证elasticsearch运行"><a href="#验证elasticsearch运行" class="headerlink" title="验证elasticsearch运行"></a>验证elasticsearch运行</h4><p>登录 <a target="_blank" rel="noopener" href="http://localhost:9200/">http://localhost:9200/</a></p>
+<p>输入账号密码。</p>
+<h4 id="验证Kibana运行"><a href="#验证Kibana运行" class="headerlink" title="验证Kibana运行"></a>验证Kibana运行</h4><p>登录 <a target="_blank" rel="noopener" href="http://localhost:5601/">http://localhost:5601/</a></p>
+<p>输入账号：<code>elastic</code>，密码：<code>lgh123</code>。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://guohaolu.github.io/2024/09/08/hello-world/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="guohao.lu">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="guohaolu的个人博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/09/08/hello-world/" class="post-title-link" itemprop="url">hexo-命令</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-09-08 12:15:08" itemprop="dateCreated datePublished" datetime="2024-09-08T12:15:08+08:00">2024-09-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-09-18 20:14:21" itemprop="dateModified" datetime="2024-09-18T20:14:21+08:00">2024-09-18</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo s</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo g -d</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://guohaolu.github.io/2024/09/08/docker-network-manager/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="guohao.lu">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="guohaolu的个人博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/09/08/docker-network-manager/" class="post-title-link" itemprop="url">docker-网络管理</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-09-08 12:15:08" itemprop="dateCreated datePublished" datetime="2024-09-08T12:15:08+08:00">2024-09-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-09-18 20:13:51" itemprop="dateModified" datetime="2024-09-18T20:13:51+08:00">2024-09-18</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>（1）创建网络”frontend”</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># docker create network frontend</span></span><br></pre></td></tr></table></figure>
+
+<p>（2）查看网络</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># docker network ls</span></span><br></pre></td></tr></table></figure>
+
+<p>（3）将容器 container 加入 frontend 网络中</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># docker run -it --name container --net frontend busybox</span></span><br></pre></td></tr></table></figure>
+
+<p>（4）将容器 container 加入 backend 网络中</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># docker network connnect backend container</span></span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://guohaolu.github.io/2024/09/07/docker-app-stack/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="guohao.lu">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="guohaolu的个人博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/09/07/docker-app-stack/" class="post-title-link" itemprop="url">docker-应用栈</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-09-07 18:46:24" itemprop="dateCreated datePublished" datetime="2024-09-07T18:46:24+08:00">2024-09-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-09-18 20:13:26" itemprop="dateModified" datetime="2024-09-18T20:13:26+08:00">2024-09-18</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="Docker应用栈"><a href="#Docker应用栈" class="headerlink" title="Docker应用栈"></a>Docker应用栈</h4><p>Docker 应用栈（Application Stack）通常指的是在一个或多个 Docker 容器中运行的一组相互协作的应用和服务。这些应用和服务通常是通过 Docker Compose 或其他编排工具来定义和管理的，它们共同构成了一个完整的应用环境。</p>
 <p>应用栈结构如下：</p>
 <p><img src="https://raw.githubusercontent.com/guohaolu/ImageHostingWebsite/main/image-20240907174622584.png" alt="image-20240907174622584"></p>
 <p>容器启动顺序：</p>
 <pre class="mermaid">graph LR
     A[Redis Master] --> B[Redis Slave] --> C[APP] --> D[HAProxy]</pre>
 
-</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2024-09-07T10:46:24.000Z" title="2024/9/7 18:46:24">2024-09-07</time>发表</span><span class="level-item"><time dateTime="2024-09-18T12:13:20.468Z" title="2024/9/18 20:13:20">2024-09-18</time>更新</span><span class="level-item">4 分钟读完 (大约530个字)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2024/09/07/develop-node-js/">hexo-博客搭建</a></p><div class="content"><h4 id="安装流程"><a href="#安装流程" class="headerlink" title="安装流程"></a>安装流程</h4><h5 id="安装node-js"><a href="#安装node-js" class="headerlink" title="安装node.js"></a>安装node.js</h5><p>进入官网安装 node.js，并在安装过程中添加到 Path 路径。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://guohaolu.github.io/2024/09/07/develop-node-js/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="guohao.lu">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="guohaolu的个人博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/09/07/develop-node-js/" class="post-title-link" itemprop="url">hexo-博客搭建</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-09-07 18:46:24" itemprop="dateCreated datePublished" datetime="2024-09-07T18:46:24+08:00">2024-09-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-09-18 20:13:20" itemprop="dateModified" datetime="2024-09-18T20:13:20+08:00">2024-09-18</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="安装流程"><a href="#安装流程" class="headerlink" title="安装流程"></a>安装流程</h4><h5 id="安装node-js"><a href="#安装node-js" class="headerlink" title="安装node.js"></a>安装node.js</h5><p>进入官网安装 node.js，并在安装过程中添加到 Path 路径。</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ node -v</span><br><span class="line">$ npm -v</span><br></pre></td></tr></table></figure>
 
 <h5 id="安装cnpm"><a href="#安装cnpm" class="headerlink" title="安装cnpm"></a>安装cnpm</h5><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ npm install -g cnpm --registry=https://registry.npmmirror.com/</span><br><span class="line">$ cnpm -v </span><br></pre></td></tr></table></figure>
@@ -78,13 +644,141 @@
 <p><img src="https://raw.githubusercontent.com/guohaolu/ImageHostingWebsite/main/image-20240912012701144.png" alt="image-20240912012701144"></p>
 <h5 id="Typora设置"><a href="#Typora设置" class="headerlink" title="Typora设置"></a>Typora设置</h5><p>在 <code>Typora - 偏好设置</code> 中进行图片上传设置。</p>
 <p><img src="https://raw.githubusercontent.com/guohaolu/ImageHostingWebsite/main/image-20240912012924757.png" alt="image-20240912012924757"></p>
-</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2024-09-07T06:39:22.000Z" title="2024/9/7 14:39:22">2024-09-07</time>发表</span><span class="level-item"><time dateTime="2024-09-18T12:15:12.147Z" title="2024/9/18 20:15:12">2024-09-18</time>更新</span><span class="level-item">几秒读完 (大约73个字)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2024/09/07/linux-fix-wsl2-forget-password/">Linux-WSL2下重设root密码</a></p><div class="content"><p>背景：在 Win11 系统上通过 WSL2 开启 Linux 子系统，但是 Linux 系统的 <code>root</code> 密码忘记了。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://guohaolu.github.io/2024/09/07/linux-fix-wsl2-forget-password/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="guohao.lu">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="guohaolu的个人博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/09/07/linux-fix-wsl2-forget-password/" class="post-title-link" itemprop="url">Linux-WSL2下重设root密码</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-09-07 14:39:22" itemprop="dateCreated datePublished" datetime="2024-09-07T14:39:22+08:00">2024-09-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-09-18 20:15:12" itemprop="dateModified" datetime="2024-09-18T20:15:12+08:00">2024-09-18</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>背景：在 Win11 系统上通过 WSL2 开启 Linux 子系统，但是 Linux 系统的 <code>root</code> 密码忘记了。</p>
 <p>步骤：</p>
 <p>（1）在 Win11 系统上，打开有管理员权限的 CMD，输入：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ wsl -u root</span><br><span class="line">$ passwd root</span><br></pre></td></tr></table></figure>
 
 <p>（2）连续输入两次新密码</p>
-</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2024-09-07T02:25:00.000Z" title="2024/9/7 10:25:00">2024-09-07</time>发表</span><span class="level-item"><time dateTime="2024-09-18T12:12:05.796Z" title="2024/9/18 20:12:05">2024-09-18</time>更新</span><span class="level-item">3 分钟读完 (大约406个字)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2024/09/07/docker-base/">docker-基础</a></p><div class="content"><h4 id="docker常用命令"><a href="#docker常用命令" class="headerlink" title="docker常用命令"></a>docker常用命令</h4><p><img src="https://raw.githubusercontent.com/guohaolu/ImageHostingWebsite/main/image-20240907105838495.png" alt="image-20240907105838495"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://guohaolu.github.io/2024/09/07/docker-base/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="guohao.lu">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="guohaolu的个人博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/09/07/docker-base/" class="post-title-link" itemprop="url">docker-基础</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-09-07 10:25:00" itemprop="dateCreated datePublished" datetime="2024-09-07T10:25:00+08:00">2024-09-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-09-18 20:12:05" itemprop="dateModified" datetime="2024-09-18T20:12:05+08:00">2024-09-18</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="docker常用命令"><a href="#docker常用命令" class="headerlink" title="docker常用命令"></a>docker常用命令</h4><p><img src="https://raw.githubusercontent.com/guohaolu/ImageHostingWebsite/main/image-20240907105838495.png" alt="image-20240907105838495"></p>
 <hr>
 <p>Docker 命令结构图：</p>
 <p><img src="https://raw.githubusercontent.com/guohaolu/ImageHostingWebsite/main/image-20240907110020254.png" alt="image-20240907110020254"></p>
@@ -153,11 +847,139 @@
 </li>
 </ul>
 <p><img src="https://raw.githubusercontent.com/guohaolu/ImageHostingWebsite/main/image-20240907114837273.png" alt="image-20240907114837273"></p>
-</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2024-09-04T13:56:23.000Z" title="2024/9/4 21:56:23">2024-09-04</time>发表</span><span class="level-item"><time dateTime="2024-09-18T12:15:05.636Z" title="2024/9/18 20:15:05">2024-09-18</time>更新</span><span class="level-item">几秒读完 (大约108个字)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2024/09/04/LeetCode-Opposite-Pointer/">LeetCode-相向双指针</a></p><div class="content"><h3 id="167-两数之和-II-输入有序数组"><a href="#167-两数之和-II-输入有序数组" class="headerlink" title="167. 两数之和 II - 输入有序数组"></a>167. 两数之和 II - 输入有序数组</h3><p>描述：给一个排好序后的数组 <code>numbers</code> 和要查找的值 <code>target</code>，给出两数之和为 <code>target</code> 的数组下标【<code>idx1，idx2</code>】</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://guohaolu.github.io/2024/09/04/LeetCode-Opposite-Pointer/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="guohao.lu">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="guohaolu的个人博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/09/04/LeetCode-Opposite-Pointer/" class="post-title-link" itemprop="url">LeetCode-相向双指针</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-09-04 21:56:23" itemprop="dateCreated datePublished" datetime="2024-09-04T21:56:23+08:00">2024-09-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-09-18 20:15:05" itemprop="dateModified" datetime="2024-09-18T20:15:05+08:00">2024-09-18</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="167-两数之和-II-输入有序数组"><a href="#167-两数之和-II-输入有序数组" class="headerlink" title="167. 两数之和 II - 输入有序数组"></a>167. 两数之和 II - 输入有序数组</h3><p>描述：给一个排好序后的数组 <code>numbers</code> 和要查找的值 <code>target</code>，给出两数之和为 <code>target</code> 的数组下标【<code>idx1，idx2</code>】</p>
 <p>技巧：设两指针，<code>i = 0</code>，<code>j = numbers.length - 1</code>，令两指针相向搜索。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>, j = numbers.length;</span><br><span class="line"><span class="keyword">while</span> (i &lt; j) &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">sum</span> <span class="operator">=</span> numbers[i] + numbers[j];</span><br><span class="line">    <span class="keyword">if</span> (sum &lt; target) &#123;</span><br><span class="line">        i++;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (sum &gt; target) &#123;</span><br><span class="line">        j--;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">int</span>[] &#123;i, j&#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h3 id="15-三数之和"><a href="#15-三数之和" class="headerlink" title="15. 三数之和"></a>15. 三数之和</h3></div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2024-09-04T10:37:26.000Z" title="2024/9/4 18:37:26">2024-09-04</time>发表</span><span class="level-item"><time dateTime="2024-09-18T12:14:35.192Z" title="2024/9/18 20:14:35">2024-09-18</time>更新</span><span class="level-item">5 分钟读完 (大约727个字)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2024/09/04/Java-ConcurrentHashMap/">Java并发集合-并发哈希结构设计</a></p><div class="content"><h2 id="并发哈希结构"><a href="#并发哈希结构" class="headerlink" title="并发哈希结构"></a>并发哈希结构</h2><p>设计一个支持并发访问的哈希结构（Concurrent Hash Structure）是一项挑战性任务，因为它需要在保证高性能的同时，还要确保数据的一致性和安全性。下面是一些设计并发哈希结构的关键考虑因素和实现策略。</p>
+<h3 id="15-三数之和"><a href="#15-三数之和" class="headerlink" title="15. 三数之和"></a>15. 三数之和</h3>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://guohaolu.github.io/2024/09/04/Java-ConcurrentHashMap/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="guohao.lu">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="guohaolu的个人博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/09/04/Java-ConcurrentHashMap/" class="post-title-link" itemprop="url">Java并发集合-并发哈希结构设计</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-09-04 18:37:26" itemprop="dateCreated datePublished" datetime="2024-09-04T18:37:26+08:00">2024-09-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-09-18 20:14:35" itemprop="dateModified" datetime="2024-09-18T20:14:35+08:00">2024-09-18</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="并发哈希结构"><a href="#并发哈希结构" class="headerlink" title="并发哈希结构"></a>并发哈希结构</h2><p>设计一个支持并发访问的哈希结构（Concurrent Hash Structure）是一项挑战性任务，因为它需要在保证高性能的同时，还要确保数据的一致性和安全性。下面是一些设计并发哈希结构的关键考虑因素和实现策略。</p>
 <h3 id="设计目标"><a href="#设计目标" class="headerlink" title="设计目标"></a>设计目标</h3><ol>
 <li><strong>高性能</strong>：并发哈希结构应当支持高并发的读写操作，减少锁的竞争，提高整体性能。</li>
 <li><strong>线程安全</strong>：在多线程环境下，需要确保数据的一致性和安全性，避免数据竞争和死锁。</li>
@@ -225,283 +1047,181 @@ class 并发哈希结构~T~ {
 <td>检测是否达到扩容条件</td>
 </tr>
 </tbody></table>
-</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2024-09-02T07:22:24.000Z" title="2024/9/2 15:22:24">2024-09-02</time>发表</span><span class="level-item"><time dateTime="2024-09-18T12:16:30.387Z" title="2024/9/18 20:16:30">2024-09-18</time>更新</span><span class="level-item">4 分钟读完 (大约663个字)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2024/09/02/PageRank-Algorithm/">机器学习——PageRank算法</a></p><div class="content"><p>在搜索引擎中，PageRank算法用来衡量网页质量（Quality），这个指标会影响搜索结果的排序。</p>
-<p>PageRank：图的链接分析，属于图数据上的无监督学习方法。</p>
-<h2 id="随机过程"><a href="#随机过程" class="headerlink" title="随机过程"></a>随机过程</h2><p>随机过程：随机变量的序列，如果我们固定某一个观察时刻<code>t</code>，则事物在时刻<code>t</code>出现的状态是随机的。</p>
-<p>伯努利过程：<br>$$<br>X &#x3D; { x_1, x_2, \ldots } &#x3D; { x_n : n &#x3D; 1, 2, \ldots ; x_n \in {1, 0} }<br>$$<br>从时间和状态空间的维度上，随机过程可以继续被划分：</p>
-<ol>
-<li><strong>离散时间</strong>：如果参数 <code>n</code> 取值于离散集，比如整数集<code>Z</code> 或非负整数集 <code>N</code>，则该过程是一个离散时间随机过程。</li>
-<li><strong>连续时间</strong>：如果参数<code>n</code>可以取任意实数值，则称其为连续时间随机过程。</li>
-</ol>
-<p>对于每个随机变量 **x<del>n</del>**：</p>
-<ol>
-<li><strong>离散状态空间</strong>：如果每个随机变量 **x<del>n</del>**只能取有限个或可数无限个值，那么这个随机过程就称为离散状态空间随机过程。例如，伯努利过程中的随机变量只能取0或1两个值。</li>
-<li><strong>连续状态空间</strong>：如果每个随机变量 <strong>x<del>n</del></strong> 可以取任意实数值或更高维度的值，那么就是连续状态空间随机过程。</li>
-</ol>
-<h2 id="马尔可夫链"><a href="#马尔可夫链" class="headerlink" title="马尔可夫链"></a>马尔可夫链</h2><p>马尔可夫链（Markov Chain）是一种特殊的随机过程，它在离散时间上进行，并且具有一个重要的特性——马尔可夫性质。</p>
-<p>马尔可夫性质指的是，在给定当前状态的情况下，未来的状态仅依赖于当前状态，而不依赖于过去的历史状态。换句话说，一旦当前状态确定了，过去的状态就不再提供额外的信息来预测未来。</p>
-<ul>
-<li><p>状态空间S：可以是有限或无限。</p>
-</li>
-<li><p>初始状态分布：马尔可夫链开始于某个初始状态的概率分布 <em>π</em><del>0</del>。</p>
-</li>
-<li><p>转移概率分布</p>
-</li>
-</ul>
-<p>时间齐次的马尔可夫链：转移概率分布与 <em>t</em> 无关。</p>
-<h3 id="转移概率矩阵"><a href="#转移概率矩阵" class="headerlink" title="转移概率矩阵"></a>转移概率矩阵</h3><p>如状态空间 <em>S</em> 中仅有三种状态，则转移概率矩阵为 3*3 矩阵，元素定义为由一种状态转为另一种状态的概率。这样只要有了转移概率矩阵，我们就可以从一个过往的概率分布链式拓展下去。</p>
-</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2024-08-31T12:14:16.000Z" title="2024/8/31 20:14:16">2024-08-31</time>发表</span><span class="level-item"><time dateTime="2024-09-18T12:14:44.460Z" title="2024/9/18 20:14:44">2024-09-18</time>更新</span><span class="level-item">4 分钟读完 (大约560个字)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2024/08/31/java-netty-core-api/">Netty-核心API</a></p><div class="content"><h2 id="ChannelHandler"><a href="#ChannelHandler" class="headerlink" title="ChannelHandler"></a>ChannelHandler</h2><p>处理 I&#x2F;O 事件或拦截 I&#x2F;O 操作，并将其转发到其 <code>ChannelPipeline</code> 中的下一个处理程序。</p>
-<h3 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h3><ol>
-<li><strong>处理I&#x2F;O事件</strong>：<ul>
-<li><code>ChannelHandler</code>可以处理各种I&#x2F;O事件，如连接建立、断开、读取、写入等。</li>
-<li>通过实现<code>ChannelInboundHandler</code>或<code>ChannelOutboundHandler</code>接口，你可以编写自定义的<code>ChannelHandler</code>来处理这些事件。</li>
-</ul>
-</li>
-<li><strong>读取和写入数据</strong>：<ul>
-<li><code>ChannelHandler</code>可以读取从网络上接收的数据，并将其处理后写回网络。</li>
-<li>你可以实现<code>channelRead()</code>方法来处理读取的数据，并实现<code>write()</code>方法来发送数据。</li>
-</ul>
-</li>
-<li><strong>异常处理</strong>：<ul>
-<li><code>ChannelHandler</code>可以处理在通信过程中发生的异常情况。</li>
-<li>你可以实现<code>exceptionCaught()</code>方法来捕获和处理异常。</li>
-</ul>
-</li>
-<li><strong>生命周期管理</strong>：<ul>
-<li><code>ChannelHandler</code>可以参与到<code>Channel</code>的生命周期管理中。</li>
-<li>你可以实现<code>channelRegistered()</code>、<code>channelActive()</code>、<code>channelInactive()</code>等方法来处理<code>Channel</code>的生命周期事件。</li>
-</ul>
-</li>
-<li><strong>自定义处理逻辑</strong>：<ul>
-<li><code>ChannelHandler</code>可以实现自定义的业务逻辑，如协议解析、编码解码、安全认证等。</li>
-<li>你可以实现<code>channelRead0()</code>方法来处理具体的业务逻辑。</li>
-</ul>
-</li>
-</ol>
-<h3 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h3><p>以下是一些常用的<code>ChannelHandler</code>方法：</p>
-<ol>
-<li><strong>入站方法</strong>：<ul>
-<li><code>channelRegistered(ChannelHandlerContext ctx)</code>：当<code>Channel</code>注册到<code>EventLoop</code>上时调用。</li>
-<li><code>channelActive(ChannelHandlerContext ctx)</code>：当<code>Channel</code>准备就绪，可以进行读写操作时调用。</li>
-<li><code>channelInactive(ChannelHandlerContext ctx)</code>：当<code>Channel</code>变得不可用时调用。</li>
-<li><code>channelRead(ChannelHandlerContext ctx, Object msg)</code>：当从网络上读取到消息时调用。</li>
-<li><code>channelReadComplete(ChannelHandlerContext ctx)</code>：当读取操作完成时调用。</li>
-<li><code>userEventTriggered(ChannelHandlerContext ctx, Object evt)</code>：当用户触发的事件发生时调用。</li>
-<li><code>channelWritabilityChanged(ChannelHandlerContext ctx)</code>：当<code>Channel</code>的可写状态发生变化时调用。</li>
-<li><code>exceptionCaught(ChannelHandlerContext ctx, Throwable cause)</code>：当发生异常时调用。</li>
-</ul>
-</li>
-<li><strong>出站方法</strong>：<ul>
-<li><code>write(ChannelHandlerContext ctx, Object msg, Promise promise)</code>：当需要写入数据到网络时调用。</li>
-<li><code>flush(ChannelHandlerContext ctx)</code>：当需要刷新输出缓冲区时调用。</li>
-</ul>
-</li>
-</ol>
-<h2 id="ChannelPipeline"><a href="#ChannelPipeline" class="headerlink" title="ChannelPipeline"></a>ChannelPipeline</h2><p>由多个 <code>ChannelHandler</code> 组成的链为<code>ChannelPipeline</code>。</p>
-<p><img src="https://raw.githubusercontent.com/guohaolu/ImageHostingWebsite/main/image-20240831204242015.png" alt="image-20240831204242015"></p>
-<ul>
-<li>InboundHandler 按照 Pipeline 正序处理入站，OutboundHandler 按照 Pipeline 逆序处理出站。</li>
-</ul>
-</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2024-08-31T08:49:46.000Z" title="2024/8/31 16:49:46">2024-08-31</time>发表</span><span class="level-item"><time dateTime="2024-09-18T12:14:55.499Z" title="2024/9/18 20:14:55">2024-09-18</time>更新</span><span class="level-item">14 分钟读完 (大约2155个字)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2024/08/31/Java-network-pattern/">Java-网络编程模式</a></p><div class="content"><h2 id="数据传输过程"><a href="#数据传输过程" class="headerlink" title="数据传输过程"></a>数据传输过程</h2><ol>
-<li><strong>数据到达网络设备</strong>：<ul>
-<li>当数据包从网络到达时，网卡（NIC，Network Interface Card）接收到这些数据包。</li>
-</ul>
-</li>
-<li><strong>DMA操作</strong>：<ul>
-<li>网卡通过 DMA 操作将接收到的数据包直接写入预先分配好的内核空间缓冲区。DMA 操作允许数据直接从网卡传输到内存，而不需要 CPU 的介入，从而减轻了 CPU 的负担。</li>
-</ul>
-</li>
-<li><strong>网卡驱动程序的作用</strong>：<ul>
-<li>网卡驱动程序负责配置 DMA 操作，并管理内核空间缓冲区。</li>
-<li>驱动程序还负责检测 DMA 操作的完成情况，并通知内核数据已经就绪。</li>
-<li>一旦 DMA 操作完成，驱动程序会通知操作系统内核，告诉内核哪些缓冲区中有新的数据。</li>
-</ul>
-</li>
-<li><strong>内核处理数据</strong>：<ul>
-<li>内核收到通知后，会处理这些数据，例如将数据从 DMA 缓冲区复制到应用程序可以访问的内核缓冲区。</li>
-<li>内核还会设置相应的文件描述符（在 Java NIO 中对应<code>Channel</code>）的状态，表示数据已经就绪，可以被应用程序读取。</li>
-</ul>
-</li>
-</ol>
-<ul>
-<li><strong>DMA</strong>：DMA 允许网卡直接将数据写入内核空间缓冲区，从而提高数据传输效率。</li>
-<li><strong>网卡驱动程序</strong>：驱动程序负责配置 DMA 操作，并管理内核空间缓冲区。它还负责通知内核数据已经就绪。</li>
-</ul>
-<h2 id="高级IO功能"><a href="#高级IO功能" class="headerlink" title="高级IO功能"></a>高级IO功能</h2><ol>
-<li><strong>文件锁定</strong>：<ul>
-<li>文件锁定可以防止多个进程或线程同时修改同一个文件，从而保证数据的一致性和完整性。</li>
-<li>传统的 Java I&#x2F;O 机制缺乏对文件锁定的支持，容易导致并发访问时的数据冲突。</li>
-</ul>
-</li>
-<li><strong>非阻塞I&#x2F;O</strong>：<ul>
-<li>非阻塞 I&#x2F;O 允许应用程序在没有数据可读或可写时立即返回，而不是阻塞等待。这样可以提高系统的并发处理能力。</li>
-<li>传统的 Java I&#x2F;O 机制通常采用阻塞式 I&#x2F;O，无法充分利用现代操作系统的非阻塞 I&#x2F;O 功能。</li>
-</ul>
-</li>
-<li><strong>就绪性选择</strong>：<ul>
-<li>就绪性选择（如<code>select</code>、<code>poll</code>、<code>epoll</code>等）允许应用程序监控多个文件描述符的状态，当某个文件描述符上的数据可读或可写时，可以立即进行处理。</li>
-<li>传统的 Java I&#x2F;O 机制缺乏对就绪性选择的支持，无法高效地处理多个并发连接。</li>
-</ul>
-</li>
-<li><strong>内存映射</strong>：<ul>
-<li>内存映射允许将文件或设备直接映射到内存中，从而提高数据访问速度。</li>
-<li>传统的 Java I&#x2F;O 机制通常采用逐字节读写的方式，无法充分利用内存映射的优势。</li>
-</ul>
-</li>
-</ol>
-<h2 id="BIO"><a href="#BIO" class="headerlink" title="BIO"></a>BIO</h2><p>在 Java 的 BIO（Blocking I&#x2F;O）模型中，很多操作都是同步阻塞的。常见的阻塞操作：</p>
-<ol>
-<li>**接受连接 (<code>accept</code>)**：<ul>
-<li><code>ServerSocket.accept()</code> 用来等待客户端的连接请求。如果没有客户端连接，这个方法会一直阻塞，直到有一个新的连接到达。</li>
-</ul>
-</li>
-<li>**读取数据 (<code>read</code>)**：<ul>
-<li><code>InputStream.read()</code> 用来从客户端读取数据。如果没有数据可读，这个方法会阻塞，直到有数据可读。</li>
-<li><code>BufferedReader.readLine()</code> 同样会阻塞，直到一行数据读取完毕或到达流的末尾。</li>
-</ul>
-</li>
-<li>**写入数据 (<code>write</code>)**：<ul>
-<li><code>OutputStream.write()</code> 用来向客户端发送数据。在某些情况下，如果网络拥塞或者客户端缓冲区满，这个方法也可能暂时阻塞。</li>
-</ul>
-</li>
-</ol>
-<p>多线程BIO的缺点：</p>
-<ul>
-<li>资源开销大，降低了服务端的吞吐量。</li>
-</ul>
-<h2 id="NIO"><a href="#NIO" class="headerlink" title="NIO"></a>NIO</h2><p>NIO：基于 IO 多路复用的同步非阻塞 IO。</p>
-<p>在 Java NIO（Non-blocking I&#x2F;O）中，使用 IO 多路复用技术可以实现同步非阻塞的 IO 操作。具体来说：</p>
-<ul>
-<li><strong>IO多路复用</strong>：一个线程可以管理（轮询：select，poll）多个 Socket 连接。当某个 Socket 的缓冲区（内核空间）中有数据可读或可写时，Selector 会通知（epoll）对应的 IO 线程进行读写操作。这样，一个线程可以同时监控多个 Socket 连接，极大地提高了系统的并发处理能力。</li>
-<li><strong>IO操作时会阻塞线程，但此时数据已经就绪</strong>：当 Selector 通知某个 Socket 连接的数据已经就绪时，线程会执行读写操作。虽然这些读写操作本身是同步的，但由于数据已经就绪（即数据已经存在于内核空间的缓冲区中），因此读写操作不会长时间阻塞线程。这种机制使得每次读写操作都非常高效，大大提升了整体的系统性能。</li>
-</ul>
-<p>tips：read 操作本身仍然是阻塞的，因为它需要等待数据从内核缓冲区复制到用户缓冲区。</p>
-<h2 id="AIO"><a href="#AIO" class="headerlink" title="AIO"></a>AIO</h2><p>异步非阻塞 IO，应用较少，主要是 Linux 上的异步 IO 实现比较特别。</p>
-<p>真正的异步 IO：</p>
-<p><img src="https://raw.githubusercontent.com/guohaolu/ImageHostingWebsite/main/image-20240831172116056.png" alt="image-20240831172116056"></p>
-<h2 id="主从Reactor模式"><a href="#主从Reactor模式" class="headerlink" title="主从Reactor模式"></a>主从Reactor模式</h2><h3 id="1-主Reactor"><a href="#1-主Reactor" class="headerlink" title="1. 主Reactor"></a>1. 主Reactor</h3><ul>
-<li><strong>职责</strong>：<ul>
-<li>监听新连接的到来。</li>
-<li>接受新连接，并将其分发给从 Reactor 进行处理。</li>
-</ul>
-</li>
-<li><strong>具体操作</strong>：<ul>
-<li>创建一个<code>Selector</code>实例，并将<code>ServerSocketChannel</code>注册到该<code>Selector</code>上，监听<code>SelectionKey.OP_ACCEPT</code>事件。</li>
-<li>在<code>Selector</code>中循环等待新连接的到来。</li>
-<li>当<code>ServerSocketChannel</code>上的<code>SelectionKey.OP_ACCEPT</code>事件就绪时，接受新连接，并将新连接的<code>SocketChannel</code>注册到一个从Reactor的<code>Selector</code>上，监听<code>SelectionKey.OP_READ</code>事件。</li>
-</ul>
-</li>
-</ul>
-<h3 id="2-从Reactor"><a href="#2-从Reactor" class="headerlink" title="2. 从Reactor"></a>2. 从Reactor</h3><ul>
-<li><strong>职责</strong>：<ul>
-<li>监控已建立的连接上的读写事件。</li>
-<li>处理具体的读写操作。</li>
-<li>将读写操作分发给 Worker 线程进行处理（如果有 Worker 线程）。</li>
-</ul>
-</li>
-<li><strong>具体操作</strong>：<ul>
-<li>创建一个<code>Selector</code>实例，并将已接受的新连接的<code>SocketChannel</code>注册到该<code>Selector</code>上，监听<code>SelectionKey.OP_READ</code>事件。</li>
-<li>在<code>Selector</code>中循环等待读写事件的到来。</li>
-<li>当<code>SocketChannel</code>上的<code>SelectionKey.OP_READ</code>事件就绪时，读取数据，并将数据交给 Worker 线程进行处理（如果有 Worker 线程）。</li>
-<li>当<code>SocketChannel</code>上的<code>SelectionKey.OP_WRITE</code>事件就绪时，写入数据。</li>
-</ul>
-</li>
-</ul>
-<h3 id="3-Worker线程"><a href="#3-Worker线程" class="headerlink" title="3. Worker线程"></a>3. Worker线程</h3><ul>
-<li><strong>职责</strong>：<ul>
-<li>执行具体的业务逻辑。</li>
-<li>处理来自客户端的数据。</li>
-<li>准备响应数据，并将响应数据交给从 Reactor 进行写操作。</li>
-</ul>
-</li>
-<li><strong>具体操作</strong>：<ul>
-<li>接收从 Reactor 传递过来的数据。</li>
-<li>处理数据，生成响应数据。</li>
-<li>将响应数据交给从 Reactor，由从 Reactor 写回到客户端。</li>
-</ul>
-</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/guohaolu/ImageHostingWebsite/main/image-20240831185850929.png" alt="image-20240831185850929"></p>
-<h2 id="Netty线程模型"><a href="#Netty线程模型" class="headerlink" title="Netty线程模型"></a>Netty线程模型</h2><h3 id="BossGroup"><a href="#BossGroup" class="headerlink" title="BossGroup"></a>BossGroup</h3><p><strong>职责</strong>：</p>
-<ul>
-<li>负责接收新进来的连接请求。</li>
-<li>一旦接收到新的连接请求，<code>BossGroup</code>会创建一个新的<code>Channel</code>并将其注册到<code>WorkerGroup</code>中的某个<code>EventLoop</code>上。</li>
-</ul>
-<p><strong>具体操作</strong>：</p>
-<ol>
-<li>监听新连接<ul>
-<li><code>BossGroup</code>中的每个<code>EventLoop</code>都会监听新连接的到来。通常，<code>BossGroup</code>只包含一个<code>EventLoop</code>，因为只需要一个线程来监听新连接。</li>
-</ul>
-</li>
-<li>处理新连接<ul>
-<li>当新的连接请求到达时，<code>BossGroup</code>会创建一个新的<code>Channel</code>（例如<code>SocketChannel</code>）并将其注册到<code>WorkerGroup</code>中的某个<code>EventLoop</code>上。</li>
-<li>这个新的<code>Channel</code>将由<code>WorkerGroup</code>中的<code>EventLoop</code>来处理后续的I&#x2F;O操作，包括读取数据、写入数据等。</li>
-</ul>
-</li>
-</ol>
-<h3 id="WorkerGroup"><a href="#WorkerGroup" class="headerlink" title="WorkerGroup"></a>WorkerGroup</h3><p><strong>职责</strong>：</p>
-<ul>
-<li>负责处理已经被接收的连接的所有 I&#x2F;O 操作，包括读取数据、写入数据等。</li>
-<li>可以包含多个<code>EventLoop</code>，每个<code>EventLoop</code>都可以独立地处理多个<code>Channel</code>上的I&#x2F;O事件。</li>
-</ul>
-<p><strong>具体操作</strong>：</p>
-<ol>
-<li>处理 I&#x2F;O 事件<ul>
-<li><code>WorkerGroup</code>中的每个<code>EventLoop</code>都会处理分配给它的<code>Channel</code>上的 I&#x2F;O 事件。</li>
-<li>每个<code>EventLoop</code>都有一个自己的事件循环，可以独立地处理多个<code>Channel</code>上的事件。</li>
-</ul>
-</li>
-<li>读取和写入数据<ul>
-<li>当<code>Channel</code>上的数据可读或可写时，对应的<code>EventLoop</code>会处理这些事件。</li>
-<li><code>EventLoop</code>会调用相应的<code>ChannelHandler</code>来读取或写入数据。</li>
-</ul>
-</li>
-</ol>
-<p><img src="https://raw.githubusercontent.com/guohaolu/ImageHostingWebsite/main/image-20240831192526294.png" alt="image-20240831192526294"></p>
-</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2024-08-29T11:10:35.000Z" title="2024/8/29 19:10:35">2024-08-29</time>发表</span><span class="level-item"><time dateTime="2024-09-18T12:16:18.603Z" title="2024/9/18 20:16:18">2024-09-18</time>更新</span><span class="level-item">1 分钟读完 (大约166个字)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2024/08/29/nio-selector/">NIO-多路选择器（selector）</a></p><div class="content"><h3 id="Selector代码"><a href="#Selector代码" class="headerlink" title="Selector代码"></a>Selector代码</h3><h4 id="服务端"><a href="#服务端" class="headerlink" title="服务端"></a>服务端</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">NIOSelectorServerDemo</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> (<span class="type">ServerSocketChannel</span> <span class="variable">serverSocketChannel</span> <span class="operator">=</span> ServerSocketChannel.open()) &#123;</span><br><span class="line">            serverSocketChannel.socket().bind(<span class="keyword">new</span> <span class="title class_">InetSocketAddress</span>(<span class="number">60001</span>));</span><br><span class="line">            serverSocketChannel.configureBlocking(<span class="literal">false</span>);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">try</span> (<span class="type">Selector</span> <span class="variable">selector</span> <span class="operator">=</span> Selector.open()) &#123;</span><br><span class="line">                <span class="comment">// (1) register OP_ACCEPT event</span></span><br><span class="line">                serverSocketChannel.register(selector, SelectionKey.OP_ACCEPT);</span><br><span class="line">                <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">                    <span class="keyword">if</span> (selector.select(<span class="number">2</span> * <span class="number">1000</span>) &lt;= <span class="number">0</span>) &#123;</span><br><span class="line">                        <span class="keyword">continue</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                    Iterator&lt;SelectionKey&gt; iterator = selector.selectedKeys().iterator();</span><br><span class="line">                    <span class="keyword">while</span> (iterator.hasNext()) &#123;</span><br><span class="line">                        <span class="type">SelectionKey</span> <span class="variable">key</span> <span class="operator">=</span> iterator.next();</span><br><span class="line">                        <span class="comment">// (2) process OP_ACCEPT event</span></span><br><span class="line">                        <span class="keyword">if</span> (key.isAcceptable()) &#123;</span><br><span class="line">                            <span class="type">SocketChannel</span> <span class="variable">clientSocketChannel</span> <span class="operator">=</span> serverSocketChannel.accept();</span><br><span class="line">                            clientSocketChannel.configureBlocking(<span class="literal">false</span>);</span><br><span class="line">                            <span class="comment">// (3) register OP_READ event</span></span><br><span class="line">                            clientSocketChannel.register(selector, SelectionKey.OP_READ);</span><br><span class="line">                        &#125;</span><br><span class="line">                        <span class="comment">// (4) process OP_READ event</span></span><br><span class="line">                        <span class="keyword">else</span> <span class="keyword">if</span> (key.isReadable()) &#123;</span><br><span class="line">                            <span class="keyword">try</span> (<span class="type">SocketChannel</span> <span class="variable">clientSocketChannel</span> <span class="operator">=</span> (SocketChannel) key.channel()) &#123;</span><br><span class="line">                                <span class="type">ByteBuffer</span> <span class="variable">buffer</span> <span class="operator">=</span> ByteBuffer.allocate(<span class="number">1024</span>);</span><br><span class="line">                                <span class="comment">// (5) read client message</span></span><br><span class="line">                                <span class="type">int</span> <span class="variable">read</span> <span class="operator">=</span> clientSocketChannel.read(buffer);</span><br><span class="line">                                <span class="keyword">if</span> (read &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                                    System.out.println(<span class="string">&quot;接收到客户端消息：&quot;</span> + <span class="keyword">new</span> <span class="title class_">String</span>(buffer.array(), <span class="number">0</span>, read, StandardCharsets.UTF_8));</span><br><span class="line">                                    <span class="comment">// (6) request client message</span></span><br><span class="line">                                    clientSocketChannel.write(ByteBuffer.wrap(<span class="string">&quot;客户端已接收到您的消息&quot;</span>.getBytes(StandardCharsets.UTF_8)));</span><br><span class="line">                                &#125;</span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;</span><br><span class="line">                        <span class="comment">// (7) remove processed event</span></span><br><span class="line">                        iterator.remove();</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">RuntimeException</span>(e);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-</div></article></div><nav class="pagination" role="navigation" aria-label="pagination"><div class="pagination-previous"><a href="/">上一页</a></div><div class="pagination-next"><a href="/page/3/">下一页</a></div><ul class="pagination-list is-hidden-mobile"><li><a class="pagination-link" href="/">1</a></li><li><a class="pagination-link is-current" href="/page/2/">2</a></li><li><a class="pagination-link" href="/page/3/">3</a></li></ul></nav></div><div class="column column-left is-4-tablet is-4-desktop is-4-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar" src="/img/avatar.png" alt="guohao.lu"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">guohao.lu</p><p class="is-size-6 is-block">软件开发工程师</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>Shanghai</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">文章</p><a href="/archives"><p class="title">24</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">分类</p><a href="/categories"><p class="title">0</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">标签</p><a href="/tags"><p class="title">22</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/ppoffice" target="_blank" rel="me noopener">关注我</a></div><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="me noopener" title="Github" href="https://github.com/ppoffice"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="me noopener" title="Facebook" href="https://facebook.com"><i class="fab fa-facebook"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="me noopener" title="Twitter" href="https://twitter.com"><i class="fab fa-twitter"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="me noopener" title="Dribbble" href="https://dribbble.com"><i class="fab fa-dribbble"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="me noopener" title="RSS" href="/"><i class="fas fa-rss"></i></a></div></div></div><!--!--><div class="card widget" data-type="links"><div class="card-content"><div class="menu"><h3 class="menu-label">链接</h3><ul class="menu-list"><li><a class="level is-mobile" href="https://hexo.io" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">Hexo</span></span><span class="level-right"><span class="level-item tag">hexo.io</span></span></a></li><li><a class="level is-mobile" href="https://bulma.io" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">Bulma</span></span><span class="level-right"><span class="level-item tag">bulma.io</span></span></a></li></ul></div></div></div><!--!--><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2024-09-13T06:31:35.000Z">2024-09-13</time></p><p class="title"><a href="/2024/09/13/lucene-tokenizer/">lucene-分词器</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2024-09-13T05:54:25.000Z">2024-09-13</time></p><p class="title"><a href="/2024/09/13/lucene-field/">lucene-field域</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2024-09-12T16:49:27.000Z">2024-09-13</time></p><p class="title"><a href="/2024/09/13/lucene-search-index/">lucene-search-index</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2024-09-11T16:25:46.000Z">2024-09-12</time></p><p class="title"><a href="/2024/09/12/lucene-create-index/">lucene-创建索引</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2024-09-11T07:39:54.000Z">2024-09-11</time></p><p class="title"><a href="/2024/09/11/lucene-data-structure/">lucene-数据结构</a></p></div></article></div></div><div class="card widget" data-type="archives"><div class="card-content"><div class="menu"><h3 class="menu-label">归档</h3><ul class="menu-list"><li><a class="level is-mobile" href="/archives/2024/09/"><span class="level-start"><span class="level-item">九月 2024</span></span><span class="level-end"><span class="level-item tag">17</span></span></a></li><li><a class="level is-mobile" href="/archives/2024/08/"><span class="level-start"><span class="level-item">八月 2024</span></span><span class="level-end"><span class="level-item tag">7</span></span></a></li></ul></div></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/Netty/"><span class="tag">Netty</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/PageRank/"><span class="tag">PageRank</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/docker/"><span class="tag">docker</span><span class="tag">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/elasticsearch/"><span class="tag">elasticsearch</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/hexo/"><span class="tag">hexo</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/java/"><span class="tag">java</span><span class="tag">6</span></a></div><div class="control"><a class="tags has-addons" href="/tags/leetcode/"><span class="tag">leetcode</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/linux/"><span class="tag">linux</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/lucene/"><span class="tag">lucene</span><span class="tag">5</span></a></div><div class="control"><a class="tags has-addons" href="/tags/netw/"><span class="tag">netw</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/network/"><span class="tag">network</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/nio/"><span class="tag">nio</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/python/"><span class="tag">python</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/socket/"><span class="tag">socket</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%88%86%E8%AF%8D/"><span class="tag">分词</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%9F%9F/"><span class="tag">域</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%B9%B6%E5%8F%91/"><span class="tag">并发</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/"><span class="tag">搜索引擎</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"><span class="tag">数据结构</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"><span class="tag">机器学习</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%AE%97%E6%B3%95/"><span class="tag">算法</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%B4%A2%E5%BC%95/"><span class="tag">索引</span><span class="tag">1</span></a></div></div></div></div></div><div class="card widget" data-type="subscribe-email"><div class="card-content"><div class="menu"><h3 class="menu-label">订阅更新</h3><form action="https://feedburner.google.com/fb/a/mailverify" method="post" target="popupwindow" onsubmit="window.open(&#039;https://feedburner.google.com/fb/a/mailverify?uri=&#039;,&#039;popupwindow&#039;,&#039;scrollbars=yes,width=550,height=520&#039;);return true"><input type="hidden" value="" name="uri"><input type="hidden" name="loc" value="en_US"><div class="field has-addons"><div class="control has-icons-left is-expanded"><input class="input" name="email" type="email" placeholder="Email"><span class="icon is-small is-left"><i class="fas fa-envelope"></i></span></div><div class="control"><input class="button" type="submit" value="订阅"></div></div></form></div></div></div><div class="card widget"><div class="card-content"><div class="notification is-danger">You need to set <code>client_id</code> and <code>slot_id</code> to show this AD unit. Please set it in <code>_config.yml</code>.</div></div></div><div class="card widget" data-type="subscribe-email"><div class="card-content"><div class="menu"><h3 class="menu-label">follow.it</h3><form action="" method="post" target="_blank"><div class="field has-addons"><div class="control has-icons-left is-expanded"><input class="input" name="email" type="email" placeholder="Email"><span class="icon is-small is-left"><i class="fas fa-envelope"></i></span></div><div class="control"><input class="button" type="submit" value="订阅"></div></div></form></div></div></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/logo.svg" alt="guohaolu的个人博客" height="28"></a><p class="is-size-7"><span>&copy; 2024 guohao.lu</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p><p class="is-size-7">© 2019</p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
-            article: {
-                highlight: {
-                    clipboard: true,
-                    fold: 'unfolded'
-                }
-            }
-        };</script><script data-pjax src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script data-pjax src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
-      window.cookieconsent.initialise({
-        type: "info",
-        theme: "edgeless",
-        static: false,
-        position: "bottom-left",
-        content: {
-          message: "此网站使用Cookie来改善您的体验。",
-          dismiss: "知道了！",
-          allow: "允许使用Cookie",
-          deny: "拒绝",
-          link: "了解更多",
-          policy: "Cookie政策",
-          href: "https://www.cookiesandyou.com/",
-        },
-        palette: {
-          popup: {
-            background: "#edeff5",
-            text: "#838391"
-          },
-          button: {
-            background: "#4b81e8"
-          },
-        },
-      });
-    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
-            if (typeof $.fn.lightGallery === 'function') {
-                $('.article').lightGallery({ selector: '.gallery-item' });
-            }
-            if (typeof $.fn.justifiedGallery === 'function') {
-                if ($('.justified-gallery > p > .gallery-item').length) {
-                    $('.justified-gallery > p > .gallery-item').unwrap();
-                }
-                $('.justified-gallery').justifiedGallery();
-            }
-        });</script><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js"></script><script src="/js/pjax.js"></script><!--!--><!--!--><!--!--><script data-pjax src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
-            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
-        });</script></body></html>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+  </nav>
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">guohao.lu</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">28</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">guohao.lu</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

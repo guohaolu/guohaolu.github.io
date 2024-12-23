@@ -1,302 +1,425 @@
-<!doctype html>
-<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="robots" content="noindex"><meta><title>标签: lucene - guohaolu的个人博客</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="guohaolu的个人博客"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="guohaolu的个人博客"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta property="og:type" content="blog"><meta property="og:title" content="guohaolu的个人博客"><meta property="og:url" content="https://guohaolu.github.io/"><meta property="og:site_name" content="guohaolu的个人博客"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://guohaolu.github.io/img/og_image.png"><meta property="article:author" content="guohao.lu"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="https://guohaolu.github.io/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://guohaolu.github.io"},"headline":"guohaolu的个人博客","image":["https://guohaolu.github.io/img/og_image.png"],"author":{"@type":"Person","name":"guohao.lu"},"publisher":{"@type":"Organization","name":"guohaolu的个人博客","logo":{"@type":"ImageObject","url":"https://guohaolu.github.io/img/logo.svg"}},"description":""}</script><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link data-pjax rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link data-pjax rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
-  (function () {
-      function switchTab() {
-          if (!location.hash) {
-            return;
-          }
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-          const id = '#' + CSS.escape(location.hash.substring(1));
-          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
-          if (!$tabMenu) {
-            return;
-          }
+<link rel="stylesheet" href="/css/main.css">
 
-          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
-          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
-          Array.from($tabMenuContainer.querySelectorAll('a'))
-              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
-              .forEach($content => $content.classList.add('is-hidden'));
 
-          if ($tabMenu) {
-              $tabMenu.parentElement.classList.add('is-active');
-          }
-          const $activeTab = document.querySelector(id);
-          if ($activeTab) {
-              $activeTab.classList.remove('is-hidden');
-          }
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"guohaolu.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta property="og:type" content="website">
+<meta property="og:title" content="guohaolu的个人博客">
+<meta property="og:url" content="https://guohaolu.github.io/tags/lucene/index.html">
+<meta property="og:site_name" content="guohaolu的个人博客">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="guohao.lu">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://guohaolu.github.io/tags/lucene/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : false,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>标签: lucene | guohaolu的个人博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">guohaolu的个人博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content tag">
+            
+
+  
+  
+  
+  <div class="post-block">
+    <div class="posts-collapse">
+      <div class="collection-title">
+        <h2 class="collection-header">lucene
+          <small>标签</small>
+        </h2>
+      </div>
+
+      
+    <div class="collection-year">
+      <span class="collection-header">2024</span>
+    </div>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <div class="post-meta">
+        <time itemprop="dateCreated"
+              datetime="2024-09-13T14:31:35+08:00"
+              content="2024-09-13">
+          09-13
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/2024/09/13/lucene-tokenizer/" itemprop="url">
+            <span itemprop="name">lucene-分词器</span>
+          </a>
+      </div>
+
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <div class="post-meta">
+        <time itemprop="dateCreated"
+              datetime="2024-09-13T13:54:25+08:00"
+              content="2024-09-13">
+          09-13
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/2024/09/13/lucene-field/" itemprop="url">
+            <span itemprop="name">lucene-field域</span>
+          </a>
+      </div>
+
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <div class="post-meta">
+        <time itemprop="dateCreated"
+              datetime="2024-09-13T00:49:27+08:00"
+              content="2024-09-13">
+          09-13
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/2024/09/13/lucene-search-index/" itemprop="url">
+            <span itemprop="name">lucene-search-index</span>
+          </a>
+      </div>
+
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <div class="post-meta">
+        <time itemprop="dateCreated"
+              datetime="2024-09-12T00:25:46+08:00"
+              content="2024-09-12">
+          09-12
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/2024/09/12/lucene-create-index/" itemprop="url">
+            <span itemprop="name">lucene-创建索引</span>
+          </a>
+      </div>
+
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <div class="post-meta">
+        <time itemprop="dateCreated"
+              datetime="2024-09-11T15:39:54+08:00"
+              content="2024-09-11">
+          09-11
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/2024/09/11/lucene-data-structure/" itemprop="url">
+            <span itemprop="name">lucene-数据结构</span>
+          </a>
+      </div>
+
+    </header>
+  </article>
+
+    </div>
+  </div>
+  
+  
+  
+
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
       }
-      switchTab();
-      window.addEventListener('hashchange', switchTab, false);
-  })();
-  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/logo.svg" alt="guohaolu的个人博客" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><div class="card-content"><nav class="breadcrumb" aria-label="breadcrumbs"><ul><li><a href="/tags">标签</a></li><li class="is-active"><a href="#" aria-current="page">lucene</a></li></ul></nav></div></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2024-09-13T06:31:35.000Z" title="2024/9/13 14:31:35">2024-09-13</time>发表</span><span class="level-item"><time dateTime="2024-09-18T12:15:57.848Z" title="2024/9/18 20:15:57">2024-09-18</time>更新</span><span class="level-item">3 分钟读完 (大约398个字)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2024/09/13/lucene-tokenizer/">lucene-分词器</a></p><div class="content"><h4 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h4><p>在 Lucene 中，分词器（Analyzer）是用于将文本分解成一系列单词或词条（tokens）的工具。分词器在索引（indexing）和搜索（searching）过程中都起着至关重要的作用。下面详细解释分词器的概念及其工作原理。</p>
-<h5 id="分词器的作用"><a href="#分词器的作用" class="headerlink" title="分词器的作用"></a>分词器的作用</h5><p>分词器的主要任务是将原始文本转换为一系列适合索引和搜索的词条。这个过程包括以下几个步骤：</p>
-<ol>
-<li><strong>分词（Tokenization）</strong>：将文本分割成一个个独立的词条（token），这些词条通常是单词、数字或其他有意义的单元。</li>
-<li><strong>标准化（Normalization）</strong>：将词条转换为统一的形式，比如小写化（lowercasing），去除HTML标签等。</li>
-<li><strong>过滤（Filtering）</strong>：根据特定规则过滤掉一些词条，比如停用词（stop words）或者噪声词（noise words）。</li>
-<li><strong>词干提取（Stemming）</strong>：将词条还原为其基本形式，例如将“running”和“runner”还原为“run”。</li>
-</ol>
-<h5 id="分词器的组成部分"><a href="#分词器的组成部分" class="headerlink" title="分词器的组成部分"></a>分词器的组成部分</h5><p>分词器通常由以下几个部分组成：</p>
-<ol>
-<li><strong>分词器（Tokenizer）</strong>：负责将文本分割成词条。</li>
-<li><strong>过滤器（TokenFilter）</strong>：对分词器产生的词条进行进一步处理，如大小写转换、停用词过滤（如：as、is）等。</li>
-<li><strong>词干提取器（PorterStemFilter）</strong>：将词条还原为其词根形式。</li>
-</ol>
-</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2024-09-13T05:54:25.000Z" title="2024/9/13 13:54:25">2024-09-13</time>发表</span><span class="level-item"><time dateTime="2024-09-18T12:15:45.871Z" title="2024/9/18 20:15:45">2024-09-18</time>更新</span><span class="level-item">5 分钟读完 (大约687个字)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2024/09/13/lucene-field/">lucene-field域</a></p><div class="content"><h4 id="Field特点"><a href="#Field特点" class="headerlink" title="Field特点"></a>Field特点</h4><p>文档（Document）是域（Field）的承载体，一个文档由多个域组成。每个域由名称和值两部分构成，域的值是要被索引和搜索的内容。</p>
-<ol>
-<li>是否分词（Tokenized）<ul>
-<li>是：对域的值进行分词处理，分词的目的是为了建立索引。例如，商品名称和商品描述。这些内容通常会通过用户的关键词查询来检索，由于内容多样化，需要进行分词处理以建立索引。</li>
-<li>否：不对域的值进行分词处理。例如，订单编号和身份证号，这些内容作为一个整体存在，分词后会失去意义，因此不需要分词处理。</li>
-</ul>
-</li>
-<li>是否索引（Indexed）<ul>
-<li>是：将分词处理后的词语（或整个域的内容）建立索引，并存储到索引域中。索引的目的是为了支持搜索。例如，商品名称和商品描述需要分词后建立索引；订单编号和身份证号则作为整体建立索引。所有可能成为用户查询条件的词语都需要被索引。</li>
-<li>否：不建立索引。例如，商品图片路径，这类内容不会作为查询条件，因此不需要建立索引。</li>
-</ul>
-</li>
-<li>是否存储（Stored）<ul>
-<li>是：将域的值保存到文档中。例如，商品名称和商品价格。所有将来需要在搜索结果页面展示给用户的内容都需要被存储。</li>
-<li>否：不存储。例如，商品描述。这类内容通常较大且格式多样，不需要直接在搜索结果页面展示，因此不做存储。需要时可以从关系数据库中获取。</li>
-</ul>
-</li>
-</ol>
-<h4 id="Field类型"><a href="#Field类型" class="headerlink" title="Field类型"></a>Field类型</h4><table>
-<thead>
-<tr>
-<th><strong>Field类型</strong></th>
-<th><strong>数据类型</strong></th>
-<th><strong>是否分词</strong></th>
-<th><strong>是否索引</strong></th>
-<th><strong>是否存储</strong></th>
-<th><strong>说明</strong></th>
-</tr>
-</thead>
-<tbody><tr>
-<td><strong>StringField(FieldName, FieldValue, Store)</strong></td>
-<td>字符串</td>
-<td>N</td>
-<td>Y</td>
-<td>Y&#x2F;N</td>
-<td>字符串类型Field, 不分词, 作为一个整体进行索引 (如: 身份证号, 订单编号), 是否需要存储由Store.YES或Store.NO决定</td>
-</tr>
-<tr>
-<td><strong>IntPoint(FieldName, FieldValue, Store)</strong></td>
-<td>数值型代表</td>
-<td>Y</td>
-<td>Y</td>
-<td>Y&#x2F;N</td>
-<td>Long数值型Field代表, 分词并且索引(如: 价格), 是否需要存储由Store.YES或Store.NO决定</td>
-</tr>
-<tr>
-<td><strong>StoredField(FieldName, FieldValue)</strong></td>
-<td>重载方法, 支持多种类型</td>
-<td>N</td>
-<td>N</td>
-<td>Y</td>
-<td>构建不同类型的Field, 不分词, 不索引, 要存储. (如: 商品图片路径)</td>
-</tr>
-<tr>
-<td><strong>TextField(FieldName, FieldValue, Store)</strong></td>
-<td>文本类型</td>
-<td>Y</td>
-<td>Y</td>
-<td>Y&#x2F;N</td>
-<td>文本类型Field, 分词并且索引, 是否需要存储由Store.YES或Store.NO决定</td>
-</tr>
-</tbody></table>
-</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2024-09-12T16:49:27.000Z" title="2024/9/13 00:49:27">2024-09-13</time>发表</span><span class="level-item"><time dateTime="2024-09-18T12:15:51.147Z" title="2024/9/18 20:15:51">2024-09-18</time>更新</span><span class="level-item">2 分钟读完 (大约292个字)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2024/09/13/lucene-search-index/">lucene-search-index</a></p><div class="content"><h4 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="meta">@DisplayName(&quot;搜索&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">searchIndex</span><span class="params">()</span> <span class="keyword">throws</span> IOException, ParseException &#123;</span><br><span class="line">    <span class="comment">// 创建一个 RAMDirectory，用于存储索引</span></span><br><span class="line">    <span class="type">Directory</span> <span class="variable">directory</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">RAMDirectory</span>();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建一个分析器</span></span><br><span class="line">    <span class="type">Analyzer</span> <span class="variable">analyzer</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StandardAnalyzer</span>();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建一个 IndexWriterConfig，用于配置 IndexWriter</span></span><br><span class="line">    <span class="type">IndexWriterConfig</span> <span class="variable">config</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">IndexWriterConfig</span>(analyzer);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建一个 IndexWriter，用于写入索引</span></span><br><span class="line">    <span class="type">IndexWriter</span> <span class="variable">indexWriter</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">IndexWriter</span>(directory, config);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建文档</span></span><br><span class="line">    <span class="type">Document</span> <span class="variable">document1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Document</span>();</span><br><span class="line">    document1.add(<span class="keyword">new</span> <span class="title class_">TextField</span>(<span class="string">&quot;title&quot;</span>, <span class="string">&quot;Lucene in Action&quot;</span>, Field.Store.YES));</span><br><span class="line">    document1.add(<span class="keyword">new</span> <span class="title class_">TextField</span>(<span class="string">&quot;content&quot;</span>, <span class="string">&quot;This book provides a comprehensive guide to Lucene.&quot;</span>, Field.Store.YES));</span><br><span class="line">    document1.add(<span class="keyword">new</span> <span class="title class_">TextField</span>(<span class="string">&quot;author&quot;</span>, <span class="string">&quot;Erik Hatcher and Otis Gospodnetic&quot;</span>, Field.Store.YES));</span><br><span class="line">    indexWriter.addDocument(document1);</span><br><span class="line"></span><br><span class="line">    <span class="type">Document</span> <span class="variable">document2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Document</span>();</span><br><span class="line">    document2.add(<span class="keyword">new</span> <span class="title class_">TextField</span>(<span class="string">&quot;title&quot;</span>, <span class="string">&quot;Learning Lucene&quot;</span>, Field.Store.YES));</span><br><span class="line">    document2.add(<span class="keyword">new</span> <span class="title class_">TextField</span>(<span class="string">&quot;content&quot;</span>, <span class="string">&quot;A practical introduction to Lucene.&quot;</span>, Field.Store.YES));</span><br><span class="line">    document2.add(<span class="keyword">new</span> <span class="title class_">TextField</span>(<span class="string">&quot;author&quot;</span>, <span class="string">&quot;Michael McCandless&quot;</span>, Field.Store.YES));</span><br><span class="line">    indexWriter.addDocument(document2);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 关闭 IndexWriter</span></span><br><span class="line">    indexWriter.close();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建一个 IndexSearcher</span></span><br><span class="line">    <span class="type">DirectoryReader</span> <span class="variable">reader</span> <span class="operator">=</span> DirectoryReader.open(directory);</span><br><span class="line">    <span class="type">IndexSearcher</span> <span class="variable">searcher</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">IndexSearcher</span>(reader);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建查询解析器</span></span><br><span class="line">    String[] fields = &#123;<span class="string">&quot;title&quot;</span>, <span class="string">&quot;content&quot;</span>, <span class="string">&quot;author&quot;</span>&#125;;</span><br><span class="line">    <span class="type">QueryParser</span> <span class="variable">parser</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">MultiFieldQueryParser</span>(fields, analyzer);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 构造查询</span></span><br><span class="line">    <span class="type">String</span> <span class="variable">queryStr</span> <span class="operator">=</span> <span class="string">&quot;Lucene guide&quot;</span>;</span><br><span class="line">    <span class="type">Query</span> <span class="variable">query</span> <span class="operator">=</span> parser.parse(queryStr);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 执行查询</span></span><br><span class="line">    <span class="type">TopDocs</span> <span class="variable">topDocs</span> <span class="operator">=</span> searcher.search(query, <span class="number">10</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 输出查询结果</span></span><br><span class="line">    System.out.println(<span class="string">&quot;查询结果：&quot;</span>);</span><br><span class="line">    <span class="keyword">for</span> (ScoreDoc scoreDoc : topDocs.scoreDocs) &#123;</span><br><span class="line">        <span class="type">Document</span> <span class="variable">doc</span> <span class="operator">=</span> searcher.doc(scoreDoc.doc);</span><br><span class="line">        System.out.println(<span class="string">&quot;标题: &quot;</span> + doc.get(<span class="string">&quot;title&quot;</span>));</span><br><span class="line">        System.out.println(<span class="string">&quot;内容: &quot;</span> + doc.get(<span class="string">&quot;content&quot;</span>));</span><br><span class="line">        System.out.println(<span class="string">&quot;作者: &quot;</span> + doc.get(<span class="string">&quot;author&quot;</span>));</span><br><span class="line">        System.out.println(<span class="string">&quot;得分: &quot;</span> + scoreDoc.score);</span><br><span class="line">        System.out.println(<span class="string">&quot;--------------------&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 关闭资源</span></span><br><span class="line">    reader.close();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2024-09-11T16:25:46.000Z" title="2024/9/12 00:25:46">2024-09-12</time>发表</span><span class="level-item"><time dateTime="2024-09-18T12:15:31.544Z" title="2024/9/18 20:15:31">2024-09-18</time>更新</span><span class="level-item">2 分钟读完 (大约343个字)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2024/09/12/lucene-create-index/">lucene-创建索引</a></p><div class="content"><h4 id="处理流程"><a href="#处理流程" class="headerlink" title="处理流程"></a>处理流程</h4><p>Lucene 为文档创建索引主要需要关注两个实体。</p>
-<ol>
-<li>数据源：Document 文档</li>
-<li>索引写入的处理器：IndexWriter</li>
-</ol>
-<h5 id="文档"><a href="#文档" class="headerlink" title="文档"></a>文档</h5><p>多个域（TextField）构建出文档（Document），其中域包含：域的名称、域的值和是否存储到字典</p>
-<h5 id="索引写入"><a href="#索引写入" class="headerlink" title="索引写入"></a>索引写入</h5><p>将文档分词，创建索引到字典。需要提供：分词器（Analyzer）、字典的存储类型（如 MMapDirectory：存储到本地磁盘中）</p>
-<p><img src="https://raw.githubusercontent.com/guohaolu/ImageHostingWebsite/main/image-20240912004931562.png" alt="image-20240912004931562"></p>
-<h4 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="meta">@DisplayName(&quot;创建索引&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">createIndex</span><span class="params">()</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">    <span class="comment">// 创建一个 MMapDirectory，用于存储索引</span></span><br><span class="line">    <span class="type">Directory</span> <span class="variable">directory</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">MMapDirectory</span>(Paths.get(<span class="string">&quot;D://work//lucene&quot;</span>));</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建一个分析器,StandardAnalyzer为英文的分词器</span></span><br><span class="line">    <span class="type">Analyzer</span> <span class="variable">analyzer</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StandardAnalyzer</span>();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建一个 IndexWriterConfig，用于配置 IndexWriter</span></span><br><span class="line">    <span class="type">IndexWriterConfig</span> <span class="variable">config</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">IndexWriterConfig</span>(analyzer);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建一个 IndexWriter，用于写入索引</span></span><br><span class="line">    <span class="type">IndexWriter</span> <span class="variable">indexWriter</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">IndexWriter</span>(directory, config);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建文档</span></span><br><span class="line">    <span class="type">Document</span> <span class="variable">document</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Document</span>();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 添加字段</span></span><br><span class="line">    document.add(<span class="keyword">new</span> <span class="title class_">TextField</span>(<span class="string">&quot;title&quot;</span>, <span class="string">&quot;Lucene in Action&quot;</span>, Field.Store.YES));</span><br><span class="line">    document.add(<span class="keyword">new</span> <span class="title class_">TextField</span>(<span class="string">&quot;content&quot;</span>, <span class="string">&quot;This book provides a comprehensive guide to Lucene.&quot;</span>, Field.Store.YES));</span><br><span class="line">    document.add(<span class="keyword">new</span> <span class="title class_">TextField</span>(<span class="string">&quot;author&quot;</span>, <span class="string">&quot;Erik Hatcher and Otis Gospodnetic&quot;</span>, Field.Store.YES));</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 将文档添加到索引中</span></span><br><span class="line">    indexWriter.addDocument(document);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 关闭 IndexWriter</span></span><br><span class="line">    indexWriter.close();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 打印完成信息</span></span><br><span class="line">    System.out.println(<span class="string">&quot;索引创建完成！&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
 
-<h4 id="处理结果"><a href="#处理结果" class="headerlink" title="处理结果"></a>处理结果</h4><p>磁盘<code>D:\work\lucene</code>路径下生成索引文件。</p>
-<p><img src="https://raw.githubusercontent.com/guohaolu/ImageHostingWebsite/main/image-20240912005736362.png" alt="image-20240912005736362"></p>
-</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2024-09-11T07:39:54.000Z" title="2024/9/11 15:39:54">2024-09-11</time>发表</span><span class="level-item"><time dateTime="2024-09-18T12:15:40.612Z" title="2024/9/18 20:15:40">2024-09-18</time>更新</span><span class="level-item">12 分钟读完 (大约1847个字)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2024/09/11/lucene-data-structure/">lucene-数据结构</a></p><div class="content"><h3 id="倒排列表——Posting"><a href="#倒排列表——Posting" class="headerlink" title="倒排列表——Posting"></a>倒排列表——Posting</h3><p>Posting 类是 Lucene 中用于表示倒排索引中的一个条目的类。它包含了与文档中的某个词相关的多种信息，如出现频率、位置信息、文档 ID 等。这些信息对于构建和查询索引都非常关键。通过这些成员变量，Posting 类能够有效地管理和存储索引数据。</p>
-<table>
-<thead>
-<tr>
-<th><strong>成员变量</strong></th>
-<th><strong>用途</strong></th>
-<th><strong>解释</strong></th>
-</tr>
-</thead>
-<tbody><tr>
-<td>int textStart</td>
-<td>表示文本在字符数组 blocks 中的起始地址。</td>
-<td>在 Lucene 中，索引数据通常存储在内存或磁盘上的多个块中。textStart 变量指示了与当前 Posting 相关的文本内容在这些块中的起始位置。</td>
-</tr>
-<tr>
-<td>int docFreq</td>
-<td>表示当前术语在当前文档中出现的次数。</td>
-<td>每个文档中某个词可能出现多次，docFreq 记录了这个频率。</td>
-</tr>
-<tr>
-<td>int freqStart</td>
-<td>表示频率信息在字节数组切片中的起始地址。</td>
-<td>频率信息通常存储在字节数组中，freqStart 指示了频率信息的起始位置。</td>
-</tr>
-<tr>
-<td>int freqUpto</td>
-<td>表示下一个写入频率信息的地址。</td>
-<td>当向索引中添加新的频率信息时，freqUpto 指示了接下来应该写入的位置。</td>
-</tr>
-<tr>
-<td>int proxStart</td>
-<td>表示位置信息（proximity information）在字节数组切片中的起始地址。</td>
-<td>位置信息记录了词在文档中的位置，proxStart 指示了位置信息的起始位置。</td>
-</tr>
-<tr>
-<td>int proxUpto</td>
-<td>表示下一个写入位置信息的地址。</td>
-<td>当向索引中添加新的位置信息时，proxUpto 指示了接下来应该写入的位置。</td>
-</tr>
-<tr>
-<td>int lastDocID</td>
-<td>表示最后一个包含该词的文档的 ID。</td>
-<td>lastDocID 用于记录最近一个包含该词的文档的 ID，这对于索引的构建和查询很有帮助。</td>
-</tr>
-<tr>
-<td>int lastDocCode</td>
-<td>表示前一个文档的编码。</td>
-<td>lastDocCode 用于存储前一个文档的一些编码信息，这有助于在构建索引时进行压缩和解码。</td>
-</tr>
-<tr>
-<td>int lastPosition</td>
-<td>表示该词最后一次出现的位置。</td>
-<td>lastPosition 记录了该词在文档中的最后一次出现位置，这对于短语查询等高级查询功能很重要。</td>
-</tr>
-<tr>
-<td>PostingVector vector</td>
-<td>表示与当前 Posting 相关联的 PostingVector 实例。</td>
-<td>PostingVector 是一个更高层次的数据结构，它管理着多个 Posting 对象。vector 成员变量用于引用与当前 Posting 相关联的 PostingVector。</td>
-</tr>
-</tbody></table>
-<hr>
-<h4 id="位置（position）和偏移量（offset）"><a href="#位置（position）和偏移量（offset）" class="headerlink" title="位置（position）和偏移量（offset）"></a>位置（position）和偏移量（offset）</h4><p>在倒排索引中，位置（position）和偏移量（offset）是两个重要的概念，它们分别用于描述词汇项（term）在文档中的位置信息和字符级别的位置信息。下面详细解释这两个概念：</p>
-<ol>
-<li>位置（Position）<br>位置指的是<strong>词汇项</strong>在文档中的相对位置。在全文搜索引擎中，每个词汇项在文档中的出现位置都被记录下来，以便在查询时能够利用这些位置信息来进行精确的匹配。</li>
-</ol>
-<p>位置的作用：</p>
-<ul>
-<li>短语查询：位置信息对于短语查询（phrase query）特别重要，因为它需要知道词汇项在文档中的相对位置是否匹配查询中的顺序。</li>
-<li>近邻查询：位置信息也用于近邻查询（proximity query），在这种查询中，需要知道两个或多词汇项是否在文档中靠近彼此。</li>
-</ul>
-<p>【示例】<br>假设文档内容为：<code>&quot;The quick brown fox jumps over the lazy dog.&quot;</code></p>
-<p>如果使用空白分词器（WhitespaceTokenizer）进行分词，得到的词汇项及其位置如下：</p>
-<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">The: 位置 1</span><br><span class="line">quick: 位置 2</span><br><span class="line">brown: 位置 3</span><br><span class="line">fox: 位置 4</span><br><span class="line">jumps: 位置 5</span><br><span class="line">over: 位置 6</span><br><span class="line">the: 位置 7</span><br><span class="line">lazy: 位置 8</span><br><span class="line">dog: 位置 9</span><br></pre></td></tr></table></figure>
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
 
-<hr>
-<ol start="2">
-<li>偏移量（Offset）<br> 偏移量指的是词汇项在文档中的<strong>字符级别</strong>的起始位置和结束位置。偏移量通常用于高亮显示查询结果中的相关词汇项，以及在某些情况下提供更精确的匹配信息。</li>
-</ol>
-<p>偏移量的作用：</p>
-<ul>
-<li>高亮显示：偏移量可以用于高亮显示查询结果中的相关词汇项，使得用户能够直观地看到匹配的部分。</li>
-<li>上下文提取：偏移量有助于提取包含匹配词汇项的上下文，这对于生成摘要或上下文片段非常有用。</li>
-</ul>
-<p>【示例】<br>继续以上述文档为例，假设我们记录每个词汇项的字符级别的起始位置和结束位置：</p>
-<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">The: 偏移量 (0, 3)</span><br><span class="line">quick: 偏移量 (4, 9)</span><br><span class="line">brown: 偏移量 (10, 14)</span><br><span class="line">fox: 偏移量 (15, 17)</span><br><span class="line">jumps: 偏移量 (18, 23)</span><br><span class="line">over: 偏移量 (24, 28)</span><br><span class="line">the: 偏移量 (29, 32)</span><br><span class="line">lazy: 偏移量 (33, 37)</span><br><span class="line">dog: 偏移量 (38, 40)</span><br></pre></td></tr></table></figure>
+  <aside class="sidebar">
+    <div class="sidebar-inner">
 
-<h3 id="ByteBlockPool"><a href="#ByteBlockPool" class="headerlink" title="ByteBlockPool"></a>ByteBlockPool</h3><p><code>ByteBlockPool</code> 类用于高效管理多个固定大小的字节数组缓冲区，通过这种方式可以有效地复用缓冲区，减少内存分配的开销，提高数据处理的效率。这种设计特别适用于需要频繁读写字节数据的场景，如索引构建、数据缓存等。</p>
-<table>
-<thead>
-<tr>
-<th><strong>成员变量</strong></th>
-<th><strong>用途</strong></th>
-<th><strong>解释</strong></th>
-</tr>
-</thead>
-<tbody><tr>
-<td>byte[][] buffers &#x3D; new byte[10][]</td>
-<td>存储多个字节数组的二维数组。</td>
-<td>这里定义了一个二维数组 <code>buffers</code>，它可以存储最多 10 个字节数组。每个字节数组代表一个缓冲区（buffer）。</td>
-</tr>
-<tr>
-<td>int bufferUpto &#x3D; -1</td>
-<td>表示当前正在使用的缓冲区索引。</td>
-<td><code>bufferUpto</code> 变量用于记录当前正在使用的缓冲区的索引位置。初始值为 <code>-1</code>，表示还没有开始使用任何缓冲区。</td>
-</tr>
-<tr>
-<td>int byteUpto &#x3D; BYTE_BLOCK_SIZE</td>
-<td>表示当前缓冲区中已使用的字节数。</td>
-<td><code>byteUpto</code> 变量记录了当前缓冲区中已经写入了多少字节。初始值为 <code>BYTE_BLOCK_SIZE</code>，表示缓冲区的容量。</td>
-</tr>
-<tr>
-<td>byte[] buffer</td>
-<td>表示当前正在使用的缓冲区。</td>
-<td><code>buffer</code> 变量指向当前正在使用的缓冲区数组。</td>
-</tr>
-<tr>
-<td>int byteOffset &#x3D; -BYTE_BLOCK_SIZE</td>
-<td>表示当前缓冲区的偏移量。</td>
-<td><code>byteOffset</code> 变量记录了当前缓冲区的偏移量，即相对于缓冲区起始位置的偏移量。初始值为 <code>-BYTE_BLOCK_SIZE</code>，表示尚未使用任何缓冲区。</td>
-</tr>
-</tbody></table>
-<h4 id="代码解析"><a href="#代码解析" class="headerlink" title="代码解析"></a>代码解析</h4><ol>
-<li>初始化<ul>
-<li>在类初始化时，<code>buffers</code> 数组被初始化为一个大小为 10 的数组，每个元素是一个字节数组。</li>
-<li><code>bufferUpto</code> 设置为 <code>-1</code>，表示还没有开始使用任何缓冲区。</li>
-<li><code>byteUpto</code> 设置为 <code>BYTE_BLOCK_SIZE</code>，表示缓冲区的最大容量。</li>
-<li><code>buffer</code> 变量目前没有指向任何缓冲区。</li>
-<li><code>byteOffset</code> 设置为 <code>-BYTE_BLOCK_SIZE</code>，表示尚未使用任何缓冲区。</li>
-</ul>
-</li>
-<li>使用过程<ul>
-<li>当需要分配一个新的缓冲区时，<code>bufferUpto</code> 会递增，并且 <code>buffers[bufferUpto]</code> 会被初始化为一个新的字节数组。</li>
-<li><code>buffer</code> 变量会指向当前正在使用的缓冲区 <code>buffers[bufferUpto]</code>。</li>
-<li><code>byteUpto</code> 和 <code>byteOffset</code> 会随着数据的写入而更新，记录当前缓冲区的使用情况。</li>
-</ul>
-</li>
-</ol>
-</div></article></div></div><div class="column column-left is-4-tablet is-4-desktop is-4-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar" src="/img/avatar.png" alt="guohao.lu"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">guohao.lu</p><p class="is-size-6 is-block">软件开发工程师</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>Shanghai</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">文章</p><a href="/archives"><p class="title">24</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">分类</p><a href="/categories"><p class="title">0</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">标签</p><a href="/tags"><p class="title">22</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/ppoffice" target="_blank" rel="me noopener">关注我</a></div><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="me noopener" title="Github" href="https://github.com/ppoffice"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="me noopener" title="Facebook" href="https://facebook.com"><i class="fab fa-facebook"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="me noopener" title="Twitter" href="https://twitter.com"><i class="fab fa-twitter"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="me noopener" title="Dribbble" href="https://dribbble.com"><i class="fab fa-dribbble"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="me noopener" title="RSS" href="/"><i class="fas fa-rss"></i></a></div></div></div><!--!--><div class="card widget" data-type="links"><div class="card-content"><div class="menu"><h3 class="menu-label">链接</h3><ul class="menu-list"><li><a class="level is-mobile" href="https://hexo.io" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">Hexo</span></span><span class="level-right"><span class="level-item tag">hexo.io</span></span></a></li><li><a class="level is-mobile" href="https://bulma.io" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">Bulma</span></span><span class="level-right"><span class="level-item tag">bulma.io</span></span></a></li></ul></div></div></div><!--!--><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2024-09-13T06:31:35.000Z">2024-09-13</time></p><p class="title"><a href="/2024/09/13/lucene-tokenizer/">lucene-分词器</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2024-09-13T05:54:25.000Z">2024-09-13</time></p><p class="title"><a href="/2024/09/13/lucene-field/">lucene-field域</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2024-09-12T16:49:27.000Z">2024-09-13</time></p><p class="title"><a href="/2024/09/13/lucene-search-index/">lucene-search-index</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2024-09-11T16:25:46.000Z">2024-09-12</time></p><p class="title"><a href="/2024/09/12/lucene-create-index/">lucene-创建索引</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2024-09-11T07:39:54.000Z">2024-09-11</time></p><p class="title"><a href="/2024/09/11/lucene-data-structure/">lucene-数据结构</a></p></div></article></div></div><div class="card widget" data-type="archives"><div class="card-content"><div class="menu"><h3 class="menu-label">归档</h3><ul class="menu-list"><li><a class="level is-mobile" href="/archives/2024/09/"><span class="level-start"><span class="level-item">九月 2024</span></span><span class="level-end"><span class="level-item tag">17</span></span></a></li><li><a class="level is-mobile" href="/archives/2024/08/"><span class="level-start"><span class="level-item">八月 2024</span></span><span class="level-end"><span class="level-item tag">7</span></span></a></li></ul></div></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/Netty/"><span class="tag">Netty</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/PageRank/"><span class="tag">PageRank</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/docker/"><span class="tag">docker</span><span class="tag">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/elasticsearch/"><span class="tag">elasticsearch</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/hexo/"><span class="tag">hexo</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/java/"><span class="tag">java</span><span class="tag">6</span></a></div><div class="control"><a class="tags has-addons" href="/tags/leetcode/"><span class="tag">leetcode</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/linux/"><span class="tag">linux</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/lucene/"><span class="tag">lucene</span><span class="tag">5</span></a></div><div class="control"><a class="tags has-addons" href="/tags/netw/"><span class="tag">netw</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/network/"><span class="tag">network</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/nio/"><span class="tag">nio</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/python/"><span class="tag">python</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/socket/"><span class="tag">socket</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%88%86%E8%AF%8D/"><span class="tag">分词</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%9F%9F/"><span class="tag">域</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%B9%B6%E5%8F%91/"><span class="tag">并发</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/"><span class="tag">搜索引擎</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"><span class="tag">数据结构</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"><span class="tag">机器学习</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%AE%97%E6%B3%95/"><span class="tag">算法</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%B4%A2%E5%BC%95/"><span class="tag">索引</span><span class="tag">1</span></a></div></div></div></div></div><div class="card widget" data-type="subscribe-email"><div class="card-content"><div class="menu"><h3 class="menu-label">订阅更新</h3><form action="https://feedburner.google.com/fb/a/mailverify" method="post" target="popupwindow" onsubmit="window.open(&#039;https://feedburner.google.com/fb/a/mailverify?uri=&#039;,&#039;popupwindow&#039;,&#039;scrollbars=yes,width=550,height=520&#039;);return true"><input type="hidden" value="" name="uri"><input type="hidden" name="loc" value="en_US"><div class="field has-addons"><div class="control has-icons-left is-expanded"><input class="input" name="email" type="email" placeholder="Email"><span class="icon is-small is-left"><i class="fas fa-envelope"></i></span></div><div class="control"><input class="button" type="submit" value="订阅"></div></div></form></div></div></div><div class="card widget"><div class="card-content"><div class="notification is-danger">You need to set <code>client_id</code> and <code>slot_id</code> to show this AD unit. Please set it in <code>_config.yml</code>.</div></div></div><div class="card widget" data-type="subscribe-email"><div class="card-content"><div class="menu"><h3 class="menu-label">follow.it</h3><form action="" method="post" target="_blank"><div class="field has-addons"><div class="control has-icons-left is-expanded"><input class="input" name="email" type="email" placeholder="Email"><span class="icon is-small is-left"><i class="fas fa-envelope"></i></span></div><div class="control"><input class="button" type="submit" value="订阅"></div></div></form></div></div></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/logo.svg" alt="guohaolu的个人博客" height="28"></a><p class="is-size-7"><span>&copy; 2024 guohao.lu</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p><p class="is-size-7">© 2019</p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
-            article: {
-                highlight: {
-                    clipboard: true,
-                    fold: 'unfolded'
-                }
-            }
-        };</script><script data-pjax src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script data-pjax src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
-      window.cookieconsent.initialise({
-        type: "info",
-        theme: "edgeless",
-        static: false,
-        position: "bottom-left",
-        content: {
-          message: "此网站使用Cookie来改善您的体验。",
-          dismiss: "知道了！",
-          allow: "允许使用Cookie",
-          deny: "拒绝",
-          link: "了解更多",
-          policy: "Cookie政策",
-          href: "https://www.cookiesandyou.com/",
-        },
-        palette: {
-          popup: {
-            background: "#edeff5",
-            text: "#838391"
-          },
-          button: {
-            background: "#4b81e8"
-          },
-        },
-      });
-    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
-            if (typeof $.fn.lightGallery === 'function') {
-                $('.article').lightGallery({ selector: '.gallery-item' });
-            }
-            if (typeof $.fn.justifiedGallery === 'function') {
-                if ($('.justified-gallery > p > .gallery-item').length) {
-                    $('.justified-gallery > p > .gallery-item').unwrap();
-                }
-                $('.justified-gallery').justifiedGallery();
-            }
-        });</script><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js"></script><script src="/js/pjax.js"></script><!--!--><!--!--><!--!--><script data-pjax src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
-            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
-        });</script></body></html>
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">guohao.lu</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">28</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">guohao.lu</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
