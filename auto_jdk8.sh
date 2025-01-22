@@ -3,7 +3,7 @@
 cd /opt/
 wget https://dragonwell.oss-cn-shanghai.aliyuncs.com/8.23.22/Alibaba_Dragonwell_Standard_8.23.22_x64_linux.tar.gz
 tar -zxvf Alibaba_Dragonwell_Standard_8.23.22_x64_linux.tar.gz
-mv Alibaba_Dragonwell_Standard_8.23.22/ /usr/local/
+mv dragonwell-8.23.22/ /usr/local/
 
 echo '' | sudo tee -a /etc/profile
 echo '# jdk8' | sudo tee -a /etc/profile
