@@ -1,7 +1,7 @@
 #!/bin/bash
 
 cd /opt/
-wget https://github.com/dragonwell-project/dragonwell8/releases/download/dragonwell-standard-8.23.22_jdk8u432-ga/Alibaba_Dragonwell_Standard_8.23.22_x64_linux.tar.gz
+wget https://dragonwell.oss-cn-shanghai.aliyuncs.com/8.23.22/Alibaba_Dragonwell_Standard_8.23.22_x64_linux.tar.gz
 tar -zxvf Alibaba_Dragonwell_Standard_8.23.22_x64_linux.tar.gz
 mv Alibaba_Dragonwell_Standard_8.23.22/ /usr/local/
 
