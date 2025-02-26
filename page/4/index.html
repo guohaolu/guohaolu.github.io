@@ -149,16 +149,16 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">33</span>
+          <span class="site-state-item-count">35</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-count">4</span>
         <span class="site-state-item-name">分类</span>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-count">16</span>
         <span class="site-state-item-name">标签</span>
       </div>
   </nav>
@@ -187,6 +187,99 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://guohaolu.github.io/2024/03/19/%E6%95%B0%E6%8D%AE%E6%8B%B7%E8%B4%9D%E8%BF%87%E7%A8%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="guohao.lu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Guohao Lu's Blog">
+      <meta itemprop="description" content="分享技术，记录生活">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Guohao Lu's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/03/19/%E6%95%B0%E6%8D%AE%E6%8B%B7%E8%B4%9D%E8%BF%87%E7%A8%8B/" class="post-title-link" itemprop="url">磁盘数据发送到网络的拷贝过程</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-03-19 21:43:47" itemprop="dateCreated datePublished" datetime="2024-03-19T21:43:47+08:00">2024-03-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">后端开发</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="磁盘数据发送到网络的拷贝过程"><a href="#磁盘数据发送到网络的拷贝过程" class="headerlink" title="磁盘数据发送到网络的拷贝过程"></a>磁盘数据发送到网络的拷贝过程</h1><ol>
+<li><p><strong>传统方式的4次拷贝</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">┌─────────┐    ┌──────────┐    ┌─────────┐    ┌──────────┐    ┌─────────┐</span><br><span class="line">│  磁盘   │ -&gt; │ 内核缓冲区│ -&gt; │ 用户缓冲区│ -&gt; │socket缓冲区│ -&gt; │  网卡   │</span><br><span class="line">└─────────┘    └──────────┘    └─────────┘    └──────────┘    └─────────┘</span><br><span class="line">    拷贝1          拷贝2           拷贝3           拷贝4</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>详细解释每次拷贝</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 示例代码</span></span><br><span class="line">File.read(fileDesc, buf, len);   <span class="comment">// 读取文件</span></span><br><span class="line">Socket.send(buf, len);           <span class="comment">// 发送数据</span></span><br><span class="line"></span><br><span class="line">过程解析：</span><br><span class="line">第<span class="number">1</span>次拷贝：DMA拷贝</span><br><span class="line">- 由DMA控制器完成</span><br><span class="line">- 将磁盘数据拷贝到内核缓冲区</span><br><span class="line">- 不需要CPU参与</span><br><span class="line"></span><br><span class="line">第<span class="number">2</span>次拷贝：CPU拷贝</span><br><span class="line">- 由CPU完成</span><br><span class="line">- 将数据从内核缓冲区拷贝到用户缓冲区(如JVM堆)</span><br><span class="line">- read()系统调用的结果</span><br><span class="line"></span><br><span class="line">第<span class="number">3</span>次拷贝：CPU拷贝</span><br><span class="line">- 由CPU完成</span><br><span class="line">- 将数据从用户缓冲区拷贝到socket缓冲区</span><br><span class="line">- write()系统调用的过程</span><br><span class="line"></span><br><span class="line">第<span class="number">4</span>次拷贝：DMA拷贝</span><br><span class="line">- 由DMA控制器完成</span><br><span class="line">- 将socket缓冲区的数据拷贝到网卡</span><br><span class="line">- 准备通过网络发送</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>上下文切换</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">涉及的上下文切换：</span><br><span class="line">1. read()调用：用户态 -&gt; 内核态</span><br><span class="line">2. read()返回：内核态 -&gt; 用户态</span><br><span class="line">3. write()调用：用户态 -&gt; 内核态</span><br><span class="line">4. write()返回：内核态 -&gt; 用户态</span><br><span class="line"></span><br><span class="line">总计：4次上下文切换</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>性能影响</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">资源消耗：</span><br><span class="line">- CPU时间：用于数据拷贝和上下文切换</span><br><span class="line">- 内存带宽：多次数据拷贝</span><br><span class="line">- 延迟增加：每次上下文切换大约需要1-10微秒</span><br><span class="line"></span><br><span class="line">示例计算(发送1MB数据)：</span><br><span class="line">- 数据拷贝：~10ms</span><br><span class="line">- 上下文切换：~4-40微秒</span><br><span class="line">- 总耗时：&gt;10ms</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>对比零拷贝</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">零拷贝方式：</span><br><span class="line">┌─────────┐    ┌──────────┐    ┌─────────┐</span><br><span class="line">│  磁盘   │ -&gt; │ 内核缓冲区│ -&gt; │  网卡   │</span><br><span class="line">└─────────┘    └──────────┘    └─────────┘</span><br><span class="line">    DMA拷贝        DMA拷贝</span><br><span class="line"></span><br><span class="line">优势：</span><br><span class="line">- 只有2次DMA拷贝</span><br><span class="line">- 不需要CPU拷贝</span><br><span class="line">- 减少上下文切换</span><br><span class="line">- 降低延迟和CPU使用率</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -255,6 +348,102 @@
 <li>自动化部署</li>
 </ol>
 <p>…</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://guohaolu.github.io/2024/03/19/%E9%99%90%E6%B5%81%E6%96%B9%E6%A1%88%E5%AF%B9%E6%AF%94/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="guohao.lu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Guohao Lu's Blog">
+      <meta itemprop="description" content="分享技术，记录生活">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Guohao Lu's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/03/19/%E9%99%90%E6%B5%81%E6%96%B9%E6%A1%88%E5%AF%B9%E6%AF%94/" class="post-title-link" itemprop="url">Sentinel与Redis限流方案对比</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-03-19 21:43:47" itemprop="dateCreated datePublished" datetime="2024-03-19T21:43:47+08:00">2024-03-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">后端开发</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="Sentinel与Redis限流方案对比"><a href="#Sentinel与Redis限流方案对比" class="headerlink" title="Sentinel与Redis限流方案对比"></a>Sentinel与Redis限流方案对比</h1><ol>
+<li><p><strong>架构对比</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">Sentinel单机限流：</span><br><span class="line">┌──────────────┐</span><br><span class="line">│   请求       │</span><br><span class="line">└──────┬───────┘</span><br><span class="line">       │</span><br><span class="line">       ▼</span><br><span class="line">┌──────────────┐</span><br><span class="line">│  应用服务器   │ ◄── Sentinel限流</span><br><span class="line">└──────────────┘</span><br><span class="line"></span><br><span class="line">Redis分布式限流：</span><br><span class="line">┌──────────────┐</span><br><span class="line">│   请求       │</span><br><span class="line">└──────┬───────┘</span><br><span class="line">       │</span><br><span class="line">       ▼</span><br><span class="line">┌──────────────┐    ┌──────────────┐</span><br><span class="line">│  应用服务器1  │    │  应用服务器2  │</span><br><span class="line">└──────┬───────┘    └──────┬───────┘</span><br><span class="line">       │                   │</span><br><span class="line">       └─────────┬────────┘</span><br><span class="line">                 ▼</span><br><span class="line">         ┌──────────────┐</span><br><span class="line">         │    Redis     │ ◄── 限流统计</span><br><span class="line">         └──────────────┘</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>特性对比</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">┌────────────┬───────────────────┬───────────────────┐</span><br><span class="line">│   特性     │    Sentinel       │    Redis限流      │</span><br><span class="line">├────────────┼───────────────────┼───────────────────┤</span><br><span class="line">│部署方式    │应用内限流         │中心化限流         │</span><br><span class="line">│实现复杂度  │简单              │相对复杂           │</span><br><span class="line">│限流精度    │较高              │受网络延迟影响     │</span><br><span class="line">│扩展性      │单机              │分布式            │</span><br><span class="line">│限流规则    │丰富              │需自行实现         │</span><br><span class="line">│实时性      │很高              │有少量延迟         │</span><br><span class="line">│资源占用    │内存              │网络IO            │</span><br><span class="line">└────────────┴───────────────────┴───────────────────┘</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>应用场景</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Sentinel适用场景：</span><br><span class="line">1. 单机应用的限流保护</span><br><span class="line">2. 微服务内部限流</span><br><span class="line">3. 需要精确控制的场景</span><br><span class="line">4. 对实时性要求高的场景</span><br><span class="line"></span><br><span class="line">Redis限流适用场景：</span><br><span class="line">1. 分布式系统的全局限流</span><br><span class="line">2. 跨服务的限流需求</span><br><span class="line">3. 需要共享限流数据的场景</span><br><span class="line">4. 动态调整限流规则</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>组合使用示例</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">OrderService</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> RedisLimiter redisLimiter;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@SentinelResource(</span></span><br><span class="line"><span class="meta">        value = &quot;createOrder&quot;,</span></span><br><span class="line"><span class="meta">        blockHandler = &quot;handleFlowControl&quot;</span></span><br><span class="line"><span class="meta">    )</span></span><br><span class="line">    <span class="keyword">public</span> Order <span class="title function_">createOrder</span><span class="params">(OrderRequest request)</span> &#123;</span><br><span class="line">        <span class="comment">// 1. 分布式限流 - 全局QPS控制</span></span><br><span class="line">        <span class="keyword">if</span> (!redisLimiter.isAllowed(<span class="string">&quot;order:global&quot;</span>, <span class="number">1000</span>)) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">LimitException</span>(<span class="string">&quot;全局限流&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 2. Sentinel限流 - 本地线程数控制</span></span><br><span class="line">        <span class="keyword">return</span> processOrder(request);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// Sentinel限流配置</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">initSentinelRules</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">FlowRule</span> <span class="variable">rule</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FlowRule</span>();</span><br><span class="line">        rule.setResource(<span class="string">&quot;createOrder&quot;</span>);</span><br><span class="line">        rule.setGrade(RuleConstant.FLOW_GRADE_THREAD);</span><br><span class="line">        rule.setCount(<span class="number">10</span>);</span><br><span class="line">        FlowRuleManager.loadRules(Arrays.asList(rule));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>为什么需要组合使用</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">技术原因：</span><br><span class="line">1. 分层防护</span><br><span class="line">   - Redis限流：全局流量控制</span><br><span class="line">   - Sentinel：应用级保护</span><br><span class="line"></span><br><span class="line">2. 不同维度</span><br><span class="line">   - Redis限流：QPS维度</span><br><span class="line">   - Sentinel：线程数维度</span><br><span class="line"></span><br><span class="line">3. 补充优势</span><br><span class="line">   - Redis：分布式一致性</span><br><span class="line">   - Sentinel：实时精确控制</span><br><span class="line"></span><br><span class="line">业务原因：</span><br><span class="line">1. 多级限流需求</span><br><span class="line">   - 用户级别限流(Redis)</span><br><span class="line">   - 接口级别限流(Sentinel)</span><br><span class="line"></span><br><span class="line">2. 差异化限流</span><br><span class="line">   - 全局业务限流(Redis)</span><br><span class="line">   - 资源保护限流(Sentinel)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>最佳实践</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">RateLimiterConfig</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> GlobalFilter <span class="title function_">globalRateLimiter</span><span class="params">(RedisLimiter redisLimiter)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> (exchange, chain) -&gt; &#123;</span><br><span class="line">            <span class="type">String</span> <span class="variable">path</span> <span class="operator">=</span> exchange.getRequest().getPath().value();</span><br><span class="line">            </span><br><span class="line">            <span class="comment">// 1. 全局限流 - Redis</span></span><br><span class="line">            <span class="keyword">if</span> (!redisLimiter.isAllowed(<span class="string">&quot;global:&quot;</span> + path)) &#123;</span><br><span class="line">                <span class="keyword">return</span> ResponseEntity.status(<span class="number">429</span>).build();</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            <span class="comment">// 2. 本地限流 - Sentinel</span></span><br><span class="line">            <span class="type">Entry</span> <span class="variable">entry</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                entry = SphU.entry(path);</span><br><span class="line">                <span class="keyword">return</span> chain.filter(exchange);</span><br><span class="line">            &#125; <span class="keyword">catch</span> (BlockException e) &#123;</span><br><span class="line">                <span class="keyword">return</span> ResponseEntity.status(<span class="number">429</span>).build();</span><br><span class="line">            &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">                <span class="keyword">if</span> (entry != <span class="literal">null</span>) &#123;</span><br><span class="line">                    entry.exit();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
 
       
     </div>

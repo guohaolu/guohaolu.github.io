@@ -149,16 +149,16 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">33</span>
+          <span class="site-state-item-count">35</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-count">4</span>
         <span class="site-state-item-name">分类</span>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-count">16</span>
         <span class="site-state-item-name">标签</span>
       </div>
   </nav>
@@ -196,7 +196,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://guohaolu.github.io/2025/02/26/kafka%E6%B6%88%E8%B4%B9%E8%80%85%E7%BB%84%E5%88%86%E5%8C%BA%E5%88%86%E9%85%8D%E8%AF%A6%E8%A7%A3/">
+    <link itemprop="mainEntityOfPage" href="https://guohaolu.github.io/2025/02/26/easyexcel%E5%AF%BC%E5%87%BA%E6%96%B9%E6%A1%88/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -214,7 +214,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2025/02/26/kafka%E6%B6%88%E8%B4%B9%E8%80%85%E7%BB%84%E5%88%86%E5%8C%BA%E5%88%86%E9%85%8D%E8%AF%A6%E8%A7%A3/" class="post-title-link" itemprop="url">未命名</a>
+          <a href="/2025/02/26/easyexcel%E5%AF%BC%E5%87%BA%E6%96%B9%E6%A1%88/" class="post-title-link" itemprop="url">未命名</a>
         </h2>
 
         <div class="post-meta-container">
@@ -225,7 +225,7 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2025-02-26 23:21:43" itemprop="dateCreated datePublished" datetime="2025-02-26T23:21:43+08:00">2025-02-26</time>
+      <time title="创建时间：2025-02-27 00:14:03" itemprop="dateCreated datePublished" datetime="2025-02-27T00:14:03+08:00">2025-02-27</time>
     </span>
 
   
@@ -238,290 +238,26 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="消费者组内的分区分配详解"><a href="#消费者组内的分区分配详解" class="headerlink" title="消费者组内的分区分配详解"></a>消费者组内的分区分配详解</h1><ol>
-<li><p><strong>同组消费者分区分配</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">场景一：单主题多分区</span><br><span class="line">Topic-A (3个分区)</span><br><span class="line">┌─────────────┐</span><br><span class="line">│ Partition 0 │────► Consumer1</span><br><span class="line">│ Partition 1 │────► Consumer2</span><br><span class="line">│ Partition 2 │────► Consumer1</span><br><span class="line">└─────────────┘</span><br><span class="line"></span><br><span class="line">Consumer Group X</span><br><span class="line">├── Consumer1: 消费Partition 0,2</span><br><span class="line">└── Consumer2: 消费Partition 1</span><br><span class="line"></span><br><span class="line">特点：</span><br><span class="line">- 每个消费者确实消费不同分区</span><br><span class="line">- 但这些分区的数据合起来是主题的全量数据</span><br><span class="line">- 消费者组作为整体可以看到主题的所有数据</span><br></pre></td></tr></table></figure>
+          <h1 id="EasyExcel导出并在最后插入汇总行"><a href="#EasyExcel导出并在最后插入汇总行" class="headerlink" title="EasyExcel导出并在最后插入汇总行"></a>EasyExcel导出并在最后插入汇总行</h1><ol>
+<li><p><strong>实现方案</strong>(<a target="_blank" rel="noopener" href="https://easyexcel.opensource.alibaba.com/docs/current/">1</a>)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">writeWithLastRow</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">String</span> <span class="variable">fileName</span> <span class="operator">=</span> <span class="string">&quot;测试导出.xlsx&quot;</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 使用ExcelWriter可以实现更灵活的写入</span></span><br><span class="line">    <span class="keyword">try</span> (<span class="type">ExcelWriter</span> <span class="variable">excelWriter</span> <span class="operator">=</span> EasyExcel.write(fileName, DemoData.class).build()) &#123;</span><br><span class="line">        <span class="type">WriteSheet</span> <span class="variable">writeSheet</span> <span class="operator">=</span> EasyExcel.writerSheet(<span class="string">&quot;sheet1&quot;</span>).build();</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 1. 先写入正常的数据列表</span></span><br><span class="line">        List&lt;DemoData&gt; dataList = getData();</span><br><span class="line">        excelWriter.write(dataList, writeSheet);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 2. 创建最后一行的汇总数据</span></span><br><span class="line">        List&lt;List&lt;String&gt;&gt; lastRowList = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">        List&lt;String&gt; lastRow = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">        lastRow.add(<span class="string">&quot;合计&quot;</span>);  <span class="comment">// 第一列</span></span><br><span class="line">        lastRow.add(<span class="string">&quot;100&quot;</span>);   <span class="comment">// 第二列</span></span><br><span class="line">        lastRow.add(<span class="string">&quot;200&quot;</span>);   <span class="comment">// 第三列</span></span><br><span class="line">        lastRowList.add(lastRow);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 3. 写入最后一行</span></span><br><span class="line">        excelWriter.write(lastRowList, writeSheet);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p><strong>不同订阅的消费者能否在同组</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">场景二：订阅主题不同</span><br><span class="line">Consumer1订阅：Topic A,B,C</span><br><span class="line">Consumer2订阅：Topic A,B,C,D</span><br><span class="line"></span><br><span class="line">结论：不能在同一组！</span><br><span class="line">原因：</span><br><span class="line">1. 违反了消费者组的订阅原则</span><br><span class="line">2. 可能导致数据消费混乱</span><br><span class="line">3. Kafka会抛出异常</span><br><span class="line"></span><br><span class="line">正确做法：</span><br><span class="line">Consumer Group X</span><br><span class="line">├── Consumer1: 订阅 A,B,C,D</span><br><span class="line">└── Consumer2: 订阅 A,B,C,D</span><br><span class="line"></span><br><span class="line">或者分成不同组：</span><br><span class="line">Group1: Consumer1 (A,B,C)</span><br><span class="line">Group2: Consumer2 (A,B,C,D)</span><br></pre></td></tr></table></figure>
+<li><p><strong>进阶实现：添加样式</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">LastRowWriteHandler</span> <span class="keyword">implements</span> <span class="title class_">RowWriteHandler</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> totalRows;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">LastRowWriteHandler</span><span class="params">(<span class="type">int</span> totalRows)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.totalRows = totalRows;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">afterRowDispose</span><span class="params">(RowWriteHandlerContext context)</span> &#123;</span><br><span class="line">        <span class="comment">// 判断是否是最后一行</span></span><br><span class="line">        <span class="keyword">if</span> (context.getRow().getRowNum() == totalRows) &#123;</span><br><span class="line">            <span class="type">Row</span> <span class="variable">row</span> <span class="operator">=</span> context.getRow();</span><br><span class="line">            <span class="type">CellStyle</span> <span class="variable">style</span> <span class="operator">=</span> context.getWriteWorkbookHolder().getWorkbook().createCellStyle();</span><br><span class="line">            <span class="comment">// 设置背景色为灰色</span></span><br><span class="line">            style.setFillForegroundColor(IndexedColors.GREY_25_PERCENT.getIndex());</span><br><span class="line">            style.setFillPattern(FillPatternType.SOLID_FOREGROUND);</span><br><span class="line">            <span class="comment">// 设置字体加粗</span></span><br><span class="line">            <span class="type">Font</span> <span class="variable">font</span> <span class="operator">=</span> context.getWriteWorkbookHolder().getWorkbook().createFont();</span><br><span class="line">            font.setBold(<span class="literal">true</span>);</span><br><span class="line">            style.setFont(font);</span><br><span class="line">            </span><br><span class="line">            <span class="comment">// 为最后一行的每个单元格设置样式</span></span><br><span class="line">            <span class="keyword">for</span> (Cell cell : row) &#123;</span><br><span class="line">                cell.setCellStyle(style);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p><strong>实际案例说明</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 错误示例：同组不同订阅</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">WrongGroupExample</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="comment">// Consumer1</span></span><br><span class="line">        KafkaConsumer&lt;String, String&gt; consumer1 = <span class="keyword">new</span> <span class="title class_">KafkaConsumer</span>&lt;&gt;(props);</span><br><span class="line">        consumer1.subscribe(Arrays.asList(<span class="string">&quot;A&quot;</span>, <span class="string">&quot;B&quot;</span>, <span class="string">&quot;C&quot;</span>));</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// Consumer2 (同组但订阅不同)</span></span><br><span class="line">        KafkaConsumer&lt;String, String&gt; consumer2 = <span class="keyword">new</span> <span class="title class_">KafkaConsumer</span>&lt;&gt;(props);</span><br><span class="line">        consumer2.subscribe(Arrays.asList(<span class="string">&quot;A&quot;</span>, <span class="string">&quot;B&quot;</span>, <span class="string">&quot;C&quot;</span>, <span class="string">&quot;D&quot;</span>));</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 会导致异常！</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 正确示例：同组相同订阅</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">CorrectGroupExample</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="comment">// 所有消费者订阅相同的主题</span></span><br><span class="line">        List&lt;String&gt; topics = Arrays.asList(<span class="string">&quot;A&quot;</span>, <span class="string">&quot;B&quot;</span>, <span class="string">&quot;C&quot;</span>, <span class="string">&quot;D&quot;</span>);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// Consumer1</span></span><br><span class="line">        KafkaConsumer&lt;String, String&gt; consumer1 = <span class="keyword">new</span> <span class="title class_">KafkaConsumer</span>&lt;&gt;(props);</span><br><span class="line">        consumer1.subscribe(topics);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// Consumer2</span></span><br><span class="line">        KafkaConsumer&lt;String, String&gt; consumer2 = <span class="keyword">new</span> <span class="title class_">KafkaConsumer</span>&lt;&gt;(props);</span><br><span class="line">        consumer2.subscribe(topics);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<li><p><strong>完整示例</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">writeWithStyledLastRow</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">String</span> <span class="variable">fileName</span> <span class="operator">=</span> <span class="string">&quot;测试导出.xlsx&quot;</span>;</span><br><span class="line">    List&lt;DemoData&gt; dataList = getData();</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">try</span> (<span class="type">ExcelWriter</span> <span class="variable">excelWriter</span> <span class="operator">=</span> EasyExcel.write(fileName, DemoData.class)</span><br><span class="line">            .registerWriteHandler(<span class="keyword">new</span> <span class="title class_">LastRowWriteHandler</span>(dataList.size() + <span class="number">1</span>))  <span class="comment">// +1是因为有表头</span></span><br><span class="line">            .build()) &#123;</span><br><span class="line">        <span class="type">WriteSheet</span> <span class="variable">writeSheet</span> <span class="operator">=</span> EasyExcel.writerSheet(<span class="string">&quot;sheet1&quot;</span>).build();</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 写入数据</span></span><br><span class="line">        excelWriter.write(dataList, writeSheet);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 写入汇总行</span></span><br><span class="line">        List&lt;List&lt;String&gt;&gt; lastRowList = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">        List&lt;String&gt; lastRow = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">        lastRow.add(<span class="string">&quot;合计&quot;</span>);</span><br><span class="line">        lastRow.add(calculateTotal(dataList));  <span class="comment">// 计算汇总值</span></span><br><span class="line">        lastRowList.add(lastRow);</span><br><span class="line">        </span><br><span class="line">        excelWriter.write(lastRowList, writeSheet);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 计算汇总值的辅助方法</span></span><br><span class="line"><span class="keyword">private</span> String <span class="title function_">calculateTotal</span><span class="params">(List&lt;DemoData&gt; dataList)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> dataList.stream()</span><br><span class="line">            .map(DemoData::getAmount)</span><br><span class="line">            .reduce(BigDecimal.ZERO, BigDecimal::add)</span><br><span class="line">            .toString();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p><strong>消费者组的数据完整性</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">示例场景：</span><br><span class="line">Topic-A (4个分区)</span><br><span class="line">┌─────────────┐</span><br><span class="line">│ Partition 0 │──┐</span><br><span class="line">│ Partition 1 │──┼─► Consumer Group X</span><br><span class="line">│ Partition 2 │──┤  ├── Consumer1</span><br><span class="line">│ Partition 3 │──┘  └── Consumer2</span><br><span class="line">└─────────────┘</span><br><span class="line"></span><br><span class="line">数据流：</span><br><span class="line">1. 生产者发送消息到各个分区</span><br><span class="line">2. 分区0,1 分配给Consumer1</span><br><span class="line">3. 分区2,3 分配给Consumer2</span><br><span class="line">4. 消费者组作为整体消费了所有数据</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><strong>关键原则</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">1. 订阅原则</span><br><span class="line">   - 同组消费者必须订阅相同主题</span><br><span class="line">   - 违反会导致异常</span><br><span class="line"></span><br><span class="line">2. 分区分配</span><br><span class="line">   - 分区是最小分配单位</span><br><span class="line">   - 一个分区只能分配给一个消费者</span><br><span class="line">   - 消费者组能看到所有数据</span><br><span class="line"></span><br><span class="line">3. 扩展性</span><br><span class="line">   - 增加消费者可以提高并行度</span><br><span class="line">   - 消费者数不应超过分区总数</span><br></pre></td></tr></table></figure></li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://guohaolu.github.io/2025/02/26/kafka%E9%A1%B5%E9%9D%A2%E7%BC%93%E5%AD%98%E5%8E%9F%E7%90%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="guohao.lu">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Guohao Lu's Blog">
-      <meta itemprop="description" content="分享技术，记录生活">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Guohao Lu's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2025/02/26/kafka%E9%A1%B5%E9%9D%A2%E7%BC%93%E5%AD%98%E5%8E%9F%E7%90%86/" class="post-title-link" itemprop="url">未命名</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2025-02-26 23:21:43" itemprop="dateCreated datePublished" datetime="2025-02-26T23:21:43+08:00">2025-02-26</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="Kafka页面缓存工作原理"><a href="#Kafka页面缓存工作原理" class="headerlink" title="Kafka页面缓存工作原理"></a>Kafka页面缓存工作原理</h1><ol>
-<li><p><strong>什么是页面缓存(Page Cache)</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">操作系统的内存分层：</span><br><span class="line">┌────────────────────┐</span><br><span class="line">│    用户空间        │ &lt;- 应用程序（如JVM）使用</span><br><span class="line">├────────────────────┤</span><br><span class="line">│    页面缓存        │ &lt;- 操作系统管理的磁盘数据缓存</span><br><span class="line">│  (Page Cache)      │</span><br><span class="line">├────────────────────┤</span><br><span class="line">│    内核空间        │ &lt;- 系统内核使用</span><br><span class="line">└────────────────────┘</span><br><span class="line"></span><br><span class="line">特点：</span><br><span class="line">- 由操作系统管理</span><br><span class="line">- 用于缓存磁盘数据</span><br><span class="line">- 采用LRU算法</span><br><span class="line">- 支持预读和回写</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><strong>传统JVM缓存的问题</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">数据读取流程（双重缓存）：</span><br><span class="line">磁盘 -&gt; 页面缓存 -&gt; JVM堆 -&gt; 应用程序</span><br><span class="line"></span><br><span class="line">问题：</span><br><span class="line">1. 数据被复制两次：</span><br><span class="line">   - 一次从磁盘到页面缓存</span><br><span class="line">   - 一次从页面缓存到JVM堆</span><br><span class="line">   </span><br><span class="line">2. 内存使用效率低：</span><br><span class="line">   - 相同数据占用两份内存空间</span><br><span class="line">   - JVM堆会触发GC</span><br><span class="line">   - GC会导致停顿</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><strong>Kafka的页面缓存使用</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Kafka读取流程：</span><br><span class="line">磁盘 -&gt; 页面缓存 -&gt; 应用程序（零拷贝）</span><br><span class="line"></span><br><span class="line">实现方式：</span><br><span class="line">1. sendfile系统调用：</span><br><span class="line">   - 直接从页面缓存传输到网络接口</span><br><span class="line">   - 避免数据复制到JVM堆</span><br><span class="line">   </span><br><span class="line">2. mmap内存映射：</span><br><span class="line">   - 将文件映射到内存地址空间</span><br><span class="line">   - 直接操作页面缓存</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><strong>性能优势</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 传统方式</span></span><br><span class="line"><span class="type">FileInputStream</span> <span class="variable">in</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileInputStream</span>(<span class="string">&quot;message.log&quot;</span>);</span><br><span class="line"><span class="type">byte</span>[] buffer = <span class="keyword">new</span> <span class="title class_">byte</span>[<span class="number">8192</span>];</span><br><span class="line">in.read(buffer); <span class="comment">// 数据复制到JVM堆</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Kafka方式（零拷贝）</span></span><br><span class="line"><span class="type">FileChannel</span> <span class="variable">channel</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileInputStream</span>(<span class="string">&quot;message.log&quot;</span>).getChannel();</span><br><span class="line">channel.transferTo(position, count, socketChannel); <span class="comment">// 直接传输</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p><strong>具体实现机制</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Kafka日志段读取代码</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">FileRecords</span> <span class="keyword">extends</span> <span class="title class_">AbstractRecords</span> &#123;</span><br><span class="line">    <span class="comment">// 使用MappedByteBuffer直接操作页面缓存</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> MappedByteBuffer mmap;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">FileRecords</span><span class="params">(File file, <span class="type">boolean</span> mmap)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (mmap) &#123;</span><br><span class="line">            <span class="comment">// 内存映射方式</span></span><br><span class="line">            <span class="built_in">this</span>.mmap = Utils.mmap(file, <span class="literal">true</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><strong>优化效果</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">传统方式 vs Kafka方式：</span><br><span class="line"></span><br><span class="line">内存拷贝次数：</span><br><span class="line">- 传统：4次 (磁盘-&gt;内核-&gt;JVM堆-&gt;socket缓冲区-&gt;网卡)</span><br><span class="line">- Kafka：2次 (磁盘-&gt;页面缓存-&gt;网卡)</span><br><span class="line"></span><br><span class="line">上下文切换：</span><br><span class="line">- 传统：4次</span><br><span class="line">- Kafka：2次</span><br><span class="line"></span><br><span class="line">性能提升：</span><br><span class="line">- 吞吐量提高2-3倍</span><br><span class="line">- 延迟降低40-50%</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><strong>最佳实践</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1. 预留足够的页面缓存空间</span></span><br><span class="line"><span class="comment"># 内存配置建议：</span></span><br><span class="line">系统内存 = JVM堆大小(4-8G) + 页面缓存(剩余内存)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. 避免使用过大的JVM堆</span></span><br><span class="line"><span class="comment"># 配置示例：</span></span><br><span class="line"><span class="built_in">export</span> KAFKA_HEAP_OPTS=<span class="string">&quot;-Xms6g -Xmx6g&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 3. 监控页面缓存使用</span></span><br><span class="line">free -m</span><br><span class="line">vmstat 1</span><br></pre></td></tr></table></figure></li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://guohaolu.github.io/2025/02/26/linux%E5%86%85%E5%AD%98%E6%9E%B6%E6%9E%84/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="guohao.lu">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Guohao Lu's Blog">
-      <meta itemprop="description" content="分享技术，记录生活">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Guohao Lu's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2025/02/26/linux%E5%86%85%E5%AD%98%E6%9E%B6%E6%9E%84/" class="post-title-link" itemprop="url">未命名</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2025-02-26 23:21:43" itemprop="dateCreated datePublished" datetime="2025-02-26T23:21:43+08:00">2025-02-26</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="Linux内存架构与页面缓存位置"><a href="#Linux内存架构与页面缓存位置" class="headerlink" title="Linux内存架构与页面缓存位置"></a>Linux内存架构与页面缓存位置</h1><ol>
-<li><p><strong>Linux内存空间划分</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">系统内存布局：</span><br><span class="line">┌────────────────────┐</span><br><span class="line">│    用户空间        │ </span><br><span class="line">│  (User Space)      │ &lt;- 应用程序、JVM堆等</span><br><span class="line">│                    │    0 ~ 3G (32位系统)</span><br><span class="line">├────────────────────┤</span><br><span class="line">│    内核空间        │ &lt;- 内核代码、内核数据结构</span><br><span class="line">│  (Kernel Space)    │    页面缓存位于此处</span><br><span class="line">│                    │    3G ~ 4G (32位系统)</span><br><span class="line">└────────────────────┘</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><strong>页面缓存的位置</strong></p>
+<li><p><strong>注意事项</strong></p>
 </li>
 </ol>
 <ul>
-<li>位于内核空间</li>
-<li>由内核直接管理</li>
-<li>对用户空间透明</li>
-<li>通过系统调用访问</li>
+<li>需要使用ExcelWriter而不是简单的doWrite方法</li>
+<li>最后一行数据需要单独构造List&lt;List<String>&gt;格式</li>
+<li>可以通过RowWriteHandler自定义最后一行样式</li>
+<li>注意关闭ExcelWriter资源</li>
+<li>如果有合并单元格需求，可以使用CellWriteHandler</li>
 </ul>
-<ol start="3">
-<li><p><strong>为什么在内核空间</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">原因：</span><br><span class="line">1. 安全性：</span><br><span class="line">   - 防止用户程序直接修改缓存</span><br><span class="line">   - 保护系统关键数据</span><br><span class="line"></span><br><span class="line">2. 性能：</span><br><span class="line">   - 避免用户态和内核态切换</span><br><span class="line">   - 直接与磁盘I/O子系统交互</span><br><span class="line">   </span><br><span class="line">3. 统一管理：</span><br><span class="line">   - 集中管理所有进程的文件访问</span><br><span class="line">   - 优化整体系统性能</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><strong>访问机制</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">应用程序访问文件数据流程：</span><br><span class="line"></span><br><span class="line">用户空间                    内核空间</span><br><span class="line">┌──────┐   系统调用   ┌───────────┐</span><br><span class="line">│ App  │ ==========&gt; │页面缓存    │</span><br><span class="line">└──────┘             └───────────┘</span><br><span class="line">                          ↕</span><br><span class="line">                     ┌───────────┐</span><br><span class="line">                     │  磁盘     │</span><br><span class="line">                     └───────────┘</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><strong>内存映射(mmap)机制</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">使用mmap后：</span><br><span class="line"></span><br><span class="line">用户空间                    内核空间</span><br><span class="line">┌──────┐   映射   ┌───────────┐</span><br><span class="line">│ App  │ &lt;======&gt; │页面缓存    │</span><br><span class="line">└──────┘         └───────────┘</span><br><span class="line"></span><br><span class="line">特点：</span><br><span class="line">- 在用户空间直接映射内核的页面缓存</span><br><span class="line">- 避免了数据复制</span><br><span class="line">- 仍然由内核管理</span><br></pre></td></tr></table></figure></li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://guohaolu.github.io/2025/02/26/redis_lua%E9%99%90%E6%B5%81%E5%AE%9E%E7%8E%B0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="guohao.lu">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Guohao Lu's Blog">
-      <meta itemprop="description" content="分享技术，记录生活">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Guohao Lu's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2025/02/26/redis_lua%E9%99%90%E6%B5%81%E5%AE%9E%E7%8E%B0/" class="post-title-link" itemprop="url">未命名</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2025-02-26 23:21:43" itemprop="dateCreated datePublished" datetime="2025-02-26T23:21:43+08:00">2025-02-26</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="Redis-Lua分布式限流实现"><a href="#Redis-Lua分布式限流实现" class="headerlink" title="Redis+Lua分布式限流实现"></a>Redis+Lua分布式限流实现</h1><ol>
-<li><p><strong>基本架构</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">请求流转图：</span><br><span class="line">┌──────────┐    1.请求     ┌──────────┐</span><br><span class="line">│ Client 1 │─────────────►│          │</span><br><span class="line">└──────────┘              │          │</span><br><span class="line">┌──────────┐    2.限流    │   API    │</span><br><span class="line">│ Client 2 │◄────────────►│ Gateway  │</span><br><span class="line">└──────────┘              │          │</span><br><span class="line">┌──────────┐    3.计数    │          │</span><br><span class="line">│ Client 3 │─────────────►│          │</span><br><span class="line">└──────────┘              └────┬─────┘</span><br><span class="line">                              │</span><br><span class="line">                         4.执行Lua脚本</span><br><span class="line">                              │</span><br><span class="line">                              ▼</span><br><span class="line">                        ┌──────────┐</span><br><span class="line">                        │  Redis   │</span><br><span class="line">                        └──────────┘</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><strong>Lua限流脚本</strong></p>
-<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 限流脚本</span></span><br><span class="line"><span class="comment">-- KEYS[1]: 限流key</span></span><br><span class="line"><span class="comment">-- ARGV[1]: 时间窗口大小(秒)</span></span><br><span class="line"><span class="comment">-- ARGV[2]: 限流阈值</span></span><br><span class="line"><span class="comment">-- ARGV[3]: 当前时间戳</span></span><br><span class="line"><span class="keyword">local</span> key = KEYS[<span class="number">1</span>]</span><br><span class="line"><span class="keyword">local</span> window = <span class="built_in">tonumber</span>(ARGV[<span class="number">1</span>])</span><br><span class="line"><span class="keyword">local</span> threshold = <span class="built_in">tonumber</span>(ARGV[<span class="number">2</span>])</span><br><span class="line"><span class="keyword">local</span> now = <span class="built_in">tonumber</span>(ARGV[<span class="number">3</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 1. 移除时间窗口之前的数据</span></span><br><span class="line">redis.call(<span class="string">&#x27;ZREMRANGEBYSCORE&#x27;</span>, key, <span class="number">0</span>, now - window * <span class="number">1000</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 2. 获取当前窗口的请求数</span></span><br><span class="line"><span class="keyword">local</span> count = redis.call(<span class="string">&#x27;ZCARD&#x27;</span>, key)</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 3. 判断是否超过阈值</span></span><br><span class="line"><span class="keyword">if</span> count &gt;= threshold <span class="keyword">then</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- 4. 记录本次请求</span></span><br><span class="line">redis.call(<span class="string">&#x27;ZADD&#x27;</span>, key, now, now)</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 5. 设置过期时间</span></span><br><span class="line">redis.call(<span class="string">&#x27;EXPIRE&#x27;</span>, key, window)</span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> <span class="number">1</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p><strong>Java实现</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">RedisLimiter</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> StringRedisTemplate redisTemplate;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> String luaScript;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">RedisLimiter</span><span class="params">(StringRedisTemplate redisTemplate)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.redisTemplate = redisTemplate;</span><br><span class="line">        <span class="comment">// 加载Lua脚本</span></span><br><span class="line">        <span class="built_in">this</span>.luaScript = loadLuaScript();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">isAllowed</span><span class="params">(String key, <span class="type">int</span> window, <span class="type">int</span> threshold)</span> &#123;</span><br><span class="line">        List&lt;String&gt; keys = Collections.singletonList(key);</span><br><span class="line">        <span class="type">long</span> <span class="variable">now</span> <span class="operator">=</span> System.currentTimeMillis();</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 执行Lua脚本</span></span><br><span class="line">        <span class="type">Long</span> <span class="variable">result</span> <span class="operator">=</span> redisTemplate.execute(</span><br><span class="line">            <span class="keyword">new</span> <span class="title class_">DefaultRedisScript</span>&lt;&gt;(luaScript, Long.class),</span><br><span class="line">            keys,</span><br><span class="line">            String.valueOf(window),</span><br><span class="line">            String.valueOf(threshold),</span><br><span class="line">            String.valueOf(now)</span><br><span class="line">        );</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> result != <span class="literal">null</span> &amp;&amp; result == <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><strong>动态调整实现</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">DynamicRateLimiter</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">LIMIT_CONFIG_KEY</span> <span class="operator">=</span> <span class="string">&quot;rate:limit:config&quot;</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 更新限流阈值</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">updateThreshold</span><span class="params">(String key, <span class="type">int</span> threshold)</span> &#123;</span><br><span class="line">        redisTemplate.opsForHash().put(</span><br><span class="line">            LIMIT_CONFIG_KEY, </span><br><span class="line">            key, </span><br><span class="line">            String.valueOf(threshold)</span><br><span class="line">        );</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 获取当前阈值</span></span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> <span class="title function_">getCurrentThreshold</span><span class="params">(String key)</span> &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">value</span> <span class="operator">=</span> (String) redisTemplate.opsForHash()</span><br><span class="line">            .get(LIMIT_CONFIG_KEY, key);</span><br><span class="line">        <span class="keyword">return</span> value == <span class="literal">null</span> ? </span><br><span class="line">            defaultThreshold : Integer.parseInt(value);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 限流检查</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">isAllowed</span><span class="params">(String key)</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">threshold</span> <span class="operator">=</span> getCurrentThreshold(key);</span><br><span class="line">        <span class="keyword">return</span> redisLimiter.isAllowed(</span><br><span class="line">            key, </span><br><span class="line">            window, </span><br><span class="line">            threshold</span><br><span class="line">        );</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><strong>滑动时间窗口示意</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">时间窗口滑动：</span><br><span class="line">     now-60s          now</span><br><span class="line">        │             │</span><br><span class="line">        ▼             ▼</span><br><span class="line">┌─────────────────────┐</span><br><span class="line">│   时间窗口(60s)     │</span><br><span class="line">└─────────────────────┘</span><br><span class="line">        │             │</span><br><span class="line">        │  ┌──────┐   │</span><br><span class="line">        │  │请求量│   │</span><br><span class="line">        │  └──────┘   │</span><br><span class="line">        │             │</span><br><span class="line">  过期的请求    新请求</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><strong>使用示例</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ApiController</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> DynamicRateLimiter limiter;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@GetMapping(&quot;/api/test&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">test</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">key</span> <span class="operator">=</span> <span class="string">&quot;api:test&quot;</span>;</span><br><span class="line">        <span class="keyword">if</span> (!limiter.isAllowed(key)) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">RuntimeException</span>(<span class="string">&quot;请求被限流&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 业务逻辑</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;success&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@PostMapping(&quot;/limit/update&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">updateLimit</span><span class="params">(</span></span><br><span class="line"><span class="params">        <span class="meta">@RequestParam</span> String key, </span></span><br><span class="line"><span class="params">        <span class="meta">@RequestParam</span> <span class="type">int</span> threshold</span></span><br><span class="line"><span class="params">    )</span> &#123;</span><br><span class="line">        limiter.updateThreshold(key, threshold);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ol>
 
       
     </div>
@@ -577,7 +313,7 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2025-02-26 23:21:43" itemprop="dateCreated datePublished" datetime="2025-02-26T23:21:43+08:00">2025-02-26</time>
+      <time title="创建时间：2025-02-27 00:14:03" itemprop="dateCreated datePublished" datetime="2025-02-27T00:14:03+08:00">2025-02-27</time>
     </span>
 
   
@@ -664,7 +400,7 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2025-02-26 23:21:43" itemprop="dateCreated datePublished" datetime="2025-02-26T23:21:43+08:00">2025-02-26</time>
+      <time title="创建时间：2025-02-27 00:14:03" itemprop="dateCreated datePublished" datetime="2025-02-27T00:14:03+08:00">2025-02-27</time>
     </span>
 
   
@@ -748,7 +484,7 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2025-02-26 23:21:43" itemprop="dateCreated datePublished" datetime="2025-02-26T23:21:43+08:00">2025-02-26</time>
+      <time title="创建时间：2025-02-27 00:14:03" itemprop="dateCreated datePublished" datetime="2025-02-27T00:14:03+08:00">2025-02-27</time>
     </span>
 
   
@@ -835,7 +571,7 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2025-02-26 23:21:43" itemprop="dateCreated datePublished" datetime="2025-02-26T23:21:43+08:00">2025-02-26</time>
+      <time title="创建时间：2025-02-27 00:14:03" itemprop="dateCreated datePublished" datetime="2025-02-27T00:14:03+08:00">2025-02-27</time>
     </span>
 
   
@@ -957,7 +693,7 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2025-02-26 23:21:43" itemprop="dateCreated datePublished" datetime="2025-02-26T23:21:43+08:00">2025-02-26</time>
+      <time title="创建时间：2025-02-27 00:14:03" itemprop="dateCreated datePublished" datetime="2025-02-27T00:14:03+08:00">2025-02-27</time>
     </span>
 
   
@@ -1041,7 +777,7 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2025-02-26 23:21:43" itemprop="dateCreated datePublished" datetime="2025-02-26T23:21:43+08:00">2025-02-26</time>
+      <time title="创建时间：2025-02-27 00:14:03" itemprop="dateCreated datePublished" datetime="2025-02-27T00:14:03+08:00">2025-02-27</time>
     </span>
 
   
@@ -1073,6 +809,270 @@
 <li><p><strong>最佳实践</strong></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">内存配置建议：</span><br><span class="line">1. 预留足够页面缓存</span><br><span class="line">   - 建议为总内存的50%</span><br><span class="line">   - 例：16G内存预留8G页面缓存</span><br><span class="line"></span><br><span class="line">2. 控制JVM堆大小</span><br><span class="line">   - 建议6-8G</span><br><span class="line">   - 避免过大堆影响页面缓存</span><br><span class="line"></span><br><span class="line">3. 最小化Swap使用</span><br><span class="line">   - 设置vm.swappiness=1</span><br><span class="line">   - Swap大小控制在1-2G</span><br></pre></td></tr></table></figure></li>
 </ol>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://guohaolu.github.io/2025/02/26/kafka%E5%86%85%E5%AD%98%E6%98%A0%E5%B0%84%E5%8E%9F%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="guohao.lu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Guohao Lu's Blog">
+      <meta itemprop="description" content="分享技术，记录生活">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Guohao Lu's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/02/26/kafka%E5%86%85%E5%AD%98%E6%98%A0%E5%B0%84%E5%8E%9F%E7%90%86/" class="post-title-link" itemprop="url">未命名</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-02-27 00:14:03" itemprop="dateCreated datePublished" datetime="2025-02-27T00:14:03+08:00">2025-02-27</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="Kafka的MMAP-Memory-Mapped-Files-实现"><a href="#Kafka的MMAP-Memory-Mapped-Files-实现" class="headerlink" title="Kafka的MMAP(Memory Mapped Files)实现"></a>Kafka的MMAP(Memory Mapped Files)实现</h1><ol>
+<li><p><strong>什么是MMAP</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">内存映射文件原理：</span><br><span class="line">┌─────────────────┐</span><br><span class="line">│   用户进程      │</span><br><span class="line">│ ┌───────────┐  │</span><br><span class="line">│ │映射的内存区域│  │     映射</span><br><span class="line">└─│───────────│──┘ ←──────────┐</span><br><span class="line">  └─────┬─────┘             │</span><br><span class="line">        │                   │</span><br><span class="line">┌───────┼───────────────────┼─┐</span><br><span class="line">│     页面缓存              │ │</span><br><span class="line">│   ┌─────────────┐         │ │</span><br><span class="line">│   │  文件数据   │ ←───────┘ │</span><br><span class="line">│   └─────────────┘           │</span><br><span class="line">└─────────────────────────────┘</span><br><span class="line">        内核空间</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>Kafka中的使用场景</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Kafka源码中的应用</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">FileRecords</span> <span class="keyword">extends</span> <span class="title class_">AbstractRecords</span> &#123;</span><br><span class="line">    <span class="comment">// 索引文件映射</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> MappedByteBuffer mmap;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">FileRecords</span><span class="params">(File file, <span class="type">boolean</span> mmap)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">        <span class="keyword">if</span> (mmap) &#123;</span><br><span class="line">            <span class="comment">// 创建内存映射</span></span><br><span class="line">            <span class="built_in">this</span>.mmap = Utils.mmap(file, <span class="literal">true</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">主要用途：</span><br><span class="line"><span class="number">1.</span> 索引文件访问</span><br><span class="line">   - offset索引</span><br><span class="line">   - timestamp索引</span><br><span class="line">   - leader epoch索引</span><br><span class="line">   </span><br><span class="line"><span class="number">2.</span> 小分区的消息日志</span><br><span class="line">   - 默认配置：segment.bytes=1GB</span><br><span class="line">   - 可配置是否使用mmap</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>映射过程</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 简化的映射过程</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MappedByteBuffer</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 1. 打开文件通道</span></span><br><span class="line">    <span class="type">FileChannel</span> <span class="variable">channel</span> <span class="operator">=</span> FileChannel.open(path);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 2. 创建映射</span></span><br><span class="line">    <span class="type">MappedByteBuffer</span> <span class="variable">buffer</span> <span class="operator">=</span> channel.map(</span><br><span class="line">        FileChannel.MapMode.READ_WRITE,  <span class="comment">// 映射模式</span></span><br><span class="line">        <span class="number">0</span>,                              <span class="comment">// 起始位置</span></span><br><span class="line">        file.length()                   <span class="comment">// 映射长度</span></span><br><span class="line">    );</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 3. 直接操作内存</span></span><br><span class="line">    buffer.putInt(<span class="number">1</span>);      <span class="comment">// 写入数据</span></span><br><span class="line">    <span class="type">int</span> <span class="variable">value</span> <span class="operator">=</span> buffer.getInt();  <span class="comment">// 读取数据</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>优缺点分析</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">优点：</span><br><span class="line">1. 零拷贝读写</span><br><span class="line">   - 避免内核空间到用户空间的拷贝</span><br><span class="line">   - 减少上下文切换</span><br><span class="line"></span><br><span class="line">2. 页面自动管理</span><br><span class="line">   - 由操作系统管理页面调度</span><br><span class="line">   - 支持预读和回写</span><br><span class="line"></span><br><span class="line">缺点：</span><br><span class="line">1. 内存占用</span><br><span class="line">   - 映射文件会占用虚拟内存</span><br><span class="line">   - 大文件映射需要注意内存限制</span><br><span class="line"></span><br><span class="line">2. 页面错误</span><br><span class="line">   - 首次访问会触发页面错误</span><br><span class="line">   - 可能导致延迟波动</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>配置与调优</strong></p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># broker配置</span></span><br><span class="line"><span class="comment"># 是否使用mmap</span></span><br><span class="line"><span class="attr">log.segment.bytes</span>=<span class="string">1073741824</span></span><br><span class="line"><span class="attr">file.mmap.enable</span>=<span class="string">true</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"># 系统配置</span></span><br><span class="line"><span class="comment"># 最大映射区域</span></span><br><span class="line"><span class="attr">vm.max_map_count</span>=<span class="string">262144</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>最佳实践</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">使用建议：</span><br><span class="line">1. 小文件优先使用mmap</span><br><span class="line">   - 索引文件</span><br><span class="line">   - 小分区日志</span><br><span class="line"></span><br><span class="line">2. 大文件使用直接I/O</span><br><span class="line">   - 大分区日志</span><br><span class="line">   - 避免内存压力</span><br><span class="line"></span><br><span class="line">3. 监控指标</span><br><span class="line">   - 页面错误率</span><br><span class="line">   - 内存映射区域数量</span><br><span class="line">   - 虚拟内存使用率</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://guohaolu.github.io/2025/02/26/kafka%E5%86%85%E5%AD%98%E9%85%8D%E7%BD%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="guohao.lu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Guohao Lu's Blog">
+      <meta itemprop="description" content="分享技术，记录生活">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Guohao Lu's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/02/26/kafka%E5%86%85%E5%AD%98%E9%85%8D%E7%BD%AE/" class="post-title-link" itemprop="url">未命名</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-02-27 00:14:03" itemprop="dateCreated datePublished" datetime="2025-02-27T00:14:03+08:00">2025-02-27</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="Kafka服务器内存配置最佳实践"><a href="#Kafka服务器内存配置最佳实践" class="headerlink" title="Kafka服务器内存配置最佳实践"></a>Kafka服务器内存配置最佳实践</h1><ol>
+<li><p><strong>16G内存的最佳分配</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">建议分配：</span><br><span class="line">┌────────────────────┐</span><br><span class="line">│ 系统预留: 2G      │ &lt;- 操作系统和其他进程使用</span><br><span class="line">├────────────────────┤</span><br><span class="line">│ Kafka堆内存: 6G   │ &lt;- broker的JVM堆内存</span><br><span class="line">├────────────────────┤</span><br><span class="line">│ 页面缓存: 8G      │ &lt;- 用于消息数据缓存</span><br><span class="line">└────────────────────┘</span><br><span class="line"></span><br><span class="line">Swap建议：</span><br><span class="line">- 默认4G -&gt; 调整为1-2G</span><br><span class="line">- 设置vm.swappiness=1</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>为什么要减少Swap</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">原因：</span><br><span class="line">1. Kafka性能严重依赖于页面缓存</span><br><span class="line">2. 一旦发生Swap：</span><br><span class="line">   - 页面缓存被换出到磁盘</span><br><span class="line">   - 数据访问延迟从ns级变为ms级</span><br><span class="line">   - 吞吐量显著下降</span><br><span class="line">   - 可能引发消息积压</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>性能对比</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">场景：生产者写入1GB数据</span><br><span class="line"></span><br><span class="line">正常配置（小Swap）：</span><br><span class="line">- 写入延迟：~10ms</span><br><span class="line">- 吞吐量：~100MB/s</span><br><span class="line">- 页面缓存命中率：95%</span><br><span class="line"></span><br><span class="line">大Swap配置：</span><br><span class="line">- 写入延迟：可能超过100ms</span><br><span class="line">- 吞吐量：可能降至10MB/s</span><br><span class="line">- 频繁的页面换入换出</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>配置建议</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1. 调整Swap大小</span></span><br><span class="line"><span class="built_in">sudo</span> swapoff -a</span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">dd</span> <span class="keyword">if</span>=/dev/zero of=/swapfile bs=1G count=2</span><br><span class="line"><span class="built_in">sudo</span> mkswap /swapfile</span><br><span class="line"><span class="built_in">sudo</span> swapon /swapfile</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. 修改swappiness</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;vm.swappiness=1&quot;</span> &gt;&gt; /etc/sysctl.conf</span><br><span class="line">sysctl -p</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3. 设置Kafka堆内存</span></span><br><span class="line"><span class="built_in">export</span> KAFKA_HEAP_OPTS=<span class="string">&quot;-Xms6g -Xmx6g&quot;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>监控指标</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 监控Swap使用</span></span><br><span class="line">vmstat 1</span><br><span class="line">free -m</span><br><span class="line"></span><br><span class="line">关键指标：</span><br><span class="line">- si (swap <span class="keyword">in</span>) 应接近0</span><br><span class="line">- so (swap out) 应接近0</span><br><span class="line">- swap used 应保持稳定</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>风险防范</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">1. 内存使用监控</span><br><span class="line">   - 设置内存使用率告警</span><br><span class="line">   - 阈值建议：80%</span><br><span class="line"></span><br><span class="line">2. Swap使用监控</span><br><span class="line">   - 设置Swap使用告警</span><br><span class="line">   - 一旦发生Swap及时处理</span><br><span class="line"></span><br><span class="line">3. 性能指标监控</span><br><span class="line">   - 生产者延迟</span><br><span class="line">   - 消费者延迟</span><br><span class="line">   - 页面缓存命中率</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://guohaolu.github.io/2025/02/26/kafka%E5%88%86%E5%8C%BA%E7%AD%96%E7%95%A5%EF%BC%9ARangeAssignor/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="guohao.lu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Guohao Lu's Blog">
+      <meta itemprop="description" content="分享技术，记录生活">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Guohao Lu's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/02/26/kafka%E5%88%86%E5%8C%BA%E7%AD%96%E7%95%A5%EF%BC%9ARangeAssignor/" class="post-title-link" itemprop="url">未命名</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-02-27 00:14:03" itemprop="dateCreated datePublished" datetime="2025-02-27T00:14:03+08:00">2025-02-27</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><code>RangeAssignor</code> 是 Kafka 中的一种默认分区分配策略，它的工作方式比较简单直接。这个策略主要用于在消费者和分区之间进行一种连续的范围分配。</p>
+<h3 id="工作原理："><a href="#工作原理：" class="headerlink" title="工作原理："></a>工作原理：</h3><ol>
+<li><strong>排序所有分区</strong>：首先，<code>RangeAssignor</code> 将所有的分区按照主题和分区号的顺序进行排序。</li>
+<li><strong>排序所有消费者</strong>：同样地，所有请求订阅的消费者也会被按照消费者ID进行排序。</li>
+<li><strong>分配分区</strong>：分配过程中，<code>RangeAssignor</code> 会将排序后的分区列表分成尽可能均等的N份（N是消费者的数量），每个消费者分得一份。对于不能均分的情况，靠前的消费者将分配到稍微多一点的分区。</li>
+</ol>
+<h3 id="分配示例："><a href="#分配示例：" class="headerlink" title="分配示例："></a>分配示例：</h3><p>假设有两个主题<code>A</code>和<code>B</code>，主题<code>A</code>有3个分区（<code>A0, A1, A2</code>），主题<code>B</code>有2个分区（<code>B0, B1</code>），共有5个分区。如果有两个消费者<code>C1</code>和<code>C2</code>:</p>
+<ul>
+<li>分区会被排序为：<code>A0, A1, A2, B0, B1</code></li>
+<li>消费者会被排序为：<code>C1, C2</code></li>
+<li>分区分配可能如下：<ul>
+<li><code>C1</code>：<code>A0, A1, B0</code>（前三个分区）</li>
+<li><code>C2</code>：<code>A2, B1</code>（后两个分区）</li>
+</ul>
+</li>
+</ul>
+<h3 id="特点和使用场景："><a href="#特点和使用场景：" class="headerlink" title="特点和使用场景："></a>特点和使用场景：</h3><ul>
+<li><strong>公平性</strong>：<code>RangeAssignor</code> 简单地尝试将分区均匀分配给每个消费者，这种方法算法简单，执行效率高。</li>
+<li><strong>适用性</strong>：当消费者数量较少或每个消费者处理能力相近时，这种分配方法相对公平。</li>
+<li><strong>缺点</strong>：在某些情况下，可能不是最优的负载均衡策略，特别是在分区数量不均匀分布于多个主题或消费者性能差异大的情况下。</li>
+</ul>
+<p>总之，<code>RangeAssignor</code> 提供了一种基础而直观的分区分配方式，适用于简单应用场景，但可能不适合需要复杂负载均衡或性能优化的高级场景。在实际使用中，选择合适的分配策略应根据具体的业务需求和消费者设置来定。</p>
 
       
     </div>

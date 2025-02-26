@@ -149,16 +149,16 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">33</span>
+          <span class="site-state-item-count">35</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-count">4</span>
         <span class="site-state-item-name">分类</span>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-count">16</span>
         <span class="site-state-item-name">标签</span>
       </div>
   </nav>
@@ -196,7 +196,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://guohaolu.github.io/2025/02/26/kafka%E5%86%85%E5%AD%98%E6%98%A0%E5%B0%84%E5%8E%9F%E7%90%86/">
+    <link itemprop="mainEntityOfPage" href="https://guohaolu.github.io/2025/02/26/kafka%E5%88%86%E5%8C%BA%E5%88%86%E9%85%8D%E8%A7%84%E5%88%99/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -214,7 +214,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2025/02/26/kafka%E5%86%85%E5%AD%98%E6%98%A0%E5%B0%84%E5%8E%9F%E7%90%86/" class="post-title-link" itemprop="url">未命名</a>
+          <a href="/2025/02/26/kafka%E5%88%86%E5%8C%BA%E5%88%86%E9%85%8D%E8%A7%84%E5%88%99/" class="post-title-link" itemprop="url">未命名</a>
         </h2>
 
         <div class="post-meta-container">
@@ -225,7 +225,7 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2025-02-26 23:21:43" itemprop="dateCreated datePublished" datetime="2025-02-26T23:21:43+08:00">2025-02-26</time>
+      <time title="创建时间：2025-02-27 00:14:03" itemprop="dateCreated datePublished" datetime="2025-02-27T00:14:03+08:00">2025-02-27</time>
     </span>
 
   
@@ -238,24 +238,18 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="Kafka的MMAP-Memory-Mapped-Files-实现"><a href="#Kafka的MMAP-Memory-Mapped-Files-实现" class="headerlink" title="Kafka的MMAP(Memory Mapped Files)实现"></a>Kafka的MMAP(Memory Mapped Files)实现</h1><ol>
-<li><p><strong>什么是MMAP</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">内存映射文件原理：</span><br><span class="line">┌─────────────────┐</span><br><span class="line">│   用户进程      │</span><br><span class="line">│ ┌───────────┐  │</span><br><span class="line">│ │映射的内存区域│  │     映射</span><br><span class="line">└─│───────────│──┘ ←──────────┐</span><br><span class="line">  └─────┬─────┘             │</span><br><span class="line">        │                   │</span><br><span class="line">┌───────┼───────────────────┼─┐</span><br><span class="line">│     页面缓存              │ │</span><br><span class="line">│   ┌─────────────┐         │ │</span><br><span class="line">│   │  文件数据   │ ←───────┘ │</span><br><span class="line">│   └─────────────┘           │</span><br><span class="line">└─────────────────────────────┘</span><br><span class="line">        内核空间</span><br></pre></td></tr></table></figure>
+          <h1 id="Kafka分区分配规则详解"><a href="#Kafka分区分配规则详解" class="headerlink" title="Kafka分区分配规则详解"></a>Kafka分区分配规则详解</h1><ol>
+<li><p><strong>分配的基本原则</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">关键规则：</span><br><span class="line">1. 消费者只能消费其订阅的主题</span><br><span class="line">2. 一个分区只能分配给同一个消费组中的一个消费者</span><br><span class="line">3. 分配是以&lt;主题,分区&gt;为单位进行的</span><br><span class="line"></span><br><span class="line">示例：</span><br><span class="line">Consumer1订阅：topic2</span><br><span class="line">Consumer2订阅：topic1</span><br><span class="line">┌─────────┐     ┌─────────┐</span><br><span class="line">│Topic1   │     │Consumer1│</span><br><span class="line">│Partition1│ ╳   │(topic2)│  ╳ 不会分配</span><br><span class="line">└─────────┘     └─────────┘</span><br><span class="line">                </span><br><span class="line">┌─────────┐     ┌─────────┐</span><br><span class="line">│Topic1   │     │Consumer2│</span><br><span class="line">│Partition1│ →   │(topic1)│  ✓ 会分配</span><br><span class="line">└─────────┘     └─────────┘</span><br></pre></td></tr></table></figure>
 </li>
-<li><p><strong>Kafka中的使用场景</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Kafka源码中的应用</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">FileRecords</span> <span class="keyword">extends</span> <span class="title class_">AbstractRecords</span> &#123;</span><br><span class="line">    <span class="comment">// 索引文件映射</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> MappedByteBuffer mmap;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">FileRecords</span><span class="params">(File file, <span class="type">boolean</span> mmap)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">        <span class="keyword">if</span> (mmap) &#123;</span><br><span class="line">            <span class="comment">// 创建内存映射</span></span><br><span class="line">            <span class="built_in">this</span>.mmap = Utils.mmap(file, <span class="literal">true</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">主要用途：</span><br><span class="line"><span class="number">1.</span> 索引文件访问</span><br><span class="line">   - offset索引</span><br><span class="line">   - timestamp索引</span><br><span class="line">   - leader epoch索引</span><br><span class="line">   </span><br><span class="line"><span class="number">2.</span> 小分区的消息日志</span><br><span class="line">   - 默认配置：segment.bytes=1GB</span><br><span class="line">   - 可配置是否使用mmap</span><br></pre></td></tr></table></figure>
+<li><p><strong>订阅模式</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1. 直接订阅指定主题</span></span><br><span class="line">consumer.subscribe(Arrays.asList(<span class="string">&quot;topic1&quot;</span>, <span class="string">&quot;topic2&quot;</span>));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2. 正则表达式订阅</span></span><br><span class="line">consumer.subscribe(Pattern.compile(<span class="string">&quot;topic.*&quot;</span>));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 3. 手动分配分区</span></span><br><span class="line">consumer.assign(Arrays.asList(</span><br><span class="line">    <span class="keyword">new</span> <span class="title class_">TopicPartition</span>(<span class="string">&quot;topic1&quot;</span>, <span class="number">0</span>),</span><br><span class="line">    <span class="keyword">new</span> <span class="title class_">TopicPartition</span>(<span class="string">&quot;topic1&quot;</span>, <span class="number">1</span>)</span><br><span class="line">));</span><br></pre></td></tr></table></figure>
 </li>
-<li><p><strong>映射过程</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 简化的映射过程</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MappedByteBuffer</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 1. 打开文件通道</span></span><br><span class="line">    <span class="type">FileChannel</span> <span class="variable">channel</span> <span class="operator">=</span> FileChannel.open(path);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 2. 创建映射</span></span><br><span class="line">    <span class="type">MappedByteBuffer</span> <span class="variable">buffer</span> <span class="operator">=</span> channel.map(</span><br><span class="line">        FileChannel.MapMode.READ_WRITE,  <span class="comment">// 映射模式</span></span><br><span class="line">        <span class="number">0</span>,                              <span class="comment">// 起始位置</span></span><br><span class="line">        file.length()                   <span class="comment">// 映射长度</span></span><br><span class="line">    );</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 3. 直接操作内存</span></span><br><span class="line">    buffer.putInt(<span class="number">1</span>);      <span class="comment">// 写入数据</span></span><br><span class="line">    <span class="type">int</span> <span class="variable">value</span> <span class="operator">=</span> buffer.getInt();  <span class="comment">// 读取数据</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<li><p><strong>分配过程示例</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">场景：</span><br><span class="line">- Topic1: 3个分区</span><br><span class="line">- Topic2: 2个分区</span><br><span class="line">- Consumer1: 订阅Topic2</span><br><span class="line">- Consumer2: 订阅Topic1</span><br><span class="line">- Consumer3: 订阅Topic1, Topic2</span><br><span class="line"></span><br><span class="line">最终分配：</span><br><span class="line">Consumer1 &lt;- Topic2-P0, Topic2-P1</span><br><span class="line">Consumer2 &lt;- Topic1-P0, Topic1-P1, Topic1-P2</span><br><span class="line">Consumer3 &lt;- Topic2-P0, Topic2-P1, Topic1-P0, Topic1-P1, Topic1-P2</span><br><span class="line"></span><br><span class="line">注意：Consumer3因为订阅了两个主题，</span><br><span class="line">所以可能同时获得两个主题的分区</span><br></pre></td></tr></table></figure>
 </li>
-<li><p><strong>优缺点分析</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">优点：</span><br><span class="line">1. 零拷贝读写</span><br><span class="line">   - 避免内核空间到用户空间的拷贝</span><br><span class="line">   - 减少上下文切换</span><br><span class="line"></span><br><span class="line">2. 页面自动管理</span><br><span class="line">   - 由操作系统管理页面调度</span><br><span class="line">   - 支持预读和回写</span><br><span class="line"></span><br><span class="line">缺点：</span><br><span class="line">1. 内存占用</span><br><span class="line">   - 映射文件会占用虚拟内存</span><br><span class="line">   - 大文件映射需要注意内存限制</span><br><span class="line"></span><br><span class="line">2. 页面错误</span><br><span class="line">   - 首次访问会触发页面错误</span><br><span class="line">   - 可能导致延迟波动</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><strong>配置与调优</strong></p>
-<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># broker配置</span></span><br><span class="line"><span class="comment"># 是否使用mmap</span></span><br><span class="line"><span class="attr">log.segment.bytes</span>=<span class="string">1073741824</span></span><br><span class="line"><span class="attr">file.mmap.enable</span>=<span class="string">true</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"># 系统配置</span></span><br><span class="line"><span class="comment"># 最大映射区域</span></span><br><span class="line"><span class="attr">vm.max_map_count</span>=<span class="string">262144</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p><strong>最佳实践</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">使用建议：</span><br><span class="line">1. 小文件优先使用mmap</span><br><span class="line">   - 索引文件</span><br><span class="line">   - 小分区日志</span><br><span class="line"></span><br><span class="line">2. 大文件使用直接I/O</span><br><span class="line">   - 大分区日志</span><br><span class="line">   - 避免内存压力</span><br><span class="line"></span><br><span class="line">3. 监控指标</span><br><span class="line">   - 页面错误率</span><br><span class="line">   - 内存映射区域数量</span><br><span class="line">   - 虚拟内存使用率</span><br></pre></td></tr></table></figure></li>
+<li><p><strong>验证代码</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">KafkaSubscriptionTest</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Properties</span> <span class="variable">props</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Properties</span>();</span><br><span class="line">        props.put(<span class="string">&quot;bootstrap.servers&quot;</span>, <span class="string">&quot;localhost:9092&quot;</span>);</span><br><span class="line">        props.put(<span class="string">&quot;group.id&quot;</span>, <span class="string">&quot;test-group&quot;</span>);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// Consumer1只订阅Topic2</span></span><br><span class="line">        KafkaConsumer&lt;String, String&gt; consumer1 = </span><br><span class="line">            <span class="keyword">new</span> <span class="title class_">KafkaConsumer</span>&lt;&gt;(props);</span><br><span class="line">        consumer1.subscribe(Arrays.asList(<span class="string">&quot;topic2&quot;</span>));</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 获取分配的分区</span></span><br><span class="line">        Set&lt;TopicPartition&gt; assignment = consumer1.assignment();</span><br><span class="line">        <span class="keyword">for</span> (TopicPartition partition : assignment) &#123;</span><br><span class="line">            <span class="comment">// 只会看到Topic2的分区</span></span><br><span class="line">            System.out.println(partition.topic() + </span><br><span class="line">                             <span class="string">&quot;-&quot;</span> + partition.partition());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 </ol>
 
       
@@ -312,7 +306,7 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2025-02-26 23:21:43" itemprop="dateCreated datePublished" datetime="2025-02-26T23:21:43+08:00">2025-02-26</time>
+      <time title="创建时间：2025-02-27 00:14:03" itemprop="dateCreated datePublished" datetime="2025-02-27T00:14:03+08:00">2025-02-27</time>
     </span>
 
   
@@ -411,7 +405,7 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2025-02-26 23:21:43" itemprop="dateCreated datePublished" datetime="2025-02-26T23:21:43+08:00">2025-02-26</time>
+      <time title="创建时间：2025-02-27 00:14:03" itemprop="dateCreated datePublished" datetime="2025-02-27T00:14:03+08:00">2025-02-27</time>
     </span>
 
   
@@ -505,7 +499,7 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2025-02-26 23:21:43" itemprop="dateCreated datePublished" datetime="2025-02-26T23:21:43+08:00">2025-02-26</time>
+      <time title="创建时间：2025-02-27 00:14:03" itemprop="dateCreated datePublished" datetime="2025-02-27T00:14:03+08:00">2025-02-27</time>
     </span>
 
   
@@ -592,7 +586,7 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2025-02-26 23:21:43" itemprop="dateCreated datePublished" datetime="2025-02-26T23:21:43+08:00">2025-02-26</time>
+      <time title="创建时间：2025-02-27 00:14:03" itemprop="dateCreated datePublished" datetime="2025-02-27T00:14:03+08:00">2025-02-27</time>
     </span>
 
   
@@ -660,7 +654,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://guohaolu.github.io/2025/02/26/easyexcel%E5%AF%BC%E5%87%BA%E6%96%B9%E6%A1%88/">
+    <link itemprop="mainEntityOfPage" href="https://guohaolu.github.io/2024/03/20/mysql-repeatable-read-implementation/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -678,7 +672,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2025/02/26/easyexcel%E5%AF%BC%E5%87%BA%E6%96%B9%E6%A1%88/" class="post-title-link" itemprop="url">未命名</a>
+          <a href="/2024/03/20/mysql-repeatable-read-implementation/" class="post-title-link" itemprop="url">MySQL可重复读隔离级别的实现原理</a>
         </h2>
 
         <div class="post-meta-container">
@@ -689,7 +683,16 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2025-02-26 23:21:43" itemprop="dateCreated datePublished" datetime="2025-02-26T23:21:43+08:00">2025-02-26</time>
+      <time title="创建时间：2024-03-20 10:30:00" itemprop="dateCreated datePublished" datetime="2024-03-20T10:30:00+08:00">2024-03-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a>
+        </span>
     </span>
 
   
@@ -702,26 +705,197 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="EasyExcel导出并在最后插入汇总行"><a href="#EasyExcel导出并在最后插入汇总行" class="headerlink" title="EasyExcel导出并在最后插入汇总行"></a>EasyExcel导出并在最后插入汇总行</h1><ol>
-<li><p><strong>实现方案</strong>(<a target="_blank" rel="noopener" href="https://easyexcel.opensource.alibaba.com/docs/current/">1</a>)</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">writeWithLastRow</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">String</span> <span class="variable">fileName</span> <span class="operator">=</span> <span class="string">&quot;测试导出.xlsx&quot;</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 使用ExcelWriter可以实现更灵活的写入</span></span><br><span class="line">    <span class="keyword">try</span> (<span class="type">ExcelWriter</span> <span class="variable">excelWriter</span> <span class="operator">=</span> EasyExcel.write(fileName, DemoData.class).build()) &#123;</span><br><span class="line">        <span class="type">WriteSheet</span> <span class="variable">writeSheet</span> <span class="operator">=</span> EasyExcel.writerSheet(<span class="string">&quot;sheet1&quot;</span>).build();</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 1. 先写入正常的数据列表</span></span><br><span class="line">        List&lt;DemoData&gt; dataList = getData();</span><br><span class="line">        excelWriter.write(dataList, writeSheet);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 2. 创建最后一行的汇总数据</span></span><br><span class="line">        List&lt;List&lt;String&gt;&gt; lastRowList = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">        List&lt;String&gt; lastRow = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">        lastRow.add(<span class="string">&quot;合计&quot;</span>);  <span class="comment">// 第一列</span></span><br><span class="line">        lastRow.add(<span class="string">&quot;100&quot;</span>);   <span class="comment">// 第二列</span></span><br><span class="line">        lastRow.add(<span class="string">&quot;200&quot;</span>);   <span class="comment">// 第三列</span></span><br><span class="line">        lastRowList.add(lastRow);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 3. 写入最后一行</span></span><br><span class="line">        excelWriter.write(lastRowList, writeSheet);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          <h2 id="MySQL默认隔离级别"><a href="#MySQL默认隔离级别" class="headerlink" title="MySQL默认隔离级别"></a>MySQL默认隔离级别</h2><p>MySQL InnoDB存储引擎默认使用<strong>可重复读</strong>（REPEATABLE READ）隔离级别。该级别通过MVCC（多版本并发控制）和锁机制的配合来实现。</p>
+<h2 id="MVCC实现原理"><a href="#MVCC实现原理" class="headerlink" title="MVCC实现原理"></a>MVCC实现原理</h2><h3 id="1-版本链"><a href="#1-版本链" class="headerlink" title="1. 版本链"></a>1. 版本链</h3><p>每行记录都存在一个版本链： </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">┌────────────┐ ┌────────────┐ ┌────────────┐</span><br><span class="line">│ 最新记录 │ ──&gt; │ 历史记录1 │ ──&gt; │ 历史记录2 │</span><br><span class="line">└────────────┘ └────────────┘ └────────────┘</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-重要字段"><a href="#2-重要字段" class="headerlink" title="2. 重要字段"></a>2. 重要字段</h3><p>每条记录都包含以下系统字段：</p>
+<ul>
+<li><code>DB_TRX_ID</code>：创建&#x2F;最后修改该记录的事务ID</li>
+<li><code>DB_ROLL_PTR</code>：回滚指针，指向上一个版本</li>
+<li><code>DB_ROW_ID</code>：行ID（可选）</li>
+</ul>
+<h3 id="3-快照读实现"><a href="#3-快照读实现" class="headerlink" title="3. 快照读实现"></a>3. 快照读实现</h3><p>在事务开始时，会创建一个快照（Read View），包含：</p>
+<ul>
+<li><code>creator_trx_id</code>：创建该Read View的事务ID</li>
+<li><code>m_ids</code>：活跃的事务ID列表</li>
+<li><code>min_trx_id</code>：活跃事务中最小的事务ID</li>
+<li><code>max_trx_id</code>：下一个将被分配的事务ID</li>
+</ul>
+<p>快照读判断规则：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">             是否可见？</span><br><span class="line">                 │</span><br><span class="line">         ┌───────┴───────┐</span><br><span class="line">         ▼               ▼</span><br><span class="line">trx_id &lt; min_trx_id   trx_id &gt;= max_trx_id</span><br><span class="line">     (可见)               (不可见)</span><br><span class="line">         │               │</span><br><span class="line">         └───────┬───────┘</span><br><span class="line">                 ▼</span><br><span class="line">         trx_id ∈ m_ids？</span><br><span class="line">         ┌────┴────┐</span><br><span class="line">         ▼         ▼</span><br><span class="line">        是        否</span><br><span class="line">     (不可见)    (可见)</span><br></pre></td></tr></table></figure>
+
+<h2 id="锁机制"><a href="#锁机制" class="headerlink" title="锁机制"></a>锁机制</h2><h3 id="1-记录锁（Record-Lock）"><a href="#1-记录锁（Record-Lock）" class="headerlink" title="1. 记录锁（Record Lock）"></a>1. 记录锁（Record Lock）</h3><ul>
+<li>锁定单个索引记录</li>
+<li>防止其他事务修改或删除</li>
+</ul>
+<h3 id="2-间隙锁（Gap-Lock）"><a href="#2-间隙锁（Gap-Lock）" class="headerlink" title="2. 间隙锁（Gap Lock）"></a>2. 间隙锁（Gap Lock）</h3><ul>
+<li>锁定索引记录之间的间隙</li>
+<li>防止其他事务在间隙插入记录</li>
+</ul>
+<h3 id="3-Next-Key-Lock"><a href="#3-Next-Key-Lock" class="headerlink" title="3. Next-Key Lock"></a>3. Next-Key Lock</h3><ul>
+<li>记录锁和间隙锁的组合</li>
+<li>可以防止幻读</li>
+</ul>
+<h2 id="可重复读的实现过程"><a href="#可重复读的实现过程" class="headerlink" title="可重复读的实现过程"></a>可重复读的实现过程</h2><ol>
+<li><p><strong>事务开始</strong>：</p>
+<ul>
+<li>创建Read View</li>
+<li>记录当前活跃事务</li>
+</ul>
 </li>
-<li><p><strong>进阶实现：添加样式</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">LastRowWriteHandler</span> <span class="keyword">implements</span> <span class="title class_">RowWriteHandler</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> totalRows;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">LastRowWriteHandler</span><span class="params">(<span class="type">int</span> totalRows)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.totalRows = totalRows;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">afterRowDispose</span><span class="params">(RowWriteHandlerContext context)</span> &#123;</span><br><span class="line">        <span class="comment">// 判断是否是最后一行</span></span><br><span class="line">        <span class="keyword">if</span> (context.getRow().getRowNum() == totalRows) &#123;</span><br><span class="line">            <span class="type">Row</span> <span class="variable">row</span> <span class="operator">=</span> context.getRow();</span><br><span class="line">            <span class="type">CellStyle</span> <span class="variable">style</span> <span class="operator">=</span> context.getWriteWorkbookHolder().getWorkbook().createCellStyle();</span><br><span class="line">            <span class="comment">// 设置背景色为灰色</span></span><br><span class="line">            style.setFillForegroundColor(IndexedColors.GREY_25_PERCENT.getIndex());</span><br><span class="line">            style.setFillPattern(FillPatternType.SOLID_FOREGROUND);</span><br><span class="line">            <span class="comment">// 设置字体加粗</span></span><br><span class="line">            <span class="type">Font</span> <span class="variable">font</span> <span class="operator">=</span> context.getWriteWorkbookHolder().getWorkbook().createFont();</span><br><span class="line">            font.setBold(<span class="literal">true</span>);</span><br><span class="line">            style.setFont(font);</span><br><span class="line">            </span><br><span class="line">            <span class="comment">// 为最后一行的每个单元格设置样式</span></span><br><span class="line">            <span class="keyword">for</span> (Cell cell : row) &#123;</span><br><span class="line">                cell.setCellStyle(style);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<li><p><strong>读操作</strong>：</p>
+<ul>
+<li>快照读：通过MVCC实现</li>
+<li>当前读：使用锁机制</li>
+</ul>
 </li>
-<li><p><strong>完整示例</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">writeWithStyledLastRow</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">String</span> <span class="variable">fileName</span> <span class="operator">=</span> <span class="string">&quot;测试导出.xlsx&quot;</span>;</span><br><span class="line">    List&lt;DemoData&gt; dataList = getData();</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">try</span> (<span class="type">ExcelWriter</span> <span class="variable">excelWriter</span> <span class="operator">=</span> EasyExcel.write(fileName, DemoData.class)</span><br><span class="line">            .registerWriteHandler(<span class="keyword">new</span> <span class="title class_">LastRowWriteHandler</span>(dataList.size() + <span class="number">1</span>))  <span class="comment">// +1是因为有表头</span></span><br><span class="line">            .build()) &#123;</span><br><span class="line">        <span class="type">WriteSheet</span> <span class="variable">writeSheet</span> <span class="operator">=</span> EasyExcel.writerSheet(<span class="string">&quot;sheet1&quot;</span>).build();</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 写入数据</span></span><br><span class="line">        excelWriter.write(dataList, writeSheet);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 写入汇总行</span></span><br><span class="line">        List&lt;List&lt;String&gt;&gt; lastRowList = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">        List&lt;String&gt; lastRow = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">        lastRow.add(<span class="string">&quot;合计&quot;</span>);</span><br><span class="line">        lastRow.add(calculateTotal(dataList));  <span class="comment">// 计算汇总值</span></span><br><span class="line">        lastRowList.add(lastRow);</span><br><span class="line">        </span><br><span class="line">        excelWriter.write(lastRowList, writeSheet);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 计算汇总值的辅助方法</span></span><br><span class="line"><span class="keyword">private</span> String <span class="title function_">calculateTotal</span><span class="params">(List&lt;DemoData&gt; dataList)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> dataList.stream()</span><br><span class="line">            .map(DemoData::getAmount)</span><br><span class="line">            .reduce(BigDecimal.ZERO, BigDecimal::add)</span><br><span class="line">            .toString();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><strong>注意事项</strong></p>
+<li><p><strong>写操作</strong>：</p>
+<ul>
+<li>加Next-Key Lock</li>
+<li>创建新的版本记录</li>
+</ul>
 </li>
 </ol>
+<h2 id="示例说明"><a href="#示例说明" class="headerlink" title="示例说明"></a>示例说明</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 事务1</span></span><br><span class="line"><span class="keyword">START</span> TRANSACTION;</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> users <span class="keyword">WHERE</span> id <span class="operator">=</span> <span class="number">1</span>;  <span class="comment">-- 创建Read View</span></span><br><span class="line"><span class="comment">-- 其他事务修改数据</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> users <span class="keyword">WHERE</span> id <span class="operator">=</span> <span class="number">1</span>;  <span class="comment">-- 使用相同Read View，看到相同结果</span></span><br><span class="line"><span class="keyword">COMMIT</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 事务2</span></span><br><span class="line"><span class="keyword">START</span> TRANSACTION;</span><br><span class="line"><span class="keyword">UPDATE</span> users <span class="keyword">SET</span> name <span class="operator">=</span> <span class="string">&#x27;new_name&#x27;</span> <span class="keyword">WHERE</span> id <span class="operator">=</span> <span class="number">1</span>;  <span class="comment">-- 加锁，创建新版本</span></span><br><span class="line"><span class="keyword">COMMIT</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>MySQL通过以下机制实现可重复读：</p>
+<ol>
+<li><p>MVCC保证读操作的一致性：</p>
 <ul>
-<li>需要使用ExcelWriter而不是简单的doWrite方法</li>
-<li>最后一行数据需要单独构造List&lt;List<String>&gt;格式</li>
-<li>可以通过RowWriteHandler自定义最后一行样式</li>
-<li>注意关闭ExcelWriter资源</li>
-<li>如果有合并单元格需求，可以使用CellWriteHandler</li>
+<li>版本链保存历史记录</li>
+<li>Read View确定可见性</li>
 </ul>
+</li>
+<li><p>锁机制保证写操作的隔离性：</p>
+<ul>
+<li>记录锁防止并发修改</li>
+<li>间隙锁防止幻读</li>
+</ul>
+</li>
+</ol>
+<p>这种实现既保证了数据的一致性，又提供了较好的并发性能。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://guohaolu.github.io/2024/03/20/mysql-wrong-index-solution/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="guohao.lu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Guohao Lu's Blog">
+      <meta itemprop="description" content="分享技术，记录生活">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Guohao Lu's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/03/20/mysql-wrong-index-solution/" class="post-title-link" itemprop="url">MySQL查询优化器选错索引的解决方案</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-03-20 10:00:00" itemprop="dateCreated datePublished" datetime="2024-03-20T10:00:00+08:00">2024-03-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>当MySQL查询优化器选择了错误的索引时，我们有以下几种解决方案：</p>
+<h2 id="1-使用强制索引（FORCE-INDEX）"><a href="#1-使用强制索引（FORCE-INDEX）" class="headerlink" title="1. 使用强制索引（FORCE INDEX）"></a>1. 使用强制索引（FORCE INDEX）</h2><p>如果您确定某个索引是最优选择，可以使用FORCE INDEX强制MySQL使用指定的索引： </p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">FROM</span> users FORCE INDEX (idx_username)</span><br><span class="line"><span class="keyword">WHERE</span> username <span class="operator">=</span> <span class="string">&#x27;test&#x27;</span> <span class="keyword">AND</span> status <span class="operator">=</span> <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-使用索引提示（USE-INDEX）"><a href="#2-使用索引提示（USE-INDEX）" class="headerlink" title="2. 使用索引提示（USE INDEX）"></a>2. 使用索引提示（USE INDEX）</h2><p>相比FORCE INDEX更温和的方式是使用USE INDEX，它会建议MySQL使用指定的索引：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> users USE INDEX (idx_username) </span><br><span class="line"><span class="keyword">WHERE</span> username <span class="operator">=</span> <span class="string">&#x27;test&#x27;</span> <span class="keyword">AND</span> status <span class="operator">=</span> <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-更新统计信息"><a href="#3-更新统计信息" class="headerlink" title="3. 更新统计信息"></a>3. 更新统计信息</h2><p>有时索引选择错误是因为统计信息过时，可以通过以下命令更新：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ANALYZE <span class="keyword">TABLE</span> users;</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-重写查询"><a href="#4-重写查询" class="headerlink" title="4. 重写查询"></a>4. 重写查询</h2><p>可以尝试重写查询语句，使其更符合索引的设计：</p>
+<ul>
+<li>调整WHERE子句的顺序</li>
+<li>改写JOIN条件</li>
+<li>使用子查询替代JOIN等</li>
+</ul>
+<h2 id="5-修改索引"><a href="#5-修改索引" class="headerlink" title="5. 修改索引"></a>5. 修改索引</h2><p>如果频繁发生索引选择错误，可能需要：</p>
+<ul>
+<li>创建更合适的复合索引</li>
+<li>删除重复或无用的索引</li>
+<li>优化现有索引结构</li>
+</ul>
+<h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><ol>
+<li><p>使用强制索引要谨慎，因为：</p>
+<ul>
+<li>可能导致性能更差</li>
+<li>随着数据变化，强制的索引可能不再是最优选择</li>
+</ul>
+</li>
+<li><p>定期维护统计信息很重要</p>
+<ul>
+<li>建议在业务低峰期执行ANALYZE TABLE</li>
+<li>可以配置自动更新统计信息</li>
+</ul>
+</li>
+<li><p>监控查询性能</p>
+<ul>
+<li>使用EXPLAIN分析执行计划</li>
+<li>观察查询响应时间</li>
+<li>记录慢查询日志</li>
+</ul>
+</li>
+</ol>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>虽然MySQL的查询优化器通常能做出正确的选择，但在特定情况下可能选错索引。了解上述解决方案，可以帮助我们在遇到此类问题时快速处理。建议优先考虑更新统计信息和优化查询语句，只在必要时才使用强制索引。</p>
 
       
     </div>
@@ -1352,99 +1526,6 @@
 </li>
 <li><p><strong>协作模式</strong></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">┌─────────────────────────────────────┐</span><br><span class="line">│            微服务架构               │</span><br><span class="line">│  ┌────────────┐    ┌────────────┐  │</span><br><span class="line">│  │  订单服务   │    │  支付服务   │  │</span><br><span class="line">│  └────────────┘    └────────────┘  │</span><br><span class="line">│    DDD实现          DDD实现        │</span><br><span class="line">│         │               │          │</span><br><span class="line">│         └───────┬───────┘          │</span><br><span class="line">│                 ▼                   │</span><br><span class="line">│           领域事件通信              │</span><br><span class="line">└─────────────────────────────────────┘</span><br></pre></td></tr></table></figure></li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://guohaolu.github.io/2024/03/19/%E6%95%B0%E6%8D%AE%E6%8B%B7%E8%B4%9D%E8%BF%87%E7%A8%8B/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="guohao.lu">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Guohao Lu's Blog">
-      <meta itemprop="description" content="分享技术，记录生活">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Guohao Lu's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/03/19/%E6%95%B0%E6%8D%AE%E6%8B%B7%E8%B4%9D%E8%BF%87%E7%A8%8B/" class="post-title-link" itemprop="url">磁盘数据发送到网络的拷贝过程</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2024-03-19 21:43:47" itemprop="dateCreated datePublished" datetime="2024-03-19T21:43:47+08:00">2024-03-19</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">后端开发</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="磁盘数据发送到网络的拷贝过程"><a href="#磁盘数据发送到网络的拷贝过程" class="headerlink" title="磁盘数据发送到网络的拷贝过程"></a>磁盘数据发送到网络的拷贝过程</h1><ol>
-<li><p><strong>传统方式的4次拷贝</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">┌─────────┐    ┌──────────┐    ┌─────────┐    ┌──────────┐    ┌─────────┐</span><br><span class="line">│  磁盘   │ -&gt; │ 内核缓冲区│ -&gt; │ 用户缓冲区│ -&gt; │socket缓冲区│ -&gt; │  网卡   │</span><br><span class="line">└─────────┘    └──────────┘    └─────────┘    └──────────┘    └─────────┘</span><br><span class="line">    拷贝1          拷贝2           拷贝3           拷贝4</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><strong>详细解释每次拷贝</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 示例代码</span></span><br><span class="line">File.read(fileDesc, buf, len);   <span class="comment">// 读取文件</span></span><br><span class="line">Socket.send(buf, len);           <span class="comment">// 发送数据</span></span><br><span class="line"></span><br><span class="line">过程解析：</span><br><span class="line">第<span class="number">1</span>次拷贝：DMA拷贝</span><br><span class="line">- 由DMA控制器完成</span><br><span class="line">- 将磁盘数据拷贝到内核缓冲区</span><br><span class="line">- 不需要CPU参与</span><br><span class="line"></span><br><span class="line">第<span class="number">2</span>次拷贝：CPU拷贝</span><br><span class="line">- 由CPU完成</span><br><span class="line">- 将数据从内核缓冲区拷贝到用户缓冲区(如JVM堆)</span><br><span class="line">- read()系统调用的结果</span><br><span class="line"></span><br><span class="line">第<span class="number">3</span>次拷贝：CPU拷贝</span><br><span class="line">- 由CPU完成</span><br><span class="line">- 将数据从用户缓冲区拷贝到socket缓冲区</span><br><span class="line">- write()系统调用的过程</span><br><span class="line"></span><br><span class="line">第<span class="number">4</span>次拷贝：DMA拷贝</span><br><span class="line">- 由DMA控制器完成</span><br><span class="line">- 将socket缓冲区的数据拷贝到网卡</span><br><span class="line">- 准备通过网络发送</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><strong>上下文切换</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">涉及的上下文切换：</span><br><span class="line">1. read()调用：用户态 -&gt; 内核态</span><br><span class="line">2. read()返回：内核态 -&gt; 用户态</span><br><span class="line">3. write()调用：用户态 -&gt; 内核态</span><br><span class="line">4. write()返回：内核态 -&gt; 用户态</span><br><span class="line"></span><br><span class="line">总计：4次上下文切换</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><strong>性能影响</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">资源消耗：</span><br><span class="line">- CPU时间：用于数据拷贝和上下文切换</span><br><span class="line">- 内存带宽：多次数据拷贝</span><br><span class="line">- 延迟增加：每次上下文切换大约需要1-10微秒</span><br><span class="line"></span><br><span class="line">示例计算(发送1MB数据)：</span><br><span class="line">- 数据拷贝：~10ms</span><br><span class="line">- 上下文切换：~4-40微秒</span><br><span class="line">- 总耗时：&gt;10ms</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><strong>对比零拷贝</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">零拷贝方式：</span><br><span class="line">┌─────────┐    ┌──────────┐    ┌─────────┐</span><br><span class="line">│  磁盘   │ -&gt; │ 内核缓冲区│ -&gt; │  网卡   │</span><br><span class="line">└─────────┘    └──────────┘    └─────────┘</span><br><span class="line">    DMA拷贝        DMA拷贝</span><br><span class="line"></span><br><span class="line">优势：</span><br><span class="line">- 只有2次DMA拷贝</span><br><span class="line">- 不需要CPU拷贝</span><br><span class="line">- 减少上下文切换</span><br><span class="line">- 降低延迟和CPU使用率</span><br></pre></td></tr></table></figure></li>
 </ol>
 
       
