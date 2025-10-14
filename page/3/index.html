@@ -1,0 +1,1401 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"guohaolu.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.22.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12,"visitor":true,"social":true,"categories":true,"tags":true,"toc":{"enable":true,"number":true,"wrap":true}},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="分享技术，记录生活">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Guohao Lu&#39;s Blog">
+<meta property="og:url" content="https://guohaolu.github.io/page/3/index.html">
+<meta property="og:site_name" content="Guohao Lu&#39;s Blog">
+<meta property="og:description" content="分享技术，记录生活">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="guohao.lu">
+<meta property="article:tag" content="技术,博客,编程">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://guohaolu.github.io/page/3/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":true,"isPost":false,"lang":"zh-CN","comments":"","permalink":"","path":"page/3/index.html","title":""}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Guohao Lu's Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Guohao Lu's Blog</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">个人技术博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">guohao.lu</p>
+  <div class="site-description" itemprop="description">分享技术，记录生活</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">44</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/guohaolu" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;guohaolu" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1670212878@qq.com" title="E-Mail → mailto:1670212878@qq.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://guohaolu.github.io/2025/10/14/kafka%E5%88%86%E5%8C%BA%E5%88%86%E9%85%8D%E8%A7%84%E5%88%99/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="guohao.lu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Guohao Lu's Blog">
+      <meta itemprop="description" content="分享技术，记录生活">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Guohao Lu's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/10/14/kafka%E5%88%86%E5%8C%BA%E5%88%86%E9%85%8D%E8%A7%84%E5%88%99/" class="post-title-link" itemprop="url">未命名</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-10-14 10:16:14" itemprop="dateCreated datePublished" datetime="2025-10-14T10:16:14+08:00">2025-10-14</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="Kafka分区分配规则详解"><a href="#Kafka分区分配规则详解" class="headerlink" title="Kafka分区分配规则详解"></a>Kafka分区分配规则详解</h1><ol>
+<li><p><strong>分配的基本原则</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">关键规则：</span><br><span class="line">1. 消费者只能消费其订阅的主题</span><br><span class="line">2. 一个分区只能分配给同一个消费组中的一个消费者</span><br><span class="line">3. 分配是以&lt;主题,分区&gt;为单位进行的</span><br><span class="line"></span><br><span class="line">示例：</span><br><span class="line">Consumer1订阅：topic2</span><br><span class="line">Consumer2订阅：topic1</span><br><span class="line">┌─────────┐     ┌─────────┐</span><br><span class="line">│Topic1   │     │Consumer1│</span><br><span class="line">│Partition1│ ╳   │(topic2)│  ╳ 不会分配</span><br><span class="line">└─────────┘     └─────────┘</span><br><span class="line">                </span><br><span class="line">┌─────────┐     ┌─────────┐</span><br><span class="line">│Topic1   │     │Consumer2│</span><br><span class="line">│Partition1│ →   │(topic1)│  ✓ 会分配</span><br><span class="line">└─────────┘     └─────────┘</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>订阅模式</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1. 直接订阅指定主题</span></span><br><span class="line">consumer.subscribe(Arrays.asList(<span class="string">&quot;topic1&quot;</span>, <span class="string">&quot;topic2&quot;</span>));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2. 正则表达式订阅</span></span><br><span class="line">consumer.subscribe(Pattern.compile(<span class="string">&quot;topic.*&quot;</span>));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 3. 手动分配分区</span></span><br><span class="line">consumer.assign(Arrays.asList(</span><br><span class="line">    <span class="keyword">new</span> <span class="title class_">TopicPartition</span>(<span class="string">&quot;topic1&quot;</span>, <span class="number">0</span>),</span><br><span class="line">    <span class="keyword">new</span> <span class="title class_">TopicPartition</span>(<span class="string">&quot;topic1&quot;</span>, <span class="number">1</span>)</span><br><span class="line">));</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>分配过程示例</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">场景：</span><br><span class="line">- Topic1: 3个分区</span><br><span class="line">- Topic2: 2个分区</span><br><span class="line">- Consumer1: 订阅Topic2</span><br><span class="line">- Consumer2: 订阅Topic1</span><br><span class="line">- Consumer3: 订阅Topic1, Topic2</span><br><span class="line"></span><br><span class="line">最终分配：</span><br><span class="line">Consumer1 &lt;- Topic2-P0, Topic2-P1</span><br><span class="line">Consumer2 &lt;- Topic1-P0, Topic1-P1, Topic1-P2</span><br><span class="line">Consumer3 &lt;- Topic2-P0, Topic2-P1, Topic1-P0, Topic1-P1, Topic1-P2</span><br><span class="line"></span><br><span class="line">注意：Consumer3因为订阅了两个主题，</span><br><span class="line">所以可能同时获得两个主题的分区</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>验证代码</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">KafkaSubscriptionTest</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Properties</span> <span class="variable">props</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Properties</span>();</span><br><span class="line">        props.put(<span class="string">&quot;bootstrap.servers&quot;</span>, <span class="string">&quot;localhost:9092&quot;</span>);</span><br><span class="line">        props.put(<span class="string">&quot;group.id&quot;</span>, <span class="string">&quot;test-group&quot;</span>);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// Consumer1只订阅Topic2</span></span><br><span class="line">        KafkaConsumer&lt;String, String&gt; consumer1 = </span><br><span class="line">            <span class="keyword">new</span> <span class="title class_">KafkaConsumer</span>&lt;&gt;(props);</span><br><span class="line">        consumer1.subscribe(Arrays.asList(<span class="string">&quot;topic2&quot;</span>));</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 获取分配的分区</span></span><br><span class="line">        Set&lt;TopicPartition&gt; assignment = consumer1.assignment();</span><br><span class="line">        <span class="keyword">for</span> (TopicPartition partition : assignment) &#123;</span><br><span class="line">            <span class="comment">// 只会看到Topic2的分区</span></span><br><span class="line">            System.out.println(partition.topic() + </span><br><span class="line">                             <span class="string">&quot;-&quot;</span> + partition.partition());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://guohaolu.github.io/2025/10/14/kafka%E5%88%86%E5%8C%BA%E7%AD%96%E7%95%A5%EF%BC%9ARangeAssignor/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="guohao.lu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Guohao Lu's Blog">
+      <meta itemprop="description" content="分享技术，记录生活">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Guohao Lu's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/10/14/kafka%E5%88%86%E5%8C%BA%E7%AD%96%E7%95%A5%EF%BC%9ARangeAssignor/" class="post-title-link" itemprop="url">未命名</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-10-14 10:16:14" itemprop="dateCreated datePublished" datetime="2025-10-14T10:16:14+08:00">2025-10-14</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><code>RangeAssignor</code> 是 Kafka 中的一种默认分区分配策略，它的工作方式比较简单直接。这个策略主要用于在消费者和分区之间进行一种连续的范围分配。</p>
+<h3 id="工作原理："><a href="#工作原理：" class="headerlink" title="工作原理："></a>工作原理：</h3><ol>
+<li><strong>排序所有分区</strong>：首先，<code>RangeAssignor</code> 将所有的分区按照主题和分区号的顺序进行排序。</li>
+<li><strong>排序所有消费者</strong>：同样地，所有请求订阅的消费者也会被按照消费者ID进行排序。</li>
+<li><strong>分配分区</strong>：分配过程中，<code>RangeAssignor</code> 会将排序后的分区列表分成尽可能均等的N份（N是消费者的数量），每个消费者分得一份。对于不能均分的情况，靠前的消费者将分配到稍微多一点的分区。</li>
+</ol>
+<h3 id="分配示例："><a href="#分配示例：" class="headerlink" title="分配示例："></a>分配示例：</h3><p>假设有两个主题<code>A</code>和<code>B</code>，主题<code>A</code>有3个分区（<code>A0, A1, A2</code>），主题<code>B</code>有2个分区（<code>B0, B1</code>），共有5个分区。如果有两个消费者<code>C1</code>和<code>C2</code>:</p>
+<ul>
+<li>分区会被排序为：<code>A0, A1, A2, B0, B1</code></li>
+<li>消费者会被排序为：<code>C1, C2</code></li>
+<li>分区分配可能如下：<ul>
+<li><code>C1</code>：<code>A0, A1, B0</code>（前三个分区）</li>
+<li><code>C2</code>：<code>A2, B1</code>（后两个分区）</li>
+</ul>
+</li>
+</ul>
+<h3 id="特点和使用场景："><a href="#特点和使用场景：" class="headerlink" title="特点和使用场景："></a>特点和使用场景：</h3><ul>
+<li><strong>公平性</strong>：<code>RangeAssignor</code> 简单地尝试将分区均匀分配给每个消费者，这种方法算法简单，执行效率高。</li>
+<li><strong>适用性</strong>：当消费者数量较少或每个消费者处理能力相近时，这种分配方法相对公平。</li>
+<li><strong>缺点</strong>：在某些情况下，可能不是最优的负载均衡策略，特别是在分区数量不均匀分布于多个主题或消费者性能差异大的情况下。</li>
+</ul>
+<p>总之，<code>RangeAssignor</code> 提供了一种基础而直观的分区分配方式，适用于简单应用场景，但可能不适合需要复杂负载均衡或性能优化的高级场景。在实际使用中，选择合适的分配策略应根据具体的业务需求和消费者设置来定。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://guohaolu.github.io/2025/10/14/Kafka%E5%A0%86%E5%86%85%E5%AD%98%E4%B8%8EGC%E6%80%A7%E8%83%BD%E7%9A%84%E5%85%B3%E7%B3%BB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="guohao.lu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Guohao Lu's Blog">
+      <meta itemprop="description" content="分享技术，记录生活">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Guohao Lu's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/10/14/Kafka%E5%A0%86%E5%86%85%E5%AD%98%E4%B8%8EGC%E6%80%A7%E8%83%BD%E7%9A%84%E5%85%B3%E7%B3%BB/" class="post-title-link" itemprop="url">未命名</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-10-14 10:16:14" itemprop="dateCreated datePublished" datetime="2025-10-14T10:16:14+08:00">2025-10-14</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="Kafka堆内存与GC性能的关系"><a href="#Kafka堆内存与GC性能的关系" class="headerlink" title="Kafka堆内存与GC性能的关系"></a>Kafka堆内存与GC性能的关系</h1><ol>
+<li><strong>JVM内存特性</strong>(<a target="_blank" rel="noopener" href="https://docs.confluent.io/kafka/design/file-system-constant-time.html">1</a>)</li>
+</ol>
+<ul>
+<li>JVM对象开销大，通常是原始数据大小的2倍或更多</li>
+<li>堆内存越大，GC扫描和处理的对象越多</li>
+<li>Full GC时需要扫描整个堆空间</li>
+</ul>
+<ol start="2">
+<li><strong>Kafka的内存使用策略</strong></li>
+</ol>
+<ul>
+<li>不在JVM堆上缓存消息数据</li>
+<li>利用操作系统的页面缓存(Page Cache)</li>
+<li>主要使用堆内存存储元数据</li>
+</ul>
+<ol start="3">
+<li><p><strong>大堆内存的问题</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">举例：32GB堆内存的GC影响</span><br><span class="line">- Minor GC：扫描年轻代，可能需要100-200ms</span><br><span class="line">- Full GC：扫描整个堆，可能需要1-2s</span><br><span class="line">- GC期间：服务暂停，无法处理请求</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>最佳实践</strong></p>
+</li>
+</ol>
+<ul>
+<li>推荐堆内存配置：4-8GB</li>
+<li>剩余内存留给页面缓存</li>
+<li>配置示例：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 32GB物理内存的配置建议</span></span><br><span class="line">系统预留：4GB</span><br><span class="line">Kafka堆内存：6GB</span><br><span class="line">页面缓存：22GB</span><br></pre></td></tr></table></figure></li>
+</ul>
+<ol start="5">
+<li><strong>性能对比</strong><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">6GB堆内存 vs 24GB堆内存</span><br><span class="line">- GC频率：较高 vs 较低</span><br><span class="line">- GC时间：较短(~100ms) vs 较长(~1s)</span><br><span class="line">- 服务影响：短暂停顿 vs 长时间停顿</span><br><span class="line">- 页面缓存：更多 vs 更少</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://guohaolu.github.io/2025/10/14/List%E5%B7%A5%E5%85%B7%E7%B1%BB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="guohao.lu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Guohao Lu's Blog">
+      <meta itemprop="description" content="分享技术，记录生活">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Guohao Lu's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/10/14/List%E5%B7%A5%E5%85%B7%E7%B1%BB/" class="post-title-link" itemprop="url">未命名</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-10-14 10:16:14" itemprop="dateCreated datePublished" datetime="2025-10-14T10:16:14+08:00">2025-10-14</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="获取List最后一个元素的工具类方法"><a href="#获取List最后一个元素的工具类方法" class="headerlink" title="获取List最后一个元素的工具类方法"></a>获取List最后一个元素的工具类方法</h1><ol>
+<li><p><strong>Apache Commons Collections</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.apache.commons.collections4.CollectionUtils;</span><br><span class="line"></span><br><span class="line">List&lt;String&gt; list = Arrays.asList(<span class="string">&quot;a&quot;</span>, <span class="string">&quot;b&quot;</span>, <span class="string">&quot;c&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 方法1：使用CollectionUtils.get()</span></span><br><span class="line"><span class="type">String</span> <span class="variable">last</span> <span class="operator">=</span> CollectionUtils.get(list, list.size() - <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 方法2：使用ListUtils.defaultIfEmpty()</span></span><br><span class="line"><span class="type">String</span> <span class="variable">last</span> <span class="operator">=</span> ListUtils.defaultIfEmpty(list, Collections.emptyList())</span><br><span class="line">                      .get(list.size() - <span class="number">1</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>Google Guava</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> com.google.common.collect.Iterables;</span><br><span class="line"></span><br><span class="line">List&lt;String&gt; list = Arrays.asList(<span class="string">&quot;a&quot;</span>, <span class="string">&quot;b&quot;</span>, <span class="string">&quot;c&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 方法1：使用Iterables.getLast()</span></span><br><span class="line"><span class="type">String</span> <span class="variable">last</span> <span class="operator">=</span> Iterables.getLast(list);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 方法2：带默认值的方式</span></span><br><span class="line"><span class="type">String</span> <span class="variable">last</span> <span class="operator">=</span> Iterables.getLast(list, <span class="string">&quot;default&quot;</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>Java 8 Stream API</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; list = Arrays.asList(<span class="string">&quot;a&quot;</span>, <span class="string">&quot;b&quot;</span>, <span class="string">&quot;c&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 方法1：使用Stream</span></span><br><span class="line">Optional&lt;String&gt; last = list.stream().reduce((first, second) -&gt; second);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 方法2：使用skip</span></span><br><span class="line">Optional&lt;String&gt; last = list.stream()</span><br><span class="line">                           .skip(Math.max(<span class="number">0</span>, list.size() - <span class="number">1</span>))</span><br><span class="line">                           .findFirst();</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>最佳实践建议</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 推荐使用Guava的方式，代码最简洁且自带空值处理</span></span><br><span class="line"><span class="keyword">public</span> String <span class="title function_">getLastElement</span><span class="params">(List&lt;String&gt; list)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> Iterables.getLast(list, <span class="literal">null</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 如果需要返回Optional</span></span><br><span class="line"><span class="keyword">public</span> Optional&lt;String&gt; <span class="title function_">getLastElementSafe</span><span class="params">(List&lt;String&gt; list)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> Optional.ofNullable(Iterables.getLast(list, <span class="literal">null</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>注意事项</strong></p>
+</li>
+</ol>
+<ul>
+<li>所有方法在list为空时的处理：<ul>
+<li>Apache Commons：抛出IndexOutOfBoundsException</li>
+<li>Guava：如果没有默认值会抛出NoSuchElementException</li>
+<li>Stream：返回Optional.empty()</li>
+</ul>
+</li>
+<li>建议先判断list是否为空</li>
+<li>考虑是否需要返回Optional</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://guohaolu.github.io/2025/02/27/%E5%AD%90%E4%B8%B2%E7%B1%BB%E7%AE%97%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="guohao.lu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Guohao Lu's Blog">
+      <meta itemprop="description" content="分享技术，记录生活">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Guohao Lu's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/02/27/%E5%AD%90%E4%B8%B2%E7%B1%BB%E7%AE%97%E6%B3%95/" class="post-title-link" itemprop="url">子串类算法问题的分析思路</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-02-27 16:00:00" itemprop="dateCreated datePublished" datetime="2025-02-27T16:00:00+08:00">2025-02-27</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="解决思路"><a href="#解决思路" class="headerlink" title="解决思路"></a>解决思路</h2><ol>
+<li>暴力解法</li>
+<li>滑动窗口</li>
+<li>动态规划</li>
+</ol>
+<h2 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h2><ol>
+<li><p>最大子序和：连续、子串和最大</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dp[i]：以nums[i]为结尾的子串的最大和</span><br><span class="line">dp[i] = max(dp[i-1] + nums[i], nums[i])</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>最长回文子串：连续、子串为回文</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dp[i][j]：s[i]到s[j]是否为回文</span><br><span class="line">dp[i][j] = dp[i+1][j-1] &amp;&amp; s[i] == s[j]</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> <span class="variable">k</span> <span class="operator">=</span> <span class="number">0</span>; k &lt; s.length(); k++) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>, j = k; i &lt; s.length() &amp;&amp; j &lt; s.length(); i++, j++) &#123;</span><br><span class="line">        <span class="type">boolean</span> <span class="variable">isSym</span> <span class="operator">=</span> s.charAt(i) == s.charAt(j);</span><br><span class="line">        dp[i][j] = isSym &amp;&amp; ((j &lt;= (i + <span class="number">1</span>)) || (dp[i + <span class="number">1</span>][j - <span class="number">1</span>] == <span class="literal">true</span>));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://guohaolu.github.io/2025/02/27/%E6%9C%80%E5%A4%A7%E5%AD%90%E6%95%B0%E7%BB%84%E5%92%8C%E9%97%AE%E9%A2%98%E7%9A%84%E5%88%86%E6%9E%90%E6%80%9D%E8%B7%AF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="guohao.lu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Guohao Lu's Blog">
+      <meta itemprop="description" content="分享技术，记录生活">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Guohao Lu's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/02/27/%E6%9C%80%E5%A4%A7%E5%AD%90%E6%95%B0%E7%BB%84%E5%92%8C%E9%97%AE%E9%A2%98%E7%9A%84%E5%88%86%E6%9E%90%E6%80%9D%E8%B7%AF/" class="post-title-link" itemprop="url">最大子数组和问题的分析思路</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-02-27 16:00:00" itemprop="dateCreated datePublished" datetime="2025-02-27T16:00:00+08:00">2025-02-27</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>给定一个整数数组 nums，找出具有最大和的连续子数组（至少包含一个元素），返回其最大和。</p>
+<h2 id="分析思路"><a href="#分析思路" class="headerlink" title="分析思路"></a>分析思路</h2><h3 id="1-问题可视化"><a href="#1-问题可视化" class="headerlink" title="1. 问题可视化"></a>1. 问题可视化</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">示例数组: [-2, 1, -3, 4, -1, 2, 1, -5, 4]</span><br><span class="line"></span><br><span class="line">可视化表示:</span><br><span class="line">     ┌─┐</span><br><span class="line">     │4│</span><br><span class="line">     └─┘     ┌─┐</span><br><span class="line">┌─┐   │    ┌─┐│2│┌─┐</span><br><span class="line">│1│   │    │ ││ ││1│</span><br><span class="line">└─┘   │    └─┘└─┘└─┘     ┌─┐</span><br><span class="line">│     │     │     │      │4│</span><br><span class="line">└─────┴─────┴─────┴──────└─┘</span><br><span class="line">-2 1 -3  4  -1  2  1  -5  4</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-思路分析"><a href="#2-思路分析" class="headerlink" title="2. 思路分析"></a>2. 思路分析</h3><ol>
+<li><p><strong>局部最优解</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">位置i的最大子数组和有两种可能：</span><br><span class="line">┌────────────────┐</span><br><span class="line">│ 1. 加入前面的和 │</span><br><span class="line">└────────────────┘</span><br><span class="line">         或</span><br><span class="line">┌────────────┐</span><br><span class="line">│ 2. 从自己开始 │</span><br><span class="line">└────────────┘</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>状态转移</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">dp[i] = max(nums[i], dp[i-1] + nums[i])</span><br><span class="line"></span><br><span class="line">示意图：</span><br><span class="line">dp[i-1] &lt; 0  →  ┌─────┐</span><br><span class="line">                 │重新开始│</span><br><span class="line">                 └─────┘</span><br><span class="line"></span><br><span class="line">dp[i-1] &gt; 0  →  ┌─────┐</span><br><span class="line">                 │继续累加│</span><br><span class="line">                 └─────┘</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="3-解题思路图解"><a href="#3-解题思路图解" class="headerlink" title="3. 解题思路图解"></a>3. 解题思路图解</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">数组: [-2, 1, -3, 4, -1, 2, 1, -5, 4]</span><br><span class="line"></span><br><span class="line">步骤分析:</span><br><span class="line">1) -2: [-2]</span><br><span class="line">   └── 当前最大和: -2</span><br><span class="line"></span><br><span class="line">2) 1:  [-2, 1]</span><br><span class="line">   └── 重新开始: 1</span><br><span class="line"></span><br><span class="line">3) -3: [1, -3]</span><br><span class="line">   └── 继续累加: -2，重新开始</span><br><span class="line"></span><br><span class="line">4) 4:  [4]</span><br><span class="line">   └── 重新开始: 4</span><br><span class="line"></span><br><span class="line">5) -1: [4, -1]</span><br><span class="line">   └── 继续累加: 3</span><br><span class="line"></span><br><span class="line">6) 2:  [4, -1, 2]</span><br><span class="line">   └── 继续累加: 5</span><br><span class="line"></span><br><span class="line">7) 1:  [4, -1, 2, 1]</span><br><span class="line">   └── 继续累加: 6</span><br><span class="line"></span><br><span class="line">8) -5: [4, -1, 2, 1, -5]</span><br><span class="line">   └── 继续累加: 1</span><br><span class="line"></span><br><span class="line">9) 4:  [4, -1, 2, 1, -5, 4]</span><br><span class="line">   └── 继续累加: 5</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-关键观察"><a href="#4-关键观察" class="headerlink" title="4. 关键观察"></a>4. 关键观察</h3><ol>
+<li><p><strong>连续性质</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[a] → [a,b] → [a,b,c]</span><br><span class="line">     连续扩展</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>决策点</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">当前位置i的决策:</span><br><span class="line">┌─────────────┐</span><br><span class="line">│ 加入前面的和 │ ← dp[i-1] &gt; 0</span><br><span class="line">└─────────────┘</span><br><span class="line">┌─────────┐</span><br><span class="line">│ 重新开始 │ ← dp[i-1] ≤ 0</span><br><span class="line">└─────────┘</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="5-优化思路"><a href="#5-优化思路" class="headerlink" title="5. 优化思路"></a>5. 优化思路</h3><ol>
+<li><p><strong>空间优化</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">只需要记录:</span><br><span class="line">┌──────────┐    ┌──────────┐</span><br><span class="line">│当前最大和│ 和 │全局最大和│</span><br><span class="line">└──────────┘    └──────────┘</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>时间优化</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">一次遍历 → O(n)</span><br><span class="line">无需回溯</span><br><span class="line">无需额外空间</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ol>
+<li><p>问题的核心是理解：在每个位置，我们要决定是加入之前的和，还是重新开始。</p>
+</li>
+<li><p>使用动态规划思想，但可以优化为O(1)空间复杂度。</p>
+</li>
+<li><p>关键是理解局部最优和全局最优的关系。</p>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://guohaolu.github.io/2024/03/21/MPP%E6%9E%B6%E6%9E%84%E4%B8%8EMapReduce%E6%9E%B6%E6%9E%84%E7%9A%84%E6%B7%B1%E5%BA%A6%E5%AF%B9%E6%AF%94/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="guohao.lu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Guohao Lu's Blog">
+      <meta itemprop="description" content="分享技术，记录生活">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Guohao Lu's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/03/21/MPP%E6%9E%B6%E6%9E%84%E4%B8%8EMapReduce%E6%9E%B6%E6%9E%84%E7%9A%84%E6%B7%B1%E5%BA%A6%E5%AF%B9%E6%AF%94/" class="post-title-link" itemprop="url">MPP架构与MapReduce架构的深度对比</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-03-21 15:00:00" itemprop="dateCreated datePublished" datetime="2024-03-21T15:00:00+08:00">2024-03-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/" itemprop="url" rel="index"><span itemprop="name">架构设计</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="架构概览"><a href="#架构概览" class="headerlink" title="架构概览"></a>架构概览</h2><h3 id="MPP-Massive-Parallel-Processing"><a href="#MPP-Massive-Parallel-Processing" class="headerlink" title="MPP (Massive Parallel Processing)"></a>MPP (Massive Parallel Processing)</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">┌──────────────────────────────────────────────┐</span><br><span class="line">│               MPP 架构                        │</span><br><span class="line">│                                              │</span><br><span class="line">│  ┌─────────┐   ┌─────────┐   ┌─────────┐    │</span><br><span class="line">│  │ Node 1  │   │ Node 2  │   │ Node 3  │    │</span><br><span class="line">│  │ CPU     │   │ CPU     │   │ CPU     │    │</span><br><span class="line">│  │ Memory  │◄─►│ Memory  │◄─►│ Memory  │    │</span><br><span class="line">│  │ Storage │   │ Storage │   │ Storage │    │</span><br><span class="line">│  └─────────┘   └─────────┘   └─────────┘    │</span><br><span class="line">│        ▲            ▲            ▲           │</span><br><span class="line">│        └────────────┴────────────┘           │</span><br><span class="line">│              高速互联网络                     │</span><br><span class="line">└──────────────────────────────────────────────┘</span><br></pre></td></tr></table></figure>
+
+<h3 id="MapReduce"><a href="#MapReduce" class="headerlink" title="MapReduce"></a>MapReduce</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">┌──────────────────────────────────────────────┐</span><br><span class="line">│             MapReduce 架构                    │</span><br><span class="line">│                                              │</span><br><span class="line">│  ┌─────────┐   ┌─────────┐   ┌─────────┐    │</span><br><span class="line">│  │ Map 1   │   │ Map 2   │   │ Map 3   │    │</span><br><span class="line">│  └────┬────┘   └────┬────┘   └────┬────┘    │</span><br><span class="line">│       │             │              │         │</span><br><span class="line">│  ┌────▼────┐   ┌────▼────┐   ┌────▼────┐    │</span><br><span class="line">│  │Shuffle 1│   │Shuffle 2│   │Shuffle 3│    │</span><br><span class="line">│  └────┬────┘   └────┬────┘   └────┬────┘    │</span><br><span class="line">│       │             │              │         │</span><br><span class="line">│  ┌────▼────┐   ┌────▼────┐   ┌────▼────┐    │</span><br><span class="line">│  │Reduce 1 │   │Reduce 2 │   │Reduce 3 │    │</span><br><span class="line">│  └─────────┘   └─────────┘   └─────────┘    │</span><br><span class="line">└──────────────────────────────────────────────┘</span><br></pre></td></tr></table></figure>
+
+<h2 id="核心区别"><a href="#核心区别" class="headerlink" title="核心区别"></a>核心区别</h2><h3 id="1-数据处理模式"><a href="#1-数据处理模式" class="headerlink" title="1. 数据处理模式"></a>1. 数据处理模式</h3><h4 id="MPP"><a href="#MPP" class="headerlink" title="MPP"></a>MPP</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// MPP数据处理示例</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MPPProcessor</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">processQuery</span><span class="params">(String sql)</span> &#123;</span><br><span class="line">        <span class="comment">// 1. 并行分发查询</span></span><br><span class="line">        List&lt;Node&gt; nodes = getAvailableNodes();</span><br><span class="line">        CompletableFuture&lt;?&gt;[] futures = nodes.stream()</span><br><span class="line">            .map(node -&gt; CompletableFuture.runAsync(() -&gt; &#123;</span><br><span class="line">                <span class="comment">// 每个节点并行执行相同的查询</span></span><br><span class="line">                node.executeQuery(sql);</span><br><span class="line">            &#125;))</span><br><span class="line">            .toArray(CompletableFuture[]::<span class="keyword">new</span>);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 2. 等待所有节点执行完成</span></span><br><span class="line">        CompletableFuture.allOf(futures).join();</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 3. 合并结果</span></span><br><span class="line">        mergeResults(nodes);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="MapReduce-1"><a href="#MapReduce-1" class="headerlink" title="MapReduce"></a>MapReduce</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// MapReduce处理示例</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MapReduceProcessor</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">processData</span><span class="params">(List&lt;String&gt; input)</span> &#123;</span><br><span class="line">        <span class="comment">// 1. Map阶段</span></span><br><span class="line">        Map&lt;String, List&lt;String&gt;&gt; mappedData = input.stream()</span><br><span class="line">            .parallel()</span><br><span class="line">            .map(<span class="built_in">this</span>::mapFunction)</span><br><span class="line">            .collect(Collectors.groupingBy(MapResult::getKey));</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 2. Shuffle阶段</span></span><br><span class="line">        shuffleData(mappedData);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 3. Reduce阶段</span></span><br><span class="line">        List&lt;String&gt; result = mappedData.entrySet().stream()</span><br><span class="line">            .parallel()</span><br><span class="line">            .map(entry -&gt; reduceFunction(entry.getKey(), entry.getValue()))</span><br><span class="line">            .collect(Collectors.toList());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-数据交互方式"><a href="#2-数据交互方式" class="headerlink" title="2. 数据交互方式"></a>2. 数据交互方式</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">MPP数据交互：</span><br><span class="line">┌────────┐     ┌────────┐</span><br><span class="line">│Node 1  │◄───►│Node 2  │  实时数据交换</span><br><span class="line">└────────┘     └────────┘</span><br><span class="line"></span><br><span class="line">MapReduce数据交互：</span><br><span class="line">┌────────┐     ┌────────┐     ┌────────┐</span><br><span class="line">│Map     │────►│Shuffle │────►│Reduce  │  阶段性数据传输</span><br><span class="line">└────────┘     └────────┘     └────────┘</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-资源管理"><a href="#3-资源管理" class="headerlink" title="3. 资源管理"></a>3. 资源管理</h3><h4 id="MPP-1"><a href="#MPP-1" class="headerlink" title="MPP"></a>MPP</h4><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># MPP资源配置示例</span></span><br><span class="line"><span class="attr">cluster:</span></span><br><span class="line">  <span class="attr">nodes:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">id:</span> <span class="string">node1</span></span><br><span class="line">      <span class="attr">cpu:</span> <span class="number">16</span></span><br><span class="line">      <span class="attr">memory:</span> <span class="string">64GB</span></span><br><span class="line">      <span class="attr">storage:</span> <span class="string">2TB</span></span><br><span class="line">      <span class="attr">network:</span> <span class="string">10Gbps</span></span><br><span class="line">  <span class="attr">interconnect:</span></span><br><span class="line">    <span class="attr">type:</span> <span class="string">InfiniBand</span></span><br><span class="line">    <span class="attr">bandwidth:</span> <span class="string">100Gbps</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="MapReduce-2"><a href="#MapReduce-2" class="headerlink" title="MapReduce"></a>MapReduce</h4><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># MapReduce资源配置示例</span></span><br><span class="line"><span class="attr">job:</span></span><br><span class="line">  <span class="attr">mappers:</span> <span class="number">100</span></span><br><span class="line">  <span class="attr">reducers:</span> <span class="number">20</span></span><br><span class="line">  <span class="attr">resources:</span></span><br><span class="line">    <span class="attr">map:</span></span><br><span class="line">      <span class="attr">cpu:</span> <span class="number">2</span></span><br><span class="line">      <span class="attr">memory:</span> <span class="string">4GB</span></span><br><span class="line">    <span class="attr">reduce:</span></span><br><span class="line">      <span class="attr">cpu:</span> <span class="number">4</span></span><br><span class="line">      <span class="attr">memory:</span> <span class="string">8GB</span></span><br><span class="line">  <span class="attr">intermediate:</span></span><br><span class="line">    <span class="attr">compression:</span> <span class="literal">true</span></span><br><span class="line">    <span class="attr">storage:</span> <span class="string">HDFS</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="性能对比"><a href="#性能对比" class="headerlink" title="性能对比"></a>性能对比</h2><h3 id="1-延迟比较"><a href="#1-延迟比较" class="headerlink" title="1. 延迟比较"></a>1. 延迟比较</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">响应时间对比：</span><br><span class="line">MPP:        ├────────┤ (毫秒级)</span><br><span class="line">MapReduce:  ├────────────────────┤ (分钟级)</span><br><span class="line"></span><br><span class="line">适用场景：</span><br><span class="line">MPP: 实时分析、交互式查询</span><br><span class="line">MapReduce: 批量处理、大规模ETL</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-扩展性对比"><a href="#2-扩展性对比" class="headerlink" title="2. 扩展性对比"></a>2. 扩展性对比</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">节点扩展效果：</span><br><span class="line"></span><br><span class="line">MPP扩展：</span><br><span class="line">性能 ─────────►</span><br><span class="line">节点数 ─────────►</span><br><span class="line">(近似线性扩展，但有上限)</span><br><span class="line"></span><br><span class="line">MapReduce扩展：</span><br><span class="line">性能 ─────────────►</span><br><span class="line">节点数 ─────────────►</span><br><span class="line">(可以持续线性扩展)</span><br></pre></td></tr></table></figure>
+
+<h2 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h2><h3 id="MPP最适合："><a href="#MPP最适合：" class="headerlink" title="MPP最适合："></a>MPP最适合：</h3><ol>
+<li>OLAP分析场景</li>
+<li>实时数据仓库</li>
+<li>交互式查询</li>
+<li>复杂SQL处理</li>
+</ol>
+<h3 id="MapReduce最适合："><a href="#MapReduce最适合：" class="headerlink" title="MapReduce最适合："></a>MapReduce最适合：</h3><ol>
+<li>大规模数据批处理</li>
+<li>ETL作业</li>
+<li>日志分析</li>
+<li>数据清洗</li>
+</ol>
+<h2 id="选型建议"><a href="#选型建议" class="headerlink" title="选型建议"></a>选型建议</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ArchitectureSelector</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">selectArchitecture</span><span class="params">(Requirements req)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (req.needsRealTimeProcessing() &amp;&amp; </span><br><span class="line">            req.dataSize() &lt; <span class="number">100_000_000</span> &amp;&amp; </span><br><span class="line">            req.requiresComplexSQL()) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&quot;MPP&quot;</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (req.isBatchProcessing() &amp;&amp; </span><br><span class="line">                   req.dataSize() &gt; <span class="number">1_000_000_000</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&quot;MapReduce&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;Need further analysis&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="总结对比表"><a href="#总结对比表" class="headerlink" title="总结对比表"></a>总结对比表</h2><table>
+<thead>
+<tr>
+<th>特性</th>
+<th>MPP</th>
+<th>MapReduce</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>处理模式</td>
+<td>并行处理</td>
+<td>分阶段处理</td>
+</tr>
+<tr>
+<td>数据交互</td>
+<td>实时</td>
+<td>阶段性</td>
+</tr>
+<tr>
+<td>延迟</td>
+<td>毫秒级</td>
+<td>分钟级</td>
+</tr>
+<tr>
+<td>扩展性</td>
+<td>有限制</td>
+<td>近乎无限</td>
+</tr>
+<tr>
+<td>适用场景</td>
+<td>实时分析</td>
+<td>批处理</td>
+</tr>
+<tr>
+<td>数据规模</td>
+<td>GB~TB</td>
+<td>TB~PB</td>
+</tr>
+<tr>
+<td>计算复杂度</td>
+<td>高</td>
+<td>中等</td>
+</tr>
+<tr>
+<td>资源消耗</td>
+<td>较大</td>
+<td>可控</td>
+</tr>
+</tbody></table>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://guohaolu.github.io/2024/03/21/Redis%E7%83%ADkey%E5%8A%A8%E6%80%81%E8%AF%86%E5%88%AB%E4%B8%8E%E6%9C%AC%E5%9C%B0%E7%BC%93%E5%AD%98%E6%96%B9%E6%A1%88/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="guohao.lu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Guohao Lu's Blog">
+      <meta itemprop="description" content="分享技术，记录生活">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Guohao Lu's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/03/21/Redis%E7%83%ADkey%E5%8A%A8%E6%80%81%E8%AF%86%E5%88%AB%E4%B8%8E%E6%9C%AC%E5%9C%B0%E7%BC%93%E5%AD%98%E6%96%B9%E6%A1%88/" class="post-title-link" itemprop="url">Redis热key动态识别与本地缓存方案</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-03-21 14:00:00" itemprop="dateCreated datePublished" datetime="2024-03-21T14:00:00+08:00">2024-03-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/" itemprop="url" rel="index"><span itemprop="name">中间件</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="热key识别方案"><a href="#热key识别方案" class="headerlink" title="热key识别方案"></a>热key识别方案</h2><h3 id="1-客户端采样统计"><a href="#1-客户端采样统计" class="headerlink" title="1. 客户端采样统计"></a>1. 客户端采样统计</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Slf4j</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">HotKeyDetector</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> LoadingCache&lt;String, LongAdder&gt; keyCounterCache = CacheBuilder.newBuilder()</span><br><span class="line">        .expireAfterWrite(<span class="number">1</span>, TimeUnit.MINUTES)</span><br><span class="line">        .build(<span class="keyword">new</span> <span class="title class_">CacheLoader</span>&lt;String, LongAdder&gt;() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="keyword">public</span> LongAdder <span class="title function_">load</span><span class="params">(String key)</span> &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">LongAdder</span>();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 采样率1%</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">double</span> <span class="variable">SAMPLE_RATE</span> <span class="operator">=</span> <span class="number">0.01</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">recordKeyAccess</span><span class="params">(String key)</span> &#123;</span><br><span class="line">        <span class="comment">// 采样统计</span></span><br><span class="line">        <span class="keyword">if</span> (ThreadLocalRandom.current().nextDouble() &lt; SAMPLE_RATE) &#123;</span><br><span class="line">            keyCounterCache.getUnchecked(key).increment();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 定时任务，每分钟统计热key</span></span><br><span class="line">    <span class="meta">@Scheduled(fixedRate = 60000)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">detectHotKeys</span><span class="params">()</span> &#123;</span><br><span class="line">        Map&lt;String, LongAdder&gt; counters = keyCounterCache.asMap();</span><br><span class="line">        <span class="comment">// 按访问量排序，取Top N</span></span><br><span class="line">        List&lt;Map.Entry&lt;String, LongAdder&gt;&gt; hotKeys = counters.entrySet().stream()</span><br><span class="line">            .sorted((e1, e2) -&gt; Long.compare(e2.getValue().sum(), e1.getValue().sum()))</span><br><span class="line">            .limit(<span class="number">100</span>)</span><br><span class="line">            .collect(Collectors.toList());</span><br><span class="line">            </span><br><span class="line">        <span class="comment">// 推送到本地缓存</span></span><br><span class="line">        updateLocalCache(hotKeys);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-Redis-Server端监控"><a href="#2-Redis-Server端监控" class="headerlink" title="2. Redis Server端监控"></a>2. Redis Server端监控</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">┌─────────────┐    ┌─────────────┐    ┌─────────────┐</span><br><span class="line">│Redis Monitor│---&gt;│日志分析服务  │---&gt;│热key计算    │</span><br><span class="line">└─────────────┘    └─────────────┘    └─────────────┘</span><br><span class="line">                                            │</span><br><span class="line">                                            ▼</span><br><span class="line">                                    ┌─────────────┐</span><br><span class="line">                                    │本地缓存更新  │</span><br><span class="line">                                    └─────────────┘</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Redis MONITOR命令采样</span></span><br><span class="line">redis-cli MONITOR | grep -v <span class="string">&quot;PING&quot;</span> | awk <span class="string">&#x27;&#123;print $4&#125;&#x27;</span> | <span class="built_in">sort</span> | <span class="built_in">uniq</span> -c | <span class="built_in">sort</span> -nr | <span class="built_in">head</span> -n 10</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-代理层统计"><a href="#3-代理层统计" class="headerlink" title="3. 代理层统计"></a>3. 代理层统计</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Aspect</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">RedisAccessAspect</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">int</span> <span class="variable">WINDOW_SIZE_SECONDS</span> <span class="operator">=</span> <span class="number">60</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">TimeWindowCounter</span> <span class="variable">counter</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">TimeWindowCounter</span>(WINDOW_SIZE_SECONDS);</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Around(&quot;execution(* org.springframework.data.redis.core.RedisTemplate.*(..))&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> Object <span class="title function_">around</span><span class="params">(ProceedingJoinPoint point)</span> <span class="keyword">throws</span> Throwable &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">key</span> <span class="operator">=</span> extractKey(point);</span><br><span class="line">        counter.increment(key);</span><br><span class="line">        <span class="keyword">return</span> point.proceed();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">TimeWindowCounter</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> Queue&lt;Map&lt;String, AtomicInteger&gt;&gt; windows = <span class="keyword">new</span> <span class="title class_">LinkedList</span>&lt;&gt;();</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="type">int</span> windowSize;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">increment</span><span class="params">(String key)</span> &#123;</span><br><span class="line">        getCurrentWindow().computeIfAbsent(key, k -&gt; <span class="keyword">new</span> <span class="title class_">AtomicInteger</span>()).incrementAndGet();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> Map&lt;String, Integer&gt; <span class="title function_">getTopKeys</span><span class="params">(<span class="type">int</span> n)</span> &#123;</span><br><span class="line">        <span class="comment">// 合并所有时间窗口的统计数据</span></span><br><span class="line">        <span class="keyword">return</span> mergeWindows().entrySet().stream()</span><br><span class="line">            .sorted((e1, e2) -&gt; e2.getValue().compareTo(e1.getValue()))</span><br><span class="line">            .limit(n)</span><br><span class="line">            .collect(Collectors.toMap(</span><br><span class="line">                Map.Entry::getKey,</span><br><span class="line">                Map.Entry::getValue,</span><br><span class="line">                (v1, v2) -&gt; v1,</span><br><span class="line">                LinkedHashMap::<span class="keyword">new</span></span><br><span class="line">            ));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="大key识别方案"><a href="#大key识别方案" class="headerlink" title="大key识别方案"></a>大key识别方案</h2><h3 id="1-Redis命令扫描"><a href="#1-Redis命令扫描" class="headerlink" title="1. Redis命令扫描"></a>1. Redis命令扫描</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用SCAN命令渐进式扫描</span></span><br><span class="line">redis-cli --bigkeys -i 0.1</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-自定义扫描工具"><a href="#2-自定义扫描工具" class="headerlink" title="2. 自定义扫描工具"></a>2. 自定义扫描工具</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">BigKeyScanner</span> &#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> RedisTemplate&lt;String, Object&gt; redisTemplate;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> List&lt;KeySize&gt; <span class="title function_">scanBigKeys</span><span class="params">(<span class="type">int</span> threshold)</span> &#123;</span><br><span class="line">        List&lt;KeySize&gt; bigKeys = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">        <span class="type">ScanOptions</span> <span class="variable">options</span> <span class="operator">=</span> ScanOptions.scanOptions().count(<span class="number">100</span>).build();</span><br><span class="line">        Cursor&lt;String&gt; cursor = redisTemplate.scan(options);</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span>(cursor.hasNext()) &#123;</span><br><span class="line">            <span class="type">String</span> <span class="variable">key</span> <span class="operator">=</span> cursor.next();</span><br><span class="line">            <span class="type">long</span> <span class="variable">size</span> <span class="operator">=</span> getKeySize(key);</span><br><span class="line">            <span class="keyword">if</span> (size &gt; threshold) &#123;</span><br><span class="line">                bigKeys.add(<span class="keyword">new</span> <span class="title class_">KeySize</span>(key, size));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> bigKeys;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> <span class="type">long</span> <span class="title function_">getKeySize</span><span class="params">(String key)</span> &#123;</span><br><span class="line">        <span class="type">DataType</span> <span class="variable">type</span> <span class="operator">=</span> redisTemplate.type(key);</span><br><span class="line">        <span class="keyword">switch</span> (type) &#123;</span><br><span class="line">            <span class="keyword">case</span> STRING:</span><br><span class="line">                <span class="keyword">return</span> redisTemplate.opsForValue().get(key).toString().length();</span><br><span class="line">            <span class="keyword">case</span> HASH:</span><br><span class="line">                <span class="keyword">return</span> redisTemplate.opsForHash().size(key);</span><br><span class="line">            <span class="keyword">case</span> LIST:</span><br><span class="line">                <span class="keyword">return</span> redisTemplate.opsForList().size(key);</span><br><span class="line">            <span class="keyword">case</span> SET:</span><br><span class="line">                <span class="keyword">return</span> redisTemplate.opsForSet().size(key);</span><br><span class="line">            <span class="keyword">case</span> ZSET:</span><br><span class="line">                <span class="keyword">return</span> redisTemplate.opsForZSet().size(key);</span><br><span class="line">            <span class="keyword">default</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="本地缓存优化方案"><a href="#本地缓存优化方案" class="headerlink" title="本地缓存优化方案"></a>本地缓存优化方案</h2><h3 id="1-多级缓存架构"><a href="#1-多级缓存架构" class="headerlink" title="1. 多级缓存架构"></a>1. 多级缓存架构</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">请求 --&gt; 本地缓存(Caffeine) --&gt; Redis集群 --&gt; 数据库</span><br><span class="line">     │                      │</span><br><span class="line">     │                      │</span><br><span class="line">     └──────────────────────┘</span><br><span class="line">          热key直接返回</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-本地缓存实现"><a href="#2-本地缓存实现" class="headerlink" title="2. 本地缓存实现"></a>2. 本地缓存实现</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MultiLevelCache</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> LoadingCache&lt;String, Object&gt; localCache = Caffeine.newBuilder()</span><br><span class="line">        .maximumSize(<span class="number">10000</span>)</span><br><span class="line">        .expireAfterWrite(<span class="number">5</span>, TimeUnit.MINUTES)</span><br><span class="line">        .recordStats()</span><br><span class="line">        .build(key -&gt; <span class="literal">null</span>); <span class="comment">// 缓存未命中时返回null</span></span><br><span class="line">        </span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> RedisTemplate&lt;String, Object&gt; redisTemplate;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> Object <span class="title function_">get</span><span class="params">(String key)</span> &#123;</span><br><span class="line">        <span class="comment">// 1. 查询本地缓存</span></span><br><span class="line">        <span class="type">Object</span> <span class="variable">value</span> <span class="operator">=</span> localCache.getIfPresent(key);</span><br><span class="line">        <span class="keyword">if</span> (value != <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> value;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 2. 查询Redis</span></span><br><span class="line">        value = redisTemplate.opsForValue().get(key);</span><br><span class="line">        <span class="keyword">if</span> (value != <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="comment">// 如果是热key，放入本地缓存</span></span><br><span class="line">            <span class="keyword">if</span> (isHotKey(key)) &#123;</span><br><span class="line">                localCache.put(key, value);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> value;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> <span class="type">boolean</span> <span class="title function_">isHotKey</span><span class="params">(String key)</span> &#123;</span><br><span class="line">        <span class="comment">// 从热key统计结果中判断</span></span><br><span class="line">        <span class="keyword">return</span> HotKeyDetector.isHot(key);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-缓存一致性保证"><a href="#3-缓存一致性保证" class="headerlink" title="3. 缓存一致性保证"></a>3. 缓存一致性保证</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">CacheConsistencyManager</span> &#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> MultiLevelCache multiLevelCache;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 监听数据变更消息</span></span><br><span class="line">    <span class="meta">@KafkaListener(topics = &quot;cache-update&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">handleCacheUpdate</span><span class="params">(CacheUpdateMessage message)</span> &#123;</span><br><span class="line">        <span class="comment">// 删除本地缓存</span></span><br><span class="line">        multiLevelCache.evict(message.getKey());</span><br><span class="line">        <span class="comment">// 更新Redis缓存</span></span><br><span class="line">        multiLevelCache.refreshRedis(message.getKey());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="监控指标"><a href="#监控指标" class="headerlink" title="监控指标"></a>监控指标</h2><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">metrics:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">&quot;hot_key_count&quot;</span></span><br><span class="line">    <span class="attr">type:</span> <span class="string">&quot;gauge&quot;</span></span><br><span class="line">    <span class="attr">labels:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;key&quot;</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;qps&quot;</span></span><br><span class="line">      </span><br><span class="line">  <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">&quot;big_key_size&quot;</span></span><br><span class="line">    <span class="attr">type:</span> <span class="string">&quot;gauge&quot;</span></span><br><span class="line">    <span class="attr">labels:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;key&quot;</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;size&quot;</span></span><br><span class="line">      </span><br><span class="line">  <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">&quot;local_cache_hit_rate&quot;</span></span><br><span class="line">    <span class="attr">type:</span> <span class="string">&quot;gauge&quot;</span></span><br><span class="line">    <span class="attr">labels:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;application&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="最佳实践"><a href="#最佳实践" class="headerlink" title="最佳实践"></a>最佳实践</h2><ol>
+<li><p><strong>采样率控制</strong></p>
+<ul>
+<li>客户端采样率动态调整</li>
+<li>重点监控高QPS时段</li>
+</ul>
+</li>
+<li><p><strong>本地缓存策略</strong></p>
+<ul>
+<li>仅缓存热key</li>
+<li>设置合理的过期时间</li>
+<li>控制缓存数量</li>
+</ul>
+</li>
+<li><p><strong>一致性保证</strong></p>
+<ul>
+<li>消息队列通知更新</li>
+<li>定时刷新机制</li>
+<li>版本号控制</li>
+</ul>
+</li>
+<li><p><strong>监控告警</strong></p>
+<ul>
+<li>热key变化趋势</li>
+<li>内存使用监控</li>
+<li>缓存命中率监控</li>
+</ul>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://guohaolu.github.io/2024/03/21/Redis%E7%BC%93%E5%AD%98%E5%87%BB%E7%A9%BF%E9%97%AE%E9%A2%98%E7%9A%84%E7%B4%A7%E6%80%A5%E5%A4%84%E7%90%86%E4%B8%8E%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="guohao.lu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Guohao Lu's Blog">
+      <meta itemprop="description" content="分享技术，记录生活">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Guohao Lu's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/03/21/Redis%E7%BC%93%E5%AD%98%E5%87%BB%E7%A9%BF%E9%97%AE%E9%A2%98%E7%9A%84%E7%B4%A7%E6%80%A5%E5%A4%84%E7%90%86%E4%B8%8E%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/" class="post-title-link" itemprop="url">Redis缓存击穿问题的紧急处理与最佳实践</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-03-21 11:00:00" itemprop="dateCreated datePublished" datetime="2024-03-21T11:00:00+08:00">2024-03-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/" itemprop="url" rel="index"><span itemprop="name">中间件</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="问题背景"><a href="#问题背景" class="headerlink" title="问题背景"></a>问题背景</h2><p>在一次线上故障中，某热门商品的缓存key恰好过期，导致大量请求直接击穿到数据库，引发系统性能问题。本文将详细分析处理过程和解决方案。</p>
+<h2 id="故障现象"><a href="#故障现象" class="headerlink" title="故障现象"></a>故障现象</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">┌──────────┐         ┌──────────┐         ┌──────────┐</span><br><span class="line">│  用户请求 │ ──────&gt; │  Redis   │ ──────&gt; │  数据库  │</span><br><span class="line">└──────────┘         └──────────┘         └──────────┘</span><br><span class="line">     │                    ×                    !!!</span><br><span class="line">     │                缓存失效              QPS暴增</span><br><span class="line">     │                                    响应变慢</span><br><span class="line">     └─────────────────────────────────────────┘</span><br><span class="line">              大量请求直接访问数据库</span><br></pre></td></tr></table></figure>
+
+<p>主要表现：</p>
+<ol>
+<li>Redis某个key突然失效</li>
+<li>大量并发请求涌入数据库</li>
+<li>数据库CPU使用率飙升</li>
+<li>系统响应时间显著增加</li>
+</ol>
+<h2 id="紧急处理流程"><a href="#紧急处理流程" class="headerlink" title="紧急处理流程"></a>紧急处理流程</h2><h3 id="1-数据库限流保护"><a href="#1-数据库限流保护" class="headerlink" title="1. 数据库限流保护"></a>1. 数据库限流保护</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Slf4j</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">DbProtector</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">RateLimiter</span> <span class="variable">rateLimiter</span> <span class="operator">=</span> RateLimiter.create(<span class="number">100.0</span>); <span class="comment">// 限制QPS为100</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> Product <span class="title function_">queryProduct</span><span class="params">(Long productId)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (!rateLimiter.tryAcquire()) &#123;</span><br><span class="line">            log.warn(<span class="string">&quot;数据库访问被限流，productId: &#123;&#125;&quot;</span>, productId);</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">RuntimeException</span>(<span class="string">&quot;系统繁忙，请稍后重试&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> productMapper.selectById(productId);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-问题商品下线"><a href="#2-问题商品下线" class="headerlink" title="2. 问题商品下线"></a>2. 问题商品下线</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">┌─────────────┐    ┌─────────────┐    ┌─────────────┐</span><br><span class="line">│ 运维平台     │---&gt;│ 配置中心    │---&gt;│ 应用服务    │</span><br><span class="line">└─────────────┘    └─────────────┘    └─────────────┘</span><br><span class="line">      │                                      │</span><br><span class="line">      │                                      │</span><br><span class="line">      └──────────────────────────────────────┘</span><br><span class="line">             更新商品状态为&quot;已下线&quot;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-手动Mock缓存"><a href="#3-手动Mock缓存" class="headerlink" title="3. 手动Mock缓存"></a>3. 手动Mock缓存</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">CacheRecoveryService</span> &#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> RedisTemplate redisTemplate;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">mockProductCache</span><span class="params">(Long productId, Product product)</span> &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">cacheKey</span> <span class="operator">=</span> <span class="string">&quot;product:&quot;</span> + productId;</span><br><span class="line">        <span class="comment">// 设置较短的过期时间，便于后续恢复</span></span><br><span class="line">        redisTemplate.opsForValue().set(cacheKey, product, <span class="number">5</span>, TimeUnit.MINUTES);</span><br><span class="line">        log.info(<span class="string">&quot;Mock cache success for productId: &#123;&#125;&quot;</span>, productId);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-重启服务"><a href="#4-重启服务" class="headerlink" title="4. 重启服务"></a>4. 重启服务</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">分批重启流程：</span><br><span class="line">┌────────────┐     ┌────────────┐     ┌────────────┐</span><br><span class="line">│  实例1下线  │ --&gt; │  实例2下线  │ --&gt; │  实例3下线  │</span><br><span class="line">└────────────┘     └────────────┘     └────────────┘</span><br><span class="line">      │                  │                  │</span><br><span class="line">      ▼                  ▼                  ▼</span><br><span class="line">┌────────────┐     ┌────────────┐     ┌────────────┐</span><br><span class="line">│  实例1上线  │ --&gt; │  实例2上线  │ --&gt; │  实例3上线  │</span><br><span class="line">└────────────┘     └────────────┘     └────────────┘</span><br></pre></td></tr></table></figure>
+
+<h2 id="长期解决方案"><a href="#长期解决方案" class="headerlink" title="长期解决方案"></a>长期解决方案</h2><h3 id="1-缓存预热"><a href="#1-缓存预热" class="headerlink" title="1. 缓存预热"></a>1. 缓存预热</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">CacheWarmer</span> &#123;</span><br><span class="line">    <span class="meta">@Scheduled(cron = &quot;0 0 3 * * ?&quot;)</span>  <span class="comment">// 每天凌晨3点执行</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">warmHotProducts</span><span class="params">()</span> &#123;</span><br><span class="line">        List&lt;Long&gt; hotProductIds = getHotProductIds();</span><br><span class="line">        <span class="keyword">for</span> (Long productId : hotProductIds) &#123;</span><br><span class="line">            <span class="type">Product</span> <span class="variable">product</span> <span class="operator">=</span> productService.getById(productId);</span><br><span class="line">            cacheService.setProductCache(productId, product);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-双重检查锁防击穿"><a href="#2-双重检查锁防击穿" class="headerlink" title="2. 双重检查锁防击穿"></a>2. 双重检查锁防击穿</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> Product <span class="title function_">getProduct</span><span class="params">(Long productId)</span> &#123;</span><br><span class="line">    <span class="type">String</span> <span class="variable">cacheKey</span> <span class="operator">=</span> <span class="string">&quot;product:&quot;</span> + productId;</span><br><span class="line">    <span class="type">Product</span> <span class="variable">product</span> <span class="operator">=</span> redisTemplate.opsForValue().get(cacheKey);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (product == <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">lockKey</span> <span class="operator">=</span> <span class="string">&quot;lock:&quot;</span> + productId;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">// 获取分布式锁</span></span><br><span class="line">            <span class="keyword">if</span> (redisTemplate.opsForValue().setIfAbsent(lockKey, <span class="string">&quot;1&quot;</span>, <span class="number">10</span>, TimeUnit.SECONDS)) &#123;</span><br><span class="line">                <span class="comment">// 双重检查</span></span><br><span class="line">                product = redisTemplate.opsForValue().get(cacheKey);</span><br><span class="line">                <span class="keyword">if</span> (product == <span class="literal">null</span>) &#123;</span><br><span class="line">                    product = productMapper.selectById(productId);</span><br><span class="line">                    redisTemplate.opsForValue().set(cacheKey, product, <span class="number">1</span>, TimeUnit.HOURS);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            redisTemplate.delete(lockKey);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> product;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-缓存降级方案"><a href="#3-缓存降级方案" class="headerlink" title="3. 缓存降级方案"></a>3. 缓存降级方案</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">正常访问流程：</span><br><span class="line">┌──────────┐     ┌──────────┐     ┌──────────┐</span><br><span class="line">│   请求    │ --&gt; │  Redis   │ --&gt; │  数据库   │</span><br><span class="line">└──────────┘     └──────────┘     └──────────┘</span><br><span class="line"></span><br><span class="line">降级后流程：</span><br><span class="line">┌──────────┐     ┌──────────┐     ┌──────────┐</span><br><span class="line">│   请求    │ --&gt; │ 本地缓存  │ --&gt; │  数据库   │</span><br><span class="line">└──────────┘     └──────────┘     └──────────┘</span><br></pre></td></tr></table></figure>
+
+<h2 id="监控预警"><a href="#监控预警" class="headerlink" title="监控预警"></a>监控预警</h2><ol>
+<li><p><strong>缓存监控指标</strong>：</p>
+<ul>
+<li>缓存命中率</li>
+<li>缓存过期监控</li>
+<li>数据库QPS监控</li>
+</ul>
+</li>
+<li><p><strong>告警规则</strong>：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">rules:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">&quot;缓存击穿告警&quot;</span></span><br><span class="line">    <span class="attr">conditions:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">metric:</span> <span class="string">&quot;cache.miss.rate&quot;</span></span><br><span class="line">        <span class="attr">threshold:</span> <span class="number">80</span><span class="string">%</span>  <span class="comment"># 缓存未命中率超过80%</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">metric:</span> <span class="string">&quot;db.qps&quot;</span></span><br><span class="line">        <span class="attr">threshold:</span> <span class="number">1000</span> <span class="comment"># 数据库QPS超过1000</span></span><br><span class="line">    <span class="attr">duration:</span> <span class="string">&quot;1m&quot;</span>     <span class="comment"># 持续1分钟</span></span><br><span class="line">    <span class="attr">severity:</span> <span class="string">&quot;critical&quot;</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="经验总结"><a href="#经验总结" class="headerlink" title="经验总结"></a>经验总结</h2><ol>
+<li><p><strong>预防措施</strong>：</p>
+<ul>
+<li>热点数据永不过期</li>
+<li>定时缓存预热</li>
+<li>多级缓存设计</li>
+</ul>
+</li>
+<li><p><strong>应急处理</strong>：</p>
+<ul>
+<li>及时限流保护</li>
+<li>快速恢复服务</li>
+<li>分批重启降低影响</li>
+</ul>
+</li>
+<li><p><strong>长期规划</strong>：</p>
+<ul>
+<li>完善监控体系</li>
+<li>建立降级方案</li>
+<li>优化缓存策略</li>
+</ul>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://guohaolu.github.io/2024/03/20/MySQL%E5%8F%AF%E9%87%8D%E5%A4%8D%E8%AF%BB%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="guohao.lu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Guohao Lu's Blog">
+      <meta itemprop="description" content="分享技术，记录生活">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Guohao Lu's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/03/20/MySQL%E5%8F%AF%E9%87%8D%E5%A4%8D%E8%AF%BB%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/" class="post-title-link" itemprop="url">MySQL可重复读隔离级别的实现原理</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-03-20 10:30:00" itemprop="dateCreated datePublished" datetime="2024-03-20T10:30:00+08:00">2024-03-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="MySQL默认隔离级别"><a href="#MySQL默认隔离级别" class="headerlink" title="MySQL默认隔离级别"></a>MySQL默认隔离级别</h2><p>MySQL InnoDB存储引擎默认使用<strong>可重复读</strong>（REPEATABLE READ）隔离级别。该级别通过MVCC（多版本并发控制）和锁机制的配合来实现。</p>
+<h2 id="MVCC实现原理"><a href="#MVCC实现原理" class="headerlink" title="MVCC实现原理"></a>MVCC实现原理</h2><h3 id="1-版本链"><a href="#1-版本链" class="headerlink" title="1. 版本链"></a>1. 版本链</h3><p>每行记录都存在一个版本链： </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">┌────────────┐ ┌────────────┐ ┌────────────┐</span><br><span class="line">│ 最新记录 │ ──&gt; │ 历史记录1 │ ──&gt; │ 历史记录2 │</span><br><span class="line">└────────────┘ └────────────┘ └────────────┘</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-重要字段"><a href="#2-重要字段" class="headerlink" title="2. 重要字段"></a>2. 重要字段</h3><p>每条记录都包含以下系统字段：</p>
+<ul>
+<li><code>DB_TRX_ID</code>：创建&#x2F;最后修改该记录的事务ID</li>
+<li><code>DB_ROLL_PTR</code>：回滚指针，指向上一个版本</li>
+<li><code>DB_ROW_ID</code>：行ID（可选）</li>
+</ul>
+<h3 id="3-快照读实现"><a href="#3-快照读实现" class="headerlink" title="3. 快照读实现"></a>3. 快照读实现</h3><p>在事务开始时，会创建一个快照（Read View），包含：</p>
+<ul>
+<li><code>creator_trx_id</code>：创建该Read View的事务ID</li>
+<li><code>m_ids</code>：活跃的事务ID列表</li>
+<li><code>min_trx_id</code>：活跃事务中最小的事务ID</li>
+<li><code>max_trx_id</code>：下一个将被分配的事务ID</li>
+</ul>
+<p>快照读判断规则：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">             是否可见？</span><br><span class="line">                 │</span><br><span class="line">         ┌───────┴───────┐</span><br><span class="line">         ▼               ▼</span><br><span class="line">trx_id &lt; min_trx_id   trx_id &gt;= max_trx_id</span><br><span class="line">     (可见)               (不可见)</span><br><span class="line">         │               │</span><br><span class="line">         └───────┬───────┘</span><br><span class="line">                 ▼</span><br><span class="line">         trx_id ∈ m_ids？</span><br><span class="line">         ┌────┴────┐</span><br><span class="line">         ▼         ▼</span><br><span class="line">        是        否</span><br><span class="line">     (不可见)    (可见)</span><br></pre></td></tr></table></figure>
+
+<h2 id="锁机制"><a href="#锁机制" class="headerlink" title="锁机制"></a>锁机制</h2><h3 id="1-记录锁（Record-Lock）"><a href="#1-记录锁（Record-Lock）" class="headerlink" title="1. 记录锁（Record Lock）"></a>1. 记录锁（Record Lock）</h3><ul>
+<li>锁定单个索引记录</li>
+<li>防止其他事务修改或删除</li>
+</ul>
+<h3 id="2-间隙锁（Gap-Lock）"><a href="#2-间隙锁（Gap-Lock）" class="headerlink" title="2. 间隙锁（Gap Lock）"></a>2. 间隙锁（Gap Lock）</h3><ul>
+<li>锁定索引记录之间的间隙</li>
+<li>防止其他事务在间隙插入记录</li>
+</ul>
+<h3 id="3-Next-Key-Lock"><a href="#3-Next-Key-Lock" class="headerlink" title="3. Next-Key Lock"></a>3. Next-Key Lock</h3><ul>
+<li>记录锁和间隙锁的组合</li>
+<li>可以防止幻读</li>
+</ul>
+<h2 id="可重复读的实现过程"><a href="#可重复读的实现过程" class="headerlink" title="可重复读的实现过程"></a>可重复读的实现过程</h2><ol>
+<li><p><strong>事务开始</strong>：</p>
+<ul>
+<li>创建Read View</li>
+<li>记录当前活跃事务</li>
+</ul>
+</li>
+<li><p><strong>读操作</strong>：</p>
+<ul>
+<li>快照读：通过MVCC实现</li>
+<li>当前读：使用锁机制</li>
+</ul>
+</li>
+<li><p><strong>写操作</strong>：</p>
+<ul>
+<li>加Next-Key Lock</li>
+<li>创建新的版本记录</li>
+</ul>
+</li>
+</ol>
+<h2 id="示例说明"><a href="#示例说明" class="headerlink" title="示例说明"></a>示例说明</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 事务1</span></span><br><span class="line"><span class="keyword">START</span> TRANSACTION;</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> users <span class="keyword">WHERE</span> id <span class="operator">=</span> <span class="number">1</span>;  <span class="comment">-- 创建Read View</span></span><br><span class="line"><span class="comment">-- 其他事务修改数据</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> users <span class="keyword">WHERE</span> id <span class="operator">=</span> <span class="number">1</span>;  <span class="comment">-- 使用相同Read View，看到相同结果</span></span><br><span class="line"><span class="keyword">COMMIT</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 事务2</span></span><br><span class="line"><span class="keyword">START</span> TRANSACTION;</span><br><span class="line"><span class="keyword">UPDATE</span> users <span class="keyword">SET</span> name <span class="operator">=</span> <span class="string">&#x27;new_name&#x27;</span> <span class="keyword">WHERE</span> id <span class="operator">=</span> <span class="number">1</span>;  <span class="comment">-- 加锁，创建新版本</span></span><br><span class="line"><span class="keyword">COMMIT</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>MySQL通过以下机制实现可重复读：</p>
+<ol>
+<li><p>MVCC保证读操作的一致性：</p>
+<ul>
+<li>版本链保存历史记录</li>
+<li>Read View确定可见性</li>
+</ul>
+</li>
+<li><p>锁机制保证写操作的隔离性：</p>
+<ul>
+<li>记录锁防止并发修改</li>
+<li>间隙锁防止幻读</li>
+</ul>
+</li>
+</ol>
+<p>这种实现既保证了数据的一致性，又提供了较好的并发性能。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/4/"><i class="fa fa-angle-right"></i></a>
+  </nav>
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2024 – 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">true</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>

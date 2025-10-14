@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"guohaolu.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.22.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12,"visitor":true,"social":true,"categories":true,"tags":true,"toc":{"enable":true,"number":true,"wrap":true}},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="本文介绍Kafka事件驱动架构的基础知识。 Kafka事件驱动架构的基础是什么？  核心概念(1)   **事件(Event)**：记录系统中”发生了什么”的事实  包含：事件key、事件value、时间戳、元数据 例如：”用户Alice在2024-03-21 14:30支付了200元”   **生产者(Producer)**：发布事件的应用  完全解耦：生产者无需等待消费者 支持多生产者写入同一">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Kafka事件驱动架构的基础">
+<meta property="og:url" content="https://guohaolu.github.io/2024/03/19/kafka%E4%BA%8B%E4%BB%B6%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1/index.html">
+<meta property="og:site_name" content="Guohao Lu&#39;s Blog">
+<meta property="og:description" content="本文介绍Kafka事件驱动架构的基础知识。 Kafka事件驱动架构的基础是什么？  核心概念(1)   **事件(Event)**：记录系统中”发生了什么”的事实  包含：事件key、事件value、时间戳、元数据 例如：”用户Alice在2024-03-21 14:30支付了200元”   **生产者(Producer)**：发布事件的应用  完全解耦：生产者无需等待消费者 支持多生产者写入同一">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-03-19T13:43:47.000Z">
+<meta property="article:modified_time" content="2025-10-14T02:16:14.110Z">
+<meta property="article:author" content="guohao.lu">
+<meta property="article:tag" content="Kafka">
+<meta property="article:tag" content="事件驱动">
+<meta property="article:tag" content="架构设计">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://guohaolu.github.io/2024/03/19/kafka%E4%BA%8B%E4%BB%B6%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://guohaolu.github.io/2024/03/19/kafka%E4%BA%8B%E4%BB%B6%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1/","path":"2024/03/19/kafka事件驱动设计/","title":"Kafka事件驱动架构的基础"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Kafka事件驱动架构的基础 | Guohao Lu's Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Guohao Lu's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">个人技术博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Kafka%E4%BA%8B%E4%BB%B6%E6%B5%81%E8%AF%A6%E8%A7%A3"><span class="nav-number">1.</span> <span class="nav-text">Kafka事件流详解</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Kafka%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA%E5%AE%9E%E6%96%BD%E6%96%B9%E6%A1%88"><span class="nav-number">2.</span> <span class="nav-text">Kafka集群搭建实施方案</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87"><span class="nav-number">2.1.</span> <span class="nav-text">一、环境准备</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Kafka%E9%9B%86%E7%BE%A4%E7%A1%AC%E4%BB%B6%E9%85%8D%E7%BD%AE%E5%BB%BA%E8%AE%AE"><span class="nav-number">3.</span> <span class="nav-text">Kafka集群硬件配置建议</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E9%9B%86%E7%BE%A4%E9%83%A8%E7%BD%B2"><span class="nav-number">3.1.</span> <span class="nav-text">二、集群部署</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E5%90%AF%E5%8A%A8%E6%9C%8D%E5%8A%A1"><span class="nav-number">3.2.</span> <span class="nav-text">三、启动服务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E7%9B%91%E6%8E%A7%E4%B8%8E%E8%BF%90%E7%BB%B4"><span class="nav-number">3.3.</span> <span class="nav-text">四、监控与运维</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98"><span class="nav-number">3.4.</span> <span class="nav-text">五、性能调优</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">guohao.lu</p>
+  <div class="site-description" itemprop="description">分享技术，记录生活</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">44</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/guohaolu" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;guohaolu" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1670212878@qq.com" title="E-Mail → mailto:1670212878@qq.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://guohaolu.github.io/2024/03/19/kafka%E4%BA%8B%E4%BB%B6%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="guohao.lu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Guohao Lu's Blog">
+      <meta itemprop="description" content="分享技术，记录生活">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Kafka事件驱动架构的基础 | Guohao Lu's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Kafka事件驱动架构的基础
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-03-19 21:43:47" itemprop="dateCreated datePublished" datetime="2024-03-19T21:43:47+08:00">2024-03-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/" itemprop="url" rel="index"><span itemprop="name">中间件</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>本文介绍Kafka事件驱动架构的基础知识。</p>
+<p>Kafka事件驱动架构的基础是什么？</p>
+<ol>
+<li><strong>核心概念</strong>(<a target="_blank" rel="noopener" href="https://kafka.apache.org/documentation/">1</a>)</li>
+</ol>
+<ul>
+<li><p>**事件(Event)**：记录系统中”发生了什么”的事实</p>
+<ul>
+<li>包含：事件key、事件value、时间戳、元数据</li>
+<li>例如：”用户Alice在2024-03-21 14:30支付了200元”</li>
+</ul>
+</li>
+<li><p>**生产者(Producer)**：发布事件的应用</p>
+<ul>
+<li>完全解耦：生产者无需等待消费者</li>
+<li>支持多生产者写入同一主题</li>
+</ul>
+</li>
+<li><p>**消费者(Consumer)**：订阅和处理事件的应用</p>
+<ul>
+<li>可以重复读取事件</li>
+<li>支持多消费者订阅同一主题</li>
+</ul>
+</li>
+</ul>
+<ol start="2">
+<li><strong>基础架构</strong></li>
+</ol>
+<ul>
+<li><p>**主题(Topic)**：</p>
+<ul>
+<li>类似文件系统的文件夹</li>
+<li>持久化存储事件</li>
+<li>支持多生产者&#x2F;多消费者</li>
+</ul>
+</li>
+<li><p>**分区(Partition)**：</p>
+<ul>
+<li>主题的分布式存储单元</li>
+<li>保证同一分区内事件顺序</li>
+<li>支持并行处理</li>
+</ul>
+</li>
+</ul>
+<ol start="3">
+<li><strong>关键特性</strong></li>
+</ol>
+<ul>
+<li><strong>持久性</strong>：事件被持久化存储</li>
+<li><strong>顺序性</strong>：分区内事件严格有序</li>
+<li><strong>可伸缩</strong>：通过分区实现横向扩展</li>
+<li><strong>容错性</strong>：通过副本机制保证可用性</li>
+</ul>
+<ol start="4">
+<li><strong>应用场景</strong></li>
+</ol>
+<ul>
+<li><p><strong>事件溯源</strong>：</p>
+<ul>
+<li>记录状态变更的完整历史</li>
+<li>支持系统状态重建</li>
+</ul>
+</li>
+<li><p><strong>流处理</strong>：</p>
+<ul>
+<li>实时数据转换和聚合</li>
+<li>构建实时数据管道</li>
+</ul>
+</li>
+<li><p><strong>系统集成</strong>：</p>
+<ul>
+<li>解耦系统组件</li>
+<li>实现异步通信</li>
+</ul>
+</li>
+</ul>
+<ol start="5">
+<li><strong>设计原则</strong></li>
+</ol>
+<ul>
+<li>事件即事实：记录已发生的事情</li>
+<li>事件不可变：一旦写入不能修改</li>
+<li>时间很重要：事件必须包含时间信息</li>
+<li>顺序很重要：保证因果关系</li>
+</ul>
+<hr>
+<p>Kafka事件驱动的深入理解</p>
+<ol>
+<li><strong>事件的本质</strong>(<a target="_blank" rel="noopener" href="https://docs.confluent.io/kafka/introduction.html">1</a>)</li>
+</ol>
+<ul>
+<li>事件是”某事发生”的记录，包含三个核心要素：<ul>
+<li>事件键（Event key）：标识事件主体</li>
+<li>事件值（Event value）：描述发生了什么</li>
+<li>时间戳（Timestamp）：什么时候发生</li>
+</ul>
+</li>
+<li>示例：<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;key&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Alice&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;value&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Trip requested at work location&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;timestamp&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Jun. 25, 2020 at 2:06 p.m.&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<ol start="2">
+<li><strong>事件流特性</strong>(<a target="_blank" rel="noopener" href="https://docs.confluent.io/kafka/introduction.html">1</a>)</li>
+</ol>
+<ul>
+<li>持续性：实时捕获来自各种源的事件</li>
+<li>持久性：事件被持久化存储以供处理</li>
+<li>实时性：支持实时处理和后期检索</li>
+<li>路由性：事件可以路由到不同的目标技术</li>
+</ul>
+<ol start="3">
+<li><strong>典型应用场景</strong>(<a target="_blank" rel="noopener" href="https://docs.confluent.io/kafka/introduction.html">1</a>)</li>
+</ol>
+<ul>
+<li>消息系统：处理实时支付和金融交易</li>
+<li>活动跟踪：监控车辆、货物实时位置</li>
+<li>指标收集：捕获和分析IoT设备数据</li>
+<li>流处理：处理客户交互和订单</li>
+<li>系统解耦：连接不同部门的数据流</li>
+<li>大数据集成：与Hadoop等技术集成</li>
+</ul>
+<ol start="4">
+<li><strong>设计考虑</strong>(<a target="_blank" rel="noopener" href="https://docs.confluent.io/kafka/design/index.html">1</a>)</li>
+</ol>
+<ul>
+<li>高吞吐量：支持高容量事件流</li>
+<li>数据积压：优雅处理大量数据积压</li>
+<li>低延迟：支持传统消息传递场景</li>
+<li>容错性：机器故障时的保障机制</li>
+</ul>
+<ol start="5">
+<li><strong>实现机制</strong></li>
+</ol>
+<ul>
+<li>Topics：事件的基本组织单位<ul>
+<li>只能追加写入</li>
+<li>事件不可变</li>
+<li>支持多生产者和多订阅者</li>
+</ul>
+</li>
+<li>Partitions：实现并行处理<ul>
+<li>相同key的事件写入相同分区</li>
+<li>保证分区内事件顺序</li>
+<li>支持横向扩展</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h1 id="Kafka事件流详解"><a href="#Kafka事件流详解" class="headerlink" title="Kafka事件流详解"></a>Kafka事件流详解</h1><ol>
+<li><strong>事件流的本质</strong>(<a target="_blank" rel="noopener" href="https://docs.confluent.io/kafka/introduction.html">1</a>)</li>
+</ol>
+<ul>
+<li>事件流是对现实世界状态变化的实时捕获</li>
+<li>每个事件代表一个不可变的事实记录</li>
+<li>事件按时间顺序追加存储<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;event_id&quot;</span><span class="punctuation">:</span> <span class="string">&quot;ord_12345&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;event_type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;ORDER_CREATED&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;timestamp&quot;</span><span class="punctuation">:</span> <span class="string">&quot;2024-03-21T14:30:00Z&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;key&quot;</span><span class="punctuation">:</span> <span class="string">&quot;user_123&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;payload&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;order_id&quot;</span><span class="punctuation">:</span> <span class="string">&quot;12345&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;user_id&quot;</span><span class="punctuation">:</span> <span class="string">&quot;user_123&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;items&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span>...<span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;total_amount&quot;</span><span class="punctuation">:</span> <span class="number">199.99</span></span><br><span class="line">    <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;metadata&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;source&quot;</span><span class="punctuation">:</span> <span class="string">&quot;mobile_app&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;version&quot;</span><span class="punctuation">:</span> <span class="string">&quot;1.0&quot;</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<ol start="2">
+<li><strong>技术架构设计</strong></li>
+</ol>
+<ul>
+<li><p><strong>生产层</strong>：</p>
+<ul>
+<li>事件捕获服务</li>
+<li>事件规范化处理</li>
+<li>事件校验和过滤</li>
+</ul>
+</li>
+<li><p><strong>存储层</strong>：</p>
+<ul>
+<li>Topic设计：按业务域划分</li>
+<li>分区策略：基于key的一致性哈希</li>
+<li>数据保留策略：基于时间或大小</li>
+</ul>
+</li>
+<li><p><strong>消费层</strong>：</p>
+<ul>
+<li>实时处理：Kafka Streams</li>
+<li>批量处理：Spark&#x2F;Flink</li>
+<li>数据分发：Kafka Connect</li>
+</ul>
+</li>
+</ul>
+<ol start="3">
+<li><strong>实际业务案例 - 电商订单系统</strong><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">订单域事件流:</span><br><span class="line">Order_Created -&gt; Payment_Initiated -&gt; Payment_Completed -&gt; </span><br><span class="line">Inventory_Reserved -&gt; Order_Fulfilled -&gt; Delivery_Started -&gt; </span><br><span class="line">Delivery_Completed</span><br></pre></td></tr></table></figure></li>
+</ol>
+<ul>
+<li><p><strong>Topic设计</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">orders.events          - 订单主事件流</span><br><span class="line">orders.payments        - 支付事件流</span><br><span class="line">orders.inventory       - 库存事件流</span><br><span class="line">orders.delivery        - 配送事件流</span><br><span class="line">orders.notifications   - 通知事件流</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>分区设计</strong>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 确保同一订单的所有事件进入同一分区</span></span><br><span class="line"><span class="type">String</span> <span class="variable">orderKey</span> <span class="operator">=</span> event.getOrderId();</span><br><span class="line">ProducerRecord&lt;String, String&gt; record = </span><br><span class="line">    <span class="keyword">new</span> <span class="title class_">ProducerRecord</span>&lt;&gt;(<span class="string">&quot;orders.events&quot;</span>, orderKey, eventJson);</span><br></pre></td></tr></table></figure></li>
+</ul>
+<ol start="4">
+<li><strong>事件流处理模式</strong></li>
+</ol>
+<ul>
+<li><p><strong>状态跟踪</strong>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用Kafka Streams跟踪订单状态</span></span><br><span class="line"><span class="type">StreamsBuilder</span> <span class="variable">builder</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StreamsBuilder</span>();</span><br><span class="line">KTable&lt;String, OrderState&gt; orderStates = builder</span><br><span class="line">    .table(<span class="string">&quot;orders.events&quot;</span>,</span><br><span class="line">           Materialized.as(<span class="string">&quot;order-states-store&quot;</span>));</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>事件关联</strong>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 关联支付和库存事件</span></span><br><span class="line">KStream&lt;String, PaymentEvent&gt; payments = </span><br><span class="line">    builder.stream(<span class="string">&quot;orders.payments&quot;</span>);</span><br><span class="line">KStream&lt;String, InventoryEvent&gt; inventory = </span><br><span class="line">    builder.stream(<span class="string">&quot;orders.inventory&quot;</span>);</span><br><span class="line">    </span><br><span class="line">KStream&lt;String, EnrichedOrder&gt; enrichedOrders = </span><br><span class="line">    payments.join(inventory,</span><br><span class="line">        (payment, inventory) -&gt; <span class="keyword">new</span> <span class="title class_">EnrichedOrder</span>(...),</span><br><span class="line">        JoinWindows.of(Duration.ofMinutes(<span class="number">5</span>)));</span><br></pre></td></tr></table></figure></li>
+</ul>
+<ol start="5">
+<li><strong>实践经验</strong></li>
+</ol>
+<ul>
+<li><p><strong>数据一致性</strong>：</p>
+<ul>
+<li>使用事务生产者确保原子性写入</li>
+<li>实现幂等性消费者处理重复事件</li>
+</ul>
+</li>
+<li><p><strong>性能优化</strong>：</p>
+<ul>
+<li>合理设置分区数（并行度）</li>
+<li>批量处理提升吞吐量</li>
+<li>压缩策略减少存储开销</li>
+</ul>
+</li>
+<li><p><strong>监控指标</strong>：</p>
+<ul>
+<li>生产延迟（Producer Latency）</li>
+<li>消费延迟（Consumer Lag）</li>
+<li>端到端延迟（End-to-end Latency）</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h1 id="Kafka集群搭建实施方案"><a href="#Kafka集群搭建实施方案" class="headerlink" title="Kafka集群搭建实施方案"></a>Kafka集群搭建实施方案</h1><h2 id="一、环境准备"><a href="#一、环境准备" class="headerlink" title="一、环境准备"></a>一、环境准备</h2><ol>
+<li><strong>硬件配置建议</strong>(<a target="_blank" rel="noopener" href="https://kafka.apache.org/documentation/#hwandos">1</a>)</li>
+</ol>
+<h1 id="Kafka集群硬件配置建议"><a href="#Kafka集群硬件配置建议" class="headerlink" title="Kafka集群硬件配置建议"></a>Kafka集群硬件配置建议</h1><ol>
+<li><strong>CPU配置</strong>(<a target="_blank" rel="noopener" href="https://kafka.apache.org/documentation/#hwandos">1</a>)</li>
+</ol>
+<ul>
+<li>普通场景：8-12核心即可</li>
+<li>原因：<ul>
+<li>Kafka不是CPU密集型应用</li>
+<li>主要负责消息传输和磁盘I&#x2F;O</li>
+<li>仅在压缩&#x2F;解压缩时较耗CPU</li>
+</ul>
+</li>
+</ul>
+<ol start="2">
+<li><strong>内存配置</strong></li>
+</ol>
+<ul>
+<li>建议配置：16GB RAM</li>
+<li>分配建议：<ul>
+<li>系统预留：4GB</li>
+<li>Kafka堆内存：4-8GB</li>
+<li>页面缓存：剩余内存</li>
+</ul>
+</li>
+<li>原因：<ul>
+<li>Kafka利用操作系统的页面缓存</li>
+<li>不需要很大的JVM堆内存</li>
+<li>过大堆内存反而会影响GC性能</li>
+</ul>
+</li>
+</ul>
+<ol start="3">
+<li><strong>磁盘配置</strong></li>
+</ol>
+<ul>
+<li>类型选择：普通HDD即可</li>
+<li>容量建议：根据数据量和保留策略决定</li>
+<li>原因：<ul>
+<li>Kafka采用顺序写入</li>
+<li>HDD顺序写性能接近SSD</li>
+<li>成本效益比更高</li>
+</ul>
+</li>
+</ul>
+<ol start="4">
+<li><strong>网络配置</strong></li>
+</ol>
+<ul>
+<li>普通场景：千兆网卡足够</li>
+<li>高吞吐场景：万兆网卡</li>
+<li>原因：<ul>
+<li>网络通常是瓶颈</li>
+<li>根据实际吞吐量需求选择</li>
+</ul>
+</li>
+</ul>
+<ol start="5">
+<li><strong>最佳实践</strong></li>
+</ol>
+<ul>
+<li>磁盘配置：<ul>
+<li>使用RAID10提高可靠性</li>
+<li>单独挂载数据目录</li>
+<li>使用XFS文件系统</li>
+</ul>
+</li>
+<li>网络配置：<ul>
+<li>调整TCP参数</li>
+<li>开启网卡多队列</li>
+</ul>
+</li>
+<li>系统配置：<ul>
+<li>调整文件描述符限制</li>
+<li>优化内存页面分配</li>
+</ul>
+</li>
+</ul>
+<ol start="2">
+<li><p><strong>软件要求</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 操作系统</span></span><br><span class="line">CentOS 7.x 或 Ubuntu 20.04 LTS</span><br><span class="line"></span><br><span class="line"><span class="comment"># 基础环境</span></span><br><span class="line">Java 11+</span><br><span class="line">ZooKeeper 3.7.1 (如果使用KRaft模式则不需要)</span><br><span class="line">Kafka 3.5.0</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>系统优化</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 文件描述符限制</span></span><br><span class="line"><span class="built_in">cat</span> &gt;&gt; /etc/security/limits.conf &lt;&lt; <span class="string">EOF</span></span><br><span class="line"><span class="string">* soft nofile 65536</span></span><br><span class="line"><span class="string">* hard nofile 65536</span></span><br><span class="line"><span class="string">EOF</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 系统参数优化</span></span><br><span class="line"><span class="built_in">cat</span> &gt;&gt; /etc/sysctl.conf &lt;&lt; <span class="string">EOF</span></span><br><span class="line"><span class="string">vm.swappiness=1</span></span><br><span class="line"><span class="string">net.core.somaxconn=32768</span></span><br><span class="line"><span class="string">net.ipv4.tcp_max_syn_backlog=16384</span></span><br><span class="line"><span class="string">net.core.netdev_max_backlog=16384</span></span><br><span class="line"><span class="string">net.ipv4.tcp_rmem=4096 87380 16777216</span></span><br><span class="line"><span class="string">net.ipv4.tcp_wmem=4096 65536 16777216</span></span><br><span class="line"><span class="string">EOF</span></span><br><span class="line">sysctl -p</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="二、集群部署"><a href="#二、集群部署" class="headerlink" title="二、集群部署"></a>二、集群部署</h2><ol>
+<li><p><strong>节点规划</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">node1: 192.168.1.101 (broker-1)</span><br><span class="line">node2: 192.168.1.102 (broker-2)</span><br><span class="line">node3: 192.168.1.103 (broker-3)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>安装配置</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 下载并解压</span></span><br><span class="line">wget https://downloads.apache.org/kafka/3.5.0/kafka_2.13-3.5.0.tgz</span><br><span class="line">tar -xzf kafka_2.13-3.5.0.tgz</span><br><span class="line"><span class="built_in">mv</span> kafka_2.13-3.5.0 /opt/kafka</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建数据目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /data/kafka/logs</span><br><span class="line"><span class="built_in">chown</span> -R kafka:kafka /data/kafka</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>Broker配置(每个节点)</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"># 基础配置</span><br><span class="line">broker.id=1  # 每个节点唯一</span><br><span class="line">listeners=PLAINTEXT://192.168.1.101:9092</span><br><span class="line">advertised.listeners=PLAINTEXT://192.168.1.101:9092</span><br><span class="line">num.network.threads=8</span><br><span class="line">num.io.threads=16</span><br><span class="line"></span><br><span class="line"># 日志配置</span><br><span class="line">log.dirs=/data/kafka/logs</span><br><span class="line">num.partitions=8</span><br><span class="line">default.replication.factor=3</span><br><span class="line">min.insync.replicas=2</span><br><span class="line"></span><br><span class="line"># 性能优化</span><br><span class="line">socket.send.buffer.bytes=102400</span><br><span class="line">socket.receive.buffer.bytes=102400</span><br><span class="line">socket.request.max.bytes=104857600</span><br><span class="line">num.replica.fetchers=4</span><br><span class="line"></span><br><span class="line"># 日志保留策略</span><br><span class="line">log.retention.hours=168</span><br><span class="line">log.segment.bytes=1073741824</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="三、启动服务"><a href="#三、启动服务" class="headerlink" title="三、启动服务"></a>三、启动服务</h2><ol>
+<li><p><strong>启动命令</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 启动ZooKeeper(如果使用)</span></span><br><span class="line">bin/zookeeper-server-start.sh -daemon config/zookeeper.properties</span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动Kafka</span></span><br><span class="line">bin/kafka-server-start.sh -daemon config/server.properties</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>验证集群状态</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看主题列表</span></span><br><span class="line">bin/kafka-topics.sh --bootstrap-server 192.168.1.101:9092 --list</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建测试主题</span></span><br><span class="line">bin/kafka-topics.sh --bootstrap-server 192.168.1.101:9092 \</span><br><span class="line">    --create --topic <span class="built_in">test</span> \</span><br><span class="line">    --partitions 3 \</span><br><span class="line">    --replication-factor 3</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="四、监控与运维"><a href="#四、监控与运维" class="headerlink" title="四、监控与运维"></a>四、监控与运维</h2><ol>
+<li><p><strong>JMX监控配置</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 设置JMX端口</span></span><br><span class="line"><span class="built_in">export</span> JMX_PORT=9999</span><br><span class="line"><span class="built_in">export</span> KAFKA_JMX_OPTS=<span class="string">&quot;-Dcom.sun.management.jmxremote \</span></span><br><span class="line"><span class="string">    -Dcom.sun.management.jmxremote.authenticate=false \</span></span><br><span class="line"><span class="string">    -Dcom.sun.management.jmxremote.ssl=false&quot;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>关键指标监控</strong></p>
+</li>
+</ol>
+<ul>
+<li>Broker存活状态</li>
+<li>分区Leader分布</li>
+<li>消息吞吐量</li>
+<li>延迟监控</li>
+<li>GC状态</li>
+</ul>
+<ol start="3">
+<li><strong>日常运维命令</strong><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看消费组</span></span><br><span class="line">bin/kafka-consumer-groups.sh --bootstrap-server 192.168.1.101:9092 --list</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看主题详情</span></span><br><span class="line">bin/kafka-topics.sh --bootstrap-server 192.168.1.101:9092 \</span><br><span class="line">    --describe --topic <span class="built_in">test</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 平衡leader</span></span><br><span class="line">bin/kafka-leader-election.sh --bootstrap-server 192.168.1.101:9092 \</span><br><span class="line">    --election-type PREFERRED --all-topic-partitions</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="五、性能调优"><a href="#五、性能调优" class="headerlink" title="五、性能调优"></a>五、性能调优</h2><ol>
+<li><p><strong>生产者优化</strong></p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 批量设置</span></span><br><span class="line"><span class="attr">batch.size</span>=<span class="string">131072</span></span><br><span class="line"><span class="attr">linger.ms</span>=<span class="string">10</span></span><br><span class="line"><span class="attr">compression.type</span>=<span class="string">lz4</span></span><br><span class="line"><span class="attr">acks</span>=<span class="string">1</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>消费者优化</strong></p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">fetch.min.bytes</span>=<span class="string">1024</span></span><br><span class="line"><span class="attr">fetch.max.wait.ms</span>=<span class="string">500</span></span><br><span class="line"><span class="attr">max.partition.fetch.bytes</span>=<span class="string">1048576</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>操作系统优化</strong></p>
+</li>
+</ol>
+<ul>
+<li>使用XFS文件系统</li>
+<li>禁用atime更新</li>
+<li>配置noatime挂载选项</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Kafka/" rel="tag"># Kafka</a>
+              <a href="/tags/%E4%BA%8B%E4%BB%B6%E9%A9%B1%E5%8A%A8/" rel="tag"># 事件驱动</a>
+              <a href="/tags/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/" rel="tag"># 架构设计</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/03/19/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E4%B8%8EDDD%E5%85%B3%E7%B3%BB/" rel="prev" title="微服务与DDD的关系分析">
+                  <i class="fa fa-angle-left"></i> 微服务与DDD的关系分析
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2024/03/19/kafka_acks%E6%9C%BA%E5%88%B6/" rel="next" title="Kafka的acks机制详解">
+                  Kafka的acks机制详解 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2024 – 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">true</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>
