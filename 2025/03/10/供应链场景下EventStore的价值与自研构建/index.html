@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"guohaolu.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.22.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12,"visitor":true,"social":true,"categories":true,"tags":true,"toc":{"enable":true,"number":true,"wrap":true}},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="供应链场景下 EventStore 的价值与自研构建在 Keep 的供应链 DDD 改造实践中，多层级业务单据的状态依赖库存变更，若「改库」与「发事件」分离，容易导致上下游状态不一致。采用 EventStore「先持久化事件、再驱动下游」是解决该问题的典型思路。本文从为何用、价值、如何自研三方面整理，并辅以事件流 Mermaid 图。  参考：一个电商供应链系统的 DDD 实战   一、为什么要用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="供应链场景下 EventStore 的价值与自研构建">
+<meta property="og:url" content="https://guohaolu.github.io/2025/03/10/%E4%BE%9B%E5%BA%94%E9%93%BE%E5%9C%BA%E6%99%AF%E4%B8%8BEventStore%E7%9A%84%E4%BB%B7%E5%80%BC%E4%B8%8E%E8%87%AA%E7%A0%94%E6%9E%84%E5%BB%BA/index.html">
+<meta property="og:site_name" content="Guohao Lu&#39;s Blog">
+<meta property="og:description" content="供应链场景下 EventStore 的价值与自研构建在 Keep 的供应链 DDD 改造实践中，多层级业务单据的状态依赖库存变更，若「改库」与「发事件」分离，容易导致上下游状态不一致。采用 EventStore「先持久化事件、再驱动下游」是解决该问题的典型思路。本文从为何用、价值、如何自研三方面整理，并辅以事件流 Mermaid 图。  参考：一个电商供应链系统的 DDD 实战   一、为什么要用">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-03-10T06:00:00.000Z">
+<meta property="article:modified_time" content="2026-03-10T05:07:47.757Z">
+<meta property="article:author" content="guohao.lu">
+<meta property="article:tag" content="电商">
+<meta property="article:tag" content="DDD">
+<meta property="article:tag" content="EventStore">
+<meta property="article:tag" content="领域事件">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://guohaolu.github.io/2025/03/10/%E4%BE%9B%E5%BA%94%E9%93%BE%E5%9C%BA%E6%99%AF%E4%B8%8BEventStore%E7%9A%84%E4%BB%B7%E5%80%BC%E4%B8%8E%E8%87%AA%E7%A0%94%E6%9E%84%E5%BB%BA/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://guohaolu.github.io/2025/03/10/%E4%BE%9B%E5%BA%94%E9%93%BE%E5%9C%BA%E6%99%AF%E4%B8%8BEventStore%E7%9A%84%E4%BB%B7%E5%80%BC%E4%B8%8E%E8%87%AA%E7%A0%94%E6%9E%84%E5%BB%BA/","path":"2025/03/10/供应链场景下EventStore的价值与自研构建/","title":"供应链场景下 EventStore 的价值与自研构建"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>供应链场景下 EventStore 的价值与自研构建 | Guohao Lu's Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Guohao Lu's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">个人技术博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BE%9B%E5%BA%94%E9%93%BE%E5%9C%BA%E6%99%AF%E4%B8%8B-EventStore-%E7%9A%84%E4%BB%B7%E5%80%BC%E4%B8%8E%E8%87%AA%E7%A0%94%E6%9E%84%E5%BB%BA"><span class="nav-number">1.</span> <span class="nav-text">供应链场景下 EventStore 的价值与自研构建</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E7%94%A8-EventStore%EF%BC%9F"><span class="nav-number">1.1.</span> <span class="nav-text">一、为什么要用 EventStore？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-%E9%97%AE%E9%A2%98%E6%9C%AC%E8%B4%A8"><span class="nav-number">1.1.1.</span> <span class="nav-text">1.1 问题本质</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-%E5%A4%9A%E5%8D%95%E6%8D%AE%E7%8A%B6%E6%80%81%E4%BE%9D%E8%B5%96%E7%A4%BA%E6%84%8F"><span class="nav-number">1.1.2.</span> <span class="nav-text">1.2 多单据状态依赖示意</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E4%BD%BF%E7%94%A8-EventStore-%E7%9A%84%E4%BB%B7%E5%80%BC"><span class="nav-number">1.2.</span> <span class="nav-text">二、使用 EventStore 的价值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81EventStore-%E8%87%AA%E7%A0%94%E6%9E%84%E5%BB%BA%E6%80%9D%E8%B7%AF"><span class="nav-number">1.3.</span> <span class="nav-text">三、EventStore 自研构建思路</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-%E6%A0%B8%E5%BF%83%E5%8E%9F%E5%88%99"><span class="nav-number">1.3.1.</span> <span class="nav-text">3.1 核心原则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-%E4%BA%8B%E4%BB%B6%E6%B5%81%E6%80%BB%E8%A7%88"><span class="nav-number">1.3.2.</span> <span class="nav-text">3.2 事件流总览</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-%E4%BA%8B%E4%BB%B6%E8%A1%A8%E4%B8%8E%E5%8F%91%E5%B8%83"><span class="nav-number">1.3.3.</span> <span class="nav-text">3.3 事件表与发布</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-%E6%8A%95%E9%80%92%E4%B8%8E%E8%AE%A2%E9%98%85"><span class="nav-number">1.3.4.</span> <span class="nav-text">3.4 投递与订阅</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-5-%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%EF%BC%88%E5%AF%B9%E5%BA%94%E6%96%87%E4%B8%AD%E3%80%8C%E9%BB%84%E8%89%B2%E9%83%A8%E5%88%86%E3%80%8D%EF%BC%89"><span class="nav-number">1.3.5.</span> <span class="nav-text">3.5 异常处理（对应文中「黄色部分」）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E5%B0%8F%E7%BB%93"><span class="nav-number">1.4.</span> <span class="nav-text">四、小结</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">guohao.lu</p>
+  <div class="site-description" itemprop="description">分享技术，记录生活</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">46</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">31</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/guohaolu" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;guohaolu" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1670212878@qq.com" title="E-Mail → mailto:1670212878@qq.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://guohaolu.github.io/2025/03/10/%E4%BE%9B%E5%BA%94%E9%93%BE%E5%9C%BA%E6%99%AF%E4%B8%8BEventStore%E7%9A%84%E4%BB%B7%E5%80%BC%E4%B8%8E%E8%87%AA%E7%A0%94%E6%9E%84%E5%BB%BA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="guohao.lu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Guohao Lu's Blog">
+      <meta itemprop="description" content="分享技术，记录生活">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="供应链场景下 EventStore 的价值与自研构建 | Guohao Lu's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          供应链场景下 EventStore 的价值与自研构建
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-03-10 14:00:00" itemprop="dateCreated datePublished" datetime="2025-03-10T14:00:00+08:00">2025-03-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">后端开发</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="供应链场景下-EventStore-的价值与自研构建"><a href="#供应链场景下-EventStore-的价值与自研构建" class="headerlink" title="供应链场景下 EventStore 的价值与自研构建"></a>供应链场景下 EventStore 的价值与自研构建</h1><p>在 Keep 的供应链 DDD 改造实践中，多层级业务单据的状态依赖库存变更，若「改库」与「发事件」分离，容易导致上下游状态不一致。采用 <strong>EventStore</strong>「先持久化事件、再驱动下游」是解决该问题的典型思路。本文从<strong>为何用、价值、如何自研</strong>三方面整理，并辅以事件流 Mermaid 图。</p>
+<blockquote>
+<p>参考：<a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1921013">一个电商供应链系统的 DDD 实战</a></p>
+</blockquote>
+<hr>
+<h2 id="一、为什么要用-EventStore？"><a href="#一、为什么要用-EventStore？" class="headerlink" title="一、为什么要用 EventStore？"></a>一、为什么要用 EventStore？</h2><h3 id="1-1-问题本质"><a href="#1-1-问题本质" class="headerlink" title="1.1 问题本质"></a>1.1 问题本质</h3><p>库存变更会牵涉<strong>多层业务单据</strong>，上层单据状态依赖底层仓储单据状态：</p>
+<ul>
+<li>采购入库单「入库完成」→ 采购单「已完成」</li>
+<li>销售出库单「出库完成」→ 销售发货单「已发货」</li>
+</ul>
+<p>若采用「先改库再发 MQ」或「先发事件再改库」：</p>
+<ul>
+<li><strong>库已更新、事件没发出去</strong> → 下游状态永远不更新</li>
+<li><strong>事件已发、本地事务回滚</strong> → 下游已按事件改了状态，与真实库存不一致</li>
+</ul>
+<p>本质是：<strong>本地事务</strong>与<strong>事件投递</strong>不在同一原子边界内。</p>
+<h3 id="1-2-多单据状态依赖示意"><a href="#1-2-多单据状态依赖示意" class="headerlink" title="1.2 多单据状态依赖示意"></a>1.2 多单据状态依赖示意</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">flowchart TB</span><br><span class="line">    subgraph 仓储层</span><br><span class="line">        A[出库单] --&gt;|出库完成| B[入库单]</span><br><span class="line">    end</span><br><span class="line">    subgraph 业务层</span><br><span class="line">        C[销售发货单] --&gt; D[采购单]</span><br><span class="line">    end</span><br><span class="line">    A -.-&gt;|状态同步| C</span><br><span class="line">    B -.-&gt;|状态同步| D</span><br><span class="line">    A --&gt;|依赖| E[库存变更]</span><br><span class="line">    B --&gt;|依赖| E</span><br></pre></td></tr></table></figure>
+
+<p>EventStore 的思路：<strong>把「发生了什么」先作为事件持久化，再基于事件驱动下游</strong>。事件与写库纳入同一套一致性模型（如先落事件再改库、或同事务），下游只消费「已持久化」的事件，避免上述两类不一致。</p>
+<hr>
+<h2 id="二、使用-EventStore-的价值"><a href="#二、使用-EventStore-的价值" class="headerlink" title="二、使用 EventStore 的价值"></a>二、使用 EventStore 的价值</h2><table>
+<thead>
+<tr>
+<th>价值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>状态一致性</strong></td>
+<td>上层单据状态由「已落库的领域事件」驱动，事件必先持久化再投递，避免发信与本地事务割裂。</td>
+</tr>
+<tr>
+<td><strong>可追溯 &#x2F; 可审计</strong></td>
+<td>事件即流水，谁在何时因何单据触发何种库存变更，有据可查；出问题可回溯、对账。</td>
+</tr>
+<tr>
+<td><strong>解耦</strong></td>
+<td>库存上下文只发布「库存已扣减 &#x2F; 已入库」等事件，订单、采购、售后通过订阅更新自身状态，不直接强依赖库存表或 RPC。</td>
+</tr>
+<tr>
+<td><strong>可复用</strong></td>
+<td>文中提到「沉淀出较通用的事件组件 EventStore，后续在 Keep 电商内部快速推广复用」。</td>
+</tr>
+<tr>
+<td><strong>可扩展</strong></td>
+<td>事件持久化后可重放、对账、离线分析，甚至向 Event Sourcing 演进。</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="三、EventStore-自研构建思路"><a href="#三、EventStore-自研构建思路" class="headerlink" title="三、EventStore 自研构建思路"></a>三、EventStore 自研构建思路</h2><p>文中未给出完整实现细节，仅给出「发布领域事件」「订阅组注册」「在订阅组中声明订阅事件」及「领域事件异常处理」等使用方式。下面结合通用实践，给出可落地的自研构建思路与事件流。</p>
+<h3 id="3-1-核心原则"><a href="#3-1-核心原则" class="headerlink" title="3.1 核心原则"></a>3.1 核心原则</h3><ul>
+<li><strong>事件先持久化、再投递</strong>：事件表与业务表同库同事务，要么一起成功要么一起回滚。</li>
+<li><strong>至少一次投递</strong>：通过扫表或 Outbox 把待发送事件推到 MQ，发送失败可重试。</li>
+<li><strong>消费幂等</strong>：下游按事件 ID + 消费者组做幂等，避免重复消费导致状态错乱。</li>
+</ul>
+<h3 id="3-2-事件流总览"><a href="#3-2-事件流总览" class="headerlink" title="3.2 事件流总览"></a>3.2 事件流总览</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">sequenceDiagram</span><br><span class="line">    participant Domain as 领域层</span><br><span class="line">    participant App as 应用/事务</span><br><span class="line">    participant EventStore as 事件表</span><br><span class="line">    participant Scanner as 扫表/Outbox</span><br><span class="line">    participant MQ as 消息队列</span><br><span class="line">    participant Consumer as 订阅者</span><br><span class="line"></span><br><span class="line">    Domain-&gt;&gt;App: 库存变更 + 发布事件</span><br><span class="line">    App-&gt;&gt;EventStore: 同事务：写业务表 + 写事件行</span><br><span class="line">    Note over App,EventStore: 事件状态：待发送</span><br><span class="line">    App--&gt;&gt;Domain: 事务提交</span><br><span class="line"></span><br><span class="line">    Scanner-&gt;&gt;EventStore: 扫描待发送事件</span><br><span class="line">    Scanner-&gt;&gt;MQ: 投递事件</span><br><span class="line">    Scanner-&gt;&gt;EventStore: 标记已发送</span><br><span class="line"></span><br><span class="line">    MQ-&gt;&gt;Consumer: 按订阅组推送</span><br><span class="line">    Consumer-&gt;&gt;Consumer: 幂等校验 + 更新下游状态</span><br><span class="line">    Consumer-&gt;&gt;MQ: ACK</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-3-事件表与发布"><a href="#3-3-事件表与发布" class="headerlink" title="3.3 事件表与发布"></a>3.3 事件表与发布</h3><ul>
+<li><strong>事件表字段（示意）</strong>：事件 ID、聚合根类型&#x2F;ID、事件类型、payload、状态（待发送 &#x2F; 已发送）、创建时间等。</li>
+<li><strong>发布流程</strong>：领域层在库存变更后调用「发布接口」；应用层在同一事务内写业务表并插入事件行；事务提交后，事件行处于「待发送」状态。</li>
+</ul>
+<h3 id="3-4-投递与订阅"><a href="#3-4-投递与订阅" class="headerlink" title="3.4 投递与订阅"></a>3.4 投递与订阅</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">flowchart LR</span><br><span class="line">    subgraph 持久化</span><br><span class="line">        E[事件表]</span><br><span class="line">    end</span><br><span class="line">    subgraph 投递</span><br><span class="line">        S[扫表/Outbox] --&gt; M[MQ]</span><br><span class="line">    end</span><br><span class="line">    subgraph 消费</span><br><span class="line">        M --&gt; G1[订阅组 A]</span><br><span class="line">        M --&gt; G2[订阅组 B]</span><br><span class="line">        G1 --&gt; C1[订单状态]</span><br><span class="line">        G2 --&gt; C2[采购单状态]</span><br><span class="line">    end</span><br><span class="line">    E --&gt; S</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>投递</strong>：定时任务或 Binlog 解析扫描「待发送」事件，推送到 MQ；发送成功后更新为「已发送」，失败则保留待发送便于重试。</li>
+<li><strong>订阅</strong>：按<strong>订阅组</strong>管理消费者；在组内声明本组关心的事件类型（文中「在订阅组中声明订阅事件」）；消费时用事件 ID + 组 ID 做幂等。</li>
+</ul>
+<h3 id="3-5-异常处理（对应文中「黄色部分」）"><a href="#3-5-异常处理（对应文中「黄色部分」）" class="headerlink" title="3.5 异常处理（对应文中「黄色部分」）"></a>3.5 异常处理（对应文中「黄色部分」）</h3><ul>
+<li><strong>发送失败</strong>：事件仍为待发送，下次扫表再发；可加告警与最大重试次数。</li>
+<li><strong>消费失败</strong>：重试、死信、告警；保证不丢事件、不重复生效（幂等）。</li>
+<li><strong>监控</strong>：对「已持久化但长期未成功投递」的事件做监控与补偿。</li>
+</ul>
+<hr>
+<h2 id="四、小结"><a href="#四、小结" class="headerlink" title="四、小结"></a>四、小结</h2><ul>
+<li><strong>为何用</strong>：多层级单据状态依赖库存变更，「改库」与「发事件」分离易导致不一致；EventStore 用「事件先持久化再驱动」把二者绑在同一套一致性边界内。</li>
+<li><strong>价值</strong>：状态一致、可追溯、解耦、组件可复用、便于重放与扩展。</li>
+<li><strong>如何自研</strong>：事件表与业务同事务写入 → 扫表&#x2F;Outbox 推 MQ → 按订阅组 + 事件类型消费 → 幂等 + 异常与重试；领域层只依赖「事件发布接口」，技术细节在基础设施层实现。</li>
+</ul>
+<p>把 EventStore 作为「领域事件持久化与投递」的单一职责组件，是供应链等多单据、强一致场景下常见且可复用的做法。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E7%94%B5%E5%95%86/" rel="tag"># 电商</a>
+              <a href="/tags/DDD/" rel="tag"># DDD</a>
+              <a href="/tags/EventStore/" rel="tag"># EventStore</a>
+              <a href="/tags/%E9%A2%86%E5%9F%9F%E4%BA%8B%E4%BB%B6/" rel="tag"># 领域事件</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/03/10/%E7%94%B5%E5%95%86%E5%BA%93%E5%AD%98%E6%A8%A1%E5%9E%8B%E5%8D%A0%E7%94%A8%E5%8F%AF%E7%94%A8%E5%9C%A8%E9%80%94%E5%86%BB%E7%BB%93%E7%9A%84%E5%88%92%E5%88%86%E4%B8%8E%E8%90%BD%E5%9C%B0/" rel="prev" title="电商库存模型：占用、可用、在途、冻结的划分与落地">
+                  <i class="fa fa-angle-left"></i> 电商库存模型：占用、可用、在途、冻结的划分与落地
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2026/03/10/seata_at%E6%A8%A1%E5%BC%8F%E8%AF%A6%E8%A7%A3/" rel="next" title="">
+                   <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2024 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">true</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>
