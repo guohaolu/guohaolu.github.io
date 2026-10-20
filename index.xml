@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss  xmlns:atom="http://www.w3.org/2005/Atom" 
+      xmlns:media="http://search.yahoo.com/mrss/" 
+      xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+      xmlns:dc="http://purl.org/dc/elements/1.1/" 
+      version="2.0">
+<channel>
+<title>Guohao Lu</title>
+<link>https://guohaolu.github.io/</link>
+<atom:link href="https://guohaolu.github.io/index.xml" rel="self" type="application/rss+xml"/>
+<description>技术、代码与笔记</description>
+<generator>quarto-1.10.19</generator>
+<lastBuildDate>Tue, 20 Oct 2026 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>PDF 在线预览示例</title>
+  <dc:creator>Guohao Lu</dc:creator>
+  <link>https://guohaolu.github.io/posts/pdf-preview/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+
+<p>把 PDF 和文章放在同一目录，用 iframe 嵌入即可在线预览：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb1-1"><span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">&lt;</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">iframe</span><span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;"> class</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"pdf-frame"</span><span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;"> src</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"sample.pdf"</span><span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;"> title</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Sample PDF"</span><span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">&gt;&lt;/</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">iframe</span><span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">&gt;</span></span></code></pre></div></div>
+<p>效果如下：</p>
+<iframe class="pdf-frame" src="sample.pdf" title="Sample PDF">
+</iframe>
+<p>若浏览器不支持内嵌 PDF，可直接 <a href="sample.pdf">下载示例 PDF</a>。</p>
+
+
+
+ ]]></description>
+  <category>PDF</category>
+  <category>示例</category>
+  <guid>https://guohaolu.github.io/posts/pdf-preview/</guid>
+  <pubDate>Tue, 20 Oct 2026 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>数学公式示例</title>
+  <dc:creator>Guohao Lu</dc:creator>
+  <link>https://guohaolu.github.io/posts/math-formulas/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+
+<p>行内公式：欧拉恒等式 <img src="https://latex.codecogs.com/png.latex?e%5E%7Bi%5Cpi%7D%20+%201%20=%200">，黄金比例 <img src="https://latex.codecogs.com/png.latex?%5Cvarphi%20=%20%5Cdfrac%7B1+%5Csqrt%7B5%7D%7D%7B2%7D">。</p>
+<p>独立公式：</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Chat%7Bf%7D(%5Cxi)%20=%20%5Cint_%7B-%5Cinfty%7D%5E%7B%5Cinfty%7D%20f(x)%5C,%20e%5E%7B-2%5Cpi%20i%20x%20%5Cxi%7D%5C,%20dx%0A"></p>
+<p>矩阵：</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cmathbf%7BA%7D%20=%20%5Cbegin%7Bpmatrix%7D%0Aa_%7B11%7D%20&amp;%20a_%7B12%7D%20%5C%5C%0Aa_%7B21%7D%20&amp;%20a_%7B22%7D%0A%5Cend%7Bpmatrix%7D,%5Cquad%0A%5Cdet(%5Cmathbf%7BA%7D)%20=%20a_%7B11%7Da_%7B22%7D%20-%20a_%7B12%7Da_%7B21%7D%0A"></p>
+
+
+
+ ]]></description>
+  <category>数学</category>
+  <category>示例</category>
+  <guid>https://guohaolu.github.io/posts/math-formulas/</guid>
+  <pubDate>Tue, 20 Oct 2026 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>欢迎使用 Quarto 博客</title>
+  <dc:creator>Guohao Lu</dc:creator>
+  <link>https://guohaolu.github.io/posts/hello-quarto/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+
+<p>旧的 Hexo / NexT 博文已清空，站点已迁移到 <strong>Quarto</strong>。</p>
+<section id="你可以用什么写文章" class="level2">
+<h2 class="anchored" data-anchor-id="你可以用什么写文章">你可以用什么写文章</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>方式</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>.qmd</code></td>
+<td>Markdown + 可执行代码块</td>
+</tr>
+<tr class="even">
+<td><code>.ipynb</code></td>
+<td>直接把 Jupyter Notebook 当作博文</td>
+</tr>
+<tr class="odd">
+<td>数学公式</td>
+<td>KaTeX（<code>$...$</code> / <code>$$...$$</code>）</td>
+</tr>
+<tr class="even">
+<td>PDF</td>
+<td>文章内嵌预览，也可将文档导出为 PDF</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="本地预览" class="level2">
+<h2 class="anchored" data-anchor-id="本地预览">本地预览</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># 建议指定 Anaconda Python</span></span>
+<span id="cb1-2"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">set</span> QUARTO_PYTHON=D:<span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">\a</span>naconda3<span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">\p</span>ython.exe</span>
+<span id="cb1-3"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">quarto</span> preview</span></code></pre></div></div>
+<p>推送到 <code>main</code> 后，GitHub Actions 会自动渲染并发布到 GitHub Pages。</p>
+
+
+</section>
+
+ ]]></description>
+  <category>导览</category>
+  <guid>https://guohaolu.github.io/posts/hello-quarto/</guid>
+  <pubDate>Tue, 20 Oct 2026 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Jupyter + Python 示例</title>
+  <dc:creator>Guohao Lu</dc:creator>
+  <link>https://guohaolu.github.io/posts/jupyter-python/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+
+<p>这篇博文本身就是一个 Jupyter Notebook。</p>
+<p>下面执行一段 Python，并用 Matplotlib 画图。</p>
+<div id="9ef34f5d" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> numpy <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> np</span>
+<span id="cb1-2"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> matplotlib.pyplot <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> plt</span>
+<span id="cb1-3"></span>
+<span id="cb1-4">x <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> np.linspace(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> np.pi, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">200</span>)</span>
+<span id="cb1-5">y <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> np.sin(x)</span>
+<span id="cb1-6"></span>
+<span id="cb1-7">fig, ax <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> plt.subplots(figsize<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">7</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3.5</span>))</span>
+<span id="cb1-8">ax.plot(x, y, color<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"#2c7fb8"</span>, linewidth<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>)</span>
+<span id="cb1-9">ax.set_title(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"y = sin(x)"</span>)</span>
+<span id="cb1-10">ax.set_xlabel(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"x"</span>)</span>
+<span id="cb1-11">ax.set_ylabel(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"y"</span>)</span>
+<span id="cb1-12">ax.grid(<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">True</span>, alpha<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.3</span>)</span>
+<span id="cb1-13">plt.show()</span></code></pre></div></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://guohaolu.github.io/posts/jupyter-python/index_files/figure-html/cell-2-output-1.png" width="609" height="339" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Notebook 里也可以写公式，例如正态分布密度：</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cphi(x)%20=%20%5Cfrac%7B1%7D%7B%5Csqrt%7B2%5Cpi%7D%7D%5C,%20e%5E%7B-x%5E%7B2%7D/2%7D%0A"></p>
+
+
+
+ ]]></description>
+  <category>Jupyter</category>
+  <category>Python</category>
+  <category>示例</category>
+  <guid>https://guohaolu.github.io/posts/jupyter-python/</guid>
+  <pubDate>Tue, 20 Oct 2026 00:00:00 GMT</pubDate>
+</item>
+</channel>
+</rss>

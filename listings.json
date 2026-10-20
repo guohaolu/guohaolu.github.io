@@ -1,0 +1,11 @@
+[
+  {
+    "listing": "/index.html",
+    "items": [
+      "/posts/pdf-preview/index.html",
+      "/posts/math-formulas/index.html",
+      "/posts/hello-quarto/index.html",
+      "/posts/jupyter-python/index.html"
+    ]
+  }
+]

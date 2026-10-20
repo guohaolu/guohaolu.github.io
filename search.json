@@ -1,0 +1,58 @@
+[
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "关于",
+    "section": "",
+    "text": "你好，我是 Guohao Lu。\n这里用 Quarto 写博客：支持 Markdown、数学公式、代码执行，以及直接从 Jupyter Notebook 发布文章。"
+  },
+  {
+    "objectID": "posts/hello-quarto/index.html",
+    "href": "posts/hello-quarto/index.html",
+    "title": "欢迎使用 Quarto 博客",
+    "section": "",
+    "text": "旧的 Hexo / NexT 博文已清空，站点已迁移到 Quarto。"
+  },
+  {
+    "objectID": "posts/hello-quarto/index.html#你可以用什么写文章",
+    "href": "posts/hello-quarto/index.html#你可以用什么写文章",
+    "title": "欢迎使用 Quarto 博客",
+    "section": "你可以用什么写文章",
+    "text": "你可以用什么写文章\n\n\n\n方式\n说明\n\n\n\n\n.qmd\nMarkdown + 可执行代码块\n\n\n.ipynb\n直接把 Jupyter Notebook 当作博文\n\n\n数学公式\nKaTeX（$...$ / $$...$$）\n\n\nPDF\n文章内嵌预览，也可将文档导出为 PDF"
+  },
+  {
+    "objectID": "posts/hello-quarto/index.html#本地预览",
+    "href": "posts/hello-quarto/index.html#本地预览",
+    "title": "欢迎使用 Quarto 博客",
+    "section": "本地预览",
+    "text": "本地预览\n# 建议指定 Anaconda Python\nset QUARTO_PYTHON=D:\\anaconda3\\python.exe\nquarto preview\n推送到 main 后，GitHub Actions 会自动渲染并发布到 GitHub Pages。"
+  },
+  {
+    "objectID": "posts/pdf-preview/index.html",
+    "href": "posts/pdf-preview/index.html",
+    "title": "PDF 在线预览示例",
+    "section": "",
+    "text": "把 PDF 和文章放在同一目录，用 iframe 嵌入即可在线预览：\n&lt;iframe class=\"pdf-frame\" src=\"sample.pdf\" title=\"Sample PDF\"&gt;&lt;/iframe&gt;\n效果如下：\n\n\n若浏览器不支持内嵌 PDF，可直接 下载示例 PDF。"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Guohao Lu’s Blog",
+    "section": "",
+    "text": "技术笔记、代码实验与 Jupyter 实践。\n\n\n\n\n\n\n   \n    \n    \n      Order By\n      Default\n      \n        Title\n      \n      \n        Date - Oldest\n      \n      \n        Date - Newest\n      \n      \n        Author\n      \n    \n  \n    \n      \n      \n    \n\n\n\n\n\n\n\n\n\n\nPDF 在线预览示例\n\n\n\nPDF\n\n示例\n\n\n\n在博文中嵌入 PDF，浏览器内直接阅读。\n\n\n\n\n\nOct 20, 2026\n\n\nGuohao Lu\n\n\n\n\n\n\n\n\n\n\n\n\n数学公式示例\n\n\n\n数学\n\n示例\n\n\n\n用 KaTeX 渲染行内与独立公式。\n\n\n\n\n\nOct 20, 2026\n\n\nGuohao Lu\n\n\n\n\n\n\n\n\n\n\n\n\n欢迎使用 Quarto 博客\n\n\n\n导览\n\n\n\n新站点说明：数学公式、代码、Jupyter、PDF 预览都已就绪。\n\n\n\n\n\nOct 20, 2026\n\n\nGuohao Lu\n\n\n\n\n\n\n\n\n\n\n\n\nJupyter + Python 示例\n\n\n\nJupyter\n\nPython\n\n示例\n\n\n\n直接用 .ipynb 写博文，含代码执行与绘图。\n\n\n\n\n\nOct 20, 2026\n\n\nGuohao Lu\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "posts/math-formulas/index.html",
+    "href": "posts/math-formulas/index.html",
+    "title": "数学公式示例",
+    "section": "",
+    "text": "行内公式：欧拉恒等式 e^{i\\pi} + 1 = 0，黄金比例 \\varphi = \\dfrac{1+\\sqrt{5}}{2}。\n独立公式：\n\n\\hat{f}(\\xi) = \\int_{-\\infty}^{\\infty} f(x)\\, e^{-2\\pi i x \\xi}\\, dx\n\n矩阵：\n\n\\mathbf{A} = \\begin{pmatrix}\na_{11} & a_{12} \\\\\na_{21} & a_{22}\n\\end{pmatrix},\\quad\n\\det(\\mathbf{A}) = a_{11}a_{22} - a_{12}a_{21}"
+  },
+  {
+    "objectID": "posts/jupyter-python/index.html",
+    "href": "posts/jupyter-python/index.html",
+    "title": "Jupyter + Python 示例",
+    "section": "",
+    "text": "这篇博文本身就是一个 Jupyter Notebook。\n下面执行一段 Python，并用 Matplotlib 画图。\n\nimport numpy as np\nimport matplotlib.pyplot as plt\n\nx = np.linspace(0, 2 * np.pi, 200)\ny = np.sin(x)\n\nfig, ax = plt.subplots(figsize=(7, 3.5))\nax.plot(x, y, color=\"#2c7fb8\", linewidth=2)\nax.set_title(\"y = sin(x)\")\nax.set_xlabel(\"x\")\nax.set_ylabel(\"y\")\nax.grid(True, alpha=0.3)\nplt.show()\n\n\n\n\n\n\n\n\nNotebook 里也可以写公式，例如正态分布密度：\n\n\\phi(x) = \\frac{1}{\\sqrt{2\\pi}}\\, e^{-x^{2}/2}"
+  }
+]
