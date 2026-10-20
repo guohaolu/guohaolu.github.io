@@ -1,0 +1,24 @@
+---
+title: "Bilibili 视频嵌入示例"
+date: "2026-10-20"
+categories: [视频, 示例]
+description: "在 Quarto 博文中内嵌 Bilibili 播放器。"
+---
+
+下面内嵌了 Bilibili 视频 [BV12Ga961E2a](https://www.bilibili.com/video/BV12Ga961E2a/) 的第 7 集（`p=7`）。
+
+```{=html}
+<div class="ratio ratio-16x9">
+  <iframe
+    src="https://player.bilibili.com/player.html?isOutside=true&bvid=BV12Ga961E2a&p=7&high_quality=1&danmaku=0"
+    title="Bilibili BV12Ga961E2a P7"
+    scrolling="no"
+    border="0"
+    frameborder="no"
+    framespacing="0"
+    allowfullscreen="true">
+  </iframe>
+</div>
+```
+
+原文链接：<https://www.bilibili.com/video/BV12Ga961E2a/?p=7>
