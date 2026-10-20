@@ -1,0 +1,27 @@
+---
+title: "欢迎使用 Quarto 博客"
+date: "2026-10-20"
+categories: [导览]
+description: "新站点说明：数学公式、代码、Jupyter、PDF 预览都已就绪。"
+---
+
+旧的 Hexo / NexT 博文已清空，站点已迁移到 **Quarto**。
+
+## 你可以用什么写文章
+
+| 方式 | 说明 |
+|------|------|
+| `.qmd` | Markdown + 可执行代码块 |
+| `.ipynb` | 直接把 Jupyter Notebook 当作博文 |
+| 数学公式 | KaTeX（`$...$` / `$$...$$`） |
+| PDF | 文章内嵌预览，也可将文档导出为 PDF |
+
+## 本地预览
+
+```bash
+# 建议指定 Anaconda Python
+set QUARTO_PYTHON=D:\anaconda3\python.exe
+quarto preview
+```
+
+推送到 `main` 后，GitHub Actions 会自动渲染并发布到 GitHub Pages。

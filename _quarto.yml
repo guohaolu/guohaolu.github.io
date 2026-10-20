@@ -1,0 +1,43 @@
+project:
+  type: website
+  output-dir: _site
+  resources:
+    - assets/**/*
+
+
+website:
+  title: "Guohao Lu"
+  description: "技术、代码与笔记"
+  site-url: https://guohaolu.github.io
+  navbar:
+    left:
+      - href: index.qmd
+        text: 博客
+      - about.qmd
+    right:
+      - icon: github
+        href: https://github.com/guohaolu
+        aria-label: GitHub
+  page-footer:
+    left: "© Guohao Lu"
+    right:
+      - icon: github
+        href: https://github.com/guohaolu
+  search:
+    location: navbar
+    type: overlay
+
+format:
+  html:
+    theme:
+      light: flatly
+      dark: darkly
+    css: styles.css
+    toc: true
+    code-copy: true
+    code-overflow: wrap
+    html-math-method: katex
+    link-external-newwindow: true
+
+execute:
+  freeze: auto

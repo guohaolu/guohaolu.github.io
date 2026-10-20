@@ -1,0 +1,23 @@
+/* Site styles */
+
+.navbar-brand {
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+#title-block-header {
+  margin-bottom: 1.5rem;
+}
+
+.pdf-frame {
+  width: 100%;
+  height: 720px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 4px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .pdf-frame {
+    border-color: rgba(255, 255, 255, 0.18);
+  }
+}

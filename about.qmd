@@ -1,0 +1,13 @@
+---
+title: "关于"
+about:
+  template: jolla
+  links:
+    - icon: github
+      text: GitHub
+      href: https://github.com/guohaolu
+---
+
+你好，我是 **Guohao Lu**。
+
+这里用 [Quarto](https://quarto.org/) 写博客：支持 Markdown、数学公式、代码执行，以及直接从 Jupyter Notebook 发布文章。

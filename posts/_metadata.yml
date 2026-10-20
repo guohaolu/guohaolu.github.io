@@ -1,0 +1,4 @@
+# Apply to all posts under posts/
+freeze: true
+title-block-banner: true
+author: "Guohao Lu"

@@ -1,0 +1,18 @@
+---
+title: "PDF 在线预览示例"
+date: "2026-10-20"
+categories: [PDF, 示例]
+description: "在博文中嵌入 PDF，浏览器内直接阅读。"
+---
+
+把 PDF 和文章放在同一目录，用 iframe 嵌入即可在线预览：
+
+```html
+<iframe class="pdf-frame" src="sample.pdf" title="Sample PDF"></iframe>
+```
+
+效果如下：
+
+<iframe class="pdf-frame" src="sample.pdf" title="Sample PDF"></iframe>
+
+若浏览器不支持内嵌 PDF，可直接 [下载示例 PDF](sample.pdf)。

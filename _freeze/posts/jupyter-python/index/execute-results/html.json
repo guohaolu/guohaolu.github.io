@@ -1,0 +1,12 @@
+{
+  "hash": "6ea5ff53d73b64abedcdde37a93c7ade",
+  "result": {
+    "engine": "jupyter",
+    "markdown": "---\ntitle: \"Jupyter + Python 示例\"\ndate: \"2026-10-20\"\ncategories: [Jupyter, Python, 示例]\ndescription: \"直接用 .ipynb 写博文，含代码执行与绘图。\"\n---\n\n这篇博文本身就是一个 Jupyter Notebook。\n\n下面执行一段 Python，并用 Matplotlib 画图。\n\n::: {#9ef34f5d .cell execution_count=1}\n``` {.python .cell-code}\nimport numpy as np\nimport matplotlib.pyplot as plt\n\nx = np.linspace(0, 2 * np.pi, 200)\ny = np.sin(x)\n\nfig, ax = plt.subplots(figsize=(7, 3.5))\nax.plot(x, y, color=\"#2c7fb8\", linewidth=2)\nax.set_title(\"y = sin(x)\")\nax.set_xlabel(\"x\")\nax.set_ylabel(\"y\")\nax.grid(True, alpha=0.3)\nplt.show()\n\n```\n\n::: {.cell-output .cell-output-display}\n![](index_files/figure-html/cell-2-output-1.png){width=609 height=339}\n:::\n:::\n\n\nNotebook 里也可以写公式，例如正态分布密度：\n\n$$\n\\phi(x) = \\frac{1}{\\sqrt{2\\pi}}\\, e^{-x^{2}/2}\n$$\n\n",
+    "supporting": [
+      "index_files\\figure-html"
+    ],
+    "filters": [],
+    "includes": {}
+  }
+}

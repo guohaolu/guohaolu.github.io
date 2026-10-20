@@ -1,0 +1,24 @@
+---
+title: "数学公式示例"
+date: "2026-10-20"
+categories: [数学, 示例]
+description: "用 KaTeX 渲染行内与独立公式。"
+---
+
+行内公式：欧拉恒等式 $e^{i\pi} + 1 = 0$，黄金比例 $\varphi = \dfrac{1+\sqrt{5}}{2}$。
+
+独立公式：
+
+$$
+\hat{f}(\xi) = \int_{-\infty}^{\infty} f(x)\, e^{-2\pi i x \xi}\, dx
+$$
+
+矩阵：
+
+$$
+\mathbf{A} = \begin{pmatrix}
+a_{11} & a_{12} \\
+a_{21} & a_{22}
+\end{pmatrix},\quad
+\det(\mathbf{A}) = a_{11}a_{22} - a_{12}a_{21}
+$$
