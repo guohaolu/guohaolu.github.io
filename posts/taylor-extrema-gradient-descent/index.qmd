@@ -1,0 +1,289 @@
+---
+title: "Taylor 展开、极值与梯度下降：一条线串起来"
+date: "2026-10-24"
+categories: [数学, 微积分, 深度学习]
+description: "从《简明微积分》3.3 的 Taylor 与极值出发，用公式与几何图说明它们与梯度下降、局部最优点的联系。"
+---
+
+读龚昇《简明微积分》第 3.3 节时，书上先讲 **Taylor 展开**，再讲 **极值**。深度学习里天天用的 **梯度下降**，本质上就是这两件事的高维版本：用局部近似决定怎么走，用导数为零刻画「走到了没有」。
+
+本文用一元函数把这条线画清楚，再自然过渡到多元 loss。
+
+## 1. Taylor：在一点附近把函数写成多项式
+
+设 $f$ 在 $x_0$ 附近足够光滑，则
+
+$$
+f(x)
+=
+f(x_0)
++ f'(x_0)\,(x-x_0)
++ \frac{1}{2}f''(x_0)\,(x-x_0)^2
++ \cdots
+$$
+
+只保留一阶，就是**切线近似**（线性化）：
+
+$$
+f(x)
+\approx
+f(x_0) + f'(x_0)\,(x-x_0)
+$$
+
+几何上：曲线在 $x_0$ 附近，用切线代替。
+
+```{python}
+#| label: fig-taylor
+#| fig-cap: "在 $x_0=1$ 处用切线近似 $f(x)=x^2$。实线为曲线，虚线为一阶 Taylor（切线）。"
+#| echo: false
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+x0 = 1.0
+f = lambda x: x**2
+fp = lambda x: 2 * x
+
+x = np.linspace(-0.2, 2.2, 400)
+y = f(x)
+y_lin = f(x0) + fp(x0) * (x - x0)
+
+fig, ax = plt.subplots(figsize=(7, 4))
+ax.plot(x, y, color="#1f4e79", linewidth=2.2, label=r"$f(x)=x^2$")
+ax.plot(x, y_lin, color="#c45c26", linewidth=2, linestyle="--",
+        label=r"一阶 Taylor：$f(x_0)+f'(x_0)(x-x_0)$")
+ax.scatter([x0], [f(x0)], color="#c45c26", s=55, zorder=5)
+ax.annotate(r"$x_0$", xy=(x0, f(x0)), xytext=(x0 + 0.15, f(x0) - 0.55),
+            fontsize=12, color="#c45c26")
+ax.set_xlabel(r"$x$")
+ax.set_ylabel(r"$f(x)$")
+ax.set_title("以直代曲：局部用切线近似曲线")
+ax.legend(loc="upper left", frameon=False)
+ax.grid(True, alpha=0.3)
+ax.set_xlim(-0.2, 2.2)
+ax.set_ylim(-0.3, 4.5)
+plt.tight_layout()
+plt.show()
+```
+
+多元时，$x$ 换成参数向量 $w$，一阶导数换成梯度 $\nabla f$：
+
+$$
+f(w)
+\approx
+f(w_0) + \nabla f(w_0)^\top (w-w_0)
+$$
+
+深度学习里的 loss $L(w)$，在当前参数附近正是这样被近似的。
+
+## 2. 极值：导数为零的点是候选
+
+若 $x_*$ 是开区间内的**局部极值点**，且 $f'(x_*)$ 存在，则必要条件是
+
+$$
+f'(x_*) = 0
+$$
+
+几何上：极值处切线水平。
+
+再用二阶信息判定：
+
+| 条件 | 结论 |
+|------|------|
+| $f'(x_*)=0$ 且 $f''(x_*)>0$ | 局部**极小** |
+| $f'(x_*)=0$ 且 $f''(x_*)<0$ | 局部**极大** |
+| $f'(x_*)=0$ 且 $f''(x_*)=0$ | 需更高阶信息 |
+
+```{python}
+#| label: fig-extrema
+#| fig-cap: "碗形函数 $f(x)=x^2$：在 $x_*=0$ 处 $f'=0$、$f''>0$，是局部（也是全局）极小。"
+#| echo: false
+
+x = np.linspace(-2.2, 2.2, 400)
+y = x**2
+
+fig, ax = plt.subplots(figsize=(7, 4))
+ax.plot(x, y, color="#1f4e79", linewidth=2.2, label=r"$f(x)=x^2$")
+ax.axhline(0, color="#888888", linewidth=1, linestyle=":", alpha=0.8)
+ax.scatter([0], [0], color="#2a9d8f", s=70, zorder=5, label=r"极小点 $x_*=0$")
+ax.annotate("切线水平\n$f'(0)=0$", xy=(0, 0), xytext=(0.7, 1.2),
+            fontsize=11, color="#2a9d8f",
+            arrowprops=dict(arrowstyle="->", color="#2a9d8f"))
+ax.set_xlabel(r"$x$")
+ax.set_ylabel(r"$f(x)$")
+ax.set_title("局部最优点：梯度为零，且曲率向上")
+ax.legend(loc="upper center", frameon=False)
+ax.grid(True, alpha=0.3)
+plt.tight_layout()
+plt.show()
+```
+
+多元对应：
+
+$$
+\nabla L(w_*) = 0
+$$
+
+并看 Hessian 是否正定（局部极小）、负定（局部极大）或不定（鞍点）。深度学习的 loss 景观里，鞍点很常见。
+
+## 3. 梯度下降：用一阶 Taylor「往下走」
+
+训练时往往不解方程 $\nabla L=0$，而是迭代逼近。
+
+在当前点 $w_t$ 只保留一阶：
+
+$$
+L(w_t + \Delta w)
+\approx
+L(w_t) + \nabla L(w_t)^\top \Delta w
+$$
+
+要让近似后的 loss 变小，取
+
+$$
+\Delta w = -\eta\,\nabla L(w_t),\qquad \eta>0
+$$
+
+因为
+
+$$
+\nabla L(w_t)^\top \bigl(-\eta\nabla L(w_t)\bigr)
+=
+-\eta\,\|\nabla L(w_t)\|^2 \le 0
+$$
+
+一阶近似下，loss 不会上升。这就是**梯度下降**：每一步都在用 Taylor 的线性部分，沿最陡下降方向挪一点。
+
+一元例子：$f(x)=x^2$，$f'(x)=2x$，更新为
+
+$$
+x_{t+1} = x_t - \eta\, f'(x_t) = x_t - 2\eta\, x_t = (1-2\eta)\,x_t
+$$
+
+```{python}
+#| label: fig-gd
+#| fig-cap: "在 $f(x)=x^2$ 上做梯度下降（$\\eta=0.15$）。红点为迭代轨迹，箭头表示每一步沿 $-f'$ 的方向。"
+#| echo: false
+
+eta = 0.15
+xs = [1.8]
+for _ in range(8):
+    xs.append(xs[-1] - eta * (2 * xs[-1]))
+xs = np.array(xs)
+ys = xs**2
+
+x = np.linspace(-2.2, 2.2, 400)
+y = x**2
+
+fig, ax = plt.subplots(figsize=(7, 4.2))
+ax.plot(x, y, color="#1f4e79", linewidth=2.2, label=r"$f(x)=x^2$")
+ax.plot(xs, ys, "o-", color="#e76f51", markersize=7, linewidth=1.6,
+        label="梯度下降轨迹")
+for i in range(len(xs) - 1):
+    ax.annotate(
+        "",
+        xy=(xs[i + 1], ys[i + 1]),
+        xytext=(xs[i], ys[i]),
+        arrowprops=dict(arrowstyle="->", color="#e76f51", lw=1.2),
+    )
+ax.scatter([0], [0], color="#2a9d8f", s=70, zorder=5, label=r"目标 $x_*=0$")
+ax.set_xlabel(r"$x$")
+ax.set_ylabel(r"$f(x)$")
+ax.set_title("梯度下降：反复做「一阶近似 + 走一小步」")
+ax.legend(loc="upper right", frameon=False)
+ax.grid(True, alpha=0.3)
+plt.tight_layout()
+plt.show()
+```
+
+步长 $\eta$ 太大时，会离开「一阶近似仍然有效」的邻域，真实函数值可能不降反升——这正是 Taylor 余项在提醒你：线性化只在局部靠谱。
+
+## 4. 二维几何：梯度指向最陡上升
+
+对二元函数 $f(x,y)=\frac12(x^2+y^2)$，梯度为
+
+$$
+\nabla f(x,y) = (x,\, y)
+$$
+
+它垂直于等高线，并指向函数值升高的方向。因此 **$-\nabla f$** 指向下山。
+
+```{python}
+#| label: fig-contour
+#| fig-cap: "等高线与梯度。蓝箭头为 $\\nabla f$（上升），红箭头为 $-\\nabla f$（下降）。梯度下降沿红色方向移动。"
+#| echo: false
+
+xx = np.linspace(-2.0, 2.0, 200)
+yy = np.linspace(-2.0, 2.0, 200)
+X, Y = np.meshgrid(xx, yy)
+Z = 0.5 * (X**2 + Y**2)
+
+fig, ax = plt.subplots(figsize=(6.2, 5.4))
+cs = ax.contour(X, Y, Z, levels=8, colors="#1f4e79", linewidths=1.1)
+ax.clabel(cs, inline=True, fontsize=8, fmt="%.1f")
+
+pts = np.array([[1.5, 1.2], [-1.3, 0.9], [0.8, -1.4]])
+for p in pts:
+    g = p  # grad of 0.5(x^2+y^2) is (x,y)
+    ax.arrow(p[0], p[1], 0.35 * g[0], 0.35 * g[1],
+             head_width=0.08, color="#457b9d", length_includes_head=True)
+    ax.arrow(p[0], p[1], -0.35 * g[0], -0.35 * g[1],
+             head_width=0.08, color="#e76f51", length_includes_head=True)
+
+ax.scatter([0], [0], color="#2a9d8f", s=70, zorder=5)
+ax.set_aspect("equal")
+ax.set_xlabel(r"$x$")
+ax.set_ylabel(r"$y$")
+ax.set_title(r"$f=\frac{1}{2}(x^2+y^2)$：等高线、$\nabla f$ 与 $-\nabla f$")
+ax.grid(True, alpha=0.25)
+
+# legend proxies
+from matplotlib.lines import Line2D
+handles = [
+    Line2D([0], [0], color="#457b9d", lw=2, label=r"$\nabla f$（上升）"),
+    Line2D([0], [0], color="#e76f51", lw=2, label=r"$-\nabla f$（下降）"),
+    Line2D([0], [0], marker="o", color="w", markerfacecolor="#2a9d8f",
+           markersize=9, label=r"极小点"),
+]
+ax.legend(handles=handles, loc="upper right", frameon=True, fancybox=False)
+plt.tight_layout()
+plt.show()
+```
+
+## 5. 四者如何串成一条线
+
+```text
+Taylor 展开
+   │
+   ├─ 一阶：∇L  → 给出下降方向 → 梯度下降
+   │
+   └─ 二阶：H   → 判断极小 / 极大 / 鞍点
+                 → 也启发牛顿法、自适应优化的直觉
+
+极值理论：∇L = 0 是局部最优点的必要条件
+梯度下降：不断减小 ‖∇L‖，试图走到这种点附近
+```
+
+| 概念 | 在优化里的角色 |
+|------|----------------|
+| Taylor（一阶） | 局部把 loss 当成平面，决定怎么走 |
+| 梯度 $\nabla L$ | 平面的最陡上升方向 |
+| 梯度下降 | 反复做「一阶近似 + 走一小步」 |
+| 局部最优点 | 理想停靠点：$\nabla L \approx 0$，附近是「碗底」 |
+| Taylor（二阶） | 判断碗底还是马鞍；解释为何有时卡住 |
+
+对应回《简明微积分》3.3：
+
+1. 会用导数做局部近似（Taylor）
+2. 用一阶 / 二阶条件找并判定极值
+
+深度学习只是把对象换成高维 $L(w)$，把「解方程 $f'=0$」换成「用梯度迭代下山」——数学骨架没有变。
+
+## 6. 小结
+
+- **展开**：告诉你局部长什么样（先直线，再抛物线）。
+- **极值**：告诉你最优点满足什么（梯度为零 + 曲率合适）。
+- **梯度下降**：用展开的一阶信息，一步步逼近极值点。
+- **局部最优点**：下降过程希望到达的地方；若曲率不对，可能是鞍点而非真正的极小。
+
+下一步若继续读《简明微积分》，可把重点放到 **6.2 偏微商** 与 **7.1 梯度**：那是把本文的一元故事正式升到多元。
